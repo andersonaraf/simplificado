@@ -37,39 +37,40 @@ class AvaliadorAvaliarController extends Controller
 
         try {
             DB::beginTransaction();
-            foreach ($anexo as $anexos) {
 
-                foreach ($pessoa->pessoaEditalAnexos as $editalAnexo) {
+            foreach ($pessoa->pessoaEditalAnexos as $editalAnexo) {
+                if (!is_null($editalAnexo->documentoDinamico->pontuacao_por_item)) {
+                    if ($anexo[$editalAnexo->id][0] >= 0) {
 
-                    if (!is_null($editalAnexo->documentoDinamico->pontuacao_por_item)) {
-                        if ($anexo[$editalAnexo->id][0] >= 0) {
+                        $editalAnexo->update([
+                            'pontuacao' => $anexo[$editalAnexo->id][0]
+                        ]);
+                        if ($anexo[$editalAnexo->id][0] != 1) {
+                            $pontuacaoTotalAnexos = $pontuacaoTotalAnexos + $anexo[$editalAnexo->id][0];
 
-                            $editalAnexo->update([
-                                'pontuacao' => $anexo[$editalAnexo->id][0]
-                            ]);
-                            if ($anexo[$editalAnexo->id][0] != 1) {
-                                $pontuacaoTotalAnexos = $pontuacaoTotalAnexos + $anexo[$editalAnexo->id][0];
-
-                            }
                         }
                     }
-
                 }
-//                $key = 0;
-//                echo "<pre>";
-//                echo $key.print_r($anexo);
-//                echo "</pre>";
+            }
 
-                if ((isset($anexos['anexoAno']) || isset($anexos['anexoMes']))) {
+//            $key = 0;
+//            echo "<pre>";
+//            echo $key . print_r($anexo);
+//            echo "</pre>";
+
+            foreach ($anexo as $anexos) {
+
+                if ((isset($anexos['anexoAno']) && isset($anexos['anexoMes'])) && $pontuacao_manual == 1) {
                     $documenDinamico = DocumentoDinamico::findorFail($anexos['documento_id']);
                     if ($documenDinamico->tipo_experiencia == 0) {
                         $pontuacaoTotalPublica = (($anexos['anexoAno'] * $pontuacao_por_ano) + ($anexos['anexoMes'] * $pontuacao_por_mes));
+
                         if ($pontuacaoTotalPublica > $pontuacao_maxima) {
                             return redirect()->back()->withErrors([
                                 'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total Pública: ' . $pontuacaoTotalPublica . '.'
                             ]);
                         }
-                        //Fazendo a somatorio de pontos por anexo
+
                         $editalAnexo = PessoaEditalAnexo::findOrFail($anexos['anexo_id']);
                         $editalAnexo->update([
                             'pontuacao_exp_publico' => $pontuacaoTotalPublica
@@ -77,22 +78,17 @@ class AvaliadorAvaliarController extends Controller
                         $pontuacaoTotalPublica2 = $pontuacaoTotalPublica2 + $pontuacaoTotalPublica;
                     } else {
                         $pontuacaoTotalPrivada = (($anexos['anexoAno'] * $pontuacao_por_ano) + ($anexos['anexoMes'] * $pontuacao_por_mes));
-
                         if ($pontuacaoTotalPrivada > $pontuacao_maxima) {
-
                             return redirect()->back()->withErrors([
                                 'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total Privada: ' . $pontuacaoTotalPrivada . '.'
                             ]);
                         }
                         $editalAnexo = PessoaEditalAnexo::findOrFail($anexos['anexo_id']);
                         $editalAnexo->update([
-
                             'pontuacao_exp_privado' => $pontuacaoTotalPrivada
                         ]);
                         $pontuacaoTotalPrivada2 = $pontuacaoTotalPrivada2 + $pontuacaoTotalPrivada;
-                        dd('total privada', $pontuacaoTotalPrivada2);
                     }
-
                 } else {
                     $editalAnexo->update([
 
@@ -102,17 +98,17 @@ class AvaliadorAvaliarController extends Controller
                     $pontuacaoTotalPublica2 = 0;
                     $pontuacaoTotalPrivada2 = 0;
                 }
-
-                $pontuacaoTotal = $pontuacaoTotalAnexos + ($pontuacaoTotalPrivada2 + $pontuacaoTotalPublica2);
-                dd($pontuacaoTotal);
-
-                if ($pontuacaoTotal > $pontuacao_maxima) {
-
-                    return redirect()->back()->withErrors([
-                        'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total: ' . $pontuacaoTotal . '.'
-                    ]);
-                }
             }
+
+            $pontuacaoTotal = ($pontuacaoTotalAnexos + ($pontuacaoTotalPrivada2 + $pontuacaoTotalPublica2));
+
+            if ($pontuacaoTotal > $pontuacao_maxima) {
+
+                return redirect()->back()->withErrors([
+                    'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total: ' . $pontuacaoTotal . '.'
+                ]);
+            }
+
             $pessoa->update([
                 'status_revisado' => null
             ]);
@@ -123,7 +119,6 @@ class AvaliadorAvaliarController extends Controller
                 'tela' => $url,
                 'pontuacao_total' => $pontuacaoTotal,
             ]);
-
 
             $pontuacao = Pontuacao::create([
 
@@ -145,7 +140,8 @@ class AvaliadorAvaliarController extends Controller
                 'message' => 'Avaliação Realizada com sucesso. Pontuação Geral: ' . $pontuacaoTotal . ''
             ]);
 
-        } catch (Exception $ex) {
+        } catch
+        (Exception $ex) {
             DB::rollBack();
             return redirect()->back()->withInput()->withErrors([
                 'message' => $ex->getMessage()
