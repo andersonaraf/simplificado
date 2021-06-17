@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocumentoDinamico extends Model
 {
-    //
+
     protected $table = 'documento_dinamicos';
 
     protected $fillable = [

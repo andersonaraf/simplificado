@@ -86,7 +86,6 @@ class RegistroController extends Controller
             $endereco->bairro = $request->bairro;
             $endereco->cep = $request->cep;
 
-
             if ($request->deficiencia == 'Nao') {
                 $deficiencia = 0;
             } else {
@@ -127,7 +126,6 @@ class RegistroController extends Controller
                 'message' => $ex->getMessage()
             ]);
         }
-
     }
 
     //SEGUNDA PARTE DO CADASTRO PARA SALVAR OS ANEXOS E ALGUMAS INFORMACOES
@@ -147,7 +145,6 @@ class RegistroController extends Controller
                 foreach (array_keys($request->anexosDocumentos[$index]['documentoDinamico']) as $indexKey) {
                     if (isset($request->anexosDocumentos[$index][$indexKey])) {
                         $rules['anexosDocumentos.' . $index . '.' . $indexKey] = 'nullable|mimes:pdf|max:5000';
-
                     }
                 }
             }
@@ -208,7 +205,6 @@ class RegistroController extends Controller
                 'aceito_dados' => 1,
             ]);
 
-
             if (is_null($pessoa)) {
                 session()->put('sucess', 'Ops, parece que você já concluiu seu cadastro!');
                 return redirect()->route('inical');
@@ -247,8 +243,8 @@ class RegistroController extends Controller
                         }
                     }
                 }
-
             }
+
             //REALIZAR O UPDATE NA PESSOA ADICIONANDO O ANEXO
             $comprovante = ComprovanteController::gerarComprovante($pessoa);
             $comprovate_id = ComprovanteController::store($comprovante);
@@ -263,15 +259,17 @@ class RegistroController extends Controller
             Cookie::queue(Cookie::forget('pessoa'));
             Cookie::queue(Cookie::forget('endereco'));
             Cookie::queue(Cookie::forget('type_edital'));
+
+            DB::commit();
+
             //ENVIAR O EMAIL
-            Mail::send('registro.comprovante-email', ['comprovante' => $comprovante,], function ($message , $title) {
-                $message->from(getenv('MAIL_USERNAME'), 'Processo Seletivo Simplificado', title($title->titulo));
+            Mail::send('registro.comprovante-email', ['comprovante' => $comprovante,], function ($message, $title) {
+                $message->from(getenv('MAIL_USERNAME'), 'Processo Seletivo Simplificado');
                 $message->to(session('pessoa_email'));
-                $message->subject('Processo Seletivo Simplificado', title($title->titulo));
+                $message->subject('Comprovante do Processo Seletivo Simplificado');
             });
             session()->forget('pessoa_email');
 
-            DB::commit();
 
             return redirect()->route('registro/comprovante', $comprovante);
 
@@ -292,7 +290,6 @@ class RegistroController extends Controller
         $pessoa = json_decode(Cookie::get('pessoa'));
         $tipoAnexoCargo = TipoAnexoCargo::where('cargo_id', $pessoa->cargo_id)->get();
         $porcetagemProgress = 100 / $tipoAnexoCargo->count();
-
 
         if (isset($pessoa->id)) {
             Cookie::queue(Cookie::forget('pessoa'));

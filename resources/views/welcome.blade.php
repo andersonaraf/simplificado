@@ -24,9 +24,9 @@
                         @if (!is_null($carrossel->url_link))
                             <div class="carousel-item active">
                                 <a href="{{$carrossel->url_link}}" target="_blank"><img class="container"
-                                                                                        src="{{asset('images/caruosel/'.$carrossel->url_img)}}"
+                                                                                        src="{{asset('images/'.$carrossel->url_img)}}"
                                                                                         alt="First slide" width="940"
-                                                                                        height="478"></a>
+                                                                                        height="200"></a>
                             </div>
                         @else
                             <div class="carousel-item active">

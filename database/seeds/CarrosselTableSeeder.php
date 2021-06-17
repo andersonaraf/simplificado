@@ -13,7 +13,7 @@ class CarrosselTableSeeder extends Seeder
     {
         //
         DB::table('carrossel')->insert([
-            'url_img' => 'carrusel-fundo.png',
+            'url_img' => 'logo_pref.png',
             'url_link' => 'http://127.0.0.1:8000/registro',
         ]);
     }

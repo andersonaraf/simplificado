@@ -16,6 +16,7 @@ class Pontuacao extends Model
         'avaliador_id',
         'revisor_id',
         'pontuacao_total',
+        'pontuacao_total_anexos',
         'pontuacao_total_publica',
         'pontuacao_total_privada'
     ];
