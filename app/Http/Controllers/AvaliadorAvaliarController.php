@@ -56,7 +56,6 @@ class AvaliadorAvaliarController extends Controller
                         }
                     }
                 }
-
             }
             $key = 0;
             echo "<pre>";
@@ -109,7 +108,6 @@ class AvaliadorAvaliarController extends Controller
                         ]);
                     }
                 }
-
 
                 $pessoa->update([
                     'status_revisado' => null
