@@ -64,8 +64,10 @@
                             </div>
                         </div>
                         <div class="col col-sm-6">
-                            <label class="mr-1">Sim</label><input type="radio" name="inputObrigatorio" id="inputObrigatorio" value="1" class="">
-                            <label class="mr-1">Não</label><input type="radio" name="inputObrigatorio" id="inputObrigatorio" value="0" class="" checked>
+                            <label class="mr-1">Sim</label><input type="radio" name="inputObrigatorio"
+                                                                  id="inputObrigatorio" value="1" class="">
+                            <label class="mr-1">Não</label><input type="radio" name="inputObrigatorio"
+                                                                  id="inputObrigatorio" value="0" class="" checked>
                         </div>
                     </div>
                     <div class="input-group mt-2">
@@ -74,17 +76,22 @@
                                 <span class="input-group-text" id="inputNomeAnexo">Inserir manualmente:</span>
                             </div>
                         </div>
+
                         <div class="col col-sm-6">
-                            <label class="mr-1">Sim</label><input type="radio" name="inputPontuacaoManual" id="inputPontuacaoManual" value="1" class="">
-                            <label class="mr-1">Não</label><input type="radio" name="inputPontuacaoManual" id="inputPontuacaoManual" value="0" class="" checked>
+                            <label class="mr-1">Sim</label><input type="radio" name="inputPontuacaoManual"
+                                                                  id="inputPontuacaoManual" value="1" class="">
+                            <label class="mr-1">Não</label><input type="radio" name="inputPontuacaoManual"
+                                                                  id="inputPontuacaoManual" value="0" class="" checked>
                         </div>
                     </div>
+
                     <div class="input-group">
                         <div class="col col-sm-12">
                             <hr>
                             <h6 class="input-group-text mb-3">Somente se necessário</h6>
                         </div>
                     </div>
+
                     <div class="input-group">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
@@ -94,6 +101,19 @@
                         <div class="col col-sm-6">
                             <input type="text" name="inputPontuacaoMaxima" class="form-control"
                                    placeholder="Pontuação máxima do documento">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="col col-sm-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"
+                                      id="inputPontuacaoMaximaDoItem">Pontuação máxima do item:</span>
+                            </div>
+                        </div>
+                        <div class="col col-sm-6">
+                            <input type="text" name="inputPontuacaoMaximaDoItem" class="form-control"
+                                   placeholder="Pontuação máxima do item">
                         </div>
                     </div>
 
@@ -134,8 +154,10 @@
                             </div>
                         </div>
                         <div class="col col-sm-6">
-                            <label class="mr-1">Público</label><input type="radio" name="inputTipoExperiencia" id="inputTipoExperiencia" value="0" class="" >
-                            <label class="mr-1">Privado</label><input type="radio" name="inputTipoExperiencia" id="inputTipoExperiencia" value="1" class="">
+                            <label class="mr-1">Público</label><input type="radio" name="inputTipoExperiencia"
+                                                                      id="inputTipoExperiencia" value="0" class="">
+                            <label class="mr-1">Privado</label><input type="radio" name="inputTipoExperiencia"
+                                                                      id="inputTipoExperiencia" value="1" class="">
                         </div>
                     </div>
                     <div class="input-group">

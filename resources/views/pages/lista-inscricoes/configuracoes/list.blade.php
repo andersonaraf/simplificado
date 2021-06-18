@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="{{asset('css/registro/style.css')}}">
 @endsection
 @section('content')
-    {{--    @dd([$editalAnexos, $editalAnexos[8]->documentoDinamico])--}}
     <div class="content">
         <div class="container-fluid">
             <main class="container">
@@ -45,6 +44,7 @@
                                                data-obrigatorio="{{$editalAnexo->documentoDinamico->obrigatorio}}"
                                                data-inserir-manual="{{$editalAnexo->documentoDinamico->pontuacao_manual}}"
                                                data-pontuacao-maxima="{{$editalAnexo->documentoDinamico->pontuacao_maxima}}"
+                                               data-pontuacao_maxima_item="{{$editalAnexo->documentoDinamico->pontuacao_maxima_item}}"
                                                data-pontuacao-item="{{$editalAnexo->documentoDinamico->pontuacao_por_item}}"
                                                data-quantidade-anexo="{{$editalAnexo->documentoDinamico->quantidade_anexos}}"
                                                data-tipo-experiencia="{{$editalAnexo->documentoDinamico->tipo_experiencia}}"

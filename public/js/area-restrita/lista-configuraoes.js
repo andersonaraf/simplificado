@@ -141,7 +141,6 @@ $(document).ready(function () {
         $('#dataTables-lista').removeAttr('hidden')
         $('#loading').attr('hidden', true)
     }
-
     var cargo_id = $('#cargo_select').val()
     $('#cargo_id_tipo').val(cargo_id)
     $('#cargo_select').click(function () {
@@ -191,7 +190,7 @@ $(document).ready(function () {
                 }
             })
 
-            //OBRIGATORI
+            //OBRIGATORIO
             if ($(this).attr('data-obrigatorio') == 1) {
                 $('#inputObrigatorio[value="0"]').attr('checked', false)
                 $('#inputObrigatorio[value="1"]').attr('checked', true)
@@ -223,6 +222,7 @@ $(document).ready(function () {
             }
 
             $('#pontuacao_maxima').val($(this).attr('data-pontuacao-maxima'))
+            $('#pontuacao_maxima_item').val($(this).attr('data-pontuacao_maxima_item'))
             $('#pontuacao_por_item').val($(this).attr('data-pontuacao-item'))
             $('#quantidade_anexo').val($(this).attr('data-quantidade-anexo'))
             $('#pontuacao_por_ano').val($(this).attr('data-pontuacao-por-ano'))

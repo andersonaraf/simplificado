@@ -179,7 +179,7 @@
                                                                for="anexo[{{$anexo->id}}][]">0</label>
                                                     </div>
                                                     @if (is_null($anexo->documentoDinamico->quantidade_maxima_ano))
-                                                        @for($i = $anexo->documentoDinamico->pontuacao_por_item; $i <= $anexo->documentoDinamico->pontuacao_maxima; $i = $i + $anexo->documentoDinamico->pontuacao_por_item)
+                                                        @for($i = $anexo->documentoDinamico->pontuacao_por_item; $i <= $anexo->documentoDinamico->pontuacao_maxima_item; $i = $i + $anexo->documentoDinamico->pontuacao_por_item)
                                                             <div class="form-check">
                                                                 <input type="radio" value="{{$i}}"
                                                                        name="anexo[{{$anexo->id}}][]"

@@ -170,6 +170,8 @@
                                                 <p>Pontuação: <strong
                                                         style="font-weight: bold;">{{$anexo->pontuacao}}</strong>
                                                 </p>
+                                            @else
+                                                <td>Não existe pontuação</td>
                                             @endif
                                         </div>
                                     </div>

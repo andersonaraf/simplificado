@@ -263,7 +263,7 @@ class RegistroController extends Controller
             DB::commit();
 
             //ENVIAR O EMAIL
-            Mail::send('registro.comprovante-email', ['comprovante' => $comprovante,], function ($message, $title) {
+            Mail::send('registro.comprovante-email', ['comprovante' => $comprovante,], function ($message) {
                 $message->from(getenv('MAIL_USERNAME'), 'Processo Seletivo Simplificado');
                 $message->to(session('pessoa_email'));
                 $message->subject('Comprovante do Processo Seletivo Simplificado');

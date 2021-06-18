@@ -13,6 +13,7 @@ class DocumentoDinamico extends Model
         'edital_dinamico_tipo_anexo_id',
         'nome_documento',
         'pontuacao_maxima',
+        'pontuacao_maxima_item',
         'pontuacao_por_item',
         'quantidade_anexos',
         'obrigatorio',

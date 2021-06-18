@@ -19,12 +19,13 @@ class CreateDocumentoDinamicosTable extends Migration
             $table->string('nome_documento');
             $table->boolean('obrigatorio')->default(false);
             $table->double('pontuacao_maxima')->nullable();
+            $table->double('pontuacao_maxima_item')->nullable();
             $table->double('pontuacao_por_item')->nullable();
             $table->integer('quantidade_anexos')->nullable();
             $table->double('pontuacao_por_ano')->nullable();
             $table->double('pontuacao_por_mes')->nullable();
-            $table->boolean('tipo_experiencia')->nullable();;
-            $table->boolean( 'pontuacao_manual')->nullable();;
+            $table->boolean('tipo_experiencia')->nullable();
+            $table->boolean( 'pontuacao_manual')->nullable();
 
             $table->foreign('edital_dinamico_tipo_anexo_id')->references('id')->on('edital_dinamico_tipo_anexos');
             $table->boolean('especial')->nullable();

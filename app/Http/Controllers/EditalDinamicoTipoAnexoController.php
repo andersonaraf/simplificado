@@ -18,7 +18,6 @@ class EditalDinamicoTipoAnexoController extends Controller
     //
     public function index($id)
     {
-
         $editalDinamico = EditalDinamico::findOrFail($id);
         $editalAnexos = EditalDinamicoTipoAnexo::where('edital_dinamico_id', $editalDinamico->id)->get();
         $tiposAnexos = TipoAnexo::all();
@@ -42,12 +41,14 @@ class EditalDinamicoTipoAnexoController extends Controller
                 'tipo_anexo_id' => $request->inputTipoAnexo,
             ]);
         }
+
         if (!is_null($editalDinamicoTipoAnexos)) {
             $documentoDinamico = DocumentoDinamico::create([
                 'edital_dinamico_tipo_anexo_id' => $editalDinamicoTipoAnexos->id,
                 'nome_documento' => $request->inputNomeAnexo,
                 'obrigatorio' => $request->inputObrigatorio,
                 'pontuacao_maxima' => $request->inputPontuacaoMaxima,
+                'pontuacao_maxima_item' => $request->inputPontuacaoMaximaDoItem,
                 'pontuacao_por_item' => $request->inputPontuacaoPorItem,
                 'quantidade_anexos' => $request->inputQuantiadeAnexos,
                 'pontuacao_por_ano' => $request->inputPorAno,
@@ -69,12 +70,6 @@ class EditalDinamicoTipoAnexoController extends Controller
         return redirect()->route('edital.formulario.anexo', $request->editalDinamicoID);
     }
 
-    public function destroy($id)
-    {
-
-    }
-
-
     public function edit($id)
     {
         $editalDinamico = EditalDinamico::findOrFail($id);
@@ -88,16 +83,13 @@ class EditalDinamicoTipoAnexoController extends Controller
 
     public function update(Request $request)
     {
-//        dd($request->all());
-
         $editalAnexo = EditalDinamicoTipoAnexo::findOrFail($request->editalDinamicoTipoAnexoID);
-
         $editalAnexo->cargo_id = $request->inputCargo;
         $editalAnexo->tipo_anexo_id = $request->inputTipoAnexo;
-
         $documento = $editalAnexo->documentoDinamico;
         $documento->obrigatorio = $request->inputObrigatorio;
         $documento->pontuacao_maxima = $request->inputPontuacaoMaxima;
+        $documento->pontuacao_maxima_item = $request->inputPontuacaoMaximaDoItem;
         $documento->pontuacao_por_item = $request->inputPontuacaoPorItem;
         $documento->quantidade_anexos = $request->inputQuantiadeAnexos;
         $documento->pontuacao_por_ano = $request->inputPorAno;
@@ -109,7 +101,6 @@ class EditalDinamicoTipoAnexoController extends Controller
         if ($editalAnexo->update() && $documento->update()) {
             session()->put('sucess', 'Alterações realizadas com sucesso.');
         } else session()->put('error', 'Não foi possível alterar as informações.');
-
         return redirect()->back();
     }
 }
