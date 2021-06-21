@@ -57,11 +57,6 @@ class AvaliadorAvaliarController extends Controller
                     }
                 }
             }
-            $key = 0;
-            echo "<pre>";
-            echo $key . print_r($anexo);
-            echo "</pre>";
-
             foreach ($anexo as $anexos) {
                 if (isset($anexos['anexoAno']) && isset($anexos['anexoMes'])) {
                     $documenDinamico = DocumentoDinamico::findorFail($anexos['documento_id']);
@@ -78,8 +73,8 @@ class AvaliadorAvaliarController extends Controller
                             'pontuacao_exp_publico' => $pontuacaoTotalPublica
                         ]);
                         $pontuacaoTotalPublica2 = $pontuacaoTotalPublica2 + $pontuacaoTotalPublica;
-                        dd('total publica', $pontuacaoTotalPublica2);
-                    } else{
+
+                    } else {
                         $pontuacaoTotalPrivada = (($anexos['anexoAno'] * $pontuacao_por_ano) + ($anexos['anexoMes'] * $pontuacao_por_mes));
 
                         if ($pontuacaoTotalPrivada > $pontuacao_maxima) {
@@ -94,54 +89,63 @@ class AvaliadorAvaliarController extends Controller
                             'pontuacao_exp_privado' => $pontuacaoTotalPrivada
                         ]);
                         $pontuacaoTotalPrivada2 = $pontuacaoTotalPrivada2 + $pontuacaoTotalPrivada;
-//                        dd('total privada', $pontuacaoTotalPrivada2);
                     }
 
-                    $pontuacaoTotal = $pontuacaoTotalAnexos + ($pontuacaoTotalPrivada2 + $pontuacaoTotalPublica2);
+                    $pessoa->update([
+                        'status_revisado' => null
+                    ]);
 
-                    dd('anexo', $pontuacaoTotalAnexos, 'privada', $pontuacaoTotalPrivada2, 'publico', $pontuacaoTotalPublica2, 'total', $pontuacaoTotal);
-
-                    if ($pontuacaoTotal > $pontuacao_maxima) {
-
-                        return redirect()->back()->withErrors([
-                            'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total: ' . $pontuacaoTotal . '.'
-                        ]);
+                    $pessoa->update([
+                        'status_avaliado' => 1
+                    ]);
+                } else {
+                    if (isset($anexos['anexo_id'])){
+                        $editalAnexo = PessoaEditalAnexo::findOrFail($anexos['anexo_id']);
+                        if (!is_null($editalAnexo)) {
+                            $editalAnexo->update([
+                                'pontuacao_exp_privado' => 0,
+                                'pontuacao_exp_publica' => 0
+                            ]);
+                        }
                     }
                 }
 
-                $pessoa->update([
-                    'status_revisado' => null
-                ]);
+                $pontuacaoTotal = $pontuacaoTotalAnexos + ($pontuacaoTotalPrivada2 + $pontuacaoTotalPublica2);
 
-                $transparencia = Transparencia::create([
-                    'instrutor_id' => auth()->id(),
-                    'pessoa_id' => $pessoa->id,
-                    'tela' => $url,
-                    'pontuacao_total' => $pontuacaoTotal,
-                ]);
+                if ($pontuacaoTotal > $pontuacao_maxima) {
 
-                $pontuacao = Pontuacao::create([
-
-                    'pessoa_id' => $pessoa->id,
-                    'avaliador_id' => auth()->id(),
-                    'pontuacao_total' => $pontuacaoTotal,
-                    'pontuacao_total_publica' => $pontuacaoTotalPublica2,
-                    'pontuacao_total_privada' => $pontuacaoTotalPrivada2,
-                    'pontuacao_total_anexos' => $pontuacaoTotalAnexos,
-                ]);
-
-                $pessoa->update([
-                    'status_avaliado' => 1
-                ]);
+                    return redirect()->back()->withErrors([
+                        'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total: ' . $pontuacaoTotal . '.'
+                    ]);
+                }
             }
 
+            $transparencia = Transparencia::create([
+                'instrutor_id' => auth()->id(),
+                'pessoa_id' => $pessoa->id,
+                'tela' => $url,
+                'pontuacao_total' => $pontuacaoTotal,
+            ]);
+
+            $pontuacao = Pontuacao::create([
+
+                'pessoa_id' => $pessoa->id,
+                'avaliador_id' => auth()->id(),
+                'pontuacao_total' => $pontuacaoTotal,
+                'pontuacao_total_publica' => $pontuacaoTotalPublica2,
+                'pontuacao_total_privada' => $pontuacaoTotalPrivada2,
+                'pontuacao_total_anexos' => $pontuacaoTotalAnexos,
+            ]);
+
             DB::commit();
+
             return redirect()->route('/visualizacao', [$pessoa->edital_dinamico_id])->with([
                 'color' => 'success',
                 'message' => 'Avaliação Realizada com sucesso. Pontuação Geral: ' . $pontuacaoTotal . ''
             ]);
 
         } catch (Exception $ex) {
+            dd($ex);
             DB::rollBack();
             return redirect()->back()->withInput()->withErrors([
                 'message' => $ex->getMessage()
