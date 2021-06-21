@@ -100,6 +100,19 @@
                     <div class="input-group">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
+                                <span class="input-group-text"
+                                      id="inputPontuacaoMaximaDoItem">Pontuação máxima do item:</span>
+                            </div>
+                        </div>
+                        <div class="col col-sm-6">
+                            <input type="text" name="inputPontuacaoMaximaDoItem" class="form-control"
+                                   placeholder="Pontuação máxima do item">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="col col-sm-6">
+                            <div class="input-group-prepend">
                                 <span class="input-group-text">Pontuação por item:</span>
                             </div>
                         </div>

@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocumentoDinamico extends Model
 {
-    //
+
     protected $table = 'documento_dinamicos';
 
     protected $fillable = [
         'edital_dinamico_tipo_anexo_id',
         'nome_documento',
         'pontuacao_maxima',
+        'pontuacao_maxima_item',
         'pontuacao_por_item',
         'quantidade_anexos',
         'obrigatorio',

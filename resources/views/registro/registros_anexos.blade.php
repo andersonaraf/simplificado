@@ -42,7 +42,6 @@
                         </div>
                         @foreach($progress->editalDinamicoTipoAnexoCargo($editalDinamico->id, $progress->tipo_anexo_id, $pessoa->cargo_id) as $keyEditais=>$editalDinamicoTipoAnexos)
                             @for ($i = 0; $i < $editalDinamicoTipoAnexos->documentoDinamico->quantidade_anexos; $i++)
-                                {{--                                @dd($editalDinamicoTipoAnexos->tipo_anexo_id)--}}
                                 <div class="div-ajuste">
                                     <div class="row">
                                         @if ($editalDinamicoTipoAnexos->documentoDinamico->obrigatorio == 1)
@@ -50,13 +49,11 @@
                                                 <label id="clickfupload1"
                                                        class="control-label label-bordered nomeArquivo">Adicione
                                                     um {{$editalDinamicoTipoAnexos->documentoDinamico->nome_documento}}</label>
-                                            </div>
-                                            <div class="col col-6 text-right pr-4">
                                                 <label class="text-danger label-bordered ">*</label>
                                             </div>
                                         @else
                                             <label id="clickfupload1" class="control-label label-bordered nomeArquivo">Adicione
-                                                 {{$editalDinamicoTipoAnexos->documentoDinamico->nome_documento}}</label>
+                                                {{$editalDinamicoTipoAnexos->documentoDinamico->nome_documento}}</label>
                                         @endif
                                     </div>
                                     @if ($editalDinamicoTipoAnexos->documentoDinamico->obrigatorio == 1)
@@ -66,7 +63,8 @@
                                                class="fupload form-control" accept="application/pdf" required/>
                                     @else
                                         <input type="file" id="fupload1"
-                                               name="anexosDocumentos[{{$editalDinamicoTipoAnexos->tipo_anexo_id}}][]" accept="application/pdf"
+                                               name="anexosDocumentos[{{$editalDinamicoTipoAnexos->tipo_anexo_id}}][]"
+                                               accept="application/pdf"
                                                class="@error('anexosDocumentos[]') is-invalid @enderror"
                                                class="fupload form-control"/>
                                     @endif
@@ -85,6 +83,10 @@
                         @if ($key < ($tipoAnexoCargo->count() - 1))
                             <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
                         @endif
+                        @if($key != 0)
+                            <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
+                        @endif
+
                         @if($key == ($tipoAnexoCargo->count() - 1))
                             <div class="row justify-content-end">
                                 <input type="submit" id="enviar" name="next" class="btn btn-success mr-3"
@@ -92,9 +94,7 @@
                                        value="Enviar"/>
                             </div>
                         @endif
-                        @if($key != 0)
-                            <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
-                        @endif
+
                     </fieldset>
                 @endforeach
             </form>

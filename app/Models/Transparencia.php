@@ -15,6 +15,9 @@ class Transparencia extends Model
         'pessoa_id',
         'tela',
         'pontuacao_total',
+        'pontuacao_total_anexos',
+        'pontuacao_total_publica',
+        'pontuacao_total_privada',
         'motivo'
     ];
 

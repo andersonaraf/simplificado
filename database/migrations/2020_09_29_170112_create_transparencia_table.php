@@ -19,9 +19,11 @@ class CreateTransparenciaTable extends Migration
             $table->unsignedBigInteger('pessoa_id');
             $table->string('tela', 100);
             $table->string('pontuacao_total')->nullable();
+            $table->string('pontuacao_total_anexos')->nullable();
+            $table->string('pontuacao_total_publica')->nullable();
+            $table->string('pontuacao_total_privada')->nullable();
             $table->string('motivo', 500)->nullable();
             $table->timestamps();
-
             $table->foreign('instrutor_id')->references('id')->on('users');
             $table->foreign('pessoa_id')->references('id')->on('pessoa');
         });

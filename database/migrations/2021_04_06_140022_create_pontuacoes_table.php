@@ -22,6 +22,8 @@ class CreatePontuacoesTable extends Migration
             $table->string('pontuacao_total');
             $table->string('pontuacao_total_publica', 100)->nullable();
             $table->string('pontuacao_total_privada', 100)->nullable();
+            $table->string('pontuacao_total_anexos', 100)->nullable();
+
 
             $table->foreign('pessoa_id')->references('id')->on('pessoa');
             $table->foreign('avaliador_id')->references('id')->on('users');
