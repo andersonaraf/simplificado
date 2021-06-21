@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipotelaTable extends Migration
+class CreateTelasEditalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTipotelaTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipotela', function (Blueprint $table) {
+        Schema::create('telas_edital', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tipo_tela_id');
             $table->string('nome_anexo_mostrar', 250)->unique()->nullable();
@@ -34,6 +34,6 @@ class CreateTipotelaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipotela');
+        Schema::dropIfExists('telas_edital');
     }
 }

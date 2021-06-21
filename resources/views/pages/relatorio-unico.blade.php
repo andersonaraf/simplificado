@@ -150,7 +150,7 @@
                                         <div class="card-body text-left">
                                             <h5><a target="_blank" href="{{asset('documentos/'.$anexo->nome_arquivo)}}">Anexo</a>
                                             </h5>
-                                            @if(!is_null($anexo->documentoDinamico->pontuacao_maxima) && !is_null($anexo->documentoDinamico->pontuacao_por_item))
+                                            @if(!is_null($anexo->documentoDinamico->pontuacao_maxima_documento) && !is_null($anexo->documentoDinamico->pontuacao_por_item))
                                                 <p>Pontuação: <strong
                                                         style="font-weight: bold;">{{$anexo->pontuacao}}</strong>
                                                 </p>

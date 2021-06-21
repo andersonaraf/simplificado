@@ -221,7 +221,7 @@ $(document).ready(function () {
                 $('#inputTipoExperiencia[value="0"]').attr('checked', true)
             }
 
-            $('#pontuacao_maxima').val($(this).attr('data-pontuacao-maxima'))
+            $('#pontuacao_maxima_documento').val($(this).attr('data-pontuacao-maxima'))
             $('#pontuacao_maxima_item').val($(this).attr('data-pontuacao_maxima_item'))
             $('#pontuacao_por_item').val($(this).attr('data-pontuacao-item'))
             $('#quantidade_anexo').val($(this).attr('data-quantidade-anexo'))

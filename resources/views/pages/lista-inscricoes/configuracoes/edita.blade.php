@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         <div class="col col-sm-6">
-                            <input type="text" name="inputPontuacaoMaxima" id="pontuacao_maxima" class="form-control"
+                            <input type="text" name="inputPontuacaoMaxima" id="pontuacao_maxima_documento" class="form-control"
                                    placeholder="Pontuação máxima do documento">
                         </div>
                     </div>

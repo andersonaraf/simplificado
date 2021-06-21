@@ -15,8 +15,8 @@ class CreateEditalDinamicosTable extends Migration
     {
         Schema::create('edital_dinamicos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tipo_tela_id');
-            $table->foreign('tipo_tela_id')->references('id')->on('tipotela');
+            $table->unsignedBigInteger('telas_edital_id');
+            $table->foreign('telas_edital_id')->references('id')->on('telas_edital');
             $table->timestamps();
         });
     }
