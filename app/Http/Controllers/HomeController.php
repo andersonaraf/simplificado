@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Pessoa;
 use App\Models\Pontuacao;
 use App\Models\RecursoModel;
-use App\Models\TipoTela;
 
 class HomeController extends Controller
 {

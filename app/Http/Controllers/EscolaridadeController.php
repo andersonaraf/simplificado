@@ -16,7 +16,7 @@ class EscolaridadeController extends Controller
     public function index($id)
     {
         //
-        $editalDinamico = EditalDinamico::where('tipo_tela_id', $id)->first();
+        $editalDinamico = EditalDinamico::where('telas_edital_id', $id)->first();
         $escolaridades = Escolaridade::all();
         return view('pages.lista-inscricoes.escolaridades.list', compact('escolaridades', 'editalDinamico'));
     }
@@ -48,7 +48,7 @@ class EscolaridadeController extends Controller
         if($escolaridade->save()){
             session()->put('sucess', 'Nível de Escolaridade criado com sucesso.');
         } else session()->put('error', 'Não foi possível cadastrar essa escolaridade.');
-        return redirect()->route('escolaridade.lista.index', $editalDinamico->tipo_tela_id);
+        return redirect()->route('escolaridade.lista.index', $editalDinamico->telas_edital_id);
     }
 
     /**

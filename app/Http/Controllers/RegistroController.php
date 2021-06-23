@@ -33,23 +33,23 @@ class RegistroController extends Controller
     {
 
         $cargos = \App\Models\Cargo::all();
-        $editalDinamico = EditalDinamico::where('tipo_tela_id', $id)->first();
+        $editalDinamico = EditalDinamico::where('telas_edital_id', $id)->first();
 
-        $tipoTela = $editalDinamico->tipoTela;
+        $telasEdital = $editalDinamico->telasEdital;
 
 
-        if ($tipoTela->status_liberar == 0 && !is_null($tipoTela->data_fecha)) {
+        if ($telasEdital->status_liberar == 0 && !is_null($telasEdital->data_fecha)) {
 
-            if (strtotime($tipoTela->data_liberar) >= strtotime(date('Y-m-d H:i'))) {
+            if (strtotime($telasEdital->data_liberar) >= strtotime(date('Y-m-d H:i'))) {
                 return redirect()->route('inical');
             }
 
-            if (strtotime($tipoTela->data_fecha) < strtotime(date('Y-m-d H:i'))) {
+            if (strtotime($telasEdital->data_fecha) < strtotime(date('Y-m-d H:i'))) {
 
                 return redirect()->route('inical');
             }
         }
-        if (($tipoTela->status_liberar == 0 && is_null($tipoTela->data_liberar) && is_null($tipoTela->data_fecha))) {
+        if (($telasEdital->status_liberar == 0 && is_null($telasEdital->data_liberar) && is_null($telasEdital->data_fecha))) {
             return redirect()->route('inical');
         }
         return view('registro.registro', compact('editalDinamico', 'cargos', 'id'));
@@ -61,7 +61,7 @@ class RegistroController extends Controller
         try {
             DB::beginTransaction();
 
-            $editalDinamico = EditalDinamico::where('tipo_tela_id', $request->type_edital)->first();
+            $editalDinamico = EditalDinamico::where('telas_edital_id', $request->type_edital)->first();
             //CASO O CPF EXISTA
             $pessoa_confirma = Pessoa::where('cpf', $request->cpf)->where('edital_dinamico_id', $editalDinamico->id)->first();
             if (!isset($request->termo_de_condicao) && !isset($request->termo_de_privacidade)) {
@@ -284,7 +284,7 @@ class RegistroController extends Controller
     //DEVOLVER PARA O REGISTRO OS DADOS DA PESSOA + ALTERACOES NO STYLE
     public function buscaIndex($id)
     {
-        $editalDinamico = EditalDinamico::where('tipo_tela_id', $id)->first();
+        $editalDinamico = EditalDinamico::where('telas_edital_id', $id)->first();
 
         $progress = Progress::where('edital_dinamico_id', $editalDinamico->id)->get();
         $pessoa = json_decode(Cookie::get('pessoa'));

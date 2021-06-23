@@ -84,6 +84,7 @@
                                     <option value="Recurso">Recurso</option>
                                     <option value="Supervisor">Supervisor</option>
                                     <option value="Admin">Administrador</option>
+                                    <option value="Candidato">Candidato</option>
                                 </select>
                             </div>
                         </div>

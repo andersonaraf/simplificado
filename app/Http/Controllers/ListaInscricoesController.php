@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cargo;
-use App\Models\TipoAnexo;
-use App\Models\TipoTela;
+use App\Models\TelasEdital;
 use Illuminate\Http\Request;
 
 class ListaInscricoesController extends Controller
@@ -16,9 +15,7 @@ class ListaInscricoesController extends Controller
      */
     public function index()
     {
-        //
-        $listaFormularios = TipoTela::where('tipo_tela_id', 3)->get();
-
+        $listaFormularios = TelasEdital::where('tipo_tela_id', 3)->get();
         return view('pages.lista-inscricoes.lista', compact('listaFormularios'));
     }
 
@@ -30,7 +27,7 @@ class ListaInscricoesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -41,18 +38,13 @@ class ListaInscricoesController extends Controller
      */
     public function show($id)
     {
-        //
-//        dd($id);
-        $tela = TipoTela::findOrFail($id);
+        $tela = TelasEdital::findOrFail($id);
         $cargos = Cargo::all();
-
-
         return view('pages.lista-inscricoes.editar', compact('tela', 'cargos'));
     }
 
    public function search(Request $request){
-//        dd($request->all());
-       $tela = TipoTela::findOrFail($request->tela_id);
+       $tela = TelasEdital::findOrFail($request->tela_id);
        $cargos = Cargo::all();
        $cargo = Cargo::findOrFail($request->cargo);
        return view('pages.lista-inscricoes.editar', compact('tela', 'cargos', 'cargo'));

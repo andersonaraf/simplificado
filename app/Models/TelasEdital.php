@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TipoTela extends Model
+class TelasEdital extends Model
 {
-    //
-    protected $table = 'tipotela';
+    protected $table = 'telas_edital';
     protected $fillable = [
         'id',
         'tipo_tela_id',
+        'edital_dinamico_id',
         'nome_ou_anexo',
         'status_liberar',
         'data_liberar',
@@ -18,11 +18,13 @@ class TipoTela extends Model
         'nome_anexo_mostrar'
     ];
 
-    public function tipoTelas(){
+    public function tipoTelas()
+    {
         return $this->hasOne(TipoTelas::class, 'id', 'tipo_tela_id');
     }
 
-    public function editalDinamico(){
+    public function editalDinamico()
+    {
         return $this->hasOne(EditalDinamico::class, 'telas_edital_id', 'id');
     }
 }

@@ -31,9 +31,6 @@
                                     @endif
                                 </td>
                                 <td>
-{{--                                    <a href="{{route('formulario.show', $lista->id)}}">--}}
-{{--                                        <i class="fas fa-file-alt mr-3"></i>--}}
-{{--                                    </a>--}}
                                     <a href="{{route('escolaridade.lista.index', $lista->id)}}">
                                         <i class="fas fa-school mr-2"></i>
                                     </a>

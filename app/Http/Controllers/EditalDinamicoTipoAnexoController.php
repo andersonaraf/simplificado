@@ -8,6 +8,7 @@ use App\Models\EditalDinamico;
 use App\Models\EditalDinamicoTipoAnexo;
 use App\Models\Escolaridade;
 use App\Models\EscolaridadeEditalDinamico;
+use App\Models\PontuacaoEdital;
 use App\Models\Progress;
 use App\Models\TipoAnexo;
 use App\Models\TipoAnexoCargo;

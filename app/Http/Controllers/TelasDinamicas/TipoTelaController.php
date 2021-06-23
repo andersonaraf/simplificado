@@ -5,14 +5,20 @@ namespace App\Http\Controllers\TelasDinamicas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TipoTelaRequest;
 use App\Models\EditalDinamico;
-use App\Models\TipoTela;
+use App\Models\TelasEdital;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Exception;
 
 class TipoTelaController extends Controller
 {
     //
     public function store(TipoTelaRequest $request)
     {
+        try {
+
+        }catch (Exception $ex){
+
+        }
         //SALVA PDF
         if ($request->tipo_tela == 2) {
             //VERIFICAR SE O PDF VEIO
@@ -21,8 +27,8 @@ class TipoTelaController extends Controller
                 return redirect()->route('tela-criar');
             } else {
                 //VERIFICAR SE O NOME JA EXISTE
-                $tipoTela = TipoTela::where('nome_ou_anexo', $request->nome_pdf)->first();
-                if (!is_null($tipoTela)) {
+                $telasEdital = TelasEdital::where('nome_ou_anexo', $request->nome_pdf)->first();
+                if (!is_null($telasEdital)) {
                     session()->put('error', 'Parece que esse anexo já está sendo utilizado!');
                     return redirect()->route('tela-criar');
                 }
@@ -37,7 +43,7 @@ class TipoTelaController extends Controller
                     session()->put('error', 'Algo de errado aconteceu, entre em contato com o suporte.');
                     return redirect()->route('tela-criar');
                 } else {
-                    TipoTela::create([
+                    TelasEdital::create([
                         'tipo_tela_id' => 2,
                         'nome_anexo_mostrar' => $request->tela_nome_pdf,
                         'nome_ou_anexo' => $name,
@@ -52,12 +58,12 @@ class TipoTelaController extends Controller
         } //SALVAR TELA
         else if ($request->tipo_tela == 1) {
             //VERIFICAR SE O NOME JA EXISTE
-            $tipoTela = TipoTela::where('nome_ou_anexo', $request->nome_tela)->first();
-            if (!is_null($tipoTela)) {
+            $telasEdital = TelasEdital::where('nome_ou_anexo', $request->nome_tela)->first();
+            if (!is_null($telasEdital)) {
                 session()->put('error', 'Parece que esse nome já está sendo utilizado!');
                 return redirect()->route('tela-criar');
             }
-            TipoTela::create([
+            TelasEdital::create([
                 'tipo_tela_id' => 1,
                 'nome_ou_anexo' => $request->tela_nome,
                 'status_liberar' => $request->status_liberar,
@@ -67,12 +73,12 @@ class TipoTelaController extends Controller
             return redirect()->route('tela-criar');
         } else if ($request->tipo_tela == 3) {
 //            dd($request->all());
-            $tipoTela = TipoTela::where('nome_ou_anexo', $request->nome_tela)->first();
-            if (!is_null($tipoTela)) {
+            $telasEdital = TelasEdital::where('nome_ou_anexo', $request->nome_tela)->first();
+            if (!is_null($telasEdital)) {
                 session()->put('error', 'Parece que esse nome já está sendo utilizado!');
                 return redirect()->route('tela-criar');
             }
-            $tipoTela = TipoTela::create([
+            $telasEdital = TelasEdital::create([
                 'tipo_tela_id' => 3,
                 'nome_ou_anexo' => $request->tela_nome,
                 'status_liberar' => $request->status_liberar,
@@ -80,7 +86,7 @@ class TipoTelaController extends Controller
             ]);
 
             EditalDinamico::create([
-                'tipo_tela_id' => $tipoTela->id,
+                'telas_edital_id' => $telasEdital->id,
             ]);
             session()->put('sucess', 'Tela Criada com sucesso!');
             return redirect()->route('tela-criar');
@@ -96,7 +102,7 @@ class TipoTelaController extends Controller
 
     public function delete($id)
     {
-        $tela = TipoTela::findOrFail($id);
+        $tela = TelasEdital::findOrFail($id);
         $tela->delete();
         session()->put('sucess', 'Tela Apagada com Sucesso!');
         return redirect()->route('tela-liberar');
@@ -104,7 +110,7 @@ class TipoTelaController extends Controller
 
     public function show($id)
     {
-        $tela = TipoTela::findOrFail($id);
+        $tela = TelasEdital::findOrFail($id);
 
         $directory = public_path();
         $files = \File::allFiles($directory);
@@ -125,7 +131,7 @@ class TipoTelaController extends Controller
         }
 
         //CRAIR UMA VARIVAVEL COM OS DADOS DA TELA PARA SER EDITADA
-        $tela = TipoTela::findOrFail($id);
+        $tela = TelasEdital::findOrFail($id);
         //VERIFICA SE A TELA EXISTE
         if (is_null($tela)) {
             session()->put('error', 'Parece que algo de errado aconteceu!');
