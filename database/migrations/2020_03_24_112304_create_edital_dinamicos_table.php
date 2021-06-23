@@ -16,8 +16,10 @@ class CreateEditalDinamicosTable extends Migration
         Schema::create('edital_dinamicos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('telas_edital_id');
-            $table->foreign('telas_edital_id')->references('id')->on('telas_edital');
             $table->timestamps();
+
+            $table->foreign('telas_edital_id')->references('id')->on('telas_edital')->onDelete('cascade');
+
         });
     }
 

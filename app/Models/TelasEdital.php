@@ -10,7 +10,6 @@ class TelasEdital extends Model
     protected $fillable = [
         'id',
         'tipo_tela_id',
-        'edital_dinamico_id',
         'nome_ou_anexo',
         'status_liberar',
         'data_liberar',
@@ -25,6 +24,6 @@ class TelasEdital extends Model
 
     public function editalDinamico()
     {
-        return $this->hasOne(EditalDinamico::class, 'telas_edital_id', 'id');
+        return $this->hasOne(EditalDinamico::class, 'tipo_tela_id', 'id');
     }
 }

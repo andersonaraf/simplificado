@@ -4,8 +4,6 @@ namespace App\Http\Controllers\TelasDinamicas;
 
 use App\Http\Controllers\Controller;
 use App\Models\TelasEdital;
-use App\Models\TipoTela;
-use Illuminate\Http\Request;
 
 class TelaLiberarController extends Controller
 {

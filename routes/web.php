@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TelasDinamicas\TelasEditalController;
+use App\Http\Controllers\TelasDinamicas\TelaLiberarController;
+use App\Http\Controllers\TelasDinamicas\TelaCriarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,20 +47,20 @@ Route::get('/protocolo', 'ComprovanteController@protocolo')->name('protocolo');
 Route::post('comprovante-procurar', 'ComprovanteController@procurar')->name('comprovante-procurar');
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('table-list', function () {
-		return view('pages.table_list');
-	})->name('table');
+    Route::get('table-list', function () {
+        return view('pages.table_list');
+    })->name('table');
 
-	Route::get('/visualizacao/{editalID}', 'AreaRestritaController@index')->name('/visualizacao');
+    Route::get('/visualizacao/{editalID}', 'AreaRestritaController@index')->name('/visualizacao');
     Route::get('/avaliar/{id}', 'AreaRestritaController@index2')->name('/avaliar');
     Route::post('pontuacao', 'PontuacaoController@store')->name('pontuacao');
 
-	Route::get('/revisao/{editalID}', 'AreaRestritaController@index3')->name('revisao');
+    Route::get('/revisao/{editalID}', 'AreaRestritaController@index3')->name('revisao');
     Route::get('/aprovar/{id}', 'AreaRestritaController@aprovar')->name('/aprovar');
     Route::get('/aprovarpessoa/{id}', 'PontuacaoController@aceitarAvaliacao')->name('aprovarpessoa');
 
     Route::get('/recurso/escolher/edital', [\App\Http\Controllers\RecursoAdminController::class, 'index'])->name('recurso.escolher.edital');
-    Route::get( '/visualizacao-recurso/{id}', 'AreaRestritaController@index4')->name('visualizacao-recurso');
+    Route::get('/visualizacao-recurso/{id}', 'AreaRestritaController@index4')->name('visualizacao-recurso');
     Route::get('/recurso-unico/{id}', [\App\Http\Controllers\AreaRestritaController::class, 'recursoUnico'])->name('recurso-unico');
 
 
@@ -72,12 +75,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/unico-transparencia/{id}', 'TransparenciaController@show')->name('unico-transparencia');
     Route::post('/pesquisa-transparencia', 'TransparenciaController@search')->name('pesquisa-transparencia');
 
-    Route::get('/tela-criar', 'TelasDinamicas\TelaCriarController@index')->name('tela-criar');
-    Route::get('/tela-liberar', 'TelasDinamicas\TelaLiberarController@index')->name('tela-liberar');
-    Route::post('tela-criar-salvar', 'TelasDinamicas\TipoTelaController@store')->name('tela-criar-salvar');
-    Route::get('tela-deletar/{id}', 'TelasDinamicas\TipoTelaController@delete')->name('tela-deletar');
-    Route::get('tela-unica-mostra/{id}', 'TelasDinamicas\TipoTelaController@show')->name('tela-unica-mostra');
-    Route::match(['post', 'get'], 'tela-editar/{id}', 'TelasDinamicas\TipoTelaController@update')->name('tela-editar');
+    Route::get('/tela-criar', [TelaCriarController::class, 'index'])->name('tela-criar');
+    Route::get('/tela-liberar', [TelaLiberarController::class, 'index'])->name('tela-liberar');
+    Route::post('tela-criar-salvar', [TelasEditalController::class, 'store'])->name('tela-criar-salvar');
+    Route::get('tela-deletar/{id}', [TelasEditalController::class, 'delete'])->name('tela-deletar');
+    Route::get('tela-unica-mostra/{id}', [TelasEditalController::class, 'show'])->name('tela-unica-mostra');
+    Route::match(['post', 'get'], 'tela-editar/{id}', [TelasEditalController::class, 'update'])->name('tela-editar');
 
     Route::get('avaliacao-pne', 'PNE\AvaliacaoPNEController@index')->name('avaliacao-pne');
     Route::get('avaliacao-pne-aceitar/{id}', 'PNE\AvaliacaoPNEController@update')->name('avaliacao-pne-aceitar');
@@ -146,10 +149,10 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'UserController', ['except' => ['show']]);
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+    Route::resource('user', 'UserController', ['except' => ['show']]);
+    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+    Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
 Route::get('/gerarPDF/{comprovante}', 'ComprovanteController@gerarComprovanteCpf')->name('gerarpdf-comprovante');

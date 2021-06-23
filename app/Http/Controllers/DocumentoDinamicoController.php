@@ -7,7 +7,8 @@ use App\Models\EditalDinamicoTipoAnexo;
 use App\Models\Progress;
 use Illuminate\Http\Request;
 
-class DocumentoDinamicoController extends Controller
+class
+DocumentoDinamicoController extends Controller
 {
     //
     public function destroy($id)
