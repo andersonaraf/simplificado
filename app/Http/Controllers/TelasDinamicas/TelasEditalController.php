@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\TelasDinamicas;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TipoTelaRequest;
+use App\Http\Requests\TelasEditalRequest;
 use App\Models\EditalDinamico;
 use App\Models\TelasEdital;
 use Illuminate\Http\Request;
 use mysql_xdevapi\Exception;
 
-class TipoTelaController extends Controller
+class TelasEditalController extends Controller
 {
     //
-    public function store(TipoTelaRequest $request)
+    public function store(TelasEditalRequest $request)
     {
         try {
 
@@ -89,14 +89,12 @@ class TipoTelaController extends Controller
                 'telas_edital_id' => $telasEdital->id,
             ]);
             session()->put('sucess', 'Tela Criada com sucesso!');
-            return redirect()->route('tela-criar');
+            return redirect()->route('tela-liberar');
         } //ERROS FINAIS
         else {
             session()->put('error', 'Parece que algo de errado aconteceu!');
             return redirect()->route('tela-criar');
         }
-        session()->put('error', 'Parece que algo de errado aconteceu!');
-        return redirect()->route('tela-criar');
     }
 
 
@@ -123,7 +121,6 @@ class TipoTelaController extends Controller
 
     public function update(Request $request, $id)
     {
-//        dd($request->all());
         //VERIFICAR SE N FOI MARCADO A DATA E SELECIONADO O LIBERAR
         if ($request->status_liberar == '1' && !is_null($request->data_liberar)) {
             session()->put('error', 'Parece que algo de errado aconteceu!');
