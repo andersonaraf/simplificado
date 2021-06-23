@@ -8,6 +8,7 @@ use App\Models\EditalDinamico;
 use App\Models\EditalDinamicoTipoAnexo;
 use App\Models\Escolaridade;
 use App\Models\EscolaridadeEditalDinamico;
+use App\Models\PontuacaoEdital;
 use App\Models\Progress;
 use App\Models\TipoAnexo;
 use App\Models\TipoAnexoCargo;
@@ -47,7 +48,7 @@ class EditalDinamicoTipoAnexoController extends Controller
                 'edital_dinamico_tipo_anexo_id' => $editalDinamicoTipoAnexos->id,
                 'nome_documento' => $request->inputNomeAnexo,
                 'obrigatorio' => $request->inputObrigatorio,
-                'pontuacao_maxima' => $request->inputPontuacaoMaxima,
+                'pontuacao_maxima_documento' => $request->inputPontuacaoMaxima,
                 'pontuacao_maxima_item' => $request->inputPontuacaoMaximaDoItem,
                 'pontuacao_por_item' => $request->inputPontuacaoPorItem,
                 'quantidade_anexos' => $request->inputQuantiadeAnexos,
@@ -88,7 +89,7 @@ class EditalDinamicoTipoAnexoController extends Controller
         $editalAnexo->tipo_anexo_id = $request->inputTipoAnexo;
         $documento = $editalAnexo->documentoDinamico;
         $documento->obrigatorio = $request->inputObrigatorio;
-        $documento->pontuacao_maxima = $request->inputPontuacaoMaxima;
+        $documento->pontuacao_maxima_documento = $request->inputPontuacaoMaxima;
         $documento->pontuacao_maxima_item = $request->inputPontuacaoMaximaDoItem;
         $documento->pontuacao_por_item = $request->inputPontuacaoPorItem;
         $documento->quantidade_anexos = $request->inputQuantiadeAnexos;

@@ -21,7 +21,7 @@
                         </tr>
                         </thead>
                         <tbody id="myTable">
-                        @forelse($tipos_telas as $tela)
+                        @forelse($telasEdital as $tela)
                             <tr>
                                 <th>{{$tela->id}}</th>
                                 <th>{{$tela->tipoTelas->tipo}}</th>
@@ -51,7 +51,7 @@
                         </tbody>
                     </table>
                     <div style="width: 100%; margin-left: 50%">
-                        {!! $tipos_telas->links() !!}
+                        {!! $telasEdital->links() !!}
                     </div>
                 </div>
             </div>

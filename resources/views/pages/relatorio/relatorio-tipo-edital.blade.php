@@ -18,7 +18,7 @@
                     <a href="{{route('relatorio.visualizar', $editalDinamico->id)}}" style="width: 100%">
                         <div class="card">
                             <div class="card-header text-center">
-                                <h5 class="font-weight-bold">{{$editalDinamico->tipoTela->nome_ou_anexo}}</h5>
+                                <h5 class="font-weight-bold">{{$editalDinamico->telasEdital->nome_ou_anexo}}</h5>
                             </div>
                         </div>
                     </a>

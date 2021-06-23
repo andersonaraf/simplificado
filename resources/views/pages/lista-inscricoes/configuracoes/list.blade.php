@@ -43,7 +43,7 @@
                                                data-tipo-documento="{{$editalAnexo->tipoAnexo->id}}"
                                                data-obrigatorio="{{$editalAnexo->documentoDinamico->obrigatorio}}"
                                                data-inserir-manual="{{$editalAnexo->documentoDinamico->pontuacao_manual}}"
-                                               data-pontuacao-maxima="{{$editalAnexo->documentoDinamico->pontuacao_maxima}}"
+                                               data-pontuacao-maxima="{{$editalAnexo->documentoDinamico->pontuacao_maxima_documento}}"
                                                data-pontuacao_maxima_item="{{$editalAnexo->documentoDinamico->pontuacao_maxima_item}}"
                                                data-pontuacao-item="{{$editalAnexo->documentoDinamico->pontuacao_por_item}}"
                                                data-quantidade-anexo="{{$editalAnexo->documentoDinamico->quantidade_anexos}}"

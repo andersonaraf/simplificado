@@ -104,6 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('procurar/cargo', [\App\Http\Controllers\ListaInscricoesController::class, 'search'])->name('cargo.search');
     Route::post('salvar/tipoAnexo', [\App\Http\Controllers\TipoAnexoController::class, 'store'])->name('tipoanexo.store');
 
+    //Configurações do edital
     Route::get('lista/escolaridade/{id}', [\App\Http\Controllers\EscolaridadeController::class, 'index'])->name('escolaridade.lista.index');
     Route::post('/escolaridade/salvar', [\App\Http\Controllers\EscolaridadeController::class, 'store'])->name('escolaridade.store');
     Route::get('/escolaridade/aceitar/{idEdital}/{idEscolaridade}', [\App\Http\Controllers\EscolaridadeEditalDinamicoController::class, 'aceito'])->name('escolaridade.edital.dinamico');
@@ -114,6 +115,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cargo/deletar/{id}', [\App\Http\Controllers\CargoController::class, 'destroy'])->name('cargo.delete');
     Route::get('/cargo/editar', [\App\Http\Controllers\CargoController::class, 'edit'])->name('cargo.edita');
     Route::post('/cargo/update', [\App\Http\Controllers\CargoController::class, 'update'])->name('cargo.update');
+
+    Route::get('pontuacao/{id}', [\App\Http\Controllers\EscolaridadeController::class, 'index'])->name('escolaridade.lista.index');
 
     Route::get('edital/formulario/anexos/{id}', [\App\Http\Controllers\EditalDinamicoTipoAnexoController::class, 'index'])->name('edital.formulario.anexo');
     Route::post('/edital/formulario/salvar', [\App\Http\Controllers\EditalDinamicoTipoAnexoController::class, 'store'])->name('edital.formulario.store');

@@ -19,6 +19,7 @@ class CreatePessoaEditalAnexosTable extends Migration
             $table->unsignedBigInteger('tipo_anexo_id');
             $table->unsignedBigInteger('pessoa_id');
             $table->unsignedBigInteger('documento_dinamico_id');
+            $table->unsignedBigInteger('pontuacao_edital_id');
             $table->string('pontuacao')->nullable();
             $table->string('pontuacao_exp_publico')->nullable();
             $table->string('pontuacao_exp_privado')->nullable();
@@ -28,6 +29,7 @@ class CreatePessoaEditalAnexosTable extends Migration
             $table->foreign('edital_dinamico_id')->references('id')->on('edital_dinamicos');
             $table->foreign('tipo_anexo_id')->references('id')->on('tipo_anexo');
             $table->foreign('pessoa_id')->references('id')->on('pessoa');
+            $table->foreign('pontuacao_edital_id')->references('id')->on('pontuacao_edital');
 
             $table->timestamps();
         });

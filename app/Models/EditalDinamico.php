@@ -9,7 +9,7 @@ class EditalDinamico extends Model
     //
     protected $table = 'edital_dinamicos';
     protected $fillable = [
-        'tipo_tela_id',
+        'telas_edital_id',
     ];
 
     public function escolaridadeEditalDinamico(){
@@ -20,7 +20,7 @@ class EditalDinamico extends Model
         return $this->hasMany(Progress::class, 'edital_dinamico_id', 'id');
     }
 
-    public function tipoTela(){
-        return $this->belongsTo(TipoTela::class, 'tipo_tela_id', 'id');
+    public function telasEdital(){
+        return $this->belongsTo(TelasEdital::class, 'telas_edital_id', 'id');
     }
 }

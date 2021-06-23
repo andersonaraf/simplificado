@@ -21,7 +21,7 @@ class AvaliadorAvaliarController extends Controller
 
         $anexo = $request->anexo;
         $pontuacao_verificar = 0;
-        $pontuacao_maxima = $request->pontuacao_maxima;
+        $pontuacao_maxima_documento = $request->pontuacao_maxima_documento;
         $pontuacao_manual = $request->pontuacao_manual;
         $pontuacao_por_ano = $request->pontuacao_por_ano;
         $pontuacao_por_mes = $request->pontuacao_por_mes;
@@ -49,9 +49,9 @@ class AvaliadorAvaliarController extends Controller
                             $pontuacaoTotalAnexos = $pontuacaoTotalAnexos + $anexo[$editalAnexo->id][0];
 
                         }
-                        if ($pontuacaoTotalAnexos > $pontuacao_maxima) {
+                        if ($pontuacaoTotalAnexos > $editalAnexo->documentoDinamico->pontuacao_maxima_documento) {
                             return redirect()->back()->withErrors([
-                                'limite' => 'Ops, você passou o limite de pontuação maxima que é : ' . $pontuacao_maxima . ' e pontuação total De anexo está com : ' . $pontuacaoTotalAnexos . '.'
+                                'limite' => 'Ops, você passou o limite de pontuação maxima que é : ' . $editalAnexo->documentoDinamico->pontuacao_maxima_documento . ' e pontuação total De anexo está com : ' . $pontuacaoTotalAnexos . '.'
                             ]);
                         }
                     }
@@ -60,11 +60,12 @@ class AvaliadorAvaliarController extends Controller
             foreach ($anexo as $anexos) {
                 if (isset($anexos['anexoAno']) && isset($anexos['anexoMes'])) {
                     $documenDinamico = DocumentoDinamico::findorFail($anexos['documento_id']);
+
                     if ($documenDinamico->tipo_experiencia == 0) {
                         $pontuacaoTotalPublica = (($anexos['anexoAno'] * $pontuacao_por_ano) + ($anexos['anexoMes'] * $pontuacao_por_mes));
-                        if ($pontuacaoTotalPublica > $pontuacao_maxima) {
+                        if ($pontuacaoTotalPublica > $documenDinamico->pontuacao_maxima_documento) {
                             return redirect()->back()->withErrors([
-                                'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total Pública: ' . $pontuacaoTotalPublica . '.'
+                                'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total Pública: ' . $pontuacaoTotalPublica . ' e pontuação total De anexo está com : ' . $documenDinamico->pontuacao_maxima_documento . '.'
                             ]);
                         }
                         //Fazendo a somatorio de pontos por anexo
@@ -77,7 +78,7 @@ class AvaliadorAvaliarController extends Controller
                     } else {
                         $pontuacaoTotalPrivada = (($anexos['anexoAno'] * $pontuacao_por_ano) + ($anexos['anexoMes'] * $pontuacao_por_mes));
 
-                        if ($pontuacaoTotalPrivada > $pontuacao_maxima) {
+                        if ($pontuacaoTotalPrivada > $documenDinamico->pontuacao_maxima_documento) {
 
                             return redirect()->back()->withErrors([
                                 'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total Privada: ' . $pontuacaoTotalPrivada . '.'
@@ -99,7 +100,7 @@ class AvaliadorAvaliarController extends Controller
                         'status_avaliado' => 1
                     ]);
                 } else {
-                    if (isset($anexos['anexo_id'])){
+                    if (isset($anexos['anexo_id'])) {
                         $editalAnexo = PessoaEditalAnexo::findOrFail($anexos['anexo_id']);
                         if (!is_null($editalAnexo)) {
                             $editalAnexo->update([
@@ -111,8 +112,8 @@ class AvaliadorAvaliarController extends Controller
                 }
 
                 $pontuacaoTotal = $pontuacaoTotalAnexos + ($pontuacaoTotalPrivada2 + $pontuacaoTotalPublica2);
-
-                if ($pontuacaoTotal > $pontuacao_maxima) {
+                dd(pontuacao_maxima_documento);
+                if ($pontuacaoTotal > pontuacao_maxima_documento) {
 
                     return redirect()->back()->withErrors([
                         'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total: ' . $pontuacaoTotal . '.'
@@ -137,12 +138,12 @@ class AvaliadorAvaliarController extends Controller
                 'pontuacao_total_anexos' => $pontuacaoTotalAnexos,
             ]);
 
-            DB::commit();
+            if (!is_null($transparencia) && !is_null($pontuacao)) {
+                DB::commit();
+                session()->put('sucess', 'Avaliação Realizada com sucesso. Pontuação Geral: ' . $pontuacaoTotal . '');
+            }
 
-            return redirect()->route('/visualizacao', [$pessoa->edital_dinamico_id])->with([
-                'color' => 'success',
-                'message' => 'Avaliação Realizada com sucesso. Pontuação Geral: ' . $pontuacaoTotal . ''
-            ]);
+            return redirect()->route('/visualizacao', $pessoa->edital_dinamico_id);
 
         } catch (Exception $ex) {
             dd($ex);
@@ -173,7 +174,7 @@ class AvaliadorAvaliarController extends Controller
             ]);
 
             foreach ($pessoa->pessoaEditalAnexos as $editalAnexo) {
-                if (!is_null($editalAnexo->documentoDinamico->pontuacao_maxima) && !is_null($editalAnexo->documentoDinamico->pontuacao_por_item)) {
+                if (!is_null($editalAnexo->documentoDinamico->pontuacao_maxima_documento) && !is_null($editalAnexo->documentoDinamico->pontuacao_por_item)) {
                     $editalAnexo->update([
                         'pontuacao' => 0
                     ]);
