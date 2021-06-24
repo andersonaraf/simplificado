@@ -41,18 +41,43 @@
                                 @enderror
                             </div>
 
-                            <div id="liberar">
+                            <div id="liberar" hidden>
                                 <p>Liberar tela</p>
                                 <select id="status_liberar" name="status_liberar">
-                                    <option value="1">Sim</option>
-                                    <option value="0">Não</option>
+                                    @if ($tela->status_liberar == 1)
+                                        <option value="1" selected>Sim</option>
+                                    @else
+                                        <option value="1">Sim</option>
+                                    @endif
+                                    @if ($tela->status_liberar == 0)
+                                        <option value="0" selected>Não</option>
+                                    @else
+                                        <option value="0">Não</option>
+                                    @endif
                                 </select>
                             </div>
 
-                            <div id="data_liberar" hidden>
-                                <p>Selecione uma Data para liberar a Tela</p>
-                                <input type="datetime-local" name="data_liberar">
-                            </div>
+                            @if ($tela->status_liberar == 0)
+                                <div id="data_liberar" hidden>
+                                    <p>Selecione uma Data para liberar a Tela</p>
+                                    @if(!is_null($tela->data_liberar) && !is_null($tela->data_fecha))
+                                        <p><strong>Data Inicial: {{$tela->data_liberar}} - Até
+                                                - {{$tela->data_fecha}}</strong></p>
+                                    @endif
+                                    <h3><strong>Data Inicial</strong></h3>
+                                    <input type="datetime-local" id="input-data_liberar" name="data_liberar"
+                                           value="{{date('d/m/Y H:i', strtotime($tela->data_liberar))}}">
+
+                                    <h3><strong>Data Final</strong></h3>
+                                    <input type="datetime-local" id="input-data_liberar" name="data_final"
+                                           value="{{date('d/m/Y H:i', strtotime($tela->data_liberar))}}">
+                                </div>
+                            @else
+                                <div id="data_liberar" hidden>
+                                    <p>Selecione uma Data para liberar a Tela</p>
+                                    <input type="date" id="input-data_liberar" name="data_liberar">
+                                </div>
+                            @endif
 
                             <input type="submit" name="next" id="confirma" class="acao" value="Criar"/>
                         </fieldset>
@@ -70,13 +95,19 @@
                 $('#tela').removeAttr('hidden');
                 $('#texto').html('Informe o nome da Tela');
                 $('#pdf').attr('hidden', true);
+                $('#liberar').removeAttr('hidden');
+                $('#data_liberar').removeAttr('hidden');
             } else if ($('#tipo_tela').val() == 2) {
                 $('#pdf').removeAttr('hidden');
                 $('#tela').attr('hidden', true);
+                $('#liberar').removeAttr('hidden');
+                $('#data_liberar').removeAttr('hidden');
             } else if ($('#tipo_tela').val() == 3) {
                 $('#texto').html('Informe o nome do Formulário');
                 $('#tela').removeAttr('hidden');
                 $('#pdf').attr('hidden', true);
+                $('#liberar').removeAttr('hidden');
+                $('#data_liberar').removeAttr('hidden');
             }
         });
 
