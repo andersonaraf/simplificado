@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "7.4",
+        "php": "^7.4||^8.0.7",
         "barryvdh/laravel-dompdf": "^0.9.0",
         "consoletvs/charts": "7.2.0",
         "doctrine/dbal": "^3.0",
@@ -19,7 +19,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "khill/lavacharts": "^3.1",
         "laravel-frontend-presets/material-dashboard": "^1.1",
-        "laravel/framework": "^7.24",
+        "laravel/framework": "^7.24||^8.0.0",
         "laravel/ui": "^2.2",
         "laravellegends/pt-br-validator": "^7.0",
         "orangehill/iseed": "2.2"
