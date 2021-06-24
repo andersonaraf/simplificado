@@ -15,7 +15,7 @@
                         <thead>
                         <tr>
                             <th>Formulário</th>
-                            <th>Aberto</th>
+                            <th>Situação Edital</th>
                             <th>Ações</th>
                         </tr>
                         </thead>
@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{$lista->nome_ou_anexo}}</td>
                                 <td>
-                                    @if(!is_null($lista->data_liberar) && $lista->status_liberar == 0)
+                                    @if(!is_null($lista->data_liberar) || $lista->status_liberar == 0)
                                         <p class="text-danger">Fechado</p>
                                     @else
                                         <p class="text-success">Aberto</p>
