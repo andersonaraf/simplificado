@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cargo;
 use App\Models\EscolaridadeEditalDinamico;
 use Illuminate\Http\Request;
+use Exception;
 
 class CargoController extends Controller
 {
@@ -93,7 +94,7 @@ class CargoController extends Controller
         $cargo->cargo = $request->inputCargo;
 
         if (!$cargo->update()) {
-           return redirect()->back()->withErrors(['error' =>'Ops, não foi possível alterar o nome do cargo.']);
+            return redirect()->back()->withErrors(['error' => 'Ops, não foi possível alterar o nome do cargo.']);
         }
         return redirect()->back()->with(['sucess' => 'Cargo alterado com sucesso.']);
 
@@ -108,11 +109,15 @@ class CargoController extends Controller
     public function destroy($id)
     {
         //
-        $cargo = Cargo::findOrFail($id);
-        $escolaridadeEditalDinamico = $cargo->escolaridadeEditalDinamico;
-        if ($cargo->delete()) {
-            session()->put('sucess', 'Cargo removido com sucesso.');
-        } else session()->put('error', 'Não foi possível remover o cargo.');
-        return redirect()->route('escolaridade.edital.cargo', [$escolaridadeEditalDinamico->edital_dinamico_id, $escolaridadeEditalDinamico->escolaridade_id]);
+        try {
+
+            $cargo = Cargo::findOrFail($id);
+            $escolaridadeEditalDinamico = $cargo->escolaridadeEditalDinamico;
+            $cargo->delete();
+            return true;
+
+        } catch (Exception $ex) {
+            return response()->withException($ex->getMessage());
+        }
     }
 }

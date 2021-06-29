@@ -5,8 +5,6 @@
     <link rel="stylesheet" href="{{asset('css/registro/style.css')}}">
 @endsection
 @section('content')
-    @csrf
-    @method('PUT')
     <div class="content">
         <div class="container-fluid">
             <main class="container">

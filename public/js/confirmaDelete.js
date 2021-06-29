@@ -1,4 +1,11 @@
 $(function () {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $('.delete_item_sweet').click(function () {
         const action = $(this).data('action');
         console.log(action)
@@ -25,14 +32,15 @@ $(function () {
                 });
 
                 $.ajax({
-                    type: 'DELETE',
+                    type: 'GET',
                     url: action,
                     dataType: 'JSON',
                     data: {
-                        "_token": "{{ csrf_token() }}"
+                        "token": $('input[name="_token"]').val()
                     },
                     success: function (response) {
-                        if (response.delete) {
+                        console.log(response)
+                        if (response) {
                             Swal.fire({
                                 title: 'Excluido!',
                                 text: response.message,
@@ -41,21 +49,24 @@ $(function () {
                                 timer: 2000,
                                 allowOutsideClick: false,
                                 allowEscapeKey: false,
-                                onClose: window.location.href = response.redirect
+                                // onClose: window.location.href = response.redirect
                             })
                         }
 
-                        if (response.error) {
-                            Swal.fire({
-                                title: 'Não Excluido!',
-                                text: response.message,
-                                type: 'error',
-                                allowOutsideClick: false,
-                                allowEscapeKey: false,
-                                showConfirmButton: true
-                            })
-                        }
+
+                    },
+                    error: function (response) {
+                        console.log(response)
+                        Swal.fire({
+                            title: 'Não Excluido!',
+                            text: 'Não é possivel excluir esse registro',
+                            type: 'error',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            showConfirmButton: true
+                        })
                     }
+
                 });
             }
         })
