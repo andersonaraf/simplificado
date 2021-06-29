@@ -6,50 +6,53 @@
     <link rel="stylesheet" href="{{asset('css/area-restrita/lista.css')}}">
 @endsection
 @section('content')
-
     <div class="content">
         <div class="container-fluid">
             <main class="container">
-                <div class="row">
-                    <table id="lista-formulario">
-                        <thead>
-                        <tr>
-                            <th>Formulário</th>
-                            <th>Situação Edital</th>
-                            <th>Ações</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($listaFormularios as $lista)
-                            <tr>
-                                <td>{{$lista->nome_ou_anexo}}</td>
-                                <td>
-                                    @if(!is_null($lista->data_liberar) || $lista->status_liberar == 0)
-                                        <p class="text-danger">Fechado</p>
-                                    @else
-                                        <p class="text-success">Aberto</p>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{route('escolaridade.lista.index', $lista->id)}}">
-                                        <i class="fas fa-school mr-2"></i>
-                                    </a>
-                                    <a href="{{route('edital.formulario.anexo', $lista->editalDinamico->id)}}">
-                                        <i class="fas fa-cog"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>Formulário</th>
-                            <th>Aberto</th>
-                            <th>Ações</th>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                <table id="lista-formulario">
+                    <div class="row">
+                            <div id="dataTables-lista">
+                                <table id="lista" class="display" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Formulário</th>
+                                        <th>Situação Edital</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($listaFormularios as $lista)
+                                        <tr>
+                                            <td>{{$lista->nome_ou_anexo}}</td>
+                                            <td>
+                                                @if(!is_null($lista->data_liberar) || $lista->status_liberar == 0)
+                                                    <p class="text-danger">Fechado</p>
+                                                @else
+                                                    <p class="text-success">Aberto</p>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{route('escolaridade.lista.index', $lista->id)}}">
+                                                    <i class="fas fa-school mr-2"></i>
+                                                </a>
+                                                <a href="{{route('edital.formulario.anexo', $lista->editalDinamico->id)}}">
+                                                    <i class="fas fa-cog"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Formulário</th>
+                                        <th>Situação Edital</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                </table>
             </main>
         </div>
     </div>

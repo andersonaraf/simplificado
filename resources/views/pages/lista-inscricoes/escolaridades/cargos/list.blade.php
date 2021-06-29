@@ -5,54 +5,60 @@
     <link rel="stylesheet" href="{{asset('css/registro/style.css')}}">
 @endsection
 @section('content')
+    @csrf
+    @method('PUT')
     <div class="content">
         <div class="container-fluid">
             <main class="container">
-                <div class="row">
-                    <div class="w-100 text-center" id="loading">
-                        <img src="{{asset('assets/gifs/Spinner-1s-164px.gif')}}">
-                    </div>
-                    <div id="dataTables-lista">
-                        <div class="float-right">
-                            <input type="button" class="btn btn-sm btn-outline-info mb-3" value="Novo Cargo"
-                                   data-toggle="modal" data-target="#storeCargo">
+                <table id="lista-formulario">
+                    <div class="row">
+                        <div class="w-100 text-center" id="loading">
+                            <img src="{{asset('assets/gifs/Spinner-1s-164px.gif')}}">
                         </div>
-                        <table id="lista-cargo" class="display" style="width:100%">
-                            <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Escolaridade</th>
-                                <th>Ações</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($cargos as $cargo)
+                        <div id="dataTables-lista">
+                            <div class="float-right">
+                                <input type="button" class="btn btn-sm btn-outline-info mb-3" value="Novo Cargo"
+                                       data-toggle="modal" data-target="#storeCargo">
+                            </div>
+                            <table id="lista-cargo" class="display" style="width:100%">
+                                <thead>
                                 <tr>
-                                    <td>{{$cargo->cargo}}</td>
-                                    <td>{{$cargo->escolaridade->nivel_escolaridade}}</td>
-                                    <td>
-                                        <a id="edita-cargo" data-id="{{$cargo->id}}" data-nome="{{$cargo->cargo}}"
-                                           data-escolaridadeEditalDinamico="{{$cargo->escolaridadeEditalDinamico->id}}">
-                                            <i class="fas fa-edit mr-2 text-info"></i>
-                                        </a>
-                                        <a href="{{route('cargo.delete', $cargo->id)}}">
-                                            <i class="fas fa-trash mr-2 text-danger"></i>
-                                        </a>
-
-                                    </td>
+                                    <th>Nome</th>
+                                    <th>Escolaridade</th>
+                                    <th>Ações</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>Nivel Escolaridade</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                            </tfoot>
-                        </table>
+                                </thead>
+                                <tbody>
+                                @foreach($cargos as $cargo)
+                                    <tr>
+                                        <td>{{$cargo->cargo}}</td>
+                                        <td>{{$cargo->escolaridade->nivel_escolaridade}}</td>
+                                        <td>
+                                            <a id="edita-cargo" data-id="{{$cargo->id}}"
+                                               data-nome="{{$cargo->cargo}}"
+                                               data-escolaridadeEditalDinamico="{{$cargo->escolaridadeEditalDinamico->id}}">
+                                                <i class="fas fa-edit mr-2 text-info"></i>
+                                            </a>
+                                            <a href="javascript:void(0);"
+                                               data-action="{{route('cargo.delete', $cargo->id)}}"
+                                               class="delete_item_sweet">
+                                                <i class="fas fa-trash mr-2 text-danger"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Nivel Escolaridade</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                </table>
             </main>
         </div>
     </div>
