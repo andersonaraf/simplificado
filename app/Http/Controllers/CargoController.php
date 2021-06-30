@@ -6,6 +6,7 @@ use App\Models\Cargo;
 use App\Models\EscolaridadeEditalDinamico;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class CargoController extends Controller
 {
@@ -108,13 +109,15 @@ class CargoController extends Controller
      */
     public function destroy($id)
     {
-        //
+
         try {
+            DB::beginTransaction();
             $cargo = Cargo::findOrFail($id);
             $cargo->delete();
+            DB::commit();
             return true;
-
         } catch (Exception $ex) {
+            DB::rollBack();
             return response()->withException($ex->getMessage());
         }
     }
