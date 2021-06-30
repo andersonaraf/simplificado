@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Concurso'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://processoseletivosemsa2021.riobranco.ac.gov.br'),
+    'url' => env('APP_URL', 'https://processoseletivoseinfra2021.riobranco.ac.gov.br'),
 
     'asset_url' => env('ASSET_URL', null),
 

@@ -13,7 +13,7 @@ class TipoAnexoTableSeeder extends Seeder
     {
         //
         DB::table('tipo_anexo')->insert([
-            'tipo' => 'documentos Pessoais',
+            'tipo' => 'Documentos Pessoais',
         ]);
 
         DB::table('tipo_anexo')->insert([

@@ -68,7 +68,7 @@
             &copy; Direito Autoral <strong><span>Prefeitura de Rio Branco</span></strong>. Todos os Direitos Reservados.
         </div>
         <div class="credits">
-            Criado por <a href="#">Prefeitura Municipal de Rio Branco</a>
+            Criado por <a href="http://www.riobranco.ac.gov.br/" target="_blank">Prefeitura Municipal de Rio Branco</a>
         </div>
     </div>
 </footer><!-- End Footer -->

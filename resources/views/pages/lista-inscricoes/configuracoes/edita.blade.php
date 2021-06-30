@@ -105,24 +105,24 @@
                         </div>
                     </div>
 
-                    <div class="input-group">
+                    <div class="input-group" id="inputPontuacaoMaximaDoItemEdita">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"
-                                      id="inputPontuacaoMaximaDoItem">Pontuação máxima do item:</span>
+                                      id="inputPontuacaoMaximaDoItem">Pontuação máxima do anexo:</span>
                             </div>
                         </div>
                         <div class="col col-sm-6">
                             <input type="text" name="inputPontuacaoMaximaDoItem" id="pontuacao_maxima_item"
                                    class="form-control"
-                                   placeholder="Pontuação máxima do item">
+                                   placeholder="Pontuação máxima do anexo">
                         </div>
                     </div>
 
-                    <div class="input-group">
+                    <div class="input-group" id="inputPontuacaoPorItemEdita">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Pontuação por item:</span>
+                                <span class="input-group-text">Pontuação por anexo:</span>
                             </div>
                         </div>
                         <div class="col col-sm-6">
@@ -172,7 +172,7 @@
                             </div>
                             <div class="col col-sm-6">
                                 <input type="text" name="inputPorAno" id="pontuacao_por_ano" class="form-control"
-                                       placeholder="Pontuação por ano do documento">
+                                       placeholder="Exemplo: 8, 0.6, 1.5">
                             </div>
                         </div>
 
@@ -184,7 +184,7 @@
                             </div>
                             <div class="col col-sm-6">
                                 <input type="text" name="inputPorMes" id="pontuacao_por_mes" class="form-control"
-                                       placeholder="Pontuação por mês do documento">
+                                       placeholder="Exemplo: 8, 0.6, 1.5">
                             </div>
                         </div>
                     </div>

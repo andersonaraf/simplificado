@@ -89,27 +89,36 @@
     <script>
         $('#inputPontuacaoManualSim').click(function () {
             $('#experienciapublicoprivado').removeAttr('hidden');
-
+            $('#inputPontuacaoMaximaDoItem').attr('hidden', true);
+            $('#inputPontuacaoPorItem').attr('hidden', true);
         });
         $('#inputPontuacaoManualNao').click(function () {
+            $('#inputPontuacaoMaximaDoItem').removeAttr('hidden');
+            $('#inputPontuacaoPorItem').removeAttr('hidden');
             $('#experienciapublicoprivado').attr('hidden', true);
             $('input[name=inputTipoExperiencia]').prop('checked', false);
             $('input[name=inputPorAno]').val("");
             $('input[name=inputPorMes]').val("");
+            $('input[name=inputPontuacaoPorItem]').val("");
+            $('input[name=inputPontuacaoMaximaDoItem]').val("");
         });
     </script>
     <script>
         $('#inputPontuacaoManualEditaSim').click(function () {
-            console.log(1)
             $('#experienciapublicoprivadoEdita').removeAttr('hidden');
+            $('#inputPontuacaoMaximaDoItemEdita').attr('hidden', true);
+            $('#inputPontuacaoPorItemEdita').attr('hidden', true);
 
         });
         $('#inputPontuacaoManualEditaNao').click(function () {
-            console.log(2)
+            $('#inputPontuacaoMaximaDoItemEdita').removeAttr('hidden');
+            $('#inputPontuacaoPorItemEdita').removeAttr('hidden');
             $('#experienciapublicoprivadoEdita').attr('hidden', true);
             $('input[name=inputTipoExperiencia]').prop('checked', false);
             $('input[name=inputPorAno]').val("");
             $('input[name=inputPorMes]').val("");
+            $('input[name=inputPontuacaoPorItem]').val("");
+            $('input[name=inputPontuacaoMaximaDoItem]').val("");
         });
     </script>
 @endpush

@@ -39,8 +39,14 @@
                                     <th>Essa tela está liberada</th>
                                 @endif
                                 <th>
-                                    <a href="{{route('tela-unica-mostra', $tela->id)}}" style="margin-right: 15px"><i class="material-icons" style="color: blue">create</i></a>
-                                    <a href="{{route('tela-deletar', $tela->id)}}"><i class="material-icons" style="color: red">delete</i></a>
+                                    <a href="{{route('tela-unica-mostra', $tela->id)}}">
+                                        <i class="fas fa-edit mr-2 text-info"></i>
+                                    </a>
+                                    <a href="javascript:void(0);"
+                                       data-action="{{route('tela-deletar', $tela->id)}}"
+                                       class="delete_item_sweet">
+                                        <i class="fas fa-trash mr-2 text-danger"></i>
+                                    </a>
                                 </th>
                             </tr>
                         @empty

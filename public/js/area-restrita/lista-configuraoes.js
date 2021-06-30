@@ -215,6 +215,8 @@ $(document).ready(function () {
                 $('#inputPontuacaoManualEditaNao[value="0"]').attr('checked', false)
                 $('#inputPontuacaoManualEditaSim[value="1"]').attr('checked', true)
                 $('#experienciapublicoprivadoEdita').removeAttr('hidden');
+                $('#inputPontuacaoMaximaDoItemEdita').attr('hidden', true);
+                $('#inputPontuacaoPorItemEdita').attr('hidden', true);
             } else {
                 $('#inputPontuacaoManualEditaSim[value="1"]').attr('checked', false)
                 $('#inputPontuacaoManualEditaNao[value="0"]').attr('checked', true)

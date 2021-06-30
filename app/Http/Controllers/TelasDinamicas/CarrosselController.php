@@ -16,7 +16,6 @@ class CarrosselController extends Controller
      */
     public function index()
     {
-        //
         $carrossels = Carrossel::Paginate(15);
         return view('pages.telas-dinamicas.lista-carrossel', [
             'carrossels' => $carrossels,
@@ -42,7 +41,6 @@ class CarrosselController extends Controller
      */
     public function store(CarrosselRequest $request)
     {
-        //
         if (isset($request->file_img)) {
             $fileName = time(). '.'. $request->file_img->extension();
             $request->file_img->move(public_path('images/caruosel'), $fileName);
@@ -75,7 +73,6 @@ class CarrosselController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -86,7 +83,6 @@ class CarrosselController extends Controller
      */
     public function edit($id)
     {
-        //
         $carrossel = Carrossel::findOrFail($id);
         return view('pages.telas-dinamicas.carrosel-edit', [
             'carrossel' => $carrossel,
@@ -102,9 +98,7 @@ class CarrosselController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $carrosel = Carrossel::findOrFail($id);
-//        dd($request->all());
         if (isset($request->file_img)) {
             $fileName = $carrosel->id . '-' . time() . '.'.$request->file_img->extension();
             $request->file_img->move(public_path('images/caruosel'), $fileName);
@@ -138,9 +132,7 @@ class CarrosselController extends Controller
      */
     public function destroy($id)
     {
-        //
         $carrosel = Carrossel::findOrFail($id);
-
         $carrosel->delete();
         session()->put('sucess', 'Carrossel deletado com sucesso!');
         return redirect()->route('lista.carrossel.index');

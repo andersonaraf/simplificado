@@ -107,7 +107,7 @@
                         </div>
                     </div>
 
-                    <div class="input-group">
+                    <div class="input-group" id="inputPontuacaoMaximaDoItem">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"
@@ -116,7 +116,7 @@
                         </div>
                         <div class="col col-sm-6">
                             <input type="text" name="inputPontuacaoMaximaDoItem" class="form-control"
-                                   placeholder="Pontuação máxima do item">
+                                   placeholder="Pontuação máxima do anexo">
                         </div>
                     </div>
 
@@ -128,7 +128,7 @@
                         </div>
                         <div class="col col-sm-6">
                             <input type="text" name="inputPontuacaoPorItem" class="form-control"
-                                   placeholder="Pontuação por item do documento">
+                                   placeholder="Pontuação por anexo do documento">
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@
                             </div>
                             <div class="col col-sm-6">
                                 <input type="text" name="inputPorAno" class="form-control"
-                                       placeholder="Pontuação por ano do documento">
+                                       placeholder="Exemplo: 8, 0.6, 1.5 ">
                             </div>
                         </div>
 
@@ -185,7 +185,7 @@
                             </div>
                             <div class="col col-sm-6">
                                 <input type="text" name="inputPorMes" class="form-control"
-                                       placeholder="Pontuação por mês do documento">
+                                       placeholder="Exemplo: 8, 0.6, 1.5">
                             </div>
                         </div>
                     </div>
