@@ -46,10 +46,10 @@ $(function () {
                                 text: response.message,
                                 type: 'success',
                                 showConfirmButton: false,
-                                timer: 2000,
+                                timer: 3000,
                                 allowOutsideClick: false,
                                 allowEscapeKey: false,
-                                // onClose: window.location.href = response.redirect
+                                onClose: window.location.replace(window.location.href)
                             })
                         }
 

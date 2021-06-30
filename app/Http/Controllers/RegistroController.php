@@ -2,30 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\TelasDinamicas\TituloController;
 use App\Http\Requests\Registro;
-use App\Http\Requests\RegistroAnexos;
 use App\Models\AnexoCursoTecnico;
 use App\Models\AnexoDoutorado;
 use App\Models\Cargo;
-use App\Models\DocumentoDinamico;
 use App\Models\EditalDinamico;
-use App\Models\EditalDinamicoTipoAnexo;
 use App\Models\Endereco;
 use App\Models\Pessoa;
 use App\Models\PessoaEditalAnexo;
 use App\Models\Progress;
 use App\Models\Termos;
 use App\Models\TipoAnexoCargo;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use mysql_xdevapi\Exception;
-use function GuzzleHttp\Promise\all;
 
 class RegistroController extends Controller
 {

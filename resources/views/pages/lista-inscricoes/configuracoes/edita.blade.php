@@ -73,15 +73,17 @@
                     <div class="input-group mt-2">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputNomeAnexo">Inserir manualmente:</span>
+                                <span class="input-group-text" id="inputNomeAnexo">Pontuação Publica/Privada:</span>
                             </div>
                         </div>
                         <div class="col col-sm-6">
-                            <label class="mr-1">Sim</label><input type="radio" name="inputPontuacaoManual"
-                                                                  id="inputPontuacaoManualSim" value="1" class="">
-                            <label class="mr-1">Não</label><input type="radio" name="inputPontuacaoManual"
-                                                                  id="inputPontuacaoManualNao" value="0" class=""
-                                                                  checked>
+                                <label class="mr-1">Sim</label>
+                                <input type="radio" name="inputPontuacaoManual"
+                                       id="inputPontuacaoManualEditaSim" value="1" class="">
+                                <label class="mr-1">Não</label>
+                                <input type="radio" name="inputPontuacaoManual"
+                                       id="inputPontuacaoManualEditaNao" value="0" class=""
+                                       checked>
                         </div>
                     </div>
                     <div class="input-group">
@@ -111,7 +113,8 @@
                             </div>
                         </div>
                         <div class="col col-sm-6">
-                            <input type="text" name="inputPontuacaoMaximaDoItem" class="form-control"
+                            <input type="text" name="inputPontuacaoMaximaDoItem" id="pontuacao_maxima_item"
+                                   class="form-control"
                                    placeholder="Pontuação máxima do item">
                         </div>
                     </div>
@@ -139,7 +142,7 @@
                                    placeholder="Quantidade de anexos para esse documento">
                         </div>
                     </div>
-                    <div id="experienciapublicoprivado" hidden>
+                    <div id="experienciapublicoprivadoEdita" hidden>
                         <div class="input-group">
                             <div class="col col-sm-12">
                                 <hr>
@@ -194,18 +197,3 @@
         </div>
     </div>
 </div>
-@section('script')]
-<script src="{{asset('js/area-restrita/functions.js')}}"></script>
-<script>
-    $('#inputPontuacaoManualSim').click(function () {
-        $('#experienciapublicoprivado').removeAttr('hidden');
-
-    });
-    $('#inputPontuacaoManualNao').click(function () {
-        $('#experienciapublicoprivado').attr('hidden', true);
-        $('input[name=inputTipoExperiencia]').prop('checked', false);
-        $('input[name=inputPorAno]').val("");
-        $('input[name=inputPorMes]').val("");
-    });
-</script>
-@endsection

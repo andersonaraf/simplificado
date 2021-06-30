@@ -20,7 +20,7 @@ class CreateEditalDinamicoTipoAnexosTable extends Migration
             $table->unsignedBigInteger('tipo_anexo_id');
 
             $table->foreign('edital_dinamico_id')->references('id')->on('edital_dinamicos')->onDelete('set null');
-            $table->foreign('cargo_id')->references('id')->on('cargos');
+            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete("cascade");;
             $table->foreign('tipo_anexo_id')->references('id')->on('tipo_anexo');
             $table->timestamps();
         });

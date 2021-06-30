@@ -84,6 +84,32 @@
     <script src="{{asset('js/area-restrita/functions.js')}}"></script>
     <script src="{{asset('assets/DataTables/datatables.min.js')}}"></script>
     <script src="{{asset('js/area-restrita/lista-configuraoes.js')}}"></script>
+    <script>
+        $('#inputPontuacaoManualSim').click(function () {
+            $('#experienciapublicoprivado').removeAttr('hidden');
+
+        });
+        $('#inputPontuacaoManualNao').click(function () {
+            $('#experienciapublicoprivado').attr('hidden', true);
+            $('input[name=inputTipoExperiencia]').prop('checked', false);
+            $('input[name=inputPorAno]').val("");
+            $('input[name=inputPorMes]').val("");
+        });
+    </script>
+    <script>
+        $('#inputPontuacaoManualEditaSim').click(function () {
+            console.log(1)
+            $('#experienciapublicoprivadoEdita').removeAttr('hidden');
+
+        });
+        $('#inputPontuacaoManualEditaNao').click(function () {
+            console.log(2)
+            $('#experienciapublicoprivadoEdita').attr('hidden', true);
+            $('input[name=inputTipoExperiencia]').prop('checked', false);
+            $('input[name=inputPorAno]').val("");
+            $('input[name=inputPorMes]').val("");
+        });
+    </script>
 @endpush
 
 @include('pages.lista-inscricoes.configuracoes.modal')

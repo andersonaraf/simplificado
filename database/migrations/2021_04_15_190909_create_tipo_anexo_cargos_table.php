@@ -19,7 +19,7 @@ class CreateTipoAnexoCargosTable extends Migration
             $table->unsignedBigInteger('cargo_id');
 
             $table->foreign('tipo_anexo_id')->references('id')->on('tipo_anexo');
-            $table->foreign('cargo_id')->references('id')->on('cargos');
+            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete("cascade");
             $table->timestamps();
         });
     }

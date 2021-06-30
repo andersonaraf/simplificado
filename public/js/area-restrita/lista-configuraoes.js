@@ -210,6 +210,17 @@ $(document).ready(function () {
 
             }
 
+            //MANUAL Edita
+            if ($(this).attr('data-inserir-manual') == 1) {
+                $('#inputPontuacaoManualEditaNao[value="0"]').attr('checked', false)
+                $('#inputPontuacaoManualEditaSim[value="1"]').attr('checked', true)
+                $('#experienciapublicoprivadoEdita').removeAttr('hidden');
+            } else {
+                $('#inputPontuacaoManualEditaSim[value="1"]').attr('checked', false)
+                $('#inputPontuacaoManualEditaNao[value="0"]').attr('checked', true)
+
+            }
+
             //TIPO EXPERIENCIA
             $('#inputTipoExperiencia[value="0"]').attr('checked', false)
             $('#inputTipoExperiencia[value="1"]').attr('checked', false)

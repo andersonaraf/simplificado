@@ -198,18 +198,3 @@
         </div>
     </div>
 </div>
-@section('script')]
-<script src="{{asset('js/area-restrita/functions.js')}}"></script>
-<script>
-    $('#inputPontuacaoManualSim').click(function () {
-        $('#experienciapublicoprivado').removeAttr('hidden');
-
-    });
-    $('#inputPontuacaoManualNao').click(function () {
-        $('#experienciapublicoprivado').attr('hidden', true);
-        $('input[name=inputTipoExperiencia]').prop('checked', false);
-        $('input[name=inputPorAno]').val("");
-        $('input[name=inputPorMes]').val("");
-    });
-</script>
-@endsection
