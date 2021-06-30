@@ -110,9 +110,7 @@ class CargoController extends Controller
     {
         //
         try {
-
             $cargo = Cargo::findOrFail($id);
-            $escolaridadeEditalDinamico = $cargo->escolaridadeEditalDinamico;
             $cargo->delete();
             return true;
 

@@ -56,7 +56,9 @@
                                                    data-pontuacao-mes="{{$editalAnexo->documentoDinamico->pontuacao_por_mes}}">
                                                     <i class="fas fa-edit mr-2 text-info"></i>
                                                 </a>
-                                                <a href="{{route('documento.dinamico.delete', $editalAnexo->documentoDinamico->id)}}">
+                                                <a href="javascript:void(0);"
+                                                   data-action="{{route('documento.dinamico.delete', $editalAnexo->documentoDinamico->id)}}"
+                                                   class="delete_item_sweet">
                                                     <i class="fas fa-trash text-danger"></i>
                                                 </a>
                                             </td>
