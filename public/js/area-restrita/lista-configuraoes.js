@@ -147,14 +147,14 @@ $(document).ready(function () {
         var cargo_id = $('#cargo_select').val()
         $('#cargo_id_tipo').val(cargo_id)
     })
-    $('#lista-configuracoes_paginate').click(function (){
+    $('#lista-configuracoes_paginate').click(function () {
         criar_editar();
     })
     $('#lista-configuracoes_filter').keypress(function () {
         criar_editar()
     })
 
-    $('tr').click(function (){
+    $('tr').click(function () {
         criar_editar()
     })
 
@@ -220,6 +220,9 @@ $(document).ready(function () {
             } else {
                 $('#inputPontuacaoManualEditaSim[value="1"]').attr('checked', false)
                 $('#inputPontuacaoManualEditaNao[value="0"]').attr('checked', true)
+                $('#experienciapublicoprivadoEdita').attr('hidden', true);
+                $('#inputPontuacaoMaximaDoItemEdita').removeAttr('hidden');
+                $('#inputPontuacaoPorItemEdita').removeAttr('hidden');
 
             }
 
@@ -246,6 +249,7 @@ $(document).ready(function () {
             $('#updateEditalDinamicoAnexo').modal('show')
         });
     }
+
     criar_editar();
 });
 

@@ -16,11 +16,9 @@ class Escolaridade extends Migration
         //
         Schema::create('escolaridade', function($table)
         {
-            $table->engine = 'InnoDB';
             $table->id();
             $table->string('nivel_escolaridade', 100);
             $table->timestamps();
-
         });
     }
 
