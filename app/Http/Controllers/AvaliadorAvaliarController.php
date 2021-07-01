@@ -51,7 +51,7 @@ class AvaliadorAvaliarController extends Controller
                         }
                         if ($pontuacaoTotalAnexos > $editalAnexo->documentoDinamico->pontuacao_maxima_documento) {
                             return redirect()->back()->withErrors([
-                                'limite' => 'Ops, você passou o limite de pontuação maxima que é : ' . $editalAnexo->documentoDinamico->pontuacao_maxima_documento . ' e pontuação total De anexo está com : ' . $pontuacaoTotalAnexos . '.'
+                                'limite' => 'Ops, você passou o limite de pontuação maxima que é : ' . $editalAnexo->documentoDinamico->pontuacao_maxima_documento . ' e pontuação total de anexo está com : ' . $pontuacaoTotalAnexos . '.'
                             ]);
                         }
                     }
@@ -112,11 +112,10 @@ class AvaliadorAvaliarController extends Controller
                 }
 
                 $pontuacaoTotal = $pontuacaoTotalAnexos + ($pontuacaoTotalPrivada2 + $pontuacaoTotalPublica2);
-                dd(pontuacao_maxima_documento);
-                if ($pontuacaoTotal > pontuacao_maxima_documento) {
+                if ($pontuacaoTotal > $pontuacao_maxima_documento) {
 
                     return redirect()->back()->withErrors([
-                        'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total: ' . $pontuacaoTotal . '.'
+                        'limite' => 'Você passou o limite de pontuação que é: ' .$pontuacao_maxima_documento. ' a sua pontuação Total deu: ' . $pontuacaoTotal . ' Favor refazer a avaliação'
                     ]);
                 }
             }
@@ -126,6 +125,9 @@ class AvaliadorAvaliarController extends Controller
                 'pessoa_id' => $pessoa->id,
                 'tela' => $url,
                 'pontuacao_total' => $pontuacaoTotal,
+                'pontuacao_total_publica' => $pontuacaoTotalPublica2,
+                'pontuacao_total_privada' => $pontuacaoTotalPrivada2,
+                'pontuacao_total_anexos' => $pontuacaoTotalAnexos,
             ]);
 
             $pontuacao = Pontuacao::create([

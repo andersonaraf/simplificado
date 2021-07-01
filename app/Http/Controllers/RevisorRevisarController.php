@@ -22,7 +22,6 @@ class RevisorRevisarController extends Controller
     }
 
     public function reavaliar(Request $request){
-//        dd($request->all());
         $pessoa = Pessoa::findOrFail($request->pessoa_id);
 
         $pessoa->update([
@@ -42,7 +41,7 @@ class RevisorRevisarController extends Controller
     }
 
     public function aceitarAvaliar(Request $request){
-//        dd($request->all());
+
         $pessoa = Pessoa::findOrFail($request->pessoa_id);
 
         $url = str_replace("Novo/", "", $_SERVER["REQUEST_URI"]);
@@ -56,7 +55,10 @@ class RevisorRevisarController extends Controller
             'instrutor_id' => auth()->id(),
             'pessoa_id' => $pessoa->id,
             'tela' => $url,
-            'pontuacao_total' => $pessoa->pontuacao($pessoa->id),
+            'pontuacao_total' => $pessoa->pontuacao($pessoa->id)->pontuacao_total,
+            'pontuacao_total_publica' => $pessoa->pontuacao($pessoa->id)->pontuacao_total_publica,
+            'pontuacao_total_privada' => $pessoa->pontuacao($pessoa->id)->pontuacao_total_privada,
+            'pontuacao_total_anexos' => $pessoa->pontuacao($pessoa->id)->pontuacao_total_anexos,
         ]);
 
         if (!is_null($transparencia)) {
