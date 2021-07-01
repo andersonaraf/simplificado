@@ -22,7 +22,7 @@
         "laravel/framework": "^7.24||^8.0.0",
         "laravel/ui": "^2.2",
         "laravellegends/pt-br-validator": "^7.0",
-        "orangehill/iseed": "2.2"
+        "orangehill/iseed": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

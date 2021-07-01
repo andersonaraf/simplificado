@@ -13,7 +13,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header"
-                         style="background-color: #e96b56; font-weight: bold; color: white">{{ __('Login') }}</div>
+                         style="background-color: #5680e9; font-weight: bold; color: white">{{ __('Login') }}</div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('update-user', $usuario->id) }}">
                             @csrf
@@ -128,7 +128,7 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-outline-danger">
+                                    <button type="submit" class="btn btn-outline-primary">
                                         {{ __('EDITAR') }}
                                     </button>
                                 </div>

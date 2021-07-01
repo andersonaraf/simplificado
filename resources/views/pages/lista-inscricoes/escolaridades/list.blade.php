@@ -11,7 +11,6 @@
         <div class="container-fluid">
             <main class="container">
                 <table id="lista-formulario">
-
                     <div class="row">
                         <div class="w-100 text-center" id="loading">
                             <img src="{{asset('assets/gifs/Spinner-1s-164px.gif')}}">

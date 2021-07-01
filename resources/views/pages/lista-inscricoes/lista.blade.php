@@ -1,27 +1,27 @@
 @extends('layouts.app', ['activePage' => 'list_formulario_ativo', 'titlePage' => __('list_formulario_ativo')])
 @extends('layouts.modal-message')
 @section('css')
-    <link rel="stylesheet" href="{{asset('assets/DataTables/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/registro/style.css')}}">
-    <link rel="stylesheet" href="{{asset('css/area-restrita/lista.css')}}">
 @endsection
 @section('content')
-
     <div class="content">
         <div class="container-fluid">
-            <main class="container">
+            <div class="container">
                 <div class="row">
-                    <table id="lista-formulario">
+                    <input class="form-control" id="pesquisa" type="text" placeholder="Procurar..">
+                    <table class="table">
                         <thead>
                         <tr>
+                            <th>#</th>
                             <th>Formulário</th>
                             <th>Situação Edital</th>
                             <th>Ações</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="myTable">
                         @foreach($listaFormularios as $lista)
                             <tr>
+                                <td>{{$lista->id}}</td>
                                 <td>{{$lista->nome_ou_anexo}}</td>
                                 <td>
                                     @if(!is_null($lista->data_liberar) || $lista->status_liberar == 0)
@@ -41,21 +41,14 @@
                             </tr>
                         @endforeach
                         </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>Formulário</th>
-                            <th>Aberto</th>
-                            <th>Ações</th>
-                        </tr>
-                        </tfoot>
                     </table>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
 @endsection
-@push('js')
+@section('js')
     <script src="{{asset('js/area-restrita/functions.js')}}"></script>
     <script src="{{asset('assets/DataTables/datatables.min.js')}}"></script>
     <script src="{{asset('js/area-restrita/lista.js')}}"></script>
-@endpush
+@endsection

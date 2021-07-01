@@ -16,7 +16,7 @@ class CreateDocumentoDinamicosTable extends Migration
         Schema::create('documento_dinamicos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('edital_dinamico_tipo_anexo_id');
-            $table->unsignedBigInteger('pontuacao_edital_id');
+            $table->unsignedBigInteger('pontuacao_edital_id')->nullable();
             $table->string('nome_documento');
             $table->boolean('obrigatorio')->default(false);
             $table->double('pontuacao_maxima_documento')->nullable();

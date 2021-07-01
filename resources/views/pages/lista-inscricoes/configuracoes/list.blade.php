@@ -56,7 +56,9 @@
                                                    data-pontuacao-mes="{{$editalAnexo->documentoDinamico->pontuacao_por_mes}}">
                                                     <i class="fas fa-edit mr-2 text-info"></i>
                                                 </a>
-                                                <a href="{{route('documento.dinamico.delete', $editalAnexo->documentoDinamico->id)}}">
+                                                <a href="javascript:void(0);"
+                                                   data-action="{{route('documento.dinamico.delete', $editalAnexo->documentoDinamico->id)}}"
+                                                   class="delete_item_sweet">
                                                     <i class="fas fa-trash text-danger"></i>
                                                 </a>
                                             </td>
@@ -84,6 +86,41 @@
     <script src="{{asset('js/area-restrita/functions.js')}}"></script>
     <script src="{{asset('assets/DataTables/datatables.min.js')}}"></script>
     <script src="{{asset('js/area-restrita/lista-configuraoes.js')}}"></script>
+    <script>
+        $('#inputPontuacaoManualSim').click(function () {
+            $('#experienciapublicoprivado').removeAttr('hidden');
+            $('#inputPontuacaoMaximaDoItem').attr('hidden', true);
+            $('#inputPontuacaoPorItem').attr('hidden', true);
+        });
+        $('#inputPontuacaoManualNao').click(function () {
+            $('#inputPontuacaoMaximaDoItem').removeAttr('hidden');
+            $('#inputPontuacaoPorItem').removeAttr('hidden');
+            $('#experienciapublicoprivado').attr('hidden', true);
+            $('input[name=inputTipoExperiencia]').prop('checked', false);
+            $('input[name=inputPorAno]').val("");
+            $('input[name=inputPorMes]').val("");
+            $('input[name=inputPontuacaoPorItem]').val("");
+            $('input[name=inputPontuacaoMaximaDoItem]').val("");
+        });
+    </script>
+    <script>
+        $('#inputPontuacaoManualEditaSim').click(function () {
+            $('#experienciapublicoprivadoEdita').removeAttr('hidden');
+            $('#inputPontuacaoMaximaDoItemEdita').attr('hidden', true);
+            $('#inputPontuacaoPorItemEdita').attr('hidden', true);
+
+        });
+        $('#inputPontuacaoManualEditaNao').click(function () {
+            $('#inputPontuacaoMaximaDoItemEdita').removeAttr('hidden');
+            $('#inputPontuacaoPorItemEdita').removeAttr('hidden');
+            $('#experienciapublicoprivadoEdita').attr('hidden', true);
+            $('input[name=inputTipoExperiencia]').prop('checked', false);
+            $('input[name=inputPorAno]').val("");
+            $('input[name=inputPorMes]').val("");
+            $('input[name=inputPontuacaoPorItem]').val("");
+            $('input[name=inputPontuacaoMaximaDoItem]').val("");
+        });
+    </script>
 @endpush
 
 @include('pages.lista-inscricoes.configuracoes.modal')

@@ -73,15 +73,18 @@
                     <div class="input-group mt-2">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputNomeAnexo">Inserir manualmente:</span>
+                                <span class="input-group-text" id="inputNomeAnexo">Pontuação Publica/Privada:</span>
                             </div>
                         </div>
 
                         <div class="col col-sm-6">
-                            <label class="mr-1">Sim</label><input type="radio" name="inputPontuacaoManual"
-                                                                  id="inputPontuacaoManual" value="1" class="">
-                            <label class="mr-1">Não</label><input type="radio" name="inputPontuacaoManual"
-                                                                  id="inputPontuacaoManual" value="0" class="" checked>
+                            <label class="mr-1">Sim</label>
+                            <input type="radio" name="inputPontuacaoManual"
+                                   id="inputPontuacaoManualSim" value="1" class="">
+                            <label class="mr-1">Não</label>
+                            <input type="radio" name="inputPontuacaoManual"
+                                   id="inputPontuacaoManualNao" value="0" class=""
+                                   checked>
                         </div>
                     </div>
 
@@ -104,32 +107,32 @@
                         </div>
                     </div>
 
-                    <div class="input-group">
+                    <div class="input-group" id="inputPontuacaoMaximaDoItem">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"
-                                      id="inputPontuacaoMaximaDoItem">Pontuação máxima do item:</span>
+                                      id="inputPontuacaoMaximaDoItem">Pontuação máxima do anexo:</span>
                             </div>
                         </div>
                         <div class="col col-sm-6">
                             <input type="text" name="inputPontuacaoMaximaDoItem" class="form-control"
-                                   placeholder="Pontuação máxima do item">
+                                   placeholder="Pontuação máxima do anexo">
                         </div>
                     </div>
 
-                    <div class="input-group">
+                    <div class="input-group" id="inputPontuacaoPorItem">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputPontuacaoPorItem">Pontuação por item:</span>
+                                <span class="input-group-text" id="inputPontuacaoPorItem">Pontuação por anexo:</span>
                             </div>
                         </div>
                         <div class="col col-sm-6">
                             <input type="text" name="inputPontuacaoPorItem" class="form-control"
-                                   placeholder="Pontuação por item do documento">
+                                   placeholder="Pontuação por anexo do documento">
                         </div>
                     </div>
 
-                    <div class="input-group">
+                    <div class="input-group" id="inputQuantiadeAnexos">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputQuantiadeAnexos">Quantiade de anexos:</span>
@@ -140,47 +143,50 @@
                                    placeholder="Quantidade de anexos para esse documento">
                         </div>
                     </div>
+                    <div id="experienciapublicoprivado" hidden>
+                        <div class="input-group">
+                            <div class="col col-sm-12">
+                                <hr>
+                                <h6 class="input-group-text mb-3">Por experiência em cargos publicos ou privados</h6>
+                            </div>
+                        </div>
+                        <div class="input-group mt-2">
+                            <div class="col col-sm-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputTipoExperiencia">Tipo da experiência:</span>
+                                </div>
+                            </div>
+                            <div class="col col-sm-6">
+                                <label class="mr-1">Público</label><input type="radio" name="inputTipoExperiencia"
+                                                                          id="inputTipoExperiencia" value="0"
+                                                                          class="">
+                                <label class="mr-1">Privado</label><input type="radio" name="inputTipoExperiencia"
+                                                                          id="inputTipoExperiencia" value="1"
+                                                                          class="">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="col col-sm-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputPorAnoPublico">Pontuação por ano</span>
+                                </div>
+                            </div>
+                            <div class="col col-sm-6">
+                                <input type="text" name="inputPorAno" class="form-control"
+                                       placeholder="Exemplo: 8, 0.6, 1.5 ">
+                            </div>
+                        </div>
 
-                    <div class="input-group">
-                        <div class="col col-sm-12">
-                            <hr>
-                            <h6 class="input-group-text mb-3">Por experiência em cargos publicos ou privados</h6>
-                        </div>
-                    </div>
-                    <div class="input-group mt-2">
-                        <div class="col col-sm-6">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputTipoExperiencia">Tipo da experiência:</span>
+                        <div class="input-group">
+                            <div class="col col-sm-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputPorMes">Pontuação por mês:</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col col-sm-6">
-                            <label class="mr-1">Público</label><input type="radio" name="inputTipoExperiencia"
-                                                                      id="inputTipoExperiencia" value="0" class="">
-                            <label class="mr-1">Privado</label><input type="radio" name="inputTipoExperiencia"
-                                                                      id="inputTipoExperiencia" value="1" class="">
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <div class="col col-sm-6">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputPorAnoPublico">Pontuação por ano</span>
+                            <div class="col col-sm-6">
+                                <input type="text" name="inputPorMes" class="form-control"
+                                       placeholder="Exemplo: 8, 0.6, 1.5">
                             </div>
-                        </div>
-                        <div class="col col-sm-6">
-                            <input type="text" name="inputPorAno" class="form-control"
-                                   placeholder="Pontuação por ano do documento">
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <div class="col col-sm-6">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputPorMes">Pontuação por mês:</span>
-                            </div>
-                        </div>
-                        <div class="col col-sm-6">
-                            <input type="text" name="inputPorMes" class="form-control"
-                                   placeholder="Pontuação por mês do documento">
                         </div>
                     </div>
                 </div>

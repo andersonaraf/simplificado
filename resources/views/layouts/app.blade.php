@@ -78,6 +78,7 @@
 <script src="{{ asset('material') }}/demo/demo.js"></script>
 <script src="{{ asset('material') }}/js/settings.js"></script>
 <script src="{{asset('assets/fontawesome-free-5.15.2-web/js/all.min.js')}}"></script>
+<script src="{{asset('js/confirmaDelete.js')}}"></script>
 @yield('script')
 @stack('js')
 </body>
