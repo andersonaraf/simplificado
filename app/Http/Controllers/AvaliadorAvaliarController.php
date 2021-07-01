@@ -112,8 +112,7 @@ class AvaliadorAvaliarController extends Controller
                 }
 
                 $pontuacaoTotal = $pontuacaoTotalAnexos + ($pontuacaoTotalPrivada2 + $pontuacaoTotalPublica2);
-                dd(pontuacao_maxima_documento);
-                if ($pontuacaoTotal > pontuacao_maxima_documento) {
+                if ($pontuacaoTotal > $pontuacao_maxima_documento) {
 
                     return redirect()->back()->withErrors([
                         'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total: ' . $pontuacaoTotal . '.'
@@ -126,6 +125,9 @@ class AvaliadorAvaliarController extends Controller
                 'pessoa_id' => $pessoa->id,
                 'tela' => $url,
                 'pontuacao_total' => $pontuacaoTotal,
+                'pontuacao_total_publica' => $pontuacaoTotalPublica2,
+                'pontuacao_total_privada' => $pontuacaoTotalPrivada2,
+                'pontuacao_total_anexos' => $pontuacaoTotalAnexos,
             ]);
 
             $pontuacao = Pontuacao::create([

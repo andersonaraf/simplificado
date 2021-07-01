@@ -24,8 +24,20 @@
                             <input type="text" value="{{$transparencia->tela}}" disabled/>
                             <p>Data e Hora</p>
                             <input type="text" value="{{$transparencia->created_at}}" disabled/>
+                            @if(!is_null($transparencia->pontuacao_total_anexos))
+                                <p>Pontuação Total Anexo Aplicada</p>
+                                <input type="text" value="{{$transparencia->pontuacao_total_anexos}}" disabled/>
+                            @endif
+                            @if(!is_null($transparencia->pontuacao_total_publica))
+                                <p>Pontuação Total Publica Aplicada</p>
+                                <input type="text" value="{{$transparencia->pontuacao_total_publica}}" disabled/>
+                            @endif
+                            @if(!is_null($transparencia->pontuacao_total_privada))
+                                <p>Pontuação Total Privada Aplicada</p>
+                                <input type="text" value="{{$transparencia->pontuacao_total_privada}}" disabled/>
+                            @endif
                             @if(!is_null($transparencia->pontuacao_total))
-                                <p>Pontuação Aplicada</p>
+                                <p>Pontuação Total Aplicada</p>
                                 <input type="text" value="{{$transparencia->pontuacao_total}}" disabled/>
                             @endif
                             @if(!is_null($transparencia->motivo))
