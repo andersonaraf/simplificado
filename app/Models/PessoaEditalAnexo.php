@@ -17,7 +17,8 @@ class PessoaEditalAnexo extends Model
         'nome_arquivo',
         'pontuacao',
         'pontuacao_exp_publico',
-        'pontuacao_exp_privado'
+        'pontuacao_exp_privado',
+        'pontuacao_edital_id'
     ];
 
     public function pessoa()
@@ -38,5 +39,10 @@ class PessoaEditalAnexo extends Model
     public function documentoDinamico()
     {
         return $this->belongsTo(DocumentoDinamico::class, 'documento_dinamico_id', 'id');
+    }
+
+    public function pontuacaoEdital()
+    {
+        return $this->belongsTo(PontuacaoEdital::class, 'pontuacao_edital_id', 'id');
     }
 }
