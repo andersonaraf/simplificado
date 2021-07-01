@@ -25,7 +25,7 @@
                     @foreach($transparencias as $transparencia)
                         @if($transparencias->count() != 0)
                             <tr>
-                                <td>{{$transparencia->instrutor->id}}</td>
+                                <td>{{$transparencia->id}}</td>
                                 <td>{{$transparencia->instrutor->name}}</td>
                                 <td>{{$transparencia->pessoa->nome_completo}}</td>
                                 <td>{{$transparencia->tela}}</td>

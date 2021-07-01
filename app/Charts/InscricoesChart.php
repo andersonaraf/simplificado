@@ -1,13 +1,16 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Charts;
 
+use App\Models\Cargo;
+use App\Models\Escolaridade;
 use App\Models\Pessoa;
 use Chartisan\PHP\Chartisan;
 use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Array_;
 
 class InscricoesChart extends BaseChart
 {
@@ -24,22 +27,20 @@ class InscricoesChart extends BaseChart
     public function handler(Request $request): Chartisan
     {
 
-        $geral = Pessoa::where('cargo_id', '1')->get()->count();
-        $ginicologista = Pessoa::where('cargo_id', '2')->get()->count();
-        $pediatra = Pessoa::where('cargo_id', '3')->get()->count();
-        $familia = Pessoa::where('cargo_id', '4')->get()->count();
+        $cargos = Cargo::all();
+        $escolaridades = Escolaridade::all();
+        $nome_cargos = [];
+        foreach ($cargos as $key => $cargo) {
 
-        $endemias = Pessoa::where('cargo_id', '5')->get()->count();
-        $zoonoses = Pessoa::where('cargo_id', '6')->get()->count();
+            $nome_cargos[$key] = $cargo->cargo;
+        }
 
-        $condutor = Pessoa::where('cargo_id', '7')->get()->count();
-        $enfermagem = Pessoa::where('cargo_id', '8')->get()->count();
+        $chart = Chartisan::build()
+            ->labels($nome_cargos);
+            foreach ($escolaridades as $key => $escolaridade) {
+               $chart->dataset($escolaridade->nivel_escolaridade,[]);
+            }
+        return $chart;
 
-        return Chartisan::build()
-            ->labels(['Médico Clínico Geral', 'Médico Ginecologista', 'Médico Pediatra', 'Médico de Saúde da Família e Comunidade', 'Agente de Endemias', 'Agente de Vigilância em Zoonoses', 'Condutor de Ambulância', 'Técnico de enfermagem'])
-            ->dataset('Nivel Superior', [$geral, $ginicologista, $pediatra, $familia, 0, 0, 0, 0])
-            ->dataset('Nivel Fundamental', [0, 0, 0, 0, $endemias, $zoonoses, 0, 0])
-            ->dataset('Nível Médio', [0, 0, 0, 0, 0, 0, $condutor, 0])
-            ->dataset('Nível Técnico', [0, 0, 0, 0, 0, 0, 0, $enfermagem]);
     }
 }
