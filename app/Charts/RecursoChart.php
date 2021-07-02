@@ -27,18 +27,26 @@ class RecursoChart extends BaseChart
     public function handler(Request $request): Chartisan
     {
         $cargos = Cargo::all();
-        $escolaridades = Escolaridade::all();
         $nome_cargos = [];
         foreach ($cargos as $key => $cargo) {
 
             $nome_cargos[$key] = $cargo->cargo;
         }
 
-        $chart = Chartisan::build()
-            ->labels($nome_cargos);
-        foreach ($escolaridades as $key => $escolaridade) {
-            $chart->dataset($escolaridade->nivel_escolaridade,[]);
+        $contador = array();
+        $chart = Chartisan::build()->labels($nome_cargos);
+        foreach ($cargos as $key => $cargo) {
+            if (count($cargo->pessoas) != 0) {
+                $contador_recurso = 0;
+                foreach ($cargo->pessoas as $pessoa){
+                    if(!is_null($pessoa->recurso)){
+                        $contador_recurso++;
+                    }
+                }
+                array_push($contador, $contador_recurso);
+            } else array_push($contador, 0);
         }
+        $chart->dataset($cargo->cargo,$contador);
         return $chart;
     }
 }

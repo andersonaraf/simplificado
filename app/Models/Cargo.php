@@ -26,4 +26,8 @@ class Cargo extends Model
     public function escolaridadeEditalDinamico(){
         return $this->belongsTo(EscolaridadeEditalDinamico::class, 'escolaridade_edital_dinamico_id', 'id');
     }
+
+    public function pessoas(){
+        return $this->hasMany(Pessoa::class, 'cargo_id', 'id');
+    }
 }

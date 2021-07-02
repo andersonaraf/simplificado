@@ -23,12 +23,12 @@ class AvaliacoesChart extends BaseChart
     public function handler(Request $request): Chartisan
     {
         $avaliados = Pessoa::whereNotNull('status')->get()->count();
-        $nao_avaliados = Pessoa::whereNull('status')->whereNull('anexo_id')->get()->count();
-        $aprovados = Pessoa::where('status_aprovado', '1')->get()->count();
-        $reprovados = Pessoa::where('status_aprovado', '0')->get()->count();
+        $nao_avaliado = Pessoa::whereNull('status')->get()->count();
+        $aprovados = Pessoa::where('status', 1)->where('status_avaliado', 1)->where('status_revisado', 1)->get()->count();
+        $reprovados = Pessoa::where('status', 0)->where('status_avaliado', 0)->where('status_revisado', 0)->get()->count();
         return Chartisan::build()
             ->labels(['Avaliados', 'Não Avaliados', 'Aprovados', 'Reprovados'])
-            ->dataset('Avaliação', [$avaliados, $nao_avaliados, 0, 0])
+            ->dataset('Avaliação', [$avaliados, $nao_avaliado, 0, 0])
             ->dataset('Aprovações', [0, 0, $aprovados, $reprovados]);
     }
 }

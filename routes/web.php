@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TelasDinamicas\TelasEditalController;
 use App\Http\Controllers\TelasDinamicas\TelaLiberarController;
 use App\Http\Controllers\TelasDinamicas\TelaCriarController;
+use App\Models\Cargo;
+use App\Models\Escolaridade;
 
 /*
 |--------------------------------------------------------------------------

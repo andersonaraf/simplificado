@@ -18,4 +18,8 @@ class Escolaridade extends Model
         $escolaridadeEditalDinamico = EscolaridadeEditalDinamico::where('edital_dinamico_id', $idEdital)->where('escolaridade_id', $idEscolaridade)->first();
         return $escolaridadeEditalDinamico;
     }
+
+    public function cargos(){
+        return $this->hasMany(Cargo::class, 'escolaridade_id', 'id');
+    }
 }

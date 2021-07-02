@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'home', 'title' => __('DashBoard')])
 @extends('layouts.modal-message')
 @section('content')
-    <div class="content">
+    <div class="content content-center">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
