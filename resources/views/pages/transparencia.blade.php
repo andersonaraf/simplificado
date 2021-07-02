@@ -11,7 +11,6 @@
             </div>
             <div id="dataTables-lista" style="width: 100%" hidden>
                 <table id="lista-pessoas">
-
                     <thead>
                     <tr>
                         <th>#</th>
