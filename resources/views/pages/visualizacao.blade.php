@@ -1,17 +1,14 @@
 @extends('layouts.app', ['activePage' => 'avaliacao', 'titlePage' => __('Typography')])
 @extends('layouts.modal-message')
-
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/DataTables/datatables.min.css')}}">
 @endsection
-
 @section('content')
     <div class="content">
         <div class="container-fluid">
             <div class="w-100 text-center" id="loading">
                 <img src="{{asset('assets/gifs/Spinner-1s-164px.gif')}}">
             </div>
-
             <div id="dataTables-lista" style="width: 100%" hidden>
                 <table id="lista-pessoas">
                     <thead>

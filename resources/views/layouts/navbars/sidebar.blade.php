@@ -21,12 +21,12 @@
             @if(auth()->user()->tipo == 'Admin')
                 <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
                     <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
-                        <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
+                      <i class="material-icons">settings</i>
                         <p>{{ __('Configurações') }}
                             <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse show" id="laravelExample">
+                    <div class="collapse" id="laravelExample">
                         <ul class="nav">
                             <li class="nav-item{{ $activePage == 'TituloAlterar' ? ' active' : '' }}">
                                 <a class="nav-link" href="{{route('titulo.index')}}">
@@ -77,19 +77,10 @@
                 </li>
             @endif
 
-{{--            @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Avaliador' || auth()->user()->tipo == 'Supervisor')--}}
-{{--                <li class="nav-item{{ $activePage == 'avaliacao-pne' ? ' active' : '' }}">--}}
-{{--                    <a class="nav-link" href="{{route('avaliacao-pne')}}">--}}
-{{--                        <i class="material-icons">library_books</i>--}}
-{{--                        <p>{{ __('Avaliação - PNE') }}</p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            @endif--}}
-
             @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Revisor' || auth()->user()->tipo == 'Supervisor')
                 <li class="nav-item{{ $activePage == 'revisao' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('revisao.escolher.edital') }}">
-                        <i class="material-icons">library_books</i>
+                        <i class="material-icons">filter_none</i>
                         <p>{{ __('Revisão') }}</p>
                     </a>
                 </li>
@@ -97,7 +88,7 @@
             @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Recurso' || auth()->user()->tipo == 'Supervisor')
                 <li class="nav-item{{ $activePage == 'recurso' ? ' active' : '' }}">
                     <a class="nav-link" href="{{route('recurso.escolher.edital')}}">
-                        <i class="material-icons">library_books</i>
+                        <i class="material-icons">folder_open</i>
                         <p>{{ __('Recurso') }}</p>
                     </a>
                 </li>
@@ -105,13 +96,13 @@
             @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Supervisor')
                 <li class="nav-item{{ $activePage == 'relatorio' ? ' active' : '' }}">
                     <a class="nav-link" href="{{route('relatorio.selecionar.edital')}}">
-                        <i class="material-icons">library_books</i>
+                        <i class="material-icons">subject</i>
                         <p>{{ __('Relatório') }}</p>
                     </a>
                 </li>
                 <li class="nav-item{{ $activePage == 'transparencia' ? ' active' : '' }}">
                     <a class="nav-link" href="{{route('lista-transparencia')}}">
-                        <i class="material-icons">library_books</i>
+                        <i class="material-icons">visibility</i>
                         <p>{{ __('Transparência') }}</p>
                     </a>
                 </li>
