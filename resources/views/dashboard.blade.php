@@ -4,7 +4,7 @@
     <div class="content content-center">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
                             <div class="card-icon">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
                             <div class="card-icon">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
                             <div class="card-icon">
@@ -48,7 +48,7 @@
             </div>
             <!-- GRAFICOS -->
             <div class="row">
-                <div class="col-lg-9 col-md-9 col-sm-9">
+                <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
                             <div class="card-icon">
@@ -69,7 +69,7 @@
                             <div class="card-icon">
                                 <i class="material-icons">insert_chart</i>
                             </div>
-                            <h3 class="card-title">Avaliação</h3>
+                            <h3 class="card-title">Avaliação por cargo</h3>
                         </div>
                         <div class="card-footer justify-content-center">
                             <!-- Chart's container -->
@@ -84,7 +84,7 @@
                             <div class="card-icon">
                                 <i class="material-icons">insert_chart</i>
                             </div>
-                            <h3 class="card-title">Recurso</h3>
+                            <h3 class="card-title">Recurso por cargo</h3>
                         </div>
                         <div class="card-footer justify-content-center">
                             <!-- Chart's container -->
