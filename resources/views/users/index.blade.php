@@ -33,7 +33,11 @@
                             <th>{{$user->email}}</th>
                             <th>{{$user->tipo}}</th>
                             <th>
-                                <a href="{{route('delete-user', $user->id)}}"><i class="fa fa-trash" style="color: red"></i></a>
+                                <a href="javascript:void(0);"
+                                   data-action="{{route('delete-user', $user->id)}}"
+                                   class="delete_item_sweet">
+                                    <i class="fas fa-trash mr-2 text-danger"></i>
+                                </a>
                                 <a href="{{route('user.block', $user->id)}}"><i class="fa fa-lock mr-2 ml-2"></i></a>
                                 <a href="{{route('edit-user', $user->id)}}"><i class="fa fa-user" style="color: #2180e8"></i></a>
 

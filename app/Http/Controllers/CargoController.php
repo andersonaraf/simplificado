@@ -109,7 +109,6 @@ class CargoController extends Controller
      */
     public function destroy($id)
     {
-
         try {
             DB::beginTransaction();
             $cargo = Cargo::findOrFail($id);

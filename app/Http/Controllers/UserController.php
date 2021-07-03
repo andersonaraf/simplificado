@@ -7,6 +7,7 @@ use App\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -27,21 +28,22 @@ class UserController extends Controller
         return view('users.index', ['users' => $model->paginate(15)]);
     }
 
-    public function delete($id){
-        if (Auth::user()->tipo != 'Admin') {
-            session()->put('error', 'Você não tem acesso a essa página!');
-            return redirect()->route('home');
+    public function delete($id)
+    {
+        try {
+            DB::beginTransaction();
+            $user = User::findOrFail($id);
+            $user->delete();
+            if (Auth::user()->tipo != 'Admin') {
+                session()->put('error', 'Você não tem acesso a essa página!');
+                return redirect()->route('home');
+            }
+            DB::commit();
+            return true;
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return response()->withException($ex->getMessage());
         }
-
-        $user = User::find($id);
-        if($user->delete()){
-            session()->put('sucess', 'Usuário deletado com sucesso!');
-        }
-        else {
-            session()->put('error', 'Esse usuário não poder ser deletado!');
-        }
-
-        return redirect()->route('user.index');
     }
 
     public function show($id){

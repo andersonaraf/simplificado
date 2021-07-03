@@ -70,7 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view('auth.register');
     })->name('add-user');
     Route::post('add-create', 'AddUserController@store')->name('add-create');
-    Route::get('delete-user/{id}', 'UserController@delete')->name('delete-user');
+    Route::get('delete-user/{id}', [\App\Http\Controllers\UserController::class, 'delete'])->name('delete-user');
     Route::get('edit-user/{id}', 'UserController@show')->name('edit-user');
     Route::any('update-user/{id}', 'UserController@update')->name('update-user');
     Route::get('/lista-transparencia', 'TransparenciaController@index')->name('lista-transparencia');
