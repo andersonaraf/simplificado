@@ -18,6 +18,7 @@ class CreateTelasEditalTable extends Migration
             $table->unsignedBigInteger('tipo_tela_id');
             $table->string('nome_anexo_mostrar', 250)->unique()->nullable();
             $table->string('nome_ou_anexo', 250)->unique();
+            $table->double('pontuacao_total')->nullable();
             $table->boolean('status_liberar')->default(0);
             $table->dateTime('data_liberar')->nullable();
             $table->dateTime('data_fecha')->nullable();

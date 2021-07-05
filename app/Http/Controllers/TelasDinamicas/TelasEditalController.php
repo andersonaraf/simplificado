@@ -77,6 +77,7 @@ class TelasEditalController extends Controller
                 }
                 $telasEdital = TelasEdital::create([
                     'tipo_tela_id' => 3,
+                    'pontuacao_total' => $request->pontuacao_maxima,
                     'nome_ou_anexo' => $request->tela_nome,
                     'status_liberar' => $request->status_liberar,
                     'data_liberar' => $request->data_liberar,
