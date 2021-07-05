@@ -90,14 +90,6 @@ class AvaliadorAvaliarController extends Controller
                         ]);
                         $pontuacaoTotalPrivada2 = $pontuacaoTotalPrivada2 + $pontuacaoTotalPrivada;
                     }
-
-                    $pessoa->update([
-                        'status_revisado' => null
-                    ]);
-
-                    $pessoa->update([
-                        'status_avaliado' => 1
-                    ]);
                 } else {
                     if (isset($anexos['anexo_id'])) {
                         $editalAnexo = PessoaEditalAnexo::findOrFail($anexos['anexo_id']);
@@ -119,6 +111,11 @@ class AvaliadorAvaliarController extends Controller
                 }
             }
 
+            $pessoa->update([
+                'status_revisado' => null,
+                'status_avaliado' => 1
+            ]);
+
             $transparencia = Transparencia::create([
                 'instrutor_id' => auth()->id(),
                 'pessoa_id' => $pessoa->id,
@@ -139,6 +136,11 @@ class AvaliadorAvaliarController extends Controller
                 'pontuacao_total_anexos' => $pontuacaoTotalAnexos,
             ]);
 
+            $pontuacaoTotal = 0;
+            foreach ($pessoa->pessoaEditalAnexos as $anexosPessoa){
+                $pontuacaoTotal = $pontuacaoTotal + $anexosPessoa->pontuacao;
+            }
+
             if (!is_null($transparencia) && !is_null($pontuacao)) {
                 DB::commit();
                 session()->put('sucess', 'Avaliação Realizada com sucesso. Pontuação Geral: ' . $pontuacaoTotal . '');
@@ -147,7 +149,6 @@ class AvaliadorAvaliarController extends Controller
             return redirect()->route('/visualizacao', $pessoa->edital_dinamico_id);
 
         } catch (Exception $ex) {
-            dd($ex);
             DB::rollBack();
             return redirect()->back()->withInput()->withErrors([
                 'message' => $ex->getMessage()
