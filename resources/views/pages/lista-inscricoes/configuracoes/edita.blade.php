@@ -95,7 +95,7 @@
                             <h6 class="input-group-text mb-3">Somente se necessário</h6>
                         </div>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" hidden>
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Pontuação máxima:</span>
@@ -104,7 +104,7 @@
                         <div class="col col-sm-6">
                             <input type="text" name="inputPontuacaoMaxima" id="pontuacao_maxima_documento"
                                    class="form-control"
-                                   placeholder="Pontuação máxima do documento">
+                                   placeholder="Pontuação máxima do documento" value="{{$editalDinamico->telasEdital->pontuacao_total}}">
                         </div>
                     </div>
 
