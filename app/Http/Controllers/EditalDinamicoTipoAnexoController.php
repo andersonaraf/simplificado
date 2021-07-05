@@ -55,7 +55,8 @@ class EditalDinamicoTipoAnexoController extends Controller
                     'pontuacao_por_ano' => $request->inputPorAno,
                     'pontuacao_por_mes' => $request->inputPorMes,
                     'tipo_experiencia' => $request->inputTipoExperiencia,
-                    'pontuar_publica_privada' => $request->pontuar_publica_privada
+                    'pontuar_publica_privada' => $request->pontuar_publica_privada,
+                    'pontuar_manual' => $request->pontuar_manual,
                 ]);
                 if (is_null($progress)) {
                     Progress::create([

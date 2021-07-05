@@ -53,7 +53,8 @@
                                                    data-quantidade-anexo="{{$editalAnexo->documentoDinamico->quantidade_anexos}}"
                                                    data-tipo-experiencia="{{$editalAnexo->documentoDinamico->tipo_experiencia}}"
                                                    data-pontuacao-por-ano="{{$editalAnexo->documentoDinamico->pontuacao_por_ano}}"
-                                                   data-pontuacao-mes="{{$editalAnexo->documentoDinamico->pontuacao_por_mes}}">
+                                                   data-pontuacao-mes="{{$editalAnexo->documentoDinamico->pontuacao_por_mes}}"
+                                                   data-pontuar-manual="{{$editalAnexo->documentoDinamico->pontuar_manual}}">
                                                     <i class="fas fa-edit mr-2 text-info"></i>
                                                 </a>
                                                 <a href="javascript:void(0);"
@@ -123,6 +124,7 @@
             $('input[name=inputPontuacaoPorItem]').val("");
             $('input[name=inputPontuacaoMaximaDoItem]').val("");
         });
+
     </script>
 @endpush
 

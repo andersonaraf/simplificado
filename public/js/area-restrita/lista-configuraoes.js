@@ -226,6 +226,15 @@ $(document).ready(function () {
 
             }
 
+            //MANUAL
+            if($(this).attr('data-pontuar-manual') == 1){
+                $('#pontuar_manual_editar_nao').attr('checked', false);
+                $('#pontuar_manual_editar_sim').attr('checked', true);
+            } else {
+                $('#pontuar_manual_editar_sim').attr('checked', false);
+                $('#pontuar_manual_editar_nao').attr('checked', true);
+            }
+
             //TIPO EXPERIENCIA
             $('#inputTipoExperiencia[value="0"]').attr('checked', false)
             $('#inputTipoExperiencia[value="1"]').attr('checked', false)
