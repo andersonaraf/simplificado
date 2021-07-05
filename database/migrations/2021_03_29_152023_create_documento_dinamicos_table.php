@@ -26,7 +26,8 @@ class CreateDocumentoDinamicosTable extends Migration
             $table->double('pontuacao_por_ano')->nullable();
             $table->double('pontuacao_por_mes')->nullable();
             $table->boolean('tipo_experiencia')->nullable();
-            $table->boolean( 'pontuacao_manual')->nullable();
+            $table->boolean( 'pontuar_publica_privada')->nullable();
+            $table->boolean( 'pontuar_manual')->nullable();
             $table->boolean('especial')->nullable();
 
             $table->foreign('edital_dinamico_tipo_anexo_id')->references('id')->on('edital_dinamico_tipo_anexos');

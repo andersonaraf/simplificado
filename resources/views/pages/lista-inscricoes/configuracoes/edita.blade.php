@@ -70,22 +70,25 @@
                                                                   id="inputObrigatorio" value="0" class="" checked>
                         </div>
                     </div>
+
                     <div class="input-group mt-2">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputNomeAnexo">Pontuação Publica/Privada:</span>
                             </div>
                         </div>
+
                         <div class="col col-sm-6">
-                                <label class="mr-1">Sim</label>
-                                <input type="radio" name="inputPontuacaoManual"
-                                       id="inputPontuacaoManualEditaSim" value="1" class="">
-                                <label class="mr-1">Não</label>
-                                <input type="radio" name="inputPontuacaoManual"
-                                       id="inputPontuacaoManualEditaNao" value="0" class=""
-                                       checked>
+                            <label class="mr-1">Sim</label>
+                            <input type="radio" name="pontuar_publica_privada"
+                                   id="pontuar_publica_privada_edita_sim" value="1" class="">
+                            <label class="mr-1">Não</label>
+                            <input type="radio" name="pontuar_publica_privada"
+                                   id="pontuar_publica_privada_edita_nao" value="0" class=""
+                                   checked>
                         </div>
                     </div>
+
                     <div class="input-group">
                         <div class="col col-sm-12">
                             <hr>

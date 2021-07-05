@@ -79,11 +79,11 @@
 
                         <div class="col col-sm-6">
                             <label class="mr-1">Sim</label>
-                            <input type="radio" name="inputPontuacaoManual"
-                                   id="inputPontuacaoManualSim" value="1" class="">
+                            <input type="radio" name="pontuar_publica_privada"
+                                   id="pontuar_publica_privada_sim" value="1" class="">
                             <label class="mr-1">Não</label>
-                            <input type="radio" name="inputPontuacaoManual"
-                                   id="inputPontuacaoManualNao" value="0" class=""
+                            <input type="radio" name="pontuar_publica_privada"
+                                   id="pontuar_publica_privada_nao" value="0" class=""
                                    checked>
                         </div>
                     </div>

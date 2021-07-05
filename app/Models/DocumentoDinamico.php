@@ -21,7 +21,8 @@ class DocumentoDinamico extends Model
         'pontuacao_por_ano',
         'pontuacao_por_mes',
         'tipo_experiencia',
-        'pontuacao_manual',
+        'pontuar_publica_privada',
+        'pontuar_manual',
         'especial',
     ];
 
