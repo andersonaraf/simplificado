@@ -18,11 +18,10 @@ class AvaliadorAvaliarController extends Controller
 
     public function aprovar(Request $request)
     {
-
         $anexo = $request->anexo;
         $pontuacao_verificar = 0;
         $pontuacao_maxima_documento = $request->pontuacao_maxima_documento;
-        $pontuacao_manual = $request->pontuacao_manual;
+        $pontuar_publica_privada = $request->pontuar_publica_privada;
         $pontuacao_por_ano = $request->pontuacao_por_ano;
         $pontuacao_por_mes = $request->pontuacao_por_mes;
         $pessoa = Pessoa::findOrFail($request->pessoa_id);
