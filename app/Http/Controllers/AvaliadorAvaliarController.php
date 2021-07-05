@@ -40,13 +40,11 @@ class AvaliadorAvaliarController extends Controller
 
                 if (!is_null($editalAnexo->documentoDinamico->pontuacao_por_item)) {
                     if ($anexo[$editalAnexo->id][0] >= 0) {
-
                         $editalAnexo->update([
                             'pontuacao' => $anexo[$editalAnexo->id][0]
                         ]);
                         if ($anexo[$editalAnexo->id][0] != 1) {
                             $pontuacaoTotalAnexos = $pontuacaoTotalAnexos + $anexo[$editalAnexo->id][0];
-
                         }
                         if ($pontuacaoTotalAnexos > $editalAnexo->documentoDinamico->pontuacao_maxima_documento) {
                             return redirect()->back()->withErrors([
@@ -73,19 +71,16 @@ class AvaliadorAvaliarController extends Controller
                             'pontuacao_exp_publico' => $pontuacaoTotalPublica
                         ]);
                         $pontuacaoTotalPublica2 = $pontuacaoTotalPublica2 + $pontuacaoTotalPublica;
-
                     } else {
                         $pontuacaoTotalPrivada = (($anexos['anexoAno'] * $pontuacao_por_ano) + ($anexos['anexoMes'] * $pontuacao_por_mes));
 
                         if ($pontuacaoTotalPrivada > $documenDinamico->pontuacao_maxima_documento) {
-
                             return redirect()->back()->withErrors([
                                 'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total Privada: ' . $pontuacaoTotalPrivada . '.'
                             ]);
                         }
                         $editalAnexo = PessoaEditalAnexo::findOrFail($anexos['anexo_id']);
                         $editalAnexo->update([
-
                             'pontuacao_exp_privado' => $pontuacaoTotalPrivada
                         ]);
                         $pontuacaoTotalPrivada2 = $pontuacaoTotalPrivada2 + $pontuacaoTotalPrivada;
@@ -104,7 +99,6 @@ class AvaliadorAvaliarController extends Controller
 
                 $pontuacaoTotal = $pontuacaoTotalAnexos + ($pontuacaoTotalPrivada2 + $pontuacaoTotalPublica2);
                 if ($pontuacaoTotal > $pontuacao_maxima_documento) {
-
                     return redirect()->back()->withErrors([
                         'limite' => 'Você passou o limite de pontuação que é: ' .$pontuacao_maxima_documento. ' a sua pontuação Total deu: ' . $pontuacaoTotal . ' Favor refazer a avaliação'
                     ]);
@@ -127,7 +121,6 @@ class AvaliadorAvaliarController extends Controller
             ]);
 
             $pontuacao = Pontuacao::create([
-
                 'pessoa_id' => $pessoa->id,
                 'avaliador_id' => auth()->id(),
                 'pontuacao_total' => $pontuacaoTotal,
@@ -166,7 +159,6 @@ class AvaliadorAvaliarController extends Controller
                 'status_revisado' => null
             ]);
             $reprovar = new ReprovarPessoa();
-
             $reprovar->pessoa_id = $pessoa->id;
             $reprovar->avaliador_id = auth()->user()->id;
             $reprovar->motivo = $request->motivo_rep;
@@ -184,7 +176,6 @@ class AvaliadorAvaliarController extends Controller
             }
 
             if ($reprovar->save()) {
-
                 $url = str_replace("Novo/", "", $_SERVER["REQUEST_URI"]);
 
                 $transparencia = Transparencia::create([
