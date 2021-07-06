@@ -105,7 +105,7 @@ class EditalDinamicoTipoAnexoController extends Controller
         $documento->pontuacao_por_mes = $request->inputPorMes;
         $documento->tipo_experiencia = $request->inputTipoExperiencia;
         $documento->pontuar_publica_privada = $request->pontuar_publica_privada;
-
+        $documento->pontuar_manual = $request->pontuar_manual;
         //ATUALIZAR NA BASE DE DADOS
         if ($editalAnexo->update() && $documento->update()) {
             session()->put('sucess', 'Alterações realizadas com sucesso.');
