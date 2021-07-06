@@ -38,7 +38,7 @@
                     <select name="editalDinamicoID">
                         @foreach($editaisDinamicos as $editalDinamico)
                             <option
-                                value="{{$editalDinamico->id}}">{{$editalDinamico->tipoTela->nome_ou_anexo}}</option>
+                                value="{{$editalDinamico->id}}">{{$editalDinamico->telasEdital->nome_ou_anexo}}</option>
                         @endforeach
                     </select>
                     @error('editalDinamicoID')

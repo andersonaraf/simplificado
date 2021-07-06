@@ -35,11 +35,15 @@ class InscricoesChart extends BaseChart
             $nome_cargos[$key] = $cargo->cargo;
         }
 
-        $chart = Chartisan::build()
-            ->labels($nome_cargos);
-            foreach ($escolaridades as $key => $escolaridade) {
-               $chart->dataset($escolaridade->nivel_escolaridade,[]);
-            }
+        $nomes_escolaridade = [];
+        $contador = array();
+        $chart = Chartisan::build()->labels($nome_cargos);
+        foreach ($cargos as $key => $cargo) {
+            if (count($cargo->pessoas) != 0) {
+                array_push($contador, count($cargo->pessoas));
+            } else array_push($contador, 0);
+        }
+        $chart->dataset($cargo->cargo,$contador);
         return $chart;
 
     }
