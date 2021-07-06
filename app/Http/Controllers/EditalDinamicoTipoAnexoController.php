@@ -55,7 +55,8 @@ class EditalDinamicoTipoAnexoController extends Controller
                     'pontuacao_por_ano' => $request->inputPorAno,
                     'pontuacao_por_mes' => $request->inputPorMes,
                     'tipo_experiencia' => $request->inputTipoExperiencia,
-                    'pontuacao_manual' => $request->inputPontuacaoManual
+                    'pontuar_publica_privada' => $request->pontuar_publica_privada,
+                    'pontuar_manual' => $request->pontuar_manual,
                 ]);
                 if (is_null($progress)) {
                     Progress::create([
@@ -103,8 +104,8 @@ class EditalDinamicoTipoAnexoController extends Controller
         $documento->pontuacao_por_ano = $request->inputPorAno;
         $documento->pontuacao_por_mes = $request->inputPorMes;
         $documento->tipo_experiencia = $request->inputTipoExperiencia;
-        $documento->pontuacao_manual = $request->inputPontuacaoManual;
-
+        $documento->pontuar_publica_privada = $request->pontuar_publica_privada;
+        $documento->pontuar_manual = $request->pontuar_manual;
         //ATUALIZAR NA BASE DE DADOS
         if ($editalAnexo->update() && $documento->update()) {
             session()->put('sucess', 'Alterações realizadas com sucesso.');

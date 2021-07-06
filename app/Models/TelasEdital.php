@@ -11,6 +11,7 @@ class TelasEdital extends Model
         'id',
         'tipo_tela_id',
         'nome_ou_anexo',
+        'pontuacao_total',
         'status_liberar',
         'data_liberar',
         'data_fecha',

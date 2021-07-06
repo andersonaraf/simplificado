@@ -144,7 +144,11 @@
                                         <div class="card-body text-left">
                                             <h5><a target="_blank" href="{{asset('documentos/'.$anexo->nome_arquivo)}}">Anexo</a>
                                             </h5>
-                                            @if(is_null($anexo->documentoDinamico->pontuacao_maxima_documento))
+                                            @if ($anexo->documentoDinamico->pontuar_manual)
+                                                <label>Pontuação: </label>
+                                                <input type="number" value="0" name="anexo[{{$anexo->id}}][]"
+                                                       id="anexo[{{$anexo->id}}][]" min="0">
+                                            @elseif(is_null($anexo->documentoDinamico->pontuacao_maxima_documento))
                                                 <label>Está correto ?</label>
                                                 <div class="form-check">
                                                     <input type="radio" value="1" name="anexo[{{$anexo->id}}][]"
@@ -161,12 +165,12 @@
                                                            for="anexo[{{$anexo->id}}][]">Não</label>
                                                 </div>
                                             @else
-                                                @if($anexo->documentoDinamico->pontuacao_manual==0)
+                                                @if($anexo->documentoDinamico->pontuar_publica_privada==0)
                                                     <input type="number" name="pontuacao_maxima_documento"
                                                            value="{{$anexo->documentoDinamico->pontuacao_maxima_documento}}"
                                                            hidden/>
-                                                    <input type="number" name="pontuacao_manual"
-                                                           value="{{$anexo->documentoDinamico->pontuacao_manual=0}}"
+                                                    <input type="number" name="pontuar_publica_privada"
+                                                           value="{{$anexo->documentoDinamico->pontuar_publica_privada=0}}"
                                                            hidden/>
 
                                                     <label>Pontuação: </label>
@@ -210,8 +214,8 @@
                                                     <input type="number" name="pontuacao_maxima_documento"
                                                            value="{{$anexo->documentoDinamico->pontuacao_maxima_documento}}"
                                                            hidden/>
-                                                    <input type="number" name="pontuacao_manual"
-                                                           value="{{$anexo->documentoDinamico->pontuacao_manual=1}}"
+                                                    <input type="number" name="pontuar_publica_privada"
+                                                           value="{{$anexo->documentoDinamico->pontuar_publica_privada=1}}"
                                                            hidden/>
                                                     <input type="number" name="pontuacao_por_ano"
                                                            value="{{$anexo->documentoDinamico->pontuacao_por_ano}}"

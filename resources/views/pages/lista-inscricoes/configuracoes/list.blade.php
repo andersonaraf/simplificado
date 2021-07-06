@@ -46,14 +46,15 @@
                                                    data-cargo="{{$editalAnexo->cargo->id}}"
                                                    data-tipo-documento="{{$editalAnexo->tipoAnexo->id}}"
                                                    data-obrigatorio="{{$editalAnexo->documentoDinamico->obrigatorio}}"
-                                                   data-inserir-manual="{{$editalAnexo->documentoDinamico->pontuacao_manual}}"
-                                                   data-pontuacao-maxima="{{$editalAnexo->documentoDinamico->pontuacao_maxima_documento}}"
+                                                   data-inserir-publica-privada="{{$editalAnexo->documentoDinamico->pontuar_publica_privada}}"
+                                                   data-pontuacao-maxima="{{$editalDinamico->telasEdital->pontuacao_total}}"
                                                    data-pontuacao_maxima_item="{{$editalAnexo->documentoDinamico->pontuacao_maxima_item}}"
                                                    data-pontuacao-item="{{$editalAnexo->documentoDinamico->pontuacao_por_item}}"
                                                    data-quantidade-anexo="{{$editalAnexo->documentoDinamico->quantidade_anexos}}"
                                                    data-tipo-experiencia="{{$editalAnexo->documentoDinamico->tipo_experiencia}}"
                                                    data-pontuacao-por-ano="{{$editalAnexo->documentoDinamico->pontuacao_por_ano}}"
-                                                   data-pontuacao-mes="{{$editalAnexo->documentoDinamico->pontuacao_por_mes}}">
+                                                   data-pontuacao-mes="{{$editalAnexo->documentoDinamico->pontuacao_por_mes}}"
+                                                   data-pontuar-manual="{{$editalAnexo->documentoDinamico->pontuar_manual}}">
                                                     <i class="fas fa-edit mr-2 text-info"></i>
                                                 </a>
                                                 <a href="javascript:void(0);"
@@ -87,12 +88,14 @@
     <script src="{{asset('assets/DataTables/datatables.min.js')}}"></script>
     <script src="{{asset('js/area-restrita/lista-configuraoes.js')}}"></script>
     <script>
-        $('#inputPontuacaoManualSim').click(function () {
+        $('#pontuar_publica_privada_sim').click(function () {
+            console.log(1)
             $('#experienciapublicoprivado').removeAttr('hidden');
             $('#inputPontuacaoMaximaDoItem').attr('hidden', true);
             $('#inputPontuacaoPorItem').attr('hidden', true);
         });
-        $('#inputPontuacaoManualNao').click(function () {
+        $('#pontuar_publica_privada_nao').click(function () {
+            console.log(2)
             $('#inputPontuacaoMaximaDoItem').removeAttr('hidden');
             $('#inputPontuacaoPorItem').removeAttr('hidden');
             $('#experienciapublicoprivado').attr('hidden', true);
@@ -103,14 +106,15 @@
             $('input[name=inputPontuacaoMaximaDoItem]').val("");
         });
     </script>
+
     <script>
-        $('#inputPontuacaoManualEditaSim').click(function () {
+        $('#pontuar_publica_privada_edita_sim').click(function () {
             $('#experienciapublicoprivadoEdita').removeAttr('hidden');
             $('#inputPontuacaoMaximaDoItemEdita').attr('hidden', true);
             $('#inputPontuacaoPorItemEdita').attr('hidden', true);
 
         });
-        $('#inputPontuacaoManualEditaNao').click(function () {
+        $('#pontuar_publica_privada_edita_nao').click(function () {
             $('#inputPontuacaoMaximaDoItemEdita').removeAttr('hidden');
             $('#inputPontuacaoPorItemEdita').removeAttr('hidden');
             $('#experienciapublicoprivadoEdita').attr('hidden', true);
@@ -120,6 +124,7 @@
             $('input[name=inputPontuacaoPorItem]').val("");
             $('input[name=inputPontuacaoMaximaDoItem]').val("");
         });
+
     </script>
 @endpush
 

@@ -200,30 +200,39 @@ $(document).ready(function () {
 
             }
 
-            //MANUAL
-            if ($(this).attr('data-inserir-manual') == 1) {
-                $('#inputPontuacaoManual[value="0"]').attr('checked', false)
-                $('#inputPontuacaoManual[value="1"]').attr('checked', true)
+            //PUBLICA PRIVADA
+            if ($(this).attr('data-inserir-publica-privada') == 1) {
+                $('#pontuar_publica_privada[value="0"]').attr('checked', false)
+                $('#pontuar_publica_privada[value="1"]').attr('checked', true)
             } else {
-                $('#inputPontuacaoManual[value="1"]').attr('checked', false)
-                $('#inputPontuacaoManual[value="0"]').attr('checked', true)
+                $('#pontuar_publica_privada[value="1"]').attr('checked', false)
+                $('#pontuar_publica_privada[value="0"]').attr('checked', true)
 
             }
 
-            //MANUAL Edita
-            if ($(this).attr('data-inserir-manual') == 1) {
-                $('#inputPontuacaoManualEditaNao[value="0"]').attr('checked', false)
-                $('#inputPontuacaoManualEditaSim[value="1"]').attr('checked', true)
+            //PRIVADA E PUBLICA
+            if ($(this).attr('data-inserir-publica-privada') == 1) {
+                $('#pontuar_publica_privada_edita_nao[value="0"]').attr('checked', false)
+                $('#pontuar_publica_privada_edita_sim[value="1"]').attr('checked', true)
                 $('#experienciapublicoprivadoEdita').removeAttr('hidden');
                 $('#inputPontuacaoMaximaDoItemEdita').attr('hidden', true);
                 $('#inputPontuacaoPorItemEdita').attr('hidden', true);
             } else {
-                $('#inputPontuacaoManualEditaSim[value="1"]').attr('checked', false)
-                $('#inputPontuacaoManualEditaNao[value="0"]').attr('checked', true)
+                $('#pontuar_publica_privada_edita_sim[value="1"]').attr('checked', false)
+                $('#pontuar_publica_privada_edita_nao[value="0"]').attr('checked', true)
                 $('#experienciapublicoprivadoEdita').attr('hidden', true);
                 $('#inputPontuacaoMaximaDoItemEdita').removeAttr('hidden');
                 $('#inputPontuacaoPorItemEdita').removeAttr('hidden');
 
+            }
+
+            //MANUAL
+            if($(this).attr('data-pontuar-manual') == 1){
+                $('#pontuar_manual_editar_nao').attr('checked', false);
+                $('#pontuar_manual_editar_sim').attr('checked', true);
+            } else {
+                $('#pontuar_manual_editar_sim').attr('checked', false);
+                $('#pontuar_manual_editar_nao').attr('checked', true);
             }
 
             //TIPO EXPERIENCIA

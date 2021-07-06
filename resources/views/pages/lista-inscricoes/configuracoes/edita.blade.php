@@ -70,29 +70,50 @@
                                                                   id="inputObrigatorio" value="0" class="" checked>
                         </div>
                     </div>
+
                     <div class="input-group mt-2">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputNomeAnexo">Pontuação Publica/Privada:</span>
                             </div>
                         </div>
+
                         <div class="col col-sm-6">
-                                <label class="mr-1">Sim</label>
-                                <input type="radio" name="inputPontuacaoManual"
-                                       id="inputPontuacaoManualEditaSim" value="1" class="">
-                                <label class="mr-1">Não</label>
-                                <input type="radio" name="inputPontuacaoManual"
-                                       id="inputPontuacaoManualEditaNao" value="0" class=""
-                                       checked>
+                            <label class="mr-1">Sim</label>
+                            <input type="radio" name="pontuar_publica_privada"
+                                   id="pontuar_publica_privada_edita_sim" value="1" class="">
+                            <label class="mr-1">Não</label>
+                            <input type="radio" name="pontuar_publica_privada"
+                                   id="pontuar_publica_privada_edita_nao" value="0" class=""
+                                   checked>
                         </div>
                     </div>
+
+                    <div class="input-group mt-2">
+                        <div class="col col-sm-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputManual">Pontuação Manual:</span>
+                            </div>
+                        </div>
+
+                        <div class="col col-sm-6">
+                            <label class="mr-1">Sim</label>
+                            <input type="radio" name="pontuar_manual"
+                                   id="pontuar_manual_editar_sim" value="1" class="">
+                            <label class="mr-1">Não</label>
+                            <input type="radio" name="pontuar_manual"
+                                   id="pontuar_manual_editar_nao" value="0" class=""
+                                   checked>
+                        </div>
+                    </div>
+
                     <div class="input-group">
                         <div class="col col-sm-12">
                             <hr>
                             <h6 class="input-group-text mb-3">Somente se necessário</h6>
                         </div>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" hidden>
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Pontuação máxima:</span>
@@ -101,7 +122,7 @@
                         <div class="col col-sm-6">
                             <input type="text" name="inputPontuacaoMaxima" id="pontuacao_maxima_documento"
                                    class="form-control"
-                                   placeholder="Pontuação máxima do documento">
+                                   placeholder="Pontuação máxima do documento" value="{{$editalDinamico->telasEdital->pontuacao_total}}">
                         </div>
                     </div>
 

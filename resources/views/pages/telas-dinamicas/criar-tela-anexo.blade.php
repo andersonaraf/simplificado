@@ -31,6 +31,12 @@
                                 <p id="texto"></p>
                                 <input type="text" name="tela_nome" value=""/>
                             </div>
+
+                            <div id="pontuacao" hidden>
+                                <p>Pontuação Máxima do Edital</p>
+                                <input type="number" name="pontuacao_maxima" id="pontuacao_maxima" value="" placeholder="0.0" required disabled/>
+                            </div>
+
                             <div id="pdf" hidden>
                                 <p>Nome da Tela</p>
                                 <input type="text" name="tela_nome_pdf" value=""/>
@@ -97,17 +103,26 @@
                 $('#pdf').attr('hidden', true);
                 $('#liberar').removeAttr('hidden');
                 $('#data_liberar').removeAttr('hidden');
+                $('#pontuacao').attr('hidden', true);
+                $('#pontuacao_maxima').attr('disabled', true);
+                $('#pontuacao_maxima').removeAttr('required');
             } else if ($('#tipo_tela').val() == 2) {
                 $('#pdf').removeAttr('hidden');
                 $('#tela').attr('hidden', true);
                 $('#liberar').removeAttr('hidden');
                 $('#data_liberar').removeAttr('hidden');
+                $('#pontuacao').attr('hidden', true);
+                $('#pontuacao_maxima').attr('disabled', true);
+                $('#pontuacao_maxima').removeAttr('required');
             } else if ($('#tipo_tela').val() == 3) {
                 $('#texto').html('Informe o nome do Formulário');
                 $('#tela').removeAttr('hidden');
                 $('#pdf').attr('hidden', true);
                 $('#liberar').removeAttr('hidden');
                 $('#data_liberar').removeAttr('hidden');
+                $('#pontuacao').removeAttr('hidden');
+                $('#pontuacao_maxima').removeAttr('disabled');
+                $('#pontuacao_maxima').attr('required');
             }
         });
 
