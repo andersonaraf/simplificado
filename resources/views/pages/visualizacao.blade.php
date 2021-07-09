@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid" id="lista-table">
             <div class="w-100 text-center" id="loading">
                 <img src="{{asset('assets/gifs/Spinner-1s-164px.gif')}}">
             </div>

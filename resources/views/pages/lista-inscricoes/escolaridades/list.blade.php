@@ -8,7 +8,7 @@
 @endsection
 @section('content')
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid" id="lista-table">
             <main class="container">
                 <table id="lista-formulario">
                     <div class="row">

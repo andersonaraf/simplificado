@@ -87,22 +87,23 @@
                                    checked>
                         </div>
                     </div>
-
-                    <div class="input-group mt-2">
-                        <div class="col col-sm-6">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputManual">Pontuação Manual:</span>
+                    <div class="input-group mt-2" id="inputManual">
+                        <div class="input-group mt-2">
+                            <div class="col col-sm-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputManual">Pontuação Manual:</span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col col-sm-6">
-                            <label class="mr-1">Sim</label>
-                            <input type="radio" name="pontuar_manual"
-                                   id="ponutar_manual_sim" value="1" class="">
-                            <label class="mr-1">Não</label>
-                            <input type="radio" name="pontuar_manual"
-                                   id="ponutar_manual_sim" value="0" class=""
-                                   checked>
+                            <div class="col col-sm-6">
+                                <label class="mr-1">Sim</label>
+                                <input type="radio" name="pontuar_manual"
+                                       id="ponutar_manual_sim" value="1" class="">
+                                <label class="mr-1">Não</label>
+                                <input type="radio" name="pontuar_manual"
+                                       id="ponutar_manual_sim" value="0" class=""
+                                       checked>
+                            </div>
                         </div>
                     </div>
 
@@ -121,7 +122,8 @@
                         </div>
                         <div class="col col-sm-6">
                             <input type="text" name="inputPontuacaoMaxima" class="form-control"
-                                   placeholder="Pontuação máxima do documento" value="{{$editalDinamico->telasEdital->pontuacao_total}}">
+                                   placeholder="Pontuação máxima do documento"
+                                   value="{{$editalDinamico->telasEdital->pontuacao_total}}">
                         </div>
                     </div>
 

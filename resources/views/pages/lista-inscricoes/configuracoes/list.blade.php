@@ -8,10 +8,9 @@
 @endsection
 @section('content')
     <div class="content">
-        <div class="container-fluid">
+           <div class="container-fluid"  id="lista-table">
             <main class="container">
                 <table id="lista-formulario">
-
                     <div class="row">
                         <div class="w-100 text-center" id="loading">
                             <img src="{{asset('assets/gifs/Spinner-1s-164px.gif')}}">
@@ -87,45 +86,7 @@
     <script src="{{asset('js/area-restrita/functions.js')}}"></script>
     <script src="{{asset('assets/DataTables/datatables.min.js')}}"></script>
     <script src="{{asset('js/area-restrita/lista-configuraoes.js')}}"></script>
-    <script>
-        $('#pontuar_publica_privada_sim').click(function () {
-            console.log(1)
-            $('#experienciapublicoprivado').removeAttr('hidden');
-            $('#inputPontuacaoMaximaDoItem').attr('hidden', true);
-            $('#inputPontuacaoPorItem').attr('hidden', true);
-        });
-        $('#pontuar_publica_privada_nao').click(function () {
-            console.log(2)
-            $('#inputPontuacaoMaximaDoItem').removeAttr('hidden');
-            $('#inputPontuacaoPorItem').removeAttr('hidden');
-            $('#experienciapublicoprivado').attr('hidden', true);
-            $('input[name=inputTipoExperiencia]').prop('checked', false);
-            $('input[name=inputPorAno]').val("");
-            $('input[name=inputPorMes]').val("");
-            $('input[name=inputPontuacaoPorItem]').val("");
-            $('input[name=inputPontuacaoMaximaDoItem]').val("");
-        });
-    </script>
-
-    <script>
-        $('#pontuar_publica_privada_edita_sim').click(function () {
-            $('#experienciapublicoprivadoEdita').removeAttr('hidden');
-            $('#inputPontuacaoMaximaDoItemEdita').attr('hidden', true);
-            $('#inputPontuacaoPorItemEdita').attr('hidden', true);
-
-        });
-        $('#pontuar_publica_privada_edita_nao').click(function () {
-            $('#inputPontuacaoMaximaDoItemEdita').removeAttr('hidden');
-            $('#inputPontuacaoPorItemEdita').removeAttr('hidden');
-            $('#experienciapublicoprivadoEdita').attr('hidden', true);
-            $('input[name=inputTipoExperiencia]').prop('checked', false);
-            $('input[name=inputPorAno]').val("");
-            $('input[name=inputPorMes]').val("");
-            $('input[name=inputPontuacaoPorItem]').val("");
-            $('input[name=inputPontuacaoMaximaDoItem]').val("");
-        });
-
-    </script>
+    <script src="{{asset('js/area-restrita/criar-configuracao-anexo.js')}}"></script>
 @endpush
 
 @include('pages.lista-inscricoes.configuracoes.modal')
