@@ -137,6 +137,7 @@ $(document).ready(function () {
             "thousands": "."
         },
     });
+
     if (listaConfiguracoes) {
         $('#dataTables-lista').removeAttr('hidden')
         $('#loading').attr('hidden', true)
@@ -200,34 +201,23 @@ $(document).ready(function () {
 
             }
 
-            //PUBLICA PRIVADA
-            if ($(this).attr('data-inserir-publica-privada') == 1) {
-                $('#pontuar_publica_privada[value="0"]').attr('checked', false)
-                $('#pontuar_publica_privada[value="1"]').attr('checked', true)
-            } else {
-                $('#pontuar_publica_privada[value="1"]').attr('checked', false)
-                $('#pontuar_publica_privada[value="0"]').attr('checked', true)
-
-            }
-
             //PRIVADA E PUBLICA
             if ($(this).attr('data-inserir-publica-privada') == 1) {
                 $('#pontuar_publica_privada_edita_nao[value="0"]').attr('checked', false)
                 $('#pontuar_publica_privada_edita_sim[value="1"]').attr('checked', true)
                 $('#experienciapublicoprivadoEdita').removeAttr('hidden');
-                $('#inputPontuacaoMaximaDoItemEdita').attr('hidden', true);
                 $('#inputPontuacaoPorItemEdita').attr('hidden', true);
+                $('#inputManualEdita').attr('hidden', true);
             } else {
                 $('#pontuar_publica_privada_edita_sim[value="1"]').attr('checked', false)
                 $('#pontuar_publica_privada_edita_nao[value="0"]').attr('checked', true)
                 $('#experienciapublicoprivadoEdita').attr('hidden', true);
-                $('#inputPontuacaoMaximaDoItemEdita').removeAttr('hidden');
                 $('#inputPontuacaoPorItemEdita').removeAttr('hidden');
-
+                $('#inputManualEdita').removeAttr('hidden');
             }
 
             //MANUAL
-            if($(this).attr('data-pontuar-manual') == 1){
+            if ($(this).attr('data-pontuar-manual') == 1) {
                 $('#pontuar_manual_editar_nao').attr('checked', false);
                 $('#pontuar_manual_editar_sim').attr('checked', true);
             } else {
@@ -261,4 +251,3 @@ $(document).ready(function () {
 
     criar_editar();
 });
-

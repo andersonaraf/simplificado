@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid"  id="lista-table">
             <div class="container">
                 <div class="row">
                     <input class="form-control" id="pesquisa" type="text" placeholder="Procurar..">

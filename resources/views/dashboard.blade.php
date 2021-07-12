@@ -7,7 +7,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
-                            <div class="card-icon">
+                            <div class="card-icon" style="background-color: #ffa726">
                                 <i class="material-icons">content_copy</i>
                             </div>
                             <p class="card-category">Total de Inscrições</p>
@@ -21,7 +21,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
-                            <div class="card-icon">
+                            <div class="card-icon" style="background-color: #26c6da">
                                 <i class="material-icons">content_copy</i>
                             </div>
                             <p class="card-category">Total de Avaliações</p>
@@ -35,7 +35,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
-                            <div class="card-icon">
+                            <div class="card-icon" style="background-color: #ef5350">
                                 <i class="material-icons">content_copy</i>
                             </div>
                             <p class="card-category">Total de Recursos</p>
@@ -51,7 +51,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
-                            <div class="card-icon">
+                            <div class="card-icon" style="background-color: #66bb6a">
                                 <i class="material-icons">insert_chart</i>
                             </div>
                             <h3 class="card-title">Inscrições por cargo</h3>
@@ -66,7 +66,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
-                            <div class="card-icon">
+                            <div class="card-icon" style="background-color: #ab47bc">
                                 <i class="material-icons">insert_chart</i>
                             </div>
                             <h3 class="card-title">Avaliação por cargo</h3>
@@ -81,7 +81,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
-                            <div class="card-icon">
+                            <div class="card-icon" style="background-color: #26c6da">
                                 <i class="material-icons">insert_chart</i>
                             </div>
                             <h3 class="card-title">Recurso por cargo</h3>
