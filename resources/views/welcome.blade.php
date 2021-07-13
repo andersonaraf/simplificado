@@ -59,10 +59,10 @@
                 </div>
                 <div class="row justify-content-md-center">
                     <div class="card text-dark bg-danger mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Informamos que o processo seletivo</div>
+                        <div class="card-header">Concurso SEINFRA</div>
                         <div class="card-body">
-                            <h5 class="card-title">Esta suspenso</h5>
-                            <p class="card-text">fique atento as informações no portal da prefeitura sobre o processo <a href="http://www.riobranco.ac.gov.br/" target="_blank">LINK</a></p>
+                            <h5 class="card-title">Inscrições suspensas</h5>
+                            <p class="card-text">fique atento as informações no portal da prefeitura sobre o novo edital com a nova data a ser publicado. <a href="http://www.riobranco.ac.gov.br/editais-e-concurso/" target="_blank">Aqui</a></p>
                         </div>
                     </div>
                     @foreach($inscricoes as $inscricao)
