@@ -17,7 +17,6 @@ class DocumentoDinamico extends Model
         'pontuacao_por_item',
         'quantidade_anexos',
         'obrigatorio',
-        'quantidade_maxima_ano',
         'pontuacao_por_ano',
         'pontuacao_por_mes',
         'tipo_experiencia',

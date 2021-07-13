@@ -15,7 +15,6 @@ class AvaliacaoController extends Controller
     public function index()
     {
         $pessoas = Pessoa::all();
-        dd($pessoas);
         return view('pages.visualizacao', compact('pessoas'));
     }
 

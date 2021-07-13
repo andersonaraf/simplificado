@@ -144,11 +144,13 @@
                                         <div class="card-body text-left">
                                             <h5><a target="_blank" href="{{asset('documentos/'.$anexo->nome_arquivo)}}">Anexo</a>
                                             </h5>
-                                            @if ($anexo->documentoDinamico->pontuar_manual)
+                                            {{--                                            @dd($anexo)--}}
+                                            @if ($anexo->documentoDinamico->pontuar_manual == 1)
                                                 <label>Pontuação: </label>
                                                 <input type="number" value="0" name="anexo[{{$anexo->id}}][]"
                                                        id="anexo[{{$anexo->id}}][]" min="0">
-                                            @elseif(is_null($anexo->documentoDinamico->pontuacao_maxima_documento))
+
+                                            @elseif(is_null($anexo->documentoDinamico->pontuacao_maxima_item) && is_null($anexo->documentoDinamico->pontuacao_por_item) && is_null($anexo->documentoDinamico->pontuacao_por_ano) && is_null($anexo->documentoDinamico->pontuacao_por_mes) && $anexo->documentoDinamico->pontuar_publica_privada == 0 && $anexo->documentoDinamico->pontuar_manual == 0)
                                                 <label>Está correto ?</label>
                                                 <div class="form-check">
                                                     <input type="radio" value="1" name="anexo[{{$anexo->id}}][]"
@@ -165,7 +167,7 @@
                                                            for="anexo[{{$anexo->id}}][]">Não</label>
                                                 </div>
                                             @else
-                                                @if($anexo->documentoDinamico->pontuar_publica_privada==0)
+                                                @if($anexo->documentoDinamico->pontuar_publica_privada == 0)
                                                     <input type="number" name="pontuacao_maxima_documento"
                                                            value="{{$anexo->documentoDinamico->pontuacao_maxima_documento}}"
                                                            hidden/>
@@ -182,7 +184,7 @@
                                                         <label class="form-check-label"
                                                                for="anexo[{{$anexo->id}}][]">0</label>
                                                     </div>
-                                                    @if (is_null($anexo->documentoDinamico->quantidade_maxima_ano))
+                                                    @if ($anexo->documentoDinamico->pontuar_publica_privada == 0)
                                                         @for($i = $anexo->documentoDinamico->pontuacao_por_item; $i <= $anexo->documentoDinamico->pontuacao_maxima_item; $i = $i + $anexo->documentoDinamico->pontuacao_por_item)
                                                             <div class="form-check">
                                                                 <input type="radio" value="{{$i}}"
@@ -194,22 +196,7 @@
                                                                        for="anexo[{{$anexo->id}}][]">{{$i}}</label>
                                                             </div>
                                                         @endfor
-                                                    @else
-                                                        {{--PONTUACAO POR ANO--}}
-                                                        @for($i = 1; $i <= $anexo->documentoDinamico->quantidade_maxima_ano; $i++)
-                                                            <div class="form-check">
-                                                                <input type="radio"
-                                                                       value="{{$anexo->documentoDinamico->pontuacao_por_ano * $i}}"
-                                                                       name="anexo[{{$anexo->id}}][]"
-
-                                                                       id="anexo[{{$anexo->id}}][]"
-                                                                       required>
-                                                                <label class="form-check-label"
-                                                                       for="anexo[{{$anexo->id}}][]">{{$anexo->documentoDinamico->pontuacao_por_ano * $i}}</label>
-                                                            </div>
-                                                        @endfor
                                                     @endif
-
                                                 @else
                                                     <input type="number" name="pontuacao_maxima_documento"
                                                            value="{{$anexo->documentoDinamico->pontuacao_maxima_documento}}"
@@ -238,11 +225,9 @@
                                                     <div class="form-check">
                                                         <input type="number" min='0' placeholder="Mês"
                                                                name="anexo[{{$anexo->id}}][anexoMes]"/>
-
                                                     </div>
                                                 @endif
                                             @endif
-
                                         </div>
                                     </div>
                                 @endforeach

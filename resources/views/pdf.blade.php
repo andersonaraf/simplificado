@@ -9,7 +9,7 @@
 </head>
 <body>
     <div style="text-align: center; margin-top: 2%;">
-        <img src="{{public_path().'/images/logo_emurb.jpg'}}"/>
+        <img src="{{public_path().'/images/logo_seinfra.jpeg'}}"/>
     </div>
     <div style="margin-left: 20%;">
         <h2>Nome: {{$comprovante->pessoa->nome_completo}}</h2>
