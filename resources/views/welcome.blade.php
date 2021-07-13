@@ -58,6 +58,13 @@
                     <h2>Processos Seletivos</h2>
                 </div>
                 <div class="row justify-content-md-center">
+                    <div class="card text-dark bg-danger mb-3" style="max-width: 18rem;">
+                        <div class="card-header">Informamos que o processo seletivo</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Esta suspenso</h5>
+                            <p class="card-text">fique atento as informações no portal da prefeitura sobre o processo <a href="http://www.riobranco.ac.gov.br/" target="_blank">LINK</a></p>
+                        </div>
+                    </div>
                     @foreach($inscricoes as $inscricao)
                         @if (($inscricao->status_liberar == '1' || !is_null($inscricao->data_liberar)) && (is_null($inscricao->data_fecha) || strtotime($inscricao->data_fecha) > strtotime(date('Y-m-d H:i'))))
                             @if (($inscricao->status_liberar == 1) || strtotime($inscricao->data_liberar) <= strtotime(date('Y-m-d H:i')))
@@ -120,9 +127,9 @@
                     <h2>Editais</h2>
                 </div>
                 <div class="row justify-content-center">
-{{--                    @dd($pdfs)--}}
+                    {{--                    @dd($pdfs)--}}
                     @foreach($pdfs as $pdf)
-{{--                        @dd($pdf)--}}
+                        {{--                        @dd($pdf)--}}
                         @if ( ($pdf->status_liberar == '1' || !is_null($pdf->data_liberar)) && (is_null($pdf->data_fecha) || strtotime($pdf->data_fecha) > strtotime(date('Y-m-d H:i'))))
                             @if (($pdf->status_liberar == '1') || strtotime($pdf->data_liberar) <= strtotime(date('Y-m-d H:i')))
                                 <div class="col-lg-4 col-md-4  align-items-stretch mt-2">

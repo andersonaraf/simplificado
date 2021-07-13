@@ -149,7 +149,7 @@ class RegistroController extends Controller
             $enderecoCookie = json_decode(Cookie::get('endereco'));
             $pessoaCookie = json_decode(Cookie::get('pessoa'));
 
-            //VALIADAR PESSOA PARA USUARIOS MONGOIDES NOVAMENTE
+            //VALIADAR PESSOA NOVAMENTE
 
             if (!is_null($enderecoCookie) && !is_null($pessoaCookie)) {
                 $pessoa_confirma = Pessoa::where('cpf', $pessoaCookie->cpf)->where('edital_dinamico_id', $pessoaCookie->edital_dinamico_id)->first();
