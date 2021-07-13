@@ -41,9 +41,6 @@ Route::post('registro/parte2', 'RegistroController@storePart2')->name('registro/
 Route::get('/registro/anexos/{id}', [\App\Http\Controllers\RegistroController::class, 'buscaIndex'])->name('registro/anexos');
 
 Route::get('/comprovante/{comprovante}', 'ComprovanteController@index')->name('registro/comprovante'); //
-//Route::get('/visualizacao', function (){
-//    return view('area-restrita.visualizacao');
-//})->name('visualizacao');
 
 Route::get('/protocolo', 'ComprovanteController@protocolo')->name('protocolo');
 Route::post('comprovante-procurar', 'ComprovanteController@procurar')->name('comprovante-procurar');

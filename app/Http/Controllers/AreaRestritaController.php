@@ -20,8 +20,6 @@ class AreaRestritaController extends Controller
     //lista avaliar
     public function index($editalID)
     {
-        //
-//        dd($editalID);
         if (Auth::user()->tipo != 'Avaliador' && Auth::user()->tipo != 'Admin' && Auth::user()->tipo != 'Supervisor') {
             session()->put('error', 'Você não tem acesso a essa página!');
             return redirect()->route('home');
@@ -43,7 +41,6 @@ class AreaRestritaController extends Controller
         $progress = Progress::where('edital_dinamico_id', $pessoa->pessoaEditalAnexos->first()->edital_dinamico_id)->get();
         $tipoAnexoCargo = TipoAnexoCargo::where('cargo_id', $pessoa->cargo_id)->get();
         $progressQuantiadePorcento = 100 / ($tipoAnexoCargo->count() + 2);
-//        dd($progressQuantiadePorcento);
 
         if ($pessoa->status == 1) {
             session()->put('error', 'Parece que alguém já avaliou essa pessoa!');

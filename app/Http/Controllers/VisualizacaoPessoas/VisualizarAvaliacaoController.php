@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 
 class VisualizarAvaliacaoController extends Controller
 {
-    //
-
-    public function show($id){
+    public function show($id)
+    {
         $pessoa = Pessoa::findOrFail($id);
 
         return view('pages.visualizacao-pessoas.visualizar-pessoa-avaliar', [
