@@ -70,7 +70,7 @@
         <tr>
             <td align="center">
                 <figure id="container">
-                    <img src="{{public_path().'/images/logo_emurb.jpg'}}" width="90%"/>
+                    <img src="{{public_path().'/images/logo_seinfra.jpeg'}}" width="90%"/>
                 </figure>
             </td>
         </tr>
@@ -212,10 +212,10 @@
     <table width="100%">
         <tr>
             <td align="left" style="width: 50%;">
-                &copy; {{ date('Y') }} {{ 'http://processoseletivoemurb.riobranco.ac.gov.br/' }} - Todos os direitos reservados.
+                &copy; {{ date('Y') }} {{ 'https://processoseletivoseinfra2021.riobranco.ac.gov.br/' }} - Todos os direitos reservados.
             </td>
             <td align="right" style="width: 50%;">
-                Concurso Seletivo EMURB
+                Processo Seletivo Simplificado
             </td>
         </tr>
 
