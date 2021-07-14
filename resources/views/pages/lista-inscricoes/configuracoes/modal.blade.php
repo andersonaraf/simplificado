@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <div class="input-group">
+                    <div class="input-group" id="inputNomeAnexo">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputNomeAnexo">Nome do Documento:</span>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col col-sm-6">
                             <input type="text" name="inputNomeAnexo" class="form-control"
-                                   placeholder="Nome do Documento">
+                                   placeholder="Nome do Documento" required>
                         </div>
                     </div>
 

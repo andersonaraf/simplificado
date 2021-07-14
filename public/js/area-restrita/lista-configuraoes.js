@@ -208,12 +208,14 @@ $(document).ready(function () {
                 $('#experienciapublicoprivadoEdita').removeAttr('hidden');
                 $('#inputPontuacaoPorItemEdita').attr('hidden', true);
                 $('#inputManualEdita').attr('hidden', true);
+                $('#inputQuantiadeAnexosEdita').attr('hidden', true);
             } else {
                 $('#pontuar_publica_privada_edita_sim[value="1"]').attr('checked', false)
                 $('#pontuar_publica_privada_edita_nao[value="0"]').attr('checked', true)
                 $('#experienciapublicoprivadoEdita').attr('hidden', true);
                 $('#inputPontuacaoPorItemEdita').removeAttr('hidden');
                 $('#inputManualEdita').removeAttr('hidden');
+                $('#inputQuantiadeAnexosEdita').removeAttr('hidden');
             }
 
             //MANUAL
@@ -250,4 +252,5 @@ $(document).ready(function () {
     }
 
     criar_editar();
+
 });
