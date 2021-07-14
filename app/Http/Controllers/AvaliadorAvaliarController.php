@@ -96,14 +96,14 @@ class AvaliadorAvaliarController extends Controller
                         }
                     }
                 }
-
+            }
                 $pontuacaoTotal = $pontuacaoTotalAnexos + ($pontuacaoTotalPrivada2 + $pontuacaoTotalPublica2);
                 if ($pontuacaoTotal > $pontuacao_maxima_documento) {
                     return redirect()->back()->withErrors([
                         'limite' => 'Você passou o limite de pontuação que é: ' .$pontuacao_maxima_documento. ' a sua pontuação Total deu: ' . $pontuacaoTotal . ' Favor refazer a avaliação'
                     ]);
                 }
-            }
+
 
             $pessoa->update([
                 'status_revisado' => null,
@@ -129,16 +129,15 @@ class AvaliadorAvaliarController extends Controller
                 'pontuacao_total_anexos' => $pontuacaoTotalAnexos,
             ]);
 
-            $pontuacaoTotal = 0;
-            foreach ($pessoa->pessoaEditalAnexos as $anexosPessoa){
-                $pontuacaoTotal = $pontuacaoTotal + $anexosPessoa->pontuacao;
-            }
-
             if (!is_null($transparencia) && !is_null($pontuacao)) {
                 DB::commit();
                 session()->put('sucess', 'Avaliação Realizada com sucesso. Pontuação Geral: ' . $pontuacaoTotal . '');
             }
 
+            $pontuacaoTotal = 0;
+            foreach ($pessoa->pessoaEditalAnexos as $anexosPessoa){
+                $pontuacaoTotal = $pontuacaoTotal + $anexosPessoa->pontuacao;
+            }
             return redirect()->route('/visualizacao', $pessoa->edital_dinamico_id);
 
         } catch (Exception $ex) {

@@ -5,7 +5,6 @@
     <style>
         #progress li {
             width: {{$progressQuantiadePorcento}}% !important;
-            height: 220px;
             border: 1px solid #fff;
             padding-top: 3%;
         }
@@ -126,14 +125,24 @@
                                         <div class="row justify-content-center mr-2">
                                             @if(isset($pessoa->pontuacao($pessoa->id)->pontuacao_total_publica))
                                                 <label style="font-weight: bold; color: black;"> Pontuação Publica:
-                                                    <label style="font-weight: bold; color: black; padding: 10px;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_publica}}</label>
+                                                    <label
+                                                        style="font-weight: bold; color: black; padding: 10px;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_publica}}</label>
+                                                </label>
+                                            @else
+                                                <td>Não existe pontuação</td>
+                                            @endif
+                                            @if(isset($pessoa->pontuacao($pessoa->id)->pontuacao_total_privada))
+                                                <label style="font-weight: bold; color: black;"> Pontuação Privada:
+                                                    <label
+                                                        style="font-weight: bold; color: black; padding: 10px;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_privada}}</label>
                                                 </label>
                                             @else
                                                 <td>Não existe pontuação</td>
                                             @endif
                                             @if(!is_null($pessoa->pontuacao($pessoa->id)))
                                                 <label style="font-weight: bold; color: black;"> Pontuação Total:
-                                                    <label style="font-weight: bold; color: black; padding: 10px;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total}}</label>
+                                                    <label
+                                                        style="font-weight: bold; color: black; padding: 10px;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total}}</label>
                                                 </label>
 
                                             @else

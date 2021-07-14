@@ -132,7 +132,6 @@
                                                 <label style="font-weight: bold; color: black;"> Pontuação Publica:
                                                     <label
                                                         style="font-weight: bold; color: black; padding: 10px;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_publica}}</label>
-                                                    <a style="color: red; font-weight:bold; padding: 10px">+</a>
                                                 </label>
                                             @else
                                                 <td>Não existe pontuação</td>
@@ -141,19 +140,7 @@
                                                 <label style="font-weight: bold; color: black;"> Pontuação Privada:
                                                     <label
                                                         style="font-weight: bold; color: black; padding: 10px;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_privada}}</label>
-                                                    <a style="color: red; font-weight:bold; padding: 10px">+</a>
                                                 </label>
-
-                                            @else
-                                                <td>Não existe pontuação</td>
-                                            @endif
-                                            @if(!is_null($pessoa->pontuacao($pessoa->id)))
-                                                <label style="font-weight: bold; color: black;"> Pontuação Total Anexo:
-                                                    <label
-                                                        style="font-weight: bold; color: black; padding: 10px;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_anexos}}</label>
-                                                    <a style="color: red; font-weight:bold; padding: 10px">=</a>
-                                                </label>
-
                                             @else
                                                 <td>Não existe pontuação</td>
                                             @endif
@@ -184,11 +171,11 @@
                                                 <p>Pontuação: <strong
                                                         style="font-weight: bold;">{{$anexo->pontuacao}}</strong>
                                                 </p>
-                                            @elseif(!is_null($anexo->documentoDinamico->pontuacao_maxima_documento) && $anexo->documentoDinamico->pontuacao_manual == 1 && $anexo->documentoDinamico->tipo_experiencia == 1 )
+                                            @elseif(!is_null($anexo->documentoDinamico->pontuacao_maxima_documento) && $anexo->documentoDinamico->pontuar_publica_privada == 1 && $anexo->documentoDinamico->tipo_experiencia == 1 )
                                                 <p>Pontuação: <strong
                                                         style="font-weight: bold;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_privada}}</strong>
                                                 </p>
-                                            @elseif(!is_null($anexo->documentoDinamico->pontuacao_maxima_documento) && $anexo->documentoDinamico->pontuacao_manual == 1 && $anexo->documentoDinamico->tipo_experiencia == 0 )
+                                            @elseif(!is_null($anexo->documentoDinamico->pontuacao_maxima_documento) && $anexo->documentoDinamico->pontuar_publica_privada == 1 && $anexo->documentoDinamico->tipo_experiencia == 0 )
                                                 <p>Pontuação: <strong
                                                         style="font-weight: bold;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_publica}}</strong>
                                                 </p>

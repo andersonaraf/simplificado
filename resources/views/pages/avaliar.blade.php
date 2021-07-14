@@ -33,7 +33,7 @@
                         </ul>
 
                         @if (!is_null($pessoa->status_revisado) && $pessoa->status_revisado == 0)
-                            <div class="card text-white bg-warning">
+                            <div class="card text-white bg-danger">
                                 <div class="card-header"><h4 class="font-weight-bold">Motivo Reavaliar</h4></div>
                                 <div class="card-body">
                                     <p class="card-text"
