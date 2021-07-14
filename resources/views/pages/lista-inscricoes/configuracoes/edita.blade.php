@@ -45,15 +45,15 @@
                         </div>
                     </div>
 
-                    <div class="input-group">
+                    <div class="input-group" id="inputNomeAnexoEdita">
                         <div class="col col-sm-6">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputNomeAnexo">Nome do Documento:</span>
+                                <span class="input-group-text" id="inputNomeAnexoEdita">Nome do Documento:</span>
                             </div>
                         </div>
                         <div class="col col-sm-6">
                             <input type="text" name="inputNomeAnexo" class="form-control"
-                                   placeholder="Nome do Documento" id="modal_inputNomeAnexo">
+                                   placeholder="Nome do Documento" id="modal_inputNomeAnexo" required>
                         </div>
                     </div>
 
@@ -108,118 +108,118 @@
                         </div>
                     </div>
 
+                    <div class="input-group">
+                        <div class="col col-sm-12">
+                            <hr>
+                            <h6 class="input-group-text mb-3">Somente se necessário</h6>
+                        </div>
+                    </div>
+                    <div class="input-group" hidden>
+                        <div class="col col-sm-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Pontuação máxima:</span>
+                            </div>
+                        </div>
+                        <div class="col col-sm-6">
+                            <input type="text" name="inputPontuacaoMaxima" id="pontuacao_maxima_documento"
+                                   class="form-control"
+                                   placeholder="Pontuação máxima do documento"
+                                   value="{{$editalDinamico->telasEdital->pontuacao_total}}">
+                        </div>
+                    </div>
+
+                    <div class="input-group" id="inputPontuacaoMaximaDoItemEdita">
+                        <div class="col col-sm-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"
+                                      id="inputPontuacaoMaximaDoItem">Pontuação máxima do anexo:</span>
+                            </div>
+                        </div>
+                        <div class="col col-sm-6">
+                            <input type="text" name="inputPontuacaoMaximaDoItem" id="pontuacao_maxima_item"
+                                   class="form-control"
+                                   placeholder="Pontuação máxima do anexo">
+                        </div>
+                    </div>
+
+                    <div class="input-group" id="inputPontuacaoPorItemEdita">
+                        <div class="col col-sm-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Pontuação por anexo:</span>
+                            </div>
+                        </div>
+                        <div class="col col-sm-6">
+                            <input type="text" name="inputPontuacaoPorItem" id="pontuacao_por_item"
+                                   class="form-control"
+                                   placeholder="Pontuação por item do documento">
+                        </div>
+                    </div>
+
+                    <div class="input-group" id="inputQuantiadeAnexosEdita">
+                        <div class="col col-sm-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Quantiade de anexos:</span>
+                            </div>
+                        </div>
+                        <div class="col col-sm-6">
+                            <input type="text" name="inputQuantiadeAnexosEdita" id="inputQuantiadeAnexosEdita"
+                                   class="form-control"
+                                   placeholder="Quantidade de anexos para esse documento">
+                        </div>
+                    </div>
+                    <div id="experienciapublicoprivadoEdita" hidden>
                         <div class="input-group">
                             <div class="col col-sm-12">
                                 <hr>
-                                <h6 class="input-group-text mb-3">Somente se necessário</h6>
+                                <h6 class="input-group-text mb-3">Por experiência em cargos publicos ou
+                                    privados</h6>
                             </div>
                         </div>
-                        <div class="input-group" hidden>
+                        <div class="input-group mt-2">
                             <div class="col col-sm-6">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Pontuação máxima:</span>
+                                        <span class="input-group-text"
+                                              id="inputTipoExperiencia">Tipo da experiência:</span>
                                 </div>
                             </div>
                             <div class="col col-sm-6">
-                                <input type="text" name="inputPontuacaoMaxima" id="pontuacao_maxima_documento"
-                                       class="form-control"
-                                       placeholder="Pontuação máxima do documento"
-                                       value="{{$editalDinamico->telasEdital->pontuacao_total}}">
+                                <label class="mr-1">Público</label><input type="radio" name="inputTipoExperiencia"
+                                                                          id="inputTipoExperiencia" value="0"
+                                                                          class="">
+                                <label class="mr-1">Privado</label><input type="radio" name="inputTipoExperiencia"
+                                                                          id="inputTipoExperiencia" value="1"
+                                                                          class="">
                             </div>
                         </div>
-
-                        <div class="input-group" id="inputPontuacaoMaximaDoItemEdita">
+                        <div class="input-group">
                             <div class="col col-sm-6">
                                 <div class="input-group-prepend">
-                                <span class="input-group-text"
-                                      id="inputPontuacaoMaximaDoItem">Pontuação máxima do anexo:</span>
+                                    <span class="input-group-text" id="inputPorAnoPublico">Pontuação por ano</span>
                                 </div>
                             </div>
                             <div class="col col-sm-6">
-                                <input type="text" name="inputPontuacaoMaximaDoItem" id="pontuacao_maxima_item"
-                                       class="form-control"
-                                       placeholder="Pontuação máxima do anexo">
-                            </div>
-                        </div>
-
-                        <div class="input-group" id="inputPontuacaoPorItemEdita">
-                            <div class="col col-sm-6">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Pontuação por anexo:</span>
-                                </div>
-                            </div>
-                            <div class="col col-sm-6">
-                                <input type="text" name="inputPontuacaoPorItem" id="pontuacao_por_item"
-                                       class="form-control"
-                                       placeholder="Pontuação por item do documento">
+                                <input type="text" name="inputPorAno" id="pontuacao_por_ano" class="form-control"
+                                       placeholder="Exemplo: 8, 0.6, 1.5">
                             </div>
                         </div>
 
                         <div class="input-group">
                             <div class="col col-sm-6">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Quantiade de anexos:</span>
+                                    <span class="input-group-text">Pontuação por mês:</span>
                                 </div>
                             </div>
                             <div class="col col-sm-6">
-                                <input type="text" name="inputQuantiadeAnexos" id="quantidade_anexo"
-                                       class="form-control"
-                                       placeholder="Quantidade de anexos para esse documento">
-                            </div>
-                        </div>
-                        <div id="experienciapublicoprivadoEdita" hidden>
-                            <div class="input-group">
-                                <div class="col col-sm-12">
-                                    <hr>
-                                    <h6 class="input-group-text mb-3">Por experiência em cargos publicos ou
-                                        privados</h6>
-                                </div>
-                            </div>
-                            <div class="input-group mt-2">
-                                <div class="col col-sm-6">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"
-                                              id="inputTipoExperiencia">Tipo da experiência:</span>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-6">
-                                    <label class="mr-1">Público</label><input type="radio" name="inputTipoExperiencia"
-                                                                              id="inputTipoExperiencia" value="0"
-                                                                              class="">
-                                    <label class="mr-1">Privado</label><input type="radio" name="inputTipoExperiencia"
-                                                                              id="inputTipoExperiencia" value="1"
-                                                                              class="">
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <div class="col col-sm-6">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputPorAnoPublico">Pontuação por ano</span>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-6">
-                                    <input type="text" name="inputPorAno" id="pontuacao_por_ano" class="form-control"
-                                           placeholder="Exemplo: 8, 0.6, 1.5">
-                                </div>
-                            </div>
-
-                            <div class="input-group">
-                                <div class="col col-sm-6">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Pontuação por mês:</span>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-6">
-                                    <input type="text" name="inputPorMes" id="pontuacao_por_mes" class="form-control"
-                                           placeholder="Exemplo: 8, 0.6, 1.5">
-                                </div>
+                                <input type="text" name="inputPorMes" id="pontuacao_por_mes" class="form-control"
+                                       placeholder="Exemplo: 8, 0.6, 1.5">
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Fecha">
-                        <input type="submit" class="btn btn-info" value="Salva">
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Fecha">
+                    <input type="submit" class="btn btn-info" value="Salva">
+                </div>
             </form>
         </div>
     </div>

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Registro;
-use App\Models\AnexoCursoTecnico;
-use App\Models\AnexoDoutorado;
 use App\Models\Cargo;
 use App\Models\EditalDinamico;
 use App\Models\Endereco;
@@ -18,7 +16,6 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use mysql_xdevapi\Exception;
 
 class RegistroController extends Controller
 {
