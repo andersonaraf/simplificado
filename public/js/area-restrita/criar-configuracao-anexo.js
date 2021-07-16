@@ -34,6 +34,5 @@ $('#pontuar_publica_privada_edita_nao').click(function () {
     $('input[name=inputPorAno]').val("");
     $('input[name=inputPorMes]').val("");
     $('input[name=inputPontuacaoPorItem]').val("");
-    $('#inputQuantiadeAnexosEdita').removeAttr('hidden', );
-    $('input[name=inputQuantiadeAnexosEdita]').val("");
+    $('#inputQuantiadeAnexosEdita').removeAttr('hidden');
 });
