@@ -53,7 +53,7 @@
                         </div>
                         <div class="col col-sm-6">
                             <input type="text" name="inputNomeAnexo" class="form-control"
-                                   placeholder="Nome do Documento" id="modal_inputNomeAnexo" required>
+                                   placeholder="Nome do Documento" id="inputNomeAnexoEditaValor" required>
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@
                             </div>
                         </div>
                         <div class="col col-sm-6">
-                            <input type="text" name="inputQuantiadeAnexosEdita" id="quantidade_anexos"
+                            <input type="text" name="inputQuantiadeAnexos" id="inputQuantiadeAnexosEditaValor"
                                    class="form-control"
                                    placeholder="Quantidade de anexos para esse documento">
                         </div>

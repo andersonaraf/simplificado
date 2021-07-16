@@ -161,7 +161,7 @@ $(document).ready(function () {
 
     function criar_editar() {
         $('#edita-anexo[data-id]').click(function () {
-            $('#modal_inputNomeAnexo').val($(this).attr('data-nome'));
+            $('#inputNomeAnexoEditaValor').val($(this).attr('data-nome'));
 
             //CARGO
             var cargo_id = $(this).attr('data-cargo');
@@ -241,9 +241,11 @@ $(document).ready(function () {
             $('#pontuacao_maxima_documento').val($(this).attr('data-pontuacao-maxima'))
             $('#pontuacao_maxima_item').val($(this).attr('data-pontuacao_maxima_item'))
             $('#pontuacao_por_item').val($(this).attr('data-pontuacao-item'))
-            $('#quantidade_anexo').val($(this).attr('data-quantidade-anexo'))
+            $('#inputQuantiadeAnexosEditaValor').val($(this).attr('data-quantidade-anexo'))
             $('#pontuacao_por_ano').val($(this).attr('data-pontuacao-por-ano'))
             $('#pontuacao_por_mes').val($(this).attr('data-pontuacao-mes'))
+
+            console.log($(this).attr('data-quantidade-anexo'))
 
             //SETEDITAL
             $("#editalDinamicoTipoAnexoID").val($(this).attr('data-id'))

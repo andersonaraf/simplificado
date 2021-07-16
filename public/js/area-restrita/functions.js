@@ -111,7 +111,7 @@ $('#data_saida-6').blur(function(){
     $('#pontuacao_experiencia-6').val(calcula(dt1,dt2))
 });
 
-('#data_entrada-7').blur(function(){
+$('#data_entrada-7').blur(function(){
     var dt1 = $('#data_entrada-7').val();
     var dt2 = $('#data_saida7').val();
     console.log(calcula(dt1,dt2));
@@ -125,7 +125,7 @@ $('#data_saida-7').blur(function(){
     $('#pontuacao_experiencia-7').val(calcula(dt1,dt2))
 });
 
-('#data_entrada-8').blur(function(){
+$('#data_entrada-8').blur(function(){
     var dt1 = $('#data_entrada-8').val();
     var dt2 = $('#data_saida8').val();
     console.log(calcula(dt1,dt2));
@@ -139,7 +139,7 @@ $('#data_saida-8').blur(function(){
     $('#pontuacao_experiencia-8').val(calcula(dt1,dt2))
 });
 
-('#data_entrada-9').blur(function(){
+$('#data_entrada-9').blur(function(){
     var dt1 = $('#data_entrada-9').val();
     var dt2 = $('#data_saida9').val();
     console.log(calcula(dt1,dt2));
@@ -153,7 +153,7 @@ $('#data_saida-9').blur(function(){
     $('#pontuacao_experiencia-9').val(calcula(dt1,dt2))
 });
 
-('#data_entrada-10').blur(function(){
+$('#data_entrada-10').blur(function(){
     var dt1 = $('#data_entrada-10').val();
     var dt2 = $('#data_saida10').val();
     console.log(calcula(dt1,dt2));
