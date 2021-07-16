@@ -159,7 +159,7 @@
                             </div>
                         </div>
                         <div class="col col-sm-6">
-                            <input type="text" name="inputQuantiadeAnexos" class="form-control"
+                            <input type="text" name="inputQuantiadeAnexos" id="inputQuantiadeAnexos" class="form-control"
                                    placeholder="Quantidade de anexos para esse documento">
                         </div>
                     </div>

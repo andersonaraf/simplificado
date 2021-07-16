@@ -31,7 +31,7 @@
                             @endforeach
                         </ul>
                         @if (!is_null($pessoa->status_avaliado) && $pessoa->status_avaliado == 0)
-                            <div class="card text-white bg-warning">
+                            <div class="card text-primary bg-warning">
                                 <div class="card-header"><h4 class="font-weight-bold">Motivo Reprovar</h4></div>
                                 <div class="card-body">
                                     <p class="card-text"

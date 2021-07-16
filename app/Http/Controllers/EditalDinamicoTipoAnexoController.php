@@ -96,6 +96,7 @@ class EditalDinamicoTipoAnexoController extends Controller
         $editalAnexo->cargo_id = $request->inputCargo;
         $editalAnexo->tipo_anexo_id = $request->inputTipoAnexo;
         $documento = $editalAnexo->documentoDinamico;
+        $documento->nome_documento = $request->inputNomeAnexo;
         $documento->obrigatorio = $request->inputObrigatorio;
         $documento->pontuacao_maxima_documento = $request->inputPontuacaoMaxima;
         $documento->pontuacao_maxima_item = $request->inputPontuacaoMaximaDoItem;
