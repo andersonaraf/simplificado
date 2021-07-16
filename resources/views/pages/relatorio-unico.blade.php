@@ -30,7 +30,7 @@
                             @endforeach
                         </ul>
                         @if (!is_null($pessoa->status_avaliado) && $pessoa->status_avaliado == 0)
-                            <div class="card text-white bg-warning">
+                            <div class="card text-primary bg-warning">
                                 <div class="card-header"><h4 class="font-weight-bold">Motivo Reprovar</h4></div>
                                 <div class="card-body">
                                     <p class="card-text"
@@ -114,9 +114,15 @@
                             <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
                             <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
                         </fieldset>
-                        @foreach($progress as $key=>$progresso)
+                        @foreach($tipoAnexoCargo as $key=>$progresso)
                             <fieldset>
-                                <h2 class="text-center font-weight-bold">{{$progresso->tipoAnexo->tipo}}</h2>
+                                <div class="row">
+                                    <div class="col col-sm-12">
+                                        <input type="button" name="next" class="btn btn-danger float-right mr-2"
+                                               data-toggle="modal" data-target="#reavaliarModal" style="width: 100px"
+                                               value="Reavaliar"/>
+                                    </div>
+                                </div>
                                 <div class="card">
                                     <div class="card-header">CARGO PRETENDIDO:
                                         <h3 class="text-center font-weight-bold">{{$pessoa->cargo->cargo}}</h3>
@@ -151,7 +157,9 @@
                                         </div>
                                     @endif
                                 </div>
-                                @foreach($progresso->tipoAnexo->pessoaEditalAnexosPessoa($pessoa->id, $progresso->edital_dinamico_id, $progresso->tipo_anexo_id) as $anexo)
+                                <h2 class="text-center font-weight-bold">{{$progresso->tipoAnexo->tipo}}</h2>
+
+                                @foreach($progresso->pessoaEditalAnexos($pessoa->id, $pessoa->edital_dinamico_id, $progresso->tipoAnexo->id) as $anexo)
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">{{$anexo->documentoDinamico->nome_documento}}</h3>
@@ -159,9 +167,18 @@
                                         <div class="card-body text-left">
                                             <h5><a target="_blank" href="{{asset('documentos/'.$anexo->nome_arquivo)}}">Anexo</a>
                                             </h5>
+
                                             @if(!is_null($anexo->documentoDinamico->pontuacao_maxima_documento) && !is_null($anexo->documentoDinamico->pontuacao_por_item))
                                                 <p>Pontuação: <strong
                                                         style="font-weight: bold;">{{$anexo->pontuacao}}</strong>
+                                                </p>
+                                            @elseif(!is_null($anexo->documentoDinamico->pontuacao_maxima_documento) && $anexo->documentoDinamico->pontuar_publica_privada == 1 && $anexo->documentoDinamico->tipo_experiencia == 1 )
+                                                <p>Pontuação: <strong
+                                                        style="font-weight: bold;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_privada}}</strong>
+                                                </p>
+                                            @elseif(!is_null($anexo->documentoDinamico->pontuacao_maxima_documento) && $anexo->documentoDinamico->pontuar_publica_privada == 1 && $anexo->documentoDinamico->tipo_experiencia == 0 )
+                                                <p>Pontuação: <strong
+                                                        style="font-weight: bold;">{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_publica}}</strong>
                                                 </p>
                                             @else
                                                 <td>Não existe pontuação</td>
@@ -173,7 +190,7 @@
                                 @if($key != $tipoAnexoCargo->count() - 1)
                                     <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
                                 @endif
-                                <input type="button" name="prev" id="prev" style="width: 11%" class="prev acao" value="Anterior"/>
+                                <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
                             </fieldset>
                         @endforeach
                     </form>

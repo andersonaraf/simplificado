@@ -60,9 +60,9 @@ class AvaliadorAvaliarController extends Controller
 
                     if ($documenDinamico->tipo_experiencia == 0) {
                         $pontuacaoTotalPublica = (($anexos['anexoAno'] * $pontuacao_por_ano) + ($anexos['anexoMes'] * $pontuacao_por_mes));
-                        if ($pontuacaoTotalPublica > $documenDinamico->pontuacao_maxima_documento) {
+                        if ($pontuacaoTotalPublica > $documenDinamico->pontuacao_maxima_item) {
                             return redirect()->back()->withErrors([
-                                'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total Pública: ' . $pontuacaoTotalPublica . ' e pontuação total De anexo está com : ' . $documenDinamico->pontuacao_maxima_documento . '.'
+                                'limite' => 'O limite da Pontuação Total Pública é: ' . $pontuacaoTotalPublica . ' e a pontuação total de anexo pública está com : ' . $documenDinamico->pontuacao_maxima_item .''
                             ]);
                         }
                         //Fazendo a somatorio de pontos por anexo
@@ -74,9 +74,9 @@ class AvaliadorAvaliarController extends Controller
                     } else {
                         $pontuacaoTotalPrivada = (($anexos['anexoAno'] * $pontuacao_por_ano) + ($anexos['anexoMes'] * $pontuacao_por_mes));
 
-                        if ($pontuacaoTotalPrivada > $documenDinamico->pontuacao_maxima_documento) {
+                        if ($pontuacaoTotalPrivada > $documenDinamico->pontuacao_maxima_item) {
                             return redirect()->back()->withErrors([
-                                'limite' => 'Ops, você passou o limite de pontuação. Pontuação Total Privada: ' . $pontuacaoTotalPrivada . '.'
+                                'limite' => 'O limite da Pontuação Total Privada é: ' . $pontuacaoTotalPrivada . ' e a pontuação total de anexo privado está com : ' . $documenDinamico->pontuacao_maxima_item .''
                             ]);
                         }
                         $editalAnexo = PessoaEditalAnexo::findOrFail($anexos['anexo_id']);
