@@ -245,8 +245,6 @@ $(document).ready(function () {
             $('#pontuacao_por_ano').val($(this).attr('data-pontuacao-por-ano'))
             $('#pontuacao_por_mes').val($(this).attr('data-pontuacao-mes'))
 
-            console.log($(this).attr('data-quantidade-anexo'))
-
             //SETEDITAL
             $("#editalDinamicoTipoAnexoID").val($(this).attr('data-id'))
             $('#updateEditalDinamicoAnexo').modal('show')
