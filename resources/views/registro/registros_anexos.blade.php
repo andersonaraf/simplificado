@@ -41,43 +41,46 @@
                             <b>Os campos com <b class="text-danger">*</b> são obrigatórios</b>
                         </div>
                         @foreach($progress->editalDinamicoTipoAnexoCargo($editalDinamico->id, $progress->tipo_anexo_id, $pessoa->cargo_id) as $keyEditais=>$editalDinamicoTipoAnexos)
-                            @for ($i = 0; $i < $editalDinamicoTipoAnexos->documentoDinamico->quantidade_anexos; $i++)
-                                <div class="div-ajuste">
-                                    <div class="row">
-                                        @if ($editalDinamicoTipoAnexos->documentoDinamico->obrigatorio == 1)
-                                            <div class="col col-6">
+                            @if(!is_null($editalDinamicoTipoAnexos->documentoDinamico))
+                                @for ($i = 0; $i < $editalDinamicoTipoAnexos->documentoDinamico->quantidade_anexos; $i++)
+                                    <div class="div-ajuste">
+                                        <div class="row">
+                                            @if ($editalDinamicoTipoAnexos->documentoDinamico->obrigatorio == 1)
+                                                <div class="col col-6">
+                                                    <label id="clickfupload1"
+                                                           class="control-label label-bordered nomeArquivo">Adicione
+                                                        {{$editalDinamicoTipoAnexos->documentoDinamico->nome_documento}}</label>
+                                                    <label class="text-danger label-bordered ">*</label>
+                                                </div>
+                                            @else
                                                 <label id="clickfupload1"
                                                        class="control-label label-bordered nomeArquivo">Adicione
-                                                    um {{$editalDinamicoTipoAnexos->documentoDinamico->nome_documento}}</label>
-                                                <label class="text-danger label-bordered ">*</label>
-                                            </div>
+                                                    {{$editalDinamicoTipoAnexos->documentoDinamico->nome_documento}}</label>
+                                            @endif
+                                        </div>
+                                        @if ($editalDinamicoTipoAnexos->documentoDinamico->obrigatorio == 1)
+                                            <input type="file" id="fupload1"
+                                                   name="anexosDocumentos[{{$editalDinamicoTipoAnexos->tipo_anexo_id}}][]"
+                                                   class="@error('anexosDocumentos[]') is-invalid @enderror"
+                                                   class="fupload form-control" accept="application/pdf" required/>
                                         @else
-                                            <label id="clickfupload1" class="control-label label-bordered nomeArquivo">Adicione
-                                                {{$editalDinamicoTipoAnexos->documentoDinamico->nome_documento}}</label>
+                                            <input type="file" id="fupload1"
+                                                   name="anexosDocumentos[{{$editalDinamicoTipoAnexos->tipo_anexo_id}}][]"
+                                                   accept="application/pdf"
+                                                   class="@error('anexosDocumentos[]') is-invalid @enderror"
+                                                   class="fupload form-control"/>
                                         @endif
+
+                                        @error('anexosDocumentos.'.$editalDinamicoTipoAnexos->tipo_anexo_id.'.'.$keyEditais)
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+
+                                        <input type="text"
+                                               name="anexosDocumentos[{{$editalDinamicoTipoAnexos->tipo_anexo_id}}][documentoDinamico][]"
+                                               value="{{$editalDinamicoTipoAnexos->documentoDinamico->id}}" hidden>
                                     </div>
-                                    @if ($editalDinamicoTipoAnexos->documentoDinamico->obrigatorio == 1)
-                                        <input type="file" id="fupload1"
-                                               name="anexosDocumentos[{{$editalDinamicoTipoAnexos->tipo_anexo_id}}][]"
-                                               class="@error('anexosDocumentos[]') is-invalid @enderror"
-                                               class="fupload form-control" accept="application/pdf" required/>
-                                    @else
-                                        <input type="file" id="fupload1"
-                                               name="anexosDocumentos[{{$editalDinamicoTipoAnexos->tipo_anexo_id}}][]"
-                                               accept="application/pdf"
-                                               class="@error('anexosDocumentos[]') is-invalid @enderror"
-                                               class="fupload form-control"/>
-                                    @endif
-
-                                    @error('anexosDocumentos.'.$editalDinamicoTipoAnexos->tipo_anexo_id.'.'.$keyEditais)
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-
-                                    <input type="text"
-                                           name="anexosDocumentos[{{$editalDinamicoTipoAnexos->tipo_anexo_id}}][documentoDinamico][]"
-                                           value="{{$editalDinamicoTipoAnexos->documentoDinamico->id}}" hidden>
-                                </div>
-                            @endfor
+                                @endfor
+                            @endif
                         @endforeach
 
                         @if ($key < ($tipoAnexoCargo->count() - 1))

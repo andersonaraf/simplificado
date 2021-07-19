@@ -58,13 +58,6 @@
                     <h2>Processos Seletivos</h2>
                 </div>
                 <div class="row justify-content-md-center">
-                    <div class="card text-dark bg-danger mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Concurso SEINFRA</div>
-                        <div class="card-body">
-                            <h5 class="card-title">Inscrições suspensas</h5>
-                            <p class="card-text">fique atento as informações no portal da prefeitura sobre o novo edital com a nova data a ser publicado. <a href="http://www.riobranco.ac.gov.br/editais-e-concurso/" target="_blank">Aqui</a></p>
-                        </div>
-                    </div>
                     @foreach($inscricoes as $inscricao)
                         @if (($inscricao->status_liberar == '1' || !is_null($inscricao->data_liberar)) && (is_null($inscricao->data_fecha) || strtotime($inscricao->data_fecha) > strtotime(date('Y-m-d H:i'))))
                             @if (($inscricao->status_liberar == 1) || strtotime($inscricao->data_liberar) <= strtotime(date('Y-m-d H:i')))
