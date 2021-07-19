@@ -53,7 +53,7 @@ class Registro extends FormRequest
             'numero.numeric' => 'Só é aceito números.',
             'escolaridade.exists' => 'Você deve selecionar um nível de escolaridade',
             'CARGO.exists' => 'Você deve selecionar um cargo',
-            'rg.digits_between' => 'O campo RG só aceita números, com quantidade mínima de 5 dígitos até 14 dígitos',
+            'rg.digits_between' => 'O campo RG só aceita números, com quantidade mínima de 5 dígitos até 14 dígitos, favor remover os trasos se tiver.',
             'rg.alpha_num' => 'O campo RG só aceita números',
             'pis.alpha_num' => 'O campo PIS só aceita números',
             'pis.digits' => 'O campo PIS só aceita números, com quantidade mínima de 11 dígitos',
