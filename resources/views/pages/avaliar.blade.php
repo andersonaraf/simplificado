@@ -122,9 +122,7 @@
                             <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
                             <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
                         </fieldset>
-
                         @foreach($tipoAnexoCargo as $key=>$progresso)
-
                             <fieldset>
                                 <input type="button" name="next" class="btn btn-danger float-right mr-2"
                                        data-toggle="modal" data-target="#reprovarModel" style="width: 100px"
@@ -139,16 +137,19 @@
 
                                     <div class="card">
                                         <div class="card-header">
+                                            {{--                                            @dd($anexo->documentoDinamico)--}}
                                             <h3 class="card-title">{{$anexo->documentoDinamico->nome_documento}}</h3>
                                         </div>
                                         <div class="card-body text-left">
                                             <h5><a target="_blank" href="{{asset('documentos/'.$anexo->nome_arquivo)}}">Anexo</a>
                                             </h5>
-                                            {{--                                            @dd($anexo)--}}
+                                            {{--                                            --}}{{--                                            @dd($anexo)--}}
                                             @if ($anexo->documentoDinamico->pontuar_manual == 1)
+                                                {{--                                                @dd($anexo->documentoDinamico)--}}
                                                 <label>Pontuação: </label>
                                                 <input type="number" value="0" name="anexo[{{$anexo->id}}][]"
-                                                       id="anexo[{{$anexo->id}}][]" min="0">
+                                                       id="anexo[{{$anexo->id}}][]" min="0" max="{{$anexo->documentoDinamico->pontuacao_maxima_item}}"
+                                                       step="{{$anexo->documentoDinamico->pontuacao_por_item}}">
 
                                             @elseif(is_null($anexo->documentoDinamico->pontuacao_maxima_item) && is_null($anexo->documentoDinamico->pontuacao_por_item) && is_null($anexo->documentoDinamico->pontuacao_por_ano) && is_null($anexo->documentoDinamico->pontuacao_por_mes) && $anexo->documentoDinamico->pontuar_publica_privada == 0 && $anexo->documentoDinamico->pontuar_manual == 0)
                                                 <label>Está correto ?</label>
