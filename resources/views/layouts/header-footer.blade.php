@@ -66,7 +66,7 @@
                 <div class="col-lg-3 col-md-6 footer-contact">
                     <h4>Contato</h4>
                     <p>
-                        <strong>Telefone:</strong> (68) 32276510<br>
+                        <strong>Telefone:</strong> (68) 3213-2515<br>
                     </p>
                 </div>
 
