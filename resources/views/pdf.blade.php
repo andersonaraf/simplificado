@@ -9,7 +9,7 @@
 </head>
 <body>
     <div style="text-align: center;">
-        <img style="width: 120%;" src="{{public_path().'/images/logo_seinfra.jpeg'}}" />
+        <img style="width: 120%;" src="{{public_path().'/images/semsa2.png'}}" />
     </div>
     <div style="margin-left: 20%; font-family: sans-serif">
         <h3>Nome:</h3>
