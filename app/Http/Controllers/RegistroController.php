@@ -131,15 +131,19 @@ class RegistroController extends Controller
                 'mimes' => 'Esse campo aceita somente pdf.',
                 'max' => 'Esse campo aceita arquivo com no máximo 5MB'
             ];
+//            dd($request->anexosDocumentos);
             foreach (array_keys($request->anexosDocumentos) as $index) {
                 foreach (array_keys($request->anexosDocumentos[$index]['documentoDinamico']) as $indexKey) {
+
                     if (isset($request->anexosDocumentos[$index][$indexKey])) {
-                        $rules['anexosDocumentos.' . $index . '.' . $indexKey] = 'nullable|mimes:pdf|max:5000';
+                        $rules['anexosDocumentos.' . $index . '.' . $indexKey] = 'nullable|max:5000';
                     }
                 }
             }
+
             $validator = Validator::make($request->all(), $rules, $messages);
             if ($validator->fails()) {
+//                dd($validator->getMessageBag());
                 return back()->withErrors($validator->getMessageBag()->toArray());
             }
 
@@ -264,6 +268,7 @@ class RegistroController extends Controller
             return redirect()->route('registro/comprovante', $comprovante);
 
         } catch (Exception $ex) {
+            dd($ex->getMessage());
             DB::rollBack();
             return redirect()->route('inical')->withInput()->withErrors([
                 'message' => $ex->getMessage()
