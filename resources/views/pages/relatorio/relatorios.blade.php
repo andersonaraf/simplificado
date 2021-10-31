@@ -101,64 +101,64 @@
                         </thead>
                         <tbody @foreach($pessoas as $pessoa)
 
-                            @if($pessoa->pessoaEditalAnexos->count() != 0)
-                                <tr>
-                                    <td>{{$pessoa->id}}</td>
-                                    <td>{{$pessoa->nome_completo}}</td>
-                                    <td>{{$pessoa->cpf}}</td>
-                                    <td>{{$pessoa->cargo->cargo}}</td>
-                                    <td>{{$pessoa->escolaridade->nivel_escolaridade}}</td>
-                                    @if ($pessoa->portador_deficiencia == 1)
-                                        <td class="font-weight-bold">SIM</td>
-                                    @else
-                                        <td>NÃO</td>
-                                    @endif
-                                    @if(isset($pessoa->pontuacao($pessoa->id)->pontuacao_total_publica))
-                                        <td>{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_publica}}</td>
-                                    @else
-                                        <td>Não existe pontuação</td>
-                                    @endif
-                                    @if(!is_null($pessoa->pontuacao($pessoa->id)))
-                                        <td>{{$pessoa->pontuacao($pessoa->id)->pontuacao_total}}</td>
-                                    @else
-                                        <td>Não existe pontuação</td>
-                                    @endif
-                                    @if(is_null($pessoa->status_avaliado))
-                                        <td class="text-warning">Aguardando Avaliação</td>
-                                    @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && is_null($pessoa->status_revisado))
-                                        <td class="text-warning">Aguardando Revisão</td>
-                                    @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && $pessoa->status_revisado == 0)
-                                        <td class="text-warning">Aguardando Reavaliação</td>
-                                    @elseif($pessoa->status_avaliado == 1 && $pessoa->status == 1 && $pessoa->status_revisado == 1)
-                                        <td class="text-success">Aprovado</td>
-                                    @elseif($pessoa->status_avaliado == 0 && $pessoa->status == 0 && $pessoa->status_revisado == 0)
-                                        <td class="text-danger">Reprovado</td>
-                                    @elseif(is_null($pessoa->status_avaliado) || is_null($pessoa->status) || is_null($pessoa->status_revisado) || ($pessoa->status_avaliado)==0 || ($pessoa->status)==0 || ($pessoa->status_revisado)==0)
-                                        <td class="text-info">Solicite Suporte Avaliação Incorreta</td>
-                                    @endif
-                                    <td>
-                                        <a href="{{route('relatorio.unico', $pessoa->id)}}" class="text-info">
-                                            <i class="fa fa-2x fa-user"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+
+                            <tr>
+                                <td>{{$pessoa->id}}</td>
+                                <td>{{$pessoa->nome_completo}}</td>
+                                <td>{{$pessoa->cpf}}</td>
+                                <td>{{$pessoa->cargo->cargo}}</td>
+                                <td>{{$pessoa->escolaridade->nivel_escolaridade}}</td>
+                                @if ($pessoa->portador_deficiencia == 1)
+                                    <td class="font-weight-bold">SIM</td>
+                                @else
+                                    <td>NÃO</td>
                                 @endif
-                                @endforeach
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nome</th>
-                                    <th>CPF</th>
-                                    <th>Cargo</th>
-                                    <th>Escolaridade</th>
-                                    <th>PNE</th>
-                                    <th>Pontuação Publica</th>
-                                    <th>Pontuação</th>
-                                    <th>Status</th>
-                                    <th>Ações</th>
-                                </tr>
-                                </tfoot>
+                                @if(isset($pessoa->pontuacao($pessoa->id)->pontuacao_total_publica))
+                                    <td>{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_publica}}</td>
+                                @else
+                                    <td>Não existe pontuação</td>
+                                @endif
+                                @if(!is_null($pessoa->pontuacao($pessoa->id)))
+                                    <td>{{$pessoa->pontuacao($pessoa->id)->pontuacao_total}}</td>
+                                @else
+                                    <td>Não existe pontuação</td>
+                                @endif
+                                @if(is_null($pessoa->status_avaliado))
+                                    <td class="text-warning">Aguardando Avaliação</td>
+                                @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && is_null($pessoa->status_revisado))
+                                    <td class="text-warning">Aguardando Revisão</td>
+                                @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && $pessoa->status_revisado == 0)
+                                    <td class="text-warning">Aguardando Reavaliação</td>
+                                @elseif($pessoa->status_avaliado == 1 && $pessoa->status == 1 && $pessoa->status_revisado == 1)
+                                    <td class="text-success">Aprovado</td>
+                                @elseif($pessoa->status_avaliado == 0 && $pessoa->status == 0 && $pessoa->status_revisado == 0)
+                                    <td class="text-danger">Reprovado</td>
+                                @elseif(is_null($pessoa->status_avaliado) || is_null($pessoa->status) || is_null($pessoa->status_revisado) || ($pessoa->status_avaliado)==0 || ($pessoa->status)==0 || ($pessoa->status_revisado)==0)
+                                    <td class="text-info">Solicite Suporte Avaliação Incorreta</td>
+                                @endif
+                                <td>
+                                    <a href="{{route('relatorio.unico', $pessoa->id)}}" class="text-info">
+                                        <i class="fa fa-2x fa-user"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            @endforeach
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Cargo</th>
+                                <th>Escolaridade</th>
+                                <th>PNE</th>
+                                <th>Pontuação Publica</th>
+                                <th>Pontuação</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                            </tfoot>
                     </table>
                 </div>
             </div>

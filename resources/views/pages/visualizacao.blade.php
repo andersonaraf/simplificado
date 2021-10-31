@@ -22,8 +22,10 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     @foreach($pessoas as $pessoa)
-                        @if($pessoa->pessoaEditalAnexos->count() != 0)
+
+
                             <tr>
                                 <td>{{$pessoa->id}}</td>
                                 <td>{{$pessoa->nome_completo}}</td>
@@ -55,7 +57,7 @@
                                     @endif
                                 </td>
                             </tr>
-                        @endif
+
                     @endforeach
                     </tbody>
                     <tfoot>

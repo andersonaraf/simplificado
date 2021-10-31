@@ -28,36 +28,35 @@
                     </thead>
                     <tbody>
                     @foreach($pessoas as $pessoa)
-                        @if($pessoa->pessoaEditalAnexos->count() != 0)
-                            <tr>
-                                <td>{{$pessoa->id}}</td>
-                                <td>{{$pessoa->nome_completo}}</td>
-                                <td>{{$pessoa->cpf}}</td>
-                                <td>{{$pessoa->cargo->cargo}}</td>
-                                @if(is_null($pessoa->status_avaliado))
-                                    <td class="text-warning">Aguardando Avaliação</td>
-                                @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && is_null($pessoa->status_revisado))
-                                    <td class="text-warning">Aguardando Revisão</td>
-                                @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && $pessoa->status_revisado == 0)
-                                    <td class="text-warning">Aguardando Reavaliação</td>
-                                @elseif($pessoa->status_avaliado == 1 && $pessoa->status == 1 && $pessoa->status_revisado == 1)
-                                    <td class="text-success">Aprovado</td>
-                                @elseif($pessoa->status_avaliado == 0 && $pessoa->status == 0 && $pessoa->status_revisado == 0)
-                                    <td class="text-danger">Reprovado</td>
-                                @elseif(is_null($pessoa->status_avaliado) || is_null($pessoa->status) || is_null($pessoa->status_revisado) || ($pessoa->status_avaliado)==0 || ($pessoa->status)==0 || ($pessoa->status_revisado)==0)
-                                    <td class="text-info">Solicite Suporte Avaliação Incorreta</td>
+                        <tr>
+                            <td>{{$pessoa->id}}</td>
+                            <td>{{$pessoa->nome_completo}}</td>
+                            <td>{{$pessoa->cpf}}</td>
+                            <td>{{$pessoa->cargo->cargo}}</td>
+                            @if(is_null($pessoa->status_avaliado))
+                                <td class="text-warning">Aguardando Avaliação</td>
+                            @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && is_null($pessoa->status_revisado))
+                                <td class="text-warning">Aguardando Revisão</td>
+                            @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && $pessoa->status_revisado == 0)
+                                <td class="text-warning">Aguardando Reavaliação</td>
+                            @elseif($pessoa->status_avaliado == 1 && $pessoa->status == 1 && $pessoa->status_revisado == 1)
+                                <td class="text-success">Aprovado</td>
+                            @elseif($pessoa->status_avaliado == 0 && $pessoa->status == 0 && $pessoa->status_revisado == 0)
+                                <td class="text-danger">Reprovado</td>
+                            @elseif(is_null($pessoa->status_avaliado) || is_null($pessoa->status) || is_null($pessoa->status_revisado) || ($pessoa->status_avaliado)==0 || ($pessoa->status)==0 || ($pessoa->status_revisado)==0)
+                                <td class="text-info">Solicite Suporte Avaliação Incorreta</td>
+                            @endif
+                            <td>
+                                @if (is_null($pessoa->status_revisado))
+                                    <a href="{{route('revisor.index', $pessoa->id)}}"
+                                       class="text-info"> {{--REVISAR--}}
+                                        <i class="fa fa-2x fa-user"></i>
+                                    </a>
                                 @endif
-                                <td>
-                                    @if (is_null($pessoa->status_revisado))
-                                        <a href="{{route('revisor.index', $pessoa->id)}}"
-                                           class="text-info"> {{--REVISAR--}}
-                                            <i class="fa fa-2x fa-user"></i>
-                                        </a>
-                                    @endif
 
-                                </td>
-                            </tr>
-                        @endif
+                            </td>
+                        </tr>
+
                     @endforeach
                     </tbody>
                     <tfoot>
