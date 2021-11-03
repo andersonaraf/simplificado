@@ -157,7 +157,8 @@ class RelatoriosController extends Controller
 
     public function visualizar($id){
         $pessoa = Pessoa::findOrFail($id);
-        $progress = Progress::where('edital_dinamico_id', $pessoa->pessoaEditalAnexos->first()->edital_dinamico_id)->get();
+        $edital_dinamico_id = !is_null($pessoa->pessoaEditalAnexos->first()) ? $pessoa->pessoaEditalAnexos->first()->edital_dinamico_id : null;
+        $progress = Progress::where('edital_dinamico_id', $edital_dinamico_id)->get();
         $tipoAnexoCargo = TipoAnexoCargo::where('cargo_id', $pessoa->cargo_id)->get();
         $progressQuantiadePorcento = 100 / ($tipoAnexoCargo->count() + 2);
 
