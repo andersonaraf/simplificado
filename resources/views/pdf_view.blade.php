@@ -101,7 +101,7 @@
         <tbody>
         {{$i= 1}}
         {{--        PNE--}}
-        @if(isset($pessoasPNE) && !is_null($pessoasPNE))
+        @if(isset($pessoasPNE) && count($pessoasPNE) > 0)
             @foreach($pessoasPNE as $key => $pessoaPNE)
                 @if($pessoaPNE->pessoaEditalAnexos->count() != 0)
                     <tr>
