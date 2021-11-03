@@ -52,15 +52,27 @@ class RelatoriosController extends Controller
 
         //VERIFICAR SE TODOS ESTÃO VAZIOS
         if (is_null($request->cargoID) && is_null($request->escolaridadeID) && is_null($request->status)) {
-            $pessoas = Pessoa::where('edital_dinamico_id', $request->editalDinamicoID)->get();
+            $pessoas = Pessoa::where('edital_dinamico_id', $request->editalDinamicoID);
+            $pessoasPNE = Pessoa::where('edital_dinamico_id', $request->editalDinamicoID);
             if (!is_null($request->titulo)) {
                 $titulo = $request->titulo;
             } else $titulo = 'Processo Seletivo Simplificado ' . date('Y');
             if ($tipo == 1) {
                 return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico'));
             } else {
-                view()->share('pessoas', $pessoas);
-                $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo'));
+                $pessoas->with('pontuacao2')->where('portador_deficiencia', 0);
+                $pessoasPNE->with('pontuacao2')->where('portador_deficiencia', 1);
+                $pessoas = $pessoas->get()->sortBy([
+                    ['pontuacao2.pontuacao_total', 'desc'],
+                    ['data_nascimento', 'asc']
+                ]);
+
+                $pessoasPNE = $pessoasPNE->get()->sortBy([
+                    ['pontuacao2.pontuacao_total', 'desc'],
+                    ['data_nascimento', 'asc']
+                ]);
+                view()->share(['pessoas', $pessoas, 'pessoasPNE', $pessoasPNE]);
+                $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo', 'pessoasPNE'));
                 return $pdf->download('pdf_file.pdf');
             }
         }
@@ -132,14 +144,17 @@ class RelatoriosController extends Controller
                 }
             }
             $pessoas->with('pontuacao2')->where('portador_deficiencia', 0);
-            $pessoasPNE->with('pontuacao2')->where('portador_deficiencia', 1);;
-            $pessoas = $pessoas->get()->sortByDesc('pontuacao2.pontuacao_total');
+            $pessoasPNE->with('pontuacao2')->where('portador_deficiencia', 1)->orderBy('data_nascimento', 'ASC');
+
+            $pessoas = $pessoas->get()->sortBy([
+                ['pontuacao2.pontuacao_total', 'desc'],
+                ['data_nascimento', 'asc']
+            ]);
             $pessoasPNE = $pessoasPNE->get()->sortByDesc('pontuacao2.pontuacao_total');
-            if(is_null($pessoasPNE->first())) $pessoasPNE = null;
+//            if(is_null($pessoasPNE->first())) dd(1);$pessoasPNE = null;
             if (!is_null($request->titulo)) {
                 $titulo = $request->titulo;
             } else $titulo = 'Processo Seletivo Simplificado ' . date('Y');
-
             view()->share('pessoas', $pessoas);
             $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo', 'pessoasPNE'));
             return $pdf->download('pdf_file.pdf');
