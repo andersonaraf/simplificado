@@ -70,7 +70,7 @@
         <tr>
             <td align="center">
                 <figure id="container">
-                    <img src="https://processoseletivosemsa20212.riobranco.ac.gov.br/images/caruosel/2-1634561848.png" width="90%"/>
+                    <img src="{{asset('images/semsa.jpg')}}" width="90%"/>
                 </figure>
             </td>
         </tr>
