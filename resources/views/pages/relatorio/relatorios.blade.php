@@ -59,6 +59,14 @@
                                     </select>
                                 </div>
 
+                                <div class="col col-4 mt-2" id="divShowPNE" hidden>
+                                    <label for="exampleFormControlSelect2">COM PNE</label>
+                                    <select name="show_pne" class="custom-select">
+                                        <option value="1" selected>SIM</option>
+                                        <option value="0">NÃO</option>
+                                    </select>
+                                </div>
+
                                 <div class="col col-6 mt-2" id="divTitulo" hidden>
                                     <label for="exampleFormControlSelect2">Título do PDF</label>
                                     <input type="text" name="titulo" id="titulo" class="form-control"

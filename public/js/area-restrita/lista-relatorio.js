@@ -147,9 +147,11 @@ $(document).ready(function() {
         var tipo = $('#tipo').val()
         if (tipo == 2) {
             $('#divTitulo').removeAttr('hidden')
+            $('#divShowPNE').removeAttr('hidden')
         }
         else {
             $('#divTitulo').attr('hidden', true)
+            $('#divShowPNE').attr('hidden', true)
             $('#titulo').val('')
         }
     })

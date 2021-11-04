@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Jasper\JasperController;
 use App\Http\Requests\RelatorioRequest;
 use App\Models\Cargo;
+use App\Models\Carrossel;
 use App\Models\EditalDinamico;
 use App\Models\Escolaridade;
 use App\Models\Pessoa;
@@ -151,12 +152,13 @@ class RelatoriosController extends Controller
                 ['data_nascimento', 'asc']
             ]);
             $pessoasPNE = $pessoasPNE->get()->sortByDesc('pontuacao2.pontuacao_total');
-//            if(is_null($pessoasPNE->first())) dd(1);$pessoasPNE = null;
+            $carrossel = Carrossel::all()->last();
+            if(!$request->show_pne) $pessoasPNE = null;
             if (!is_null($request->titulo)) {
                 $titulo = $request->titulo;
             } else $titulo = 'Processo Seletivo Simplificado ' . date('Y');
             view()->share('pessoas', $pessoas);
-            $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo', 'pessoasPNE'));
+            $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo', 'pessoasPNE', 'carrossel'));
             return $pdf->download('pdf_file.pdf');
         }
     }
