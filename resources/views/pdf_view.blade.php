@@ -70,7 +70,7 @@
         <tr>
             <td align="center">
                 <figure id="container">
-                    <img src="{{public_path().'/images/logo_seinfra.jpeg'}}" width="90%"/>
+                    <img src="{{asset('images/caruosel/'.$carrossel->url_img)}}" width="90%"/>
                 </figure>
             </td>
         </tr>
@@ -102,6 +102,13 @@
         {{$i= 1}}
         {{--        PNE--}}
         @if(isset($pessoasPNE) && count($pessoasPNE) > 0)
+            <tr>
+                <td colspan="10" style="font-weight: bold;">
+                    <hr>
+                    <label style="font-size: 16px; margin-top: -2px">PCD</label>
+                    <hr>
+                </td>
+            </tr>
             @foreach($pessoasPNE as $key => $pessoaPNE)
                 @if($pessoaPNE->pessoaEditalAnexos->count() != 0)
                     <tr>
@@ -145,8 +152,17 @@
 
                 @endif
             @endforeach
+            <tr>
+                <td colspan="10" style="font-weight: bold;">
+                    <hr>
+                    <label style="font-size: 16px; margin-top: -2px">* * *</label>
+                    <hr>
+                </td>
+            </tr>
         @endif
         {{--        NORMAL--}}
+
+        {{$i = 1}}
         @foreach($pessoas as $key => $pessoa)
             @if($pessoa->pessoaEditalAnexos->count() != 0)
                 <tr>
