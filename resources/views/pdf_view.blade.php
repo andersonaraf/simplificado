@@ -64,20 +64,20 @@
 
 </head>
 <body>
-
+@if(!isset($excel))
 <div class="information">
     <table width="100%">
         <tr>
             <td align="center">
                 <figure id="container">
-                    <img src="{{asset('images/semsa.jpg')}}" width="90%"/>
+                    <img src="{{asset('images/semsa.png')}}" width="90%"/>
                 </figure>
             </td>
         </tr>
 
     </table>
 </div>
-
+@endif
 
 <br/>
 
