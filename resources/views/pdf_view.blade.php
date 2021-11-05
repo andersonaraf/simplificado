@@ -64,7 +64,7 @@
 
 </head>
 <body>
-
+@if(!isset($excel))
 <div class="information">
     <table width="100%">
         <tr>
@@ -77,7 +77,7 @@
 
     </table>
 </div>
-
+@endif
 
 <br/>
 

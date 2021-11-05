@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ResultadoExport;
 use App\Http\Controllers\Jasper\JasperController;
 use App\Http\Requests\RelatorioRequest;
 use App\Models\Cargo;
@@ -13,6 +14,7 @@ use App\Models\Progress;
 use App\Models\TipoAnexoCargo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
 class RelatoriosController extends Controller
@@ -109,7 +111,7 @@ class RelatoriosController extends Controller
             return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico'));
         }
         // GENERATE PDF
-        else {
+        else if($tipo == 2) {
             if (!is_null($request->cargoID)) {
                 $pessoas = Pessoa::where('cargo_id', $request->cargoID);
                 $pessoasPNE = Pessoa::where('cargo_id', $request->cargoID);
@@ -161,6 +163,57 @@ class RelatoriosController extends Controller
             $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo', 'pessoasPNE', 'carrossel'));
             return $pdf->download('pdf_file.pdf');
         }
+        else {
+            if (!is_null($request->cargoID)) {
+                $pessoas = Pessoa::where('cargo_id', $request->cargoID);
+                $pessoasPNE = Pessoa::where('cargo_id', $request->cargoID);
+                if (!is_null($request->escolaridadeID)) {
+                    $pessoas->where('escolaridade_id', $request->escolaridadeID);
+                    $pessoasPNE->where('escolaridade_id', $request->escolaridadeID);
+                }
+                if (!is_null($request->status)) {
+                    $pessoas->where('status', $request->status);
+                    $pessoasPNE->where('status', $request->status);
+                }
+            } else if (!is_null($request->escolaridadeID)) {
+                $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
+                $pessoasPNE = Pessoa::where('escolaridade_id', $request->escolaridadeID);
+                if (!is_null($request->cargoID)) {
+                    $pessoas = Pessoa::where('cargo_id', $request->cargoID);
+                    $pessoasPNE = Pessoa::where('cargo_id', $request->cargoID);
+                }
+                if (!is_null($request->status)) {
+                    $pessoas->where('status', $request->status);
+                    $pessoasPNE->where('status', $request->status);
+                }
+            } else if (!is_null($request->status)) {
+                $pessoas = Pessoa::where('status', $request->status);
+                $pessoasPNE = Pessoa::where('status', $request->status);
+                if (!is_null($request->cargoID)) {
+                    $pessoas = Pessoa::where('cargo_id', $request->cargoID);
+                    $pessoasPNE = Pessoa::where('cargo_id', $request->cargoID);
+                }
+                if (!is_null($request->escolaridadeID)) {
+                    $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
+                    $pessoasPNE = Pessoa::where('escolaridade_id', $request->escolaridadeID);
+                }
+            }
+            $pessoas->with('pontuacao2')->where('portador_deficiencia', 0);
+            $pessoasPNE->with('pontuacao2')->where('portador_deficiencia', 1)->orderBy('data_nascimento', 'ASC');
+
+            $pessoas = $pessoas->get()->sortBy([
+                ['pontuacao2.pontuacao_total', 'desc'],
+                ['data_nascimento', 'asc']
+            ]);
+            $pessoasPNE = $pessoasPNE->get()->sortByDesc('pontuacao2.pontuacao_total');
+            $carrossel = Carrossel::all()->last();
+            if(!$request->show_pne) $pessoasPNE = null;
+            if (!is_null($request->titulo)) {
+                $titulo = $request->titulo;
+            } else $titulo = 'Gerado_' . date('Y');
+
+            return $this->export($pessoas, $pessoasPNE, $titulo, $carrossel);
+        }
     }
 
     public function requestPDFJasper(Request $request)
@@ -180,5 +233,10 @@ class RelatoriosController extends Controller
         $progressQuantiadePorcento = 100 / ($tipoAnexoCargo->count() + 2);
 
         return view('pages.relatorio-unico', compact('pessoa', 'progressQuantiadePorcento', 'progress', 'tipoAnexoCargo'));
+    }
+
+    public function export($pessoas, $pessoasPNE, $titulo, $carrossel){
+        $resultadoExport = new ResultadoExport($pessoas, $pessoasPNE, $titulo, $carrossel);
+        return Excel::download($resultadoExport, 'resultado.xlsx');
     }
 }

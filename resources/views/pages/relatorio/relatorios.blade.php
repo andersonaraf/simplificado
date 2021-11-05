@@ -56,6 +56,7 @@
                                     <select class="form-control" name="tipo" id="tipo">
                                         <option value="1">Tabela</option>
                                         <option value="2">PDF</option>
+                                        <option value="3">Excel</option>
                                     </select>
                                 </div>
 
