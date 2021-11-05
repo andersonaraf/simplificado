@@ -46,7 +46,7 @@ class RelatoriosController extends Controller
     public function gerarRelatorio(RelatorioRequest $request)
     {
         //TIPO
-        //1 = TABELA | 2  = PDF
+        //1 = TABELA | 2  = PDF | 3 = execel
         $tipo = $request->tipo;
         ////
         $cargos = Cargo::all();
@@ -62,7 +62,7 @@ class RelatoriosController extends Controller
             } else $titulo = 'Processo Seletivo Simplificado ' . date('Y');
             if ($tipo == 1) {
                 return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico'));
-            } else {
+            } else if ($tipo == 2) {
                 $pessoas->with('pontuacao2')->where('portador_deficiencia', 0);
                 $pessoasPNE->with('pontuacao2')->where('portador_deficiencia', 1);
                 $pessoas = $pessoas->get()->sortBy([
@@ -77,6 +77,21 @@ class RelatoriosController extends Controller
                 view()->share(['pessoas', $pessoas, 'pessoasPNE', $pessoasPNE]);
                 $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo', 'pessoasPNE'));
                 return $pdf->download('pdf_file.pdf');
+            } else {
+                $pessoas->with('pontuacao2')->where('portador_deficiencia', 0);
+                $pessoasPNE->with('pontuacao2')->where('portador_deficiencia', 1);
+                $pessoas = $pessoas->get()->sortBy([
+                    ['pontuacao2.pontuacao_total', 'desc'],
+                    ['data_nascimento', 'asc']
+                ]);
+
+                $pessoasPNE = $pessoasPNE->get()->sortBy([
+                    ['pontuacao2.pontuacao_total', 'desc'],
+                    ['data_nascimento', 'asc']
+                ]);
+
+                $carrossel = Carrossel::all()->last();
+                return $this->export($pessoas, $pessoasPNE, 'GERADO_EXECEL', $carrossel);
             }
         }
         if ($tipo == 1) {
