@@ -80,4 +80,8 @@ class Pessoa extends Model
     public function revisarPessoa($id){
         return RevisarPessoa::where('pessoa_id', $id)->get()->last();
     }
+
+    public function reprovarMotivo(){
+        return $this->hasOne(ReprovarPessoa::class, 'pessoa_id', 'id')->latest();
+    }
 }

@@ -20,6 +20,19 @@ use PDF;
 class RelatoriosController extends Controller
 {
     //
+    private $listaDoMultiSelect = [
+        0 => ['nome' => 'NOME', 'selecionado' => 1],
+        1 => ['nome' => 'CPF', 'selecionado' => 1],
+        2 => ['nome' => 'CARGO', 'selecionado' => 1],
+        3 => ['nome' => 'ESCOLARIDADE', 'selecionado' => 1],
+        4 => ['nome' => 'PONTUAÇÃO PÚBLICA', 'selecionado' => 0],
+        5 => ['nome' => 'PONTUAÇÃO PRIVADA', 'selecionado' => 0],
+        6 => ['nome' => 'PNE', 'selecionado' => 1],
+        7 => ['nome' => 'PONTUAÇÃO', 'selecionado' => 1],
+        8 => ['nome' => 'STATUS', 'selecionado' => 1],
+        9 => ['nome' => 'MOTIVO DE RECUSAR', 'selecionado' => 0],
+    ];
+
     public function selecionarEdital()
     {
         $editalDinamicos = EditalDinamico::all();
@@ -39,8 +52,8 @@ class RelatoriosController extends Controller
         $editalDinamico = EditalDinamico::findOrFail($id);
         $cargos = Cargo::all();
         $niveisEscolaridades = Escolaridade::all();
-
-        return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico'));
+        $listaDoMultiSelect = $this->listaDoMultiSelect;
+        return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico', 'listaDoMultiSelect'));
     }
 
     public function gerarRelatorio(RelatorioRequest $request)
@@ -52,182 +65,58 @@ class RelatoriosController extends Controller
         $cargos = Cargo::all();
         $niveisEscolaridades = Escolaridade::all();
         $editalDinamico = EditalDinamico::findOrFail($request->editalDinamicoID);
-
         //VERIFICAR SE TODOS ESTÃO VAZIOS
         if (is_null($request->cargoID) && is_null($request->escolaridadeID) && is_null($request->status)) {
-            $pessoas = Pessoa::where('edital_dinamico_id', $request->editalDinamicoID);
-            $pessoasPNE = Pessoa::where('edital_dinamico_id', $request->editalDinamicoID);
             if (!is_null($request->titulo)) {
                 $titulo = $request->titulo;
             } else $titulo = 'Processo Seletivo Simplificado ' . date('Y');
             if ($tipo == 1) {
+                $pessoas = $this->gerarTodasPessoas($request);
                 return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico'));
             } else if ($tipo == 2) {
-                $pessoas->with('pontuacao2')->where('portador_deficiencia', 0);
-                $pessoasPNE->with('pontuacao2')->where('portador_deficiencia', 1);
-                $pessoas = $pessoas->get()->sortBy([
-                    ['pontuacao2.pontuacao_total', 'desc'],
-                    ['data_nascimento', 'asc']
-                ]);
-
-                $pessoasPNE = $pessoasPNE->get()->sortBy([
-                    ['pontuacao2.pontuacao_total', 'desc'],
-                    ['data_nascimento', 'asc']
-                ]);
+                $pessoas = $this->gerarPessoasS($request, 0);
+                $pessoasPNE = $this->gerarPessoasS($request, 0);
                 view()->share(['pessoas', $pessoas, 'pessoasPNE', $pessoasPNE]);
-                $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo', 'pessoasPNE'));
+                $listaParaCarregar = $request->constructorPDFIsExcel;
+                $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo', 'pessoasPNE', 'listaParaCarregar'));
                 return $pdf->download('pdf_file.pdf');
             } else {
-                $pessoas->with('pontuacao2')->where('portador_deficiencia', 0);
-                $pessoasPNE->with('pontuacao2')->where('portador_deficiencia', 1);
-                $pessoas = $pessoas->get()->sortBy([
-                    ['pontuacao2.pontuacao_total', 'desc'],
-                    ['data_nascimento', 'asc']
-                ]);
-
-                $pessoasPNE = $pessoasPNE->get()->sortBy([
-                    ['pontuacao2.pontuacao_total', 'desc'],
-                    ['data_nascimento', 'asc']
-                ]);
+                $pessoas = $this->gerarPessoasS($request, 0);
+                $pessoasPNE = $this->gerarPessoasS($request, 0);
 
                 $carrossel = Carrossel::all()->last();
-                return $this->export($pessoas, $pessoasPNE, 'GERADO_EXECEL', $carrossel);
+                $listaParaCarregar = $request->constructorPDFIsExcel;
+                return $this->export($pessoas, $pessoasPNE, 'GERADO_EXECEL', $carrossel, $listaParaCarregar);
             }
         }
         if ($tipo == 1) {
-
-            if (!is_null($request->cargoID)) {
-                $pessoas = Pessoa::where('cargo_id', $request->cargoID);
-                if (!is_null($request->escolaridadeID)) {
-                    $pessoas->where('escolaridade_id', $request->escolaridadeID);
-                }
-                if (!is_null($request->status)) {
-                    $pessoas->where('status', $request->status);
-                }
-            } else if (!is_null($request->escolaridadeID)) {
-                $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
-                if (!is_null($request->cargoID)) {
-                    $pessoas = Pessoa::where('cargo_id', $request->cargoID);
-                }
-                if (!is_null($request->status)) {
-                    $pessoas->where('status', $request->status);
-                }
-            } else if (!is_null($request->status)) {
-                $pessoas = Pessoa::where('status', $request->status);
-                if (!is_null($request->cargoID)) {
-                    $pessoas = Pessoa::where('cargo_id', $request->cargoID);
-                }
-                if (!is_null($request->escolaridadeID)) {
-                    $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
-                }
-            }
-            $pessoas->where('edital_dinamico_id', $request->editalDinamicoID);
-            $pessoas = $pessoas->get();
+            $pessoas = $this->gerarTodasPessoas($request);
             return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico'));
-        }
-        // GENERATE PDF
-        else if($tipo == 2) {
-            if (!is_null($request->cargoID)) {
-                $pessoas = Pessoa::where('cargo_id', $request->cargoID);
-                $pessoasPNE = Pessoa::where('cargo_id', $request->cargoID);
-                if (!is_null($request->escolaridadeID)) {
-                    $pessoas->where('escolaridade_id', $request->escolaridadeID);
-                    $pessoasPNE->where('escolaridade_id', $request->escolaridadeID);
-                }
-                if (!is_null($request->status)) {
-                    $pessoas->where('status', $request->status);
-                    $pessoasPNE->where('status', $request->status);
-                }
-            } else if (!is_null($request->escolaridadeID)) {
-                $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
-                $pessoasPNE = Pessoa::where('escolaridade_id', $request->escolaridadeID);
-                if (!is_null($request->cargoID)) {
-                    $pessoas = Pessoa::where('cargo_id', $request->cargoID);
-                    $pessoasPNE = Pessoa::where('cargo_id', $request->cargoID);
-                }
-                if (!is_null($request->status)) {
-                    $pessoas->where('status', $request->status);
-                    $pessoasPNE->where('status', $request->status);
-                }
-            } else if (!is_null($request->status)) {
-                $pessoas = Pessoa::where('status', $request->status);
-                $pessoasPNE = Pessoa::where('status', $request->status);
-                if (!is_null($request->cargoID)) {
-                    $pessoas = Pessoa::where('cargo_id', $request->cargoID);
-                    $pessoasPNE = Pessoa::where('cargo_id', $request->cargoID);
-                }
-                if (!is_null($request->escolaridadeID)) {
-                    $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
-                    $pessoasPNE = Pessoa::where('escolaridade_id', $request->escolaridadeID);
-                }
-            }
-            $pessoas->with('pontuacao2')->where('portador_deficiencia', 0);
-            $pessoasPNE->with('pontuacao2')->where('portador_deficiencia', 1)->orderBy('data_nascimento', 'ASC');
+        } // GENERATE PDF
+        else if ($tipo == 2) {
+            $pessoas = $this->gerarPessoasS($request, 0);
+            $pessoasPNE = $this->gerarPessoasS($request, 1);
 
-            $pessoas = $pessoas->get()->sortBy([
-                ['pontuacao2.pontuacao_total', 'desc'],
-                ['data_nascimento', 'asc']
-            ]);
-            $pessoasPNE = $pessoasPNE->get()->sortByDesc('pontuacao2.pontuacao_total');
             $carrossel = Carrossel::all()->last();
-            if(!$request->show_pne) $pessoasPNE = null;
+            if (!$request->show_pne) $pessoasPNE = null;
             if (!is_null($request->titulo)) {
                 $titulo = $request->titulo;
             } else $titulo = 'Processo Seletivo Simplificado ' . date('Y');
+            $listaParaCarregar = $request->constructorPDFIsExcel;
             view()->share('pessoas', $pessoas);
-            $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo', 'pessoasPNE', 'carrossel'));
+            $pdf = PDF::loadView('pdf_view', compact('pessoas', 'titulo', 'pessoasPNE', 'carrossel', 'listaParaCarregar'));
             return $pdf->download('pdf_file.pdf');
-        }
-        else {
-            if (!is_null($request->cargoID)) {
-                $pessoas = Pessoa::where('cargo_id', $request->cargoID);
-                $pessoasPNE = Pessoa::where('cargo_id', $request->cargoID);
-                if (!is_null($request->escolaridadeID)) {
-                    $pessoas->where('escolaridade_id', $request->escolaridadeID);
-                    $pessoasPNE->where('escolaridade_id', $request->escolaridadeID);
-                }
-                if (!is_null($request->status)) {
-                    $pessoas->where('status', $request->status);
-                    $pessoasPNE->where('status', $request->status);
-                }
-            } else if (!is_null($request->escolaridadeID)) {
-                $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
-                $pessoasPNE = Pessoa::where('escolaridade_id', $request->escolaridadeID);
-                if (!is_null($request->cargoID)) {
-                    $pessoas = Pessoa::where('cargo_id', $request->cargoID);
-                    $pessoasPNE = Pessoa::where('cargo_id', $request->cargoID);
-                }
-                if (!is_null($request->status)) {
-                    $pessoas->where('status', $request->status);
-                    $pessoasPNE->where('status', $request->status);
-                }
-            } else if (!is_null($request->status)) {
-                $pessoas = Pessoa::where('status', $request->status);
-                $pessoasPNE = Pessoa::where('status', $request->status);
-                if (!is_null($request->cargoID)) {
-                    $pessoas = Pessoa::where('cargo_id', $request->cargoID);
-                    $pessoasPNE = Pessoa::where('cargo_id', $request->cargoID);
-                }
-                if (!is_null($request->escolaridadeID)) {
-                    $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
-                    $pessoasPNE = Pessoa::where('escolaridade_id', $request->escolaridadeID);
-                }
-            }
-            $pessoas->with('pontuacao2')->where('portador_deficiencia', 0);
-            $pessoasPNE->with('pontuacao2')->where('portador_deficiencia', 1)->orderBy('data_nascimento', 'ASC');
 
-            $pessoas = $pessoas->get()->sortBy([
-                ['pontuacao2.pontuacao_total', 'desc'],
-                ['data_nascimento', 'asc']
-            ]);
-            $pessoasPNE = $pessoasPNE->get()->sortByDesc('pontuacao2.pontuacao_total');
+        } else {
+            $pessoas = $this->gerarPessoasS($request, 0);
+            $pessoasPNE = $this->gerarPessoasS($request, 1);
             $carrossel = Carrossel::all()->last();
-            if(!$request->show_pne) $pessoasPNE = null;
+            if (!$request->show_pne) $pessoasPNE = null;
             if (!is_null($request->titulo)) {
                 $titulo = $request->titulo;
             } else $titulo = 'Gerado_' . date('Y');
-
-            return $this->export($pessoas, $pessoasPNE, $titulo, $carrossel);
+            $listaParaCarregar = $request->constructorPDFIsExcel;
+            return $this->export($pessoas, $pessoasPNE, $titulo, $carrossel, $listaParaCarregar);
         }
     }
 
@@ -240,7 +129,8 @@ class RelatoriosController extends Controller
         return response()->download($file, $request->cargo . '.pdf', $headers);
     }
 
-    public function visualizar($id){
+    public function visualizar($id)
+    {
         $pessoa = Pessoa::findOrFail($id);
         $edital_dinamico_id = !is_null($pessoa->pessoaEditalAnexos->first()) ? $pessoa->pessoaEditalAnexos->first()->edital_dinamico_id : null;
         $progress = Progress::where('edital_dinamico_id', $edital_dinamico_id)->get();
@@ -250,8 +140,77 @@ class RelatoriosController extends Controller
         return view('pages.relatorio-unico', compact('pessoa', 'progressQuantiadePorcento', 'progress', 'tipoAnexoCargo'));
     }
 
-    public function export($pessoas, $pessoasPNE, $titulo, $carrossel){
-        $resultadoExport = new ResultadoExport($pessoas, $pessoasPNE, $titulo, $carrossel);
+    public function export($pessoas, $pessoasPNE, $titulo, $carrossel, $listaParaCarregar)
+    {
+        $resultadoExport = new ResultadoExport($pessoas, $pessoasPNE, $titulo, $carrossel, $listaParaCarregar);
         return Excel::download($resultadoExport, 'resultado.xlsx');
+    }
+
+    public function gerarPessoasS(Request $request, $status)
+    {
+        if (!is_null($request->cargoID)) {
+            $pessoas = Pessoa::where('cargo_id', $request->cargoID);
+            if (!is_null($request->escolaridadeID)) {
+                $pessoas->where('escolaridade_id', $request->escolaridadeID);
+            }
+            if (!is_null($request->status)) {
+                $pessoas->where('status', $request->status);
+            }
+        } else if (!is_null($request->escolaridadeID)) {
+            $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
+            if (!is_null($request->cargoID)) {
+                $pessoas = Pessoa::where('cargo_id', $request->cargoID);
+            }
+            if (!is_null($request->status)) {
+                $pessoas->where('status', $request->status);
+            }
+        } else if (!is_null($request->status)) {
+            $pessoas = Pessoa::where('status', $request->status);
+            if (!is_null($request->cargoID)) {
+                $pessoas = Pessoa::where('cargo_id', $request->cargoID);
+            }
+            if (!is_null($request->escolaridadeID)) {
+                $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
+            }
+        }
+        $pessoas->with('pontuacao2')->where('portador_deficiencia', $status);
+
+        $pessoas = $pessoas->get()->sortBy([
+            ['pontuacao2.pontuacao_total', 'desc'],
+            ['data_nascimento', 'asc']
+        ]);
+        return $pessoas;
+    }
+
+    public function gerarTodasPessoas(Request $request)
+    {
+        if (!is_null($request->cargoID)) {
+            $pessoas = Pessoa::where('cargo_id', $request->cargoID);
+            if (!is_null($request->escolaridadeID)) {
+                $pessoas->where('escolaridade_id', $request->escolaridadeID);
+            }
+            if (!is_null($request->status)) {
+                $pessoas->where('status', $request->status);
+            }
+        } else if (!is_null($request->escolaridadeID)) {
+            $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
+            if (!is_null($request->cargoID)) {
+                $pessoas = Pessoa::where('cargo_id', $request->cargoID);
+            }
+            if (!is_null($request->status)) {
+                $pessoas->where('status', $request->status);
+            }
+        } else if (!is_null($request->status)) {
+            $pessoas = Pessoa::where('status', $request->status);
+            if (!is_null($request->cargoID)) {
+                $pessoas = Pessoa::where('cargo_id', $request->cargoID);
+            }
+            if (!is_null($request->escolaridadeID)) {
+                $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
+            }
+        }
+        $pessoas->where('edital_dinamico_id', $request->editalDinamicoID);
+        $pessoas = $pessoas->get();
+        return $pessoas;
     }
 }
