@@ -22,7 +22,7 @@ use App\Models\Escolaridade;
 Auth::routes([
     'register' => false
 ]);
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/sair', function () {
     auth()->logout();
@@ -98,7 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('carrossel-update/{id}', 'TelasDinamicas\CarrosselController@update')->name('carrossel.update');
     Route::get('carrossel-delete/{id}', 'TelasDinamicas\CarrosselController@destroy')->name('carrossel.delete');
     Route::get('carrossel-create', 'TelasDinamicas\CarrosselController@create')->name('carrossel.create');
-    Route::post('carrossel-store', 'TelasDinamicas\CarrosselController@store')->name('carrossel.store');
+    Route::post('carrossel-store', [\App\Http\Controllers\TelasDinamicas\CarrosselController::class, 'store'])->name('carrossel.store');
 
     Route::get('lista/formularios', [\App\Http\Controllers\ListaInscricoesController::class, 'index'])->name('lista.formularios');
     Route::get('formularios/visualizar/{id}', [\App\Http\Controllers\ListaInscricoesController::class, 'show'])->name('formulario.show');

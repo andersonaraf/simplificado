@@ -21,19 +21,11 @@
                 </ol>
                 <div class="carousel-inner">
                     @foreach($carrossels as $carrossel)
-                        @if (!is_null($carrossel->url_link))
-                            <div class="carousel-item active">
-                                <a href="{{$carrossel->url_link}}" target="_blank"><img class="container"
-                                                                                        src="{{asset('images/'.$carrossel->url_img)}}"
-                                                                                        alt="First slide" width="940"
-                                                                                        height="200"></a>
-                            </div>
-                        @else
-                            <div class="carousel-item active">
-                                <img class="container" src="{{asset('images/caruosel/'.$carrossel->url_img)}}"
-                                     alt="First slide">
-                            </div>
-                        @endif
+                        <div class="carousel-item active">
+                            <a href="{{is_null($carrossel->url_link) ? '#' : $carrossel->url_link}}" target="_blank">
+                                <img class="container" src="{{asset('storage/carrossel/LospcQzQCsg1f6iqDKrB8SLOuhn6miSrwxGKUyTl.jpg')}}" alt="First slide" width="940" height="200">
+                            </a>
+                        </div>
                     @endforeach
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -72,44 +64,47 @@
                             @endif
                         @endif
                     @endforeach
-                    @if ($protocolo->status_liberar == '1' || !is_null($protocolo->data_liberar) )
-                        @if ($protocolo->nome_ou_anexo == 'Protocolo' && ($protocolo->status_liberar == 1) || strtotime($protocolo->data_liberar) <= strtotime(date('Y-m-d H:i')))
-                            <div class="col-lg-4 mt-4 mt-lg-0">
-                                <a href="{{route('protocolo')}}">
-                                    <button class="icon-box">
-                                        <i class="icofont-ui-note"></i>
-                                        <h3>Buscar Protocolo</h3>
-                                    </button>
-                                </a>
-                            </div>
+                    @if(!is_null($protocolo))
+                        @if ($protocolo->status_liberar == '1' || !is_null($protocolo->data_liberar) )
+                            @if ($protocolo->nome_ou_anexo == 'Protocolo' && ($protocolo->status_liberar == 1) || strtotime($protocolo->data_liberar) <= strtotime(date('Y-m-d H:i')))
+                                <div class="col-lg-4 mt-4 mt-lg-0">
+                                    <a href="{{route('protocolo')}}">
+                                        <button class="icon-box">
+                                            <i class="icofont-ui-note"></i>
+                                            <h3>Buscar Protocolo</h3>
+                                        </button>
+                                    </a>
+                                </div>
+                            @endif
                         @endif
                     @endif
                 </div>
             </div>
         </section><!-- End Featured Section -->
+        @if(!is_null($recurso))
+            @if ($recurso->status_liberar == '1' || !is_null($recurso->data_liberar) )
+                @if ($recurso->nome_ou_anexo == 'Recurso' && ($recurso->status_liberar == 1) || strtotime($recurso->data_liberar) <= strtotime(date('Y-m-d H:i')))
+                    <section id="featured" class="featured">
+                        <div class="container">
+                            <div class="section-title" data-aos="fade-up">
+                                <h2>Recurso</h2>
+                            </div>
+                            <div class="row justify-content-md-center">
 
-        @if ($recurso->status_liberar == '1' || !is_null($recurso->data_liberar) )
-            @if ($recurso->nome_ou_anexo == 'Recurso' && ($recurso->status_liberar == 1) || strtotime($recurso->data_liberar) <= strtotime(date('Y-m-d H:i')))
-                <section id="featured" class="featured">
-                    <div class="container">
-                        <div class="section-title" data-aos="fade-up">
-                            <h2>Recurso</h2>
-                        </div>
-                        <div class="row justify-content-md-center">
+                                <div class="col-lg-4 mt-4 mt-lg-0">
+                                    <a href="{{route('recurso')}}">
+                                        <button class="icon-box">
+                                            <i class="icofont-tasks-alt"></i>
+                                            <h3>Recurso</h3>
+                                        </button>
+                                    </a>
 
-                            <div class="col-lg-4 mt-4 mt-lg-0">
-                                <a href="{{route('recurso')}}">
-                                    <button class="icon-box">
-                                        <i class="icofont-tasks-alt"></i>
-                                        <h3>Recurso</h3>
-                                    </button>
-                                </a>
+                                </div>
 
                             </div>
-
                         </div>
-                    </div>
-                </section><!-- End Featured Section -->
+                    </section><!-- End Featured Section -->
+            @endif
         @endif
     @endif
 

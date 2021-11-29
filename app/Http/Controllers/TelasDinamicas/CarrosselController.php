@@ -42,8 +42,8 @@ class CarrosselController extends Controller
     public function store(CarrosselRequest $request)
     {
         if (isset($request->file_img)) {
-            $fileName = time(). '.'. $request->file_img->extension();
-            $request->file_img->move(public_path('images/caruosel'), $fileName);
+//            $fileName = time(). '.'. $request->file_img->extension();
+            $fileName = $request->file_img->store('carrossel');
 
             $carrossel = Carrossel::create([
                 'url_img' => $fileName,
