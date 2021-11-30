@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Registro;
 use App\Models\Cargo;
 use App\Models\EditalDinamico;
+use App\Models\EditalDinamicoTipoAnexo;
 use App\Models\Endereco;
 use App\Models\Pessoa;
 use App\Models\PessoaEditalAnexo;
@@ -12,6 +13,7 @@ use App\Models\Progress;
 use App\Models\Termos;
 use App\Models\TipoAnexoCargo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -280,11 +282,17 @@ class RegistroController extends Controller
     public function buscaIndex($id)
     {
         $editalDinamico = EditalDinamico::where('telas_edital_id', $id)->first();
-
-        $progress = Progress::where('edital_dinamico_id', $editalDinamico->id)->get();
         $pessoa = json_decode(Cookie::get('pessoa'));
+        $progress = $this->gerarProgress($editalDinamico->id, $pessoa->cargo_id);
+
+
         $tipoAnexoCargo = TipoAnexoCargo::where('cargo_id', $pessoa->cargo_id)->get();
-        $porcetagemProgress = 100 / $tipoAnexoCargo->count();
+        //VAI VERIFICAR SE EXISTE ESSE ANEXO NO EDITAL
+        $tipoAnexoCargo = $this->gerarTipoAnexoCargo($tipoAnexoCargo, $pessoa->cargo_id, $editalDinamico->id);
+
+        if ($tipoAnexoCargo->count() > 0) {
+            $porcetagemProgress = 100 / $tipoAnexoCargo->count();
+        } else $porcetagemProgress = 0;
 
         if (isset($pessoa->id)) {
             Cookie::queue(Cookie::forget('pessoa'));
@@ -295,4 +303,26 @@ class RegistroController extends Controller
         return view('registro.registros_anexos', compact('progress', 'pessoa', 'editalDinamico', 'porcetagemProgress', 'tipoAnexoCargo'));
     }
 
+
+    public function gerarProgress($id, $cargo_id)
+    {
+        $progressM = Progress::where('edital_dinamico_id', $id)->get();
+        $progress = new Collection();
+
+        foreach ($progressM as $item) {
+            $editalDinamicoTipoAnexo = EditalDinamicoTipoAnexo::where('tipo_anexo_id', $item->tipo_anexo_id)->where('edital_dinamico_id', $item->edital_dinamico_id)->where('cargo_id', $cargo_id)->first();
+            if (!is_null($editalDinamicoTipoAnexo)) $progress->add($item);
+        }
+        return $progress;
+    }
+
+    public function gerarTipoAnexoCargo($tipoAnexo, $cargo_id, $editaDinamicoID)
+    {
+        $collection = new Collection();
+        foreach ($tipoAnexo as $item) {
+            $editalDinamicoTipoAnexo = EditalDinamicoTipoAnexo::where('tipo_anexo_id', $item->tipo_anexo_id)->where('edital_dinamico_id', $editaDinamicoID)->where('cargo_id', $item->cargo_id)->first();
+            if (!is_null($editalDinamicoTipoAnexo)) $collection->add($item);
+        }
+        return $collection;
+    }
 }

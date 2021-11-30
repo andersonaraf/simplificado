@@ -22,9 +22,9 @@ class TipoAnexoController extends Controller
     public function store(Request $request)
     {
         try {
-            if ($this->searchExist($request->inputTitulo)) {
+            if ($this->searchExist(mb_strtoupper($request->inputTitulo))) {
                 $tipoAnexo = new TipoAnexo();
-                $tipoAnexo->tipo = strtoupper($request->inputTitulo);
+                $tipoAnexo->tipo = mb_strtoupper($request->inputTitulo);
 
                 $tipoAnexo->save();
                 return redirect()->route('edital.formulario.anexo', $request->editalDinamicoID)->with(['type' => 'success', 'msg' => 'Título criado com sucesso']);

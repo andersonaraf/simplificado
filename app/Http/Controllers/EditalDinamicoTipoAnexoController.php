@@ -46,7 +46,7 @@ class EditalDinamicoTipoAnexoController extends Controller
             if (!is_null($editalDinamicoTipoAnexos)) {
                 $documentoDinamico = DocumentoDinamico::create([
                     'edital_dinamico_tipo_anexo_id' => $editalDinamicoTipoAnexos->id,
-                    'nome_documento' => $request->inputNomeAnexo,
+                    'nome_documento' => mb_strtoupper($request->inputNomeAnexo),
                     'obrigatorio' => $request->inputObrigatorio,
                     'pontuacao_maxima_documento' => $request->inputPontuacaoMaxima,
                     'pontuacao_maxima_item' => $request->inputPontuacaoMaximaDoItem,
