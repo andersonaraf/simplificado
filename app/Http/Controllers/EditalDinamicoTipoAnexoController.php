@@ -92,7 +92,6 @@ class EditalDinamicoTipoAnexoController extends Controller
 
     public function update(Request $request)
     {
-//        dd($request->all());
         try {
             DB::beginTransaction();
             $tipoAnexoCargo = TipoAnexoCargo::where('cargo_id', $request->inputCargo)->where('tipo_anexo_id', $request->inputTipoAnexo)->first();

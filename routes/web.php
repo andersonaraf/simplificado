@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('table');
 
     Route::get('/visualizacao/{editalID}', 'AreaRestritaController@index')->name('/visualizacao');
-    Route::get('/avaliar/{id}', 'AreaRestritaController@index2')->name('/avaliar');
+    Route::get('/avaliar/{id}', [\App\Http\Controllers\AreaRestritaController::class, 'index2'])->name('/avaliar');
     Route::post('pontuacao', 'PontuacaoController@store')->name('pontuacao');
 
     Route::get('/revisao/{editalID}', 'AreaRestritaController@index3')->name('revisao');

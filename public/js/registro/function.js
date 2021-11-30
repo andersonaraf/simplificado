@@ -21,6 +21,27 @@ $(function () {
         prev_fs.show(800);
     });
 
+    $('.progress-click').click(function () {
+        // var select = $(this).attr('data-pos') -1;
+        // atual_fs = $(`.next`).parent()
+        //
+        // prev_fs =  $(`.prev[data-pos='${select}']`).parent().prev();
+        // next_fs = $(`.next[data-pos='${select}']`).parent().next();
+        //
+        //
+        // prev_fs.hide(800)
+        // atual_fs.hide(800)
+        // next_fs.show(800)
+        $('.fild').map(function () {
+            return $(this).css('display', 'none')
+        })
+        $(`.fild[data-pos=${$(this).attr('data-pos')}]`).css('display', 'block')
+
+        $('html,body').scrollTop(0);
+        $('html, body').animate({scrollTop: 0}, 'slow');
+
+    })
+
     $('select[name="escolaridade"]').on('change', function () {
         var escolaridade = this.value;
         var vazio = ''

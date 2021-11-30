@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ini_set('post_max_size', '500M');
+ini_set('upload_max_filesize', '500M');
 use App\Http\Requests\Registro;
 use App\Models\Cargo;
 use App\Models\EditalDinamico;
@@ -138,7 +139,7 @@ class RegistroController extends Controller
                 foreach (array_keys($request->anexosDocumentos[$index]['documentoDinamico']) as $indexKey) {
 
                     if (isset($request->anexosDocumentos[$index][$indexKey])) {
-                        $rules['anexosDocumentos.' . $index . '.' . $indexKey] = 'nullable|max:5000';
+                        $rules['anexosDocumentos.' . $index . '.' . $indexKey] = 'nullable|max:50000';
                     }
                 }
             }

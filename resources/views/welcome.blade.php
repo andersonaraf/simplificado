@@ -10,7 +10,7 @@
     </style>
 @endsection
 @section('content')
-    @extends('layouts.modal-cache')
+{{--    @extends('layouts.modal-cache')--}}
     <section class="container-fluid">
         <div class="row justify-content-center">
             <div id="carouselExampleIndicators" class="carousel slide w-100 text-center" data-ride="carousel">

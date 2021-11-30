@@ -25,10 +25,10 @@
                         @enderror
 
                         <ul id="progress">
-                            <li class="ativo">Informações Pessoais</li>
-                            <li>Endereço</li>
-                            @foreach($tipoAnexoCargo as $tipo)
-                                <li>{{$tipo->tipoAnexo->tipo}}</li>
+                            <li class="ativo progress-click h-auto" data-pos="0">Informações Pessoais</li>
+                            <li class="progress-click h-auto" data-pos="1">Endereço</li>
+                            @foreach($tipoAnexoCargo as $key=>$tipo)
+                                <li class="progress-click h-auto" data-pos="{{$key+2}}">{{$tipo->tipoAnexo->tipo}}</li>
                             @endforeach
                         </ul>
 
@@ -46,8 +46,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
-
-                        <fieldset>
+                        <fieldset data-pos="0" class="fild">
                             <h2>Informações Pessoais</h2>
                             <p>Nome Completo</p>
                             <input type="text" placeholder="Nome Completo"
@@ -104,10 +103,10 @@
                             @endif
                             <p>Data de Inscrição</p>
                             <input type="text" value="{{$pessoa->created_at->format('d-m-Y H:i')}}" disabled>
-                            <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                            <input type="button" name="next" id="next" class="next acao" value="Proximo" data-pos="0"/>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset data-pos="1" class="fild">
                             <h2>Endereço</h2>
                             <p>CEP</p>
                             <input type="text" placeholder="Informe seu CEP"
@@ -119,11 +118,11 @@
                             <input type="text" placeholder="Informe seu Endereço"
                                    value="{{$pessoa->endereco->endereco}}"
                                    disabled/>
-                            <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
-                            <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
+                            <input type="button" name="next" id="next" class="next acao" value="Proximo" data-pos="1"/>
+                            <input type="button" name="prev" id="prev" class="prev acao" value="Anterior" data-pos="1"/>
                         </fieldset>
                         @foreach($tipoAnexoCargo as $key=>$progresso)
-                            <fieldset>
+                            <fieldset class="fild" data-pos="{{$key+2}}">
                                 <input type="button" name="next" class="btn btn-danger float-right mr-2"
                                        data-toggle="modal" data-target="#reprovarModel" style="width: 100px"
                                        value="Reprovar"/>
@@ -134,18 +133,14 @@
                                     </div>
                                 </div>
                                 @foreach($progresso->pessoaEditalAnexos($pessoa->id, $pessoa->edital_dinamico_id, $progresso->tipoAnexo->id) as $anexo)
-
                                     <div class="card">
                                         <div class="card-header">
-                                            {{--                                            @dd($anexo->documentoDinamico)--}}
                                             <h3 class="card-title">{{$anexo->documentoDinamico->nome_documento}}</h3>
                                         </div>
                                         <div class="card-body text-left">
                                             <h5><a target="_blank" href="{{asset('documentos/'.$anexo->nome_arquivo)}}">Anexo</a>
                                             </h5>
-                                            {{--                                            --}}{{--                                            @dd($anexo)--}}
                                             @if ($anexo->documentoDinamico->pontuar_manual == 1)
-                                                {{--                                                @dd($anexo->documentoDinamico)--}}
                                                 <label>Pontuação: </label>
                                                 <input type="number" value="0" name="anexo[{{$anexo->id}}][]"
                                                        id="anexo[{{$anexo->id}}][]" min="0" max="{{$anexo->documentoDinamico->pontuacao_maxima_item}}"
@@ -233,7 +228,7 @@
                                     </div>
                                 @endforeach
                                 @if($key != $tipoAnexoCargo->count() - 1)
-                                    <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                                    <input type="button" name="next" id="next" class="next acao" value="Proximo" data-pos="{{$key+2}}"/>
                                 @endif
                                 @if($key == $tipoAnexoCargo->count() - 1)
                                     <div class="row justify-content-end">
@@ -242,7 +237,7 @@
                                                value="Aprovar"/>
                                     </div>
                                 @endif
-                                <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
+                                <input type="button" name="prev" id="prev" class="prev acao" value="Anterior" data-pos="{{$key+2}}"/>
                             </fieldset>
                         @endforeach
                     </form>
