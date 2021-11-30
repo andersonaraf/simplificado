@@ -13,7 +13,7 @@
     @extends('layouts.modal-cache')
     <section class="container-fluid">
         <div class="row justify-content-center">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide w-100 text-center" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -23,7 +23,7 @@
                     @foreach($carrossels as $carrossel)
                         <div class="carousel-item active">
                             <a href="{{is_null($carrossel->url_link) ? '#' : $carrossel->url_link}}" target="_blank">
-                                <img class="container" src="{{asset('storage/carrossel/LospcQzQCsg1f6iqDKrB8SLOuhn6miSrwxGKUyTl.jpg')}}" alt="First slide" width="940" height="200">
+                                <img class="container" src="{{asset('storage/'.$carrossel->url_img)}}" alt="First slide" style="width: 100%;">
                             </a>
                         </div>
                     @endforeach

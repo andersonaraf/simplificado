@@ -30,9 +30,6 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route('inical')}}">Início</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('login')}}">Área Restrita</a>
-                    </li>
                     @if(auth()->check())
                         <li>
                             <a class="nav-link" href="{{route('sair')}}">Sair</a>

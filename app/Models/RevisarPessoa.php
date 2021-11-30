@@ -4,10 +4,13 @@ namespace App\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class RevisarPessoa extends Model
+class RevisarPessoa extends Model implements Auditable
 {
     //
+    use AuditableTrait;
     protected $table = 'revisar_pessoas';
     protected $fillable = [
         'pessoa_id',

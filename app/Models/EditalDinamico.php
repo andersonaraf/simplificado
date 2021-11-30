@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class EditalDinamico extends Model
+class EditalDinamico extends Model implements Auditable
 {
     //
+    use AuditableTrait;
     protected $table = 'edital_dinamicos';
     protected $fillable = [
         'telas_edital_id',

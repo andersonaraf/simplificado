@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Progress extends Model
+class Progress extends Model implements Auditable
 {
     //
+    use AuditableTrait;
     protected $table = 'progress';
     protected $fillable = [
         'tipo_anexo_id',
