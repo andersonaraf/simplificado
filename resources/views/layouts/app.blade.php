@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -18,6 +18,7 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{asset('assets/fontawesome-free-5.15.2-web/css/all.min.css')}}">
     <!--CS PAGE-->
+    <link rel="stylesheet" href="{{asset('assets/sweetalert2/sweetalert2.min.css')}}">
     @yield('css')
 </head>
 
@@ -76,6 +77,17 @@
 <script src="{{ asset('material') }}/js/settings.js"></script>
 <script src="{{asset('assets/fontawesome-free-5.15.2-web/js/all.min.js')}}"></script>
 <script src="{{asset('js/confirmaDelete.js')}}"></script>
+<script src="{{asset('assets/sweetalert2/sweetalert2.all.min.js')}}"></script>
+{{--MENSAGENS--}}
+<script>
+    @if(session()->get('type'))
+        Swal.fire({
+            icon: '{{session()->get('type')}}',
+            title: 'AVISO',
+            text: '{{mb_strtoupper(session()->get('msg'))}}',
+        })
+    @endif
+</script>
 @yield('script')
 @stack('js')
 </body>
