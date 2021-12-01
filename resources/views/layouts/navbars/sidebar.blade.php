@@ -64,6 +64,12 @@
                                     <span class="sidebar-normal"> {{ __('Lista de Formulários Ativos') }} </span>
                                 </a>
                             </li>
+                            <li class="nav-item{{ $activePage == 'lista_participantes' ? ' active' : '' }}">
+                                <a class="nav-link" href="{{route('lista.candidatos.index')}}">
+                                    <span class="sidebar-mini"> CA </span>
+                                    <span class="sidebar-normal"> {{ __('Candidatos') }} </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

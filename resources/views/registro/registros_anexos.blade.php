@@ -48,13 +48,13 @@
                                             @if ($editalDinamicoTipoAnexos->documentoDinamico->obrigatorio == 1)
                                                 <div class="col col-6">
                                                     <label id="clickfupload1"
-                                                           class="control-label label-bordered nomeArquivo">Adicione
+                                                           class="control-label label-bordered nomeArquivo">ADICIONE
                                                         {{$editalDinamicoTipoAnexos->documentoDinamico->nome_documento}}</label>
                                                     <label class="text-danger label-bordered ">*</label>
                                                 </div>
                                             @else
                                                 <label id="clickfupload1"
-                                                       class="control-label label-bordered nomeArquivo">Adicione
+                                                       class="control-label label-bordered nomeArquivo">ADICIONE
                                                     {{$editalDinamicoTipoAnexos->documentoDinamico->nome_documento}}</label>
                                             @endif
                                         </div>

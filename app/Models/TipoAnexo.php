@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class TipoAnexo extends Model
+class TipoAnexo extends Model implements Auditable
 {
     //
+    use AuditableTrait;
     protected $table = 'tipo_anexo';
     protected $fillable = [
         'tipo'

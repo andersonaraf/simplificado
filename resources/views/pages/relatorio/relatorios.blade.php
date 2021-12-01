@@ -74,11 +74,20 @@
                                            placeholder="Informe o título do pdf">
                                 </div>
 
+                                <div class="col col-12 mt-3" id="divConstruirExcel" hidden>
+                                    <label for="constructorPDFIsExcel">Exibir Excel</label>
+                                    <select class="custom-select h-100" id="constructorPDFIsExcel" name="constructorPDFIsExcel[]" multiple>
+                                        @foreach($listaDoMultiSelect as $key=>$item)
+                                            <option value="{{$item['nome']}}" {{$item['selecionado'] == 1 ? 'selected' : ''}}>{{$item['nome']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <input type="text" name="editalDinamicoID" value="{{$editalDinamico->id}}" hidden>
                             </div>
 
-                            <div class="row">
-                                <div class="col col-sm-12 text-right mt-2">
+                            <div class="row mt-4">
+                                <div class="col col-sm-12 text-right mt-3">
                                     <input type="submit" class="btn btn-outline-info" value="Busca">
                                 </div>
                             </div>

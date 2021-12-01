@@ -39,8 +39,12 @@ class AreaRestritaController extends Controller
 
         $pessoa =  Pessoa::findOrFail($id);
         $edital_dinamico_id = !is_null($pessoa->pessoaEditalAnexos->first()) ? $pessoa->pessoaEditalAnexos->first()->edital_dinamico_id : null;
-        $progress = Progress::where('edital_dinamico_id', $edital_dinamico_id)->get();
+
+        $registroController = neW RegistroController();
+
+        $progress = $registroController->gerarProgress($edital_dinamico_id, $pessoa->cargo_id);
         $tipoAnexoCargo = TipoAnexoCargo::where('cargo_id', $pessoa->cargo_id)->get();
+        $tipoAnexoCargo = $registroController->gerarTipoAnexoCargo($tipoAnexoCargo, $pessoa->cargo_id, $edital_dinamico_id);
         $progressQuantiadePorcento = 100 / ($tipoAnexoCargo->count() + 2);
 
         if ($pessoa->status == 1) {

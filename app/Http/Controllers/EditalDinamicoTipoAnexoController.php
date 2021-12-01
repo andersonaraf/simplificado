@@ -46,7 +46,7 @@ class EditalDinamicoTipoAnexoController extends Controller
             if (!is_null($editalDinamicoTipoAnexos)) {
                 $documentoDinamico = DocumentoDinamico::create([
                     'edital_dinamico_tipo_anexo_id' => $editalDinamicoTipoAnexos->id,
-                    'nome_documento' => $request->inputNomeAnexo,
+                    'nome_documento' => mb_strtoupper($request->inputNomeAnexo),
                     'obrigatorio' => $request->inputObrigatorio,
                     'pontuacao_maxima_documento' => $request->inputPontuacaoMaxima,
                     'pontuacao_maxima_item' => $request->inputPontuacaoMaximaDoItem,
@@ -92,25 +92,53 @@ class EditalDinamicoTipoAnexoController extends Controller
 
     public function update(Request $request)
     {
-        $editalAnexo = EditalDinamicoTipoAnexo::findOrFail($request->editalDinamicoTipoAnexoID);
-        $editalAnexo->cargo_id = $request->inputCargo;
-        $editalAnexo->tipo_anexo_id = $request->inputTipoAnexo;
-        $documento = $editalAnexo->documentoDinamico;
-        $documento->nome_documento = $request->inputNomeAnexo;
-        $documento->obrigatorio = $request->inputObrigatorio;
-        $documento->pontuacao_maxima_documento = $request->inputPontuacaoMaxima;
-        $documento->pontuacao_maxima_item = $request->inputPontuacaoMaximaDoItem;
-        $documento->pontuacao_por_item = $request->inputPontuacaoPorItem;
-        $documento->quantidade_anexos = $request->inputQuantiadeAnexos;
-        $documento->pontuacao_por_ano = $request->inputPorAno;
-        $documento->pontuacao_por_mes = $request->inputPorMes;
-        $documento->tipo_experiencia = $request->inputTipoExperiencia;
-        $documento->pontuar_publica_privada = $request->pontuar_publica_privada;
-        $documento->pontuar_manual = $request->pontuar_manual;
-        //ATUALIZAR NA BASE DE DADOS
-        if ($editalAnexo->update() && $documento->update()) {
-            session()->put('sucess', 'Alterações realizadas com sucesso.');
-        } else session()->put('error', 'Não foi possível alterar as informações.');
-        return redirect()->back();
+        try {
+            DB::beginTransaction();
+            $tipoAnexoCargo = TipoAnexoCargo::where('cargo_id', $request->inputCargo)->where('tipo_anexo_id', $request->inputTipoAnexo)->first();
+            if (is_null($tipoAnexoCargo)) {
+                $tipoAnexoCargo = TipoAnexoCargo::create([
+                    'cargo_id' => $request->inputCargo,
+                    'tipo_anexo_id' => $request->inputTipoAnexo,
+                ]);
+            }
+            //BUSCA PELO EDITAL DINAMICO TIPO ANEXO
+            $editalAnexo = EditalDinamicoTipoAnexo::findOrFail($request->editalDinamicoTipoAnexoID);
+            //BUSCA PELO PROGRESS
+            $progress = Progress::where('tipo_anexo_id', $request->inputTipoAnexo)->where('edital_dinamico_id', $editalAnexo->edital_dinamico_id)->first();
+            //CASO NÃO EXISTA CRIAR UM NOVO
+            if (is_null($progress)) {
+                Progress::create([
+                    'tipo_anexo_id' => $request->inputTipoAnexo,
+                    'edital_dinamico_id' => $editalAnexo->edital_dinamico_id
+                ]);
+            }
+            //REALIZAR AS ALTERAÇÕES
+            $editalAnexo->cargo_id = $request->inputCargo;
+            $editalAnexo->tipo_anexo_id = $tipoAnexoCargo->tipo_anexo_id;
+
+            $documento = $editalAnexo->documentoDinamico;
+            $documento->nome_documento = $request->inputNomeAnexo;
+            $documento->obrigatorio = $request->inputObrigatorio;
+            $documento->pontuacao_maxima_documento = $request->inputPontuacaoMaxima;
+            $documento->pontuacao_maxima_item = $request->inputPontuacaoMaximaDoItem;
+            $documento->pontuacao_por_item = $request->inputPontuacaoPorItem;
+            $documento->quantidade_anexos = $request->inputQuantiadeAnexos;
+            $documento->pontuacao_por_ano = $request->inputPorAno;
+            $documento->pontuacao_por_mes = $request->inputPorMes;
+            $documento->tipo_experiencia = $request->inputTipoExperiencia;
+            $documento->pontuar_publica_privada = $request->pontuar_publica_privada;
+            $documento->pontuar_manual = $request->pontuar_manual;
+            //ATUALIZAR NA BASE DE DADOS
+            $editalAnexo->update();
+            $documento->update();
+
+            DB::commit();
+            return redirect()->back()->with(['type' => 'success', 'msg' => 'Informações alteradas com sucesso.']);
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return redirect()->back()->with(['type' => 'error', 'msg' => 'Ocorreu um erro na tentativa de atualizar as informações. log: ' . $exception->getMessage()]);
+        }
+
+
     }
 }

@@ -65,18 +65,18 @@
 </head>
 <body>
 @if(!isset($excel))
-<div class="information">
-    <table width="100%">
-        <tr>
-            <td align="center">
-                <figure id="container">
-                    <img src="{{asset('images/semsa.png')}}" width="90%"/>
-                </figure>
-            </td>
-        </tr>
+    <div class="information">
+        <table width="100%">
+            <tr>
+                <td align="center">
+                    <figure id="container">
+                        <img src="{{asset('images/semsa.png')}}" width="90%"/>
+                    </figure>
+                </td>
+            </tr>
 
-    </table>
-</div>
+        </table>
+    </div>
 @endif
 
 <br/>
@@ -87,15 +87,36 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Cargo</th>
-            <th>Escolaridade</th>
-            <th>Pontuação Publica</th>
-            <th>Pontuacação Privada</th>
-            <th>PNE</th>
-            <th>Pontuação</th>
-            <th>Status</th>
+            @if(array_search("NOME", $listaParaCarregar) == 0)
+                <th>Nome</th>
+            @endif
+            @if(array_search('CPF', $listaParaCarregar))
+                <th>CPF</th>
+            @endif
+            @if(array_search('CARGO', $listaParaCarregar))
+                <th>Cargo</th>
+            @endif
+            @if(array_search('ESCOLARIDADE', $listaParaCarregar))
+                <th>Escolaridade</th>
+            @endif
+            @if(array_search('PONTUAÇÃO PÚBLICA', $listaParaCarregar))
+                <th>Pontuação Publica</th>
+            @endif
+            @if(array_search('PONTUAÇÃO PRIVADA', $listaParaCarregar))
+                <th>Pontuacação Privada</th>
+            @endif
+            @if(array_search('PNE', $listaParaCarregar))
+                <th>PNE</th>
+            @endif
+            @if(array_search('PONTUAÇÃO', $listaParaCarregar))
+                <th>Pontuação</th>
+            @endif
+            @if(array_search('STATUS', $listaParaCarregar))
+                <th>Status</th>
+            @endif
+            @if(array_search('MOTIVO DE RECUSAR', $listaParaCarregar) && isset($excel))
+                <th>RECUSADO</th>
+            @endif
         </tr>
         </thead>
         <tbody>
@@ -113,39 +134,58 @@
                 @if($pessoaPNE->pessoaEditalAnexos->count() != 0)
                     <tr>
                         <td>{{$i}}</td>
-                        <td>{{$pessoaPNE->nome_completo}}</td>
-                        <td>{{$pessoaPNE->cpf}}</td>
-                        <td>{{$pessoaPNE->cargo->cargo}}</td>
-                        <td>{{$pessoaPNE->escolaridade->nivel_escolaridade}}</td>
-                        @if($pessoaPNE->status_avaliado == 0 && $pessoaPNE->status == 0 && $pessoaPNE->status_revisado == 0)
-                            <td>0</td>
-                            <td>0</td>
-                        @else
-                            <td>{{$pessoaPNE->pontuacao($pessoaPNE->id)->pontuacao_total_publica}}</td>
-                            <td>{{$pessoaPNE->pontuacao($pessoaPNE->id)->pontuacao_total_privada}}</td>
+                        @if(array_search("NOME", $listaParaCarregar) == 0)
+                            <td>{{$pessoaPNE->nome_completo}}</td>
                         @endif
-                        @if ($pessoaPNE->portador_deficiencia == 1)
-                            <td style="font-weight: bold">SIM</td>
-                        @else
-                            <td>NÃO</td>
+                        @if(array_search('CPF', $listaParaCarregar))
+                            <td>{{$pessoaPNE->cpf}}</td>
                         @endif
-                        @if($pessoaPNE->status_avaliado == 0 && $pessoaPNE->status == 0 && $pessoaPNE->status_revisado == 0)
-                            <td>0</td>
-                        @else
-                            <td>{{$pessoaPNE->pontuacao($pessoaPNE->id)->pontuacao_total}}</td>
+                        @if(array_search('CARGO', $listaParaCarregar))
+                            <td>{{$pessoaPNE->cargo->cargo}}</td>
                         @endif
-                        @if(is_null($pessoaPNE->status_avaliado))
-                            <td class="text-warning">Aguardando Avaliação</td>
-                        @elseif(!is_null($pessoaPNE->status_avaliado) && is_null($pessoaPNE->status) && is_null($pessoaPNE->status_revisado))
-                            <td class="text-warning">Aguardando Revisão</td>
-                        @elseif(!is_null($pessoaPNE->status_avaliado) && is_null($pessoaPNE->status) && $pessoaPNE->status_revisado == 0)
-                            <td class="text-warning">Aguardando Reavaliação</td>
-                        @elseif($pessoaPNE->status_avaliado == 1 && $pessoaPNE->status == 1 && $pessoaPNE->status_revisado == 1)
-                            <td class="text-success">Aprovado</td>
-                        @elseif($pessoaPNE->status_avaliado == 0 && $pessoaPNE->status == 0 && $pessoaPNE->status_revisado == 0)
-                            <td class="text-danger">Reprovado</td>
-                        @elseif(is_null($pessoaPNE->status_avaliado) || is_null($pessoaPNE->status) || is_null($pessoaPNE->status_revisado) || ($pessoaPNE->status_avaliado)==0 || ($pessoaPNE->status)==0 || ($pessoaPNE->status_revisado)==0)
-                            <td class="text-info">Solicite Suporte Avaliação Incorreta</td>
+                        @if(array_search('ESCOLARIDADE', $listaParaCarregar))
+                            <td>{{$pessoaPNE->escolaridade->nivel_escolaridade}}</td>
+                        @endif
+                        @if(array_search('PONTUAÇÃO PÚBLICA', $listaParaCarregar) || array_search('PONTUAÇÃO PRIVADA', $listaParaCarregar))
+                            @if($pessoaPNE->status_avaliado == 0 && $pessoaPNE->status == 0 && $pessoaPNE->status_revisado == 0)
+                                <td>0</td>
+                                <td>0</td>
+                            @else
+                                <td>{{$pessoaPNE->pontuacao($pessoaPNE->id)->pontuacao_total_publica}}</td>
+                                <td>{{$pessoaPNE->pontuacao($pessoaPNE->id)->pontuacao_total_privada}}</td>
+                            @endif
+                        @endif
+                        @if(array_search('PNE', $listaParaCarregar))
+                            @if ($pessoaPNE->portador_deficiencia == 1)
+                                <td style="font-weight: bold">SIM</td>
+                            @else
+                                <td>NÃO</td>
+                            @endif
+                        @endif
+                        @if(array_search('PONTUAÇÃO', $listaParaCarregar))
+                            @if($pessoaPNE->status_avaliado == 0 && $pessoaPNE->status == 0 && $pessoaPNE->status_revisado == 0)
+                                <td>0</td>
+                            @else
+                                <td>{{$pessoaPNE->pontuacao($pessoaPNE->id)->pontuacao_total}}</td>
+                            @endif
+                        @endif
+                        @if(array_search('STATUS', $listaParaCarregar))
+                            @if(is_null($pessoaPNE->status_avaliado))
+                                <td class="text-warning">Aguardando Avaliação</td>
+                            @elseif(!is_null($pessoaPNE->status_avaliado) && is_null($pessoaPNE->status) && is_null($pessoaPNE->status_revisado))
+                                <td class="text-warning">Aguardando Revisão</td>
+                            @elseif(!is_null($pessoaPNE->status_avaliado) && is_null($pessoaPNE->status) && $pessoaPNE->status_revisado == 0)
+                                <td class="text-warning">Aguardando Reavaliação</td>
+                            @elseif($pessoaPNE->status_avaliado == 1 && $pessoaPNE->status == 1 && $pessoaPNE->status_revisado == 1)
+                                <td class="text-success">Aprovado</td>
+                            @elseif($pessoaPNE->status_avaliado == 0 && $pessoaPNE->status == 0 && $pessoaPNE->status_revisado == 0)
+                                <td class="text-danger">Reprovado</td>
+                            @elseif(is_null($pessoaPNE->status_avaliado) || is_null($pessoaPNE->status) || is_null($pessoaPNE->status_revisado) || ($pessoaPNE->status_avaliado)==0 || ($pessoaPNE->status)==0 || ($pessoaPNE->status_revisado)==0)
+                                <td class="text-info">Solicite Suporte Avaliação Incorreta</td>
+                            @endif
+                        @endif
+                        @if(array_search('MOTIVO DE RECUSAR', $listaParaCarregar) && isset($excel))
+                            <td>RECUSADO</td>
                         @endif
                     </tr>
                     {{$i++}}
@@ -167,39 +207,58 @@
             @if($pessoa->pessoaEditalAnexos->count() != 0)
                 <tr>
                     <td>{{$i}}</td>
-                    <td>{{$pessoa->nome_completo}}</td>
-                    <td>{{$pessoa->cpf}}</td>
-                    <td>{{$pessoa->cargo->cargo}}</td>
-                    <td>{{$pessoa->escolaridade->nivel_escolaridade}}</td>
-                    @if($pessoa->status_avaliado == 0 && $pessoa->status == 0 && $pessoa->status_revisado == 0)
-                        <td>0</td>
-                        <td>0</td>
-                    @else
-                        <td>{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_publica}}</td>
-                        <td>{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_privada}}</td>
+                    @if(array_search("NOME", $listaParaCarregar) == 0)
+                        <td>{{$pessoa->nome_completo}}</td>
                     @endif
-                    @if ($pessoa->portador_deficiencia == 1)
-                        <td style="font-weight: bold">SIM</td>
-                    @else
-                        <td>NÃO</td>
+                    @if(array_search('CPF', $listaParaCarregar))
+                        <td>{{$pessoa->cpf}}</td>
                     @endif
-                    @if($pessoa->status_avaliado == 0 && $pessoa->status == 0 && $pessoa->status_revisado == 0)
-                        <td>0</td>
-                    @else
-                        <td>{{$pessoa->pontuacao($pessoa->id)->pontuacao_total}}</td>
+                    @if(array_search('CARGO', $listaParaCarregar))
+                        <td>{{$pessoa->cargo->cargo}}</td>
                     @endif
-                    @if(is_null($pessoa->status_avaliado))
-                        <td class="text-warning">Aguardando Avaliação</td>
-                    @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && is_null($pessoa->status_revisado))
-                        <td class="text-warning">Aguardando Revisão</td>
-                    @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && $pessoa->status_revisado == 0)
-                        <td class="text-warning">Aguardando Reavaliação</td>
-                    @elseif($pessoa->status_avaliado == 1 && $pessoa->status == 1 && $pessoa->status_revisado == 1)
-                        <td class="text-success">Aprovado</td>
-                    @elseif($pessoa->status_avaliado == 0 && $pessoa->status == 0 && $pessoa->status_revisado == 0)
-                        <td class="text-danger">Reprovado</td>
-                    @elseif(is_null($pessoa->status_avaliado) || is_null($pessoa->status) || is_null($pessoa->status_revisado) || ($pessoa->status_avaliado)==0 || ($pessoa->status)==0 || ($pessoa->status_revisado)==0)
-                        <td class="text-info">Solicite Suporte Avaliação Incorreta</td>
+                    @if(array_search('ESCOLARIDADE', $listaParaCarregar))
+                        <td>{{$pessoa->escolaridade->nivel_escolaridade}}</td>
+                    @endif
+                    @if(array_search('PONTUAÇÃO PÚBLICA', $listaParaCarregar) || array_search('PONTUAÇÃO PRIVADA', $listaParaCarregar))
+                        @if($pessoa->status_avaliado == 0 && $pessoa->status == 0 && $pessoa->status_revisado == 0)
+                            <td>0</td>
+                            <td>0</td>
+                        @else
+                            <td>{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_publica}}</td>
+                            <td>{{$pessoa->pontuacao($pessoa->id)->pontuacao_total_privada}}</td>
+                        @endif
+                    @endif
+                    @if(array_search('PNE', $listaParaCarregar))
+                        @if ($pessoa->portador_deficiencia == 1)
+                            <td style="font-weight: bold">SIM</td>
+                        @else
+                            <td>NÃO</td>
+                        @endif
+                    @endif
+                    @if(array_search('PONTUAÇÃO', $listaParaCarregar))
+                        @if($pessoa->status_avaliado == 0 && $pessoa->status == 0 && $pessoa->status_revisado == 0)
+                            <td>0</td>
+                        @else
+                            <td>{{$pessoa->pontuacao($pessoa->id)->pontuacao_total}}</td>
+                        @endif
+                    @endif
+                    @if(array_search('STATUS', $listaParaCarregar))
+                        @if(is_null($pessoa->status_avaliado))
+                            <td class="text-warning">Aguardando Avaliação</td>
+                        @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && is_null($pessoa->status_revisado))
+                            <td class="text-warning">Aguardando Revisão</td>
+                        @elseif(!is_null($pessoa->status_avaliado) && is_null($pessoa->status) && $pessoa->status_revisado == 0)
+                            <td class="text-warning">Aguardando Reavaliação</td>
+                        @elseif($pessoa->status_avaliado == 1 && $pessoa->status == 1 && $pessoa->status_revisado == 1)
+                            <td class="text-success">Aprovado</td>
+                        @elseif($pessoa->status_avaliado == 0 && $pessoa->status == 0 && $pessoa->status_revisado == 0)
+                            <td class="text-danger">Reprovado</td>
+                        @elseif(is_null($pessoa->status_avaliado) || is_null($pessoa->status) || is_null($pessoa->status_revisado) || ($pessoa->status_avaliado)==0 || ($pessoa->status)==0 || ($pessoa->status_revisado)==0)
+                            <td class="text-info">Solicite Suporte Avaliação Incorreta</td>
+                        @endif
+                    @endif
+                    @if(array_search('MOTIVO DE RECUSAR', $listaParaCarregar) && isset($excel))
+                        <td>RECUSADO</td>
                     @endif
                 </tr>
                 {{$i++}}
@@ -210,15 +269,33 @@
         <tfoot>
         <tr>
             <th>#</th>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Cargo</th>
-            <th>Escolaridade</th>
-            <th>Pontuação Publica</th>
-            <th>Pontuacação Privada</th>
-            <th>PNE</th>
-            <th>Pontuação</th>
-            <th>Status</th>
+            @if(array_search("NOME", $listaParaCarregar) == 0)
+                <th>Nome</th>
+            @endif
+            @if(array_search('CPF', $listaParaCarregar))
+                <th>CPF</th>
+            @endif
+            @if(array_search('CARGO', $listaParaCarregar))
+                <th>Cargo</th>
+            @endif
+            @if(array_search('ESCOLARIDADE', $listaParaCarregar))
+                <th>Escolaridade</th>
+            @endif
+            @if(array_search('PONTUAÇÃO PÚBLICA', $listaParaCarregar))
+                <th>Pontuação Publica</th>
+            @endif
+            @if(array_search('PONTUAÇÃO PRIVADA', $listaParaCarregar))
+                <th>Pontuacação Privada</th>
+            @endif
+            @if(array_search('PNE', $listaParaCarregar))
+                <th>PNE</th>
+            @endif
+            @if(array_search('PONTUAÇÃO', $listaParaCarregar))
+                <th>Pontuação</th>
+            @endif
+            @if(array_search('MOTIVO DE RECUSAR', $listaParaCarregar) && isset($excel))
+                <th>RECUSADO</th>
+            @endif
         </tr>
         </tfoot>
     </table>

@@ -22,7 +22,7 @@ use App\Models\Escolaridade;
 Auth::routes([
     'register' => false
 ]);
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/sair', function () {
     auth()->logout();
@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('table');
 
     Route::get('/visualizacao/{editalID}', 'AreaRestritaController@index')->name('/visualizacao');
-    Route::get('/avaliar/{id}', 'AreaRestritaController@index2')->name('/avaliar');
+    Route::get('/avaliar/{id}', [\App\Http\Controllers\AreaRestritaController::class, 'index2'])->name('/avaliar');
     Route::post('pontuacao', 'PontuacaoController@store')->name('pontuacao');
 
     Route::get('/revisao/{editalID}', 'AreaRestritaController@index3')->name('revisao');
@@ -98,7 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('carrossel-update/{id}', 'TelasDinamicas\CarrosselController@update')->name('carrossel.update');
     Route::get('carrossel-delete/{id}', 'TelasDinamicas\CarrosselController@destroy')->name('carrossel.delete');
     Route::get('carrossel-create', 'TelasDinamicas\CarrosselController@create')->name('carrossel.create');
-    Route::post('carrossel-store', 'TelasDinamicas\CarrosselController@store')->name('carrossel.store');
+    Route::post('carrossel-store', [\App\Http\Controllers\TelasDinamicas\CarrosselController::class, 'store'])->name('carrossel.store');
 
     Route::get('lista/formularios', [\App\Http\Controllers\ListaInscricoesController::class, 'index'])->name('lista.formularios');
     Route::get('formularios/visualizar/{id}', [\App\Http\Controllers\ListaInscricoesController::class, 'show'])->name('formulario.show');
@@ -145,6 +145,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/relatorio/gerar/', [\App\Http\Controllers\RelatoriosController::class, 'gerarRelatorio'])->name('relatorio.gerar');
     Route::get('/relatorio/unico/{id}', [\App\Http\Controllers\RelatoriosController::class, 'visualizar'])->name('relatorio.unico');
     Route::get('/controller/bloquear/{id}', [\App\Http\Controllers\UserController::class, 'block'])->name('user.block');
+
+    //LISTA CANDIDATOS
+    Route::get('lista/candidatos/{pessoas?}', [\App\Http\Controllers\ListaCandidatos\ListaController::class, 'index'])->name('lista.candidatos.index');
+    Route::post('lista/candidatos/filtro', [\App\Http\Controllers\ListaCandidatos\ListaController::class, 'filtro'])->name('lista.candidatos.filtro');
+    Route::get('candidato/{id}', [\App\Http\Controllers\ListaCandidatos\ListaController::class, 'devolverAvaliacao'])->name('lista.candidatos.devolverAvaliacao');
 });
 
 Route::group(['middleware' => 'auth'], function () {

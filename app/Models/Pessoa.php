@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Pessoa extends Model
+class Pessoa extends Model implements Auditable
 {
     //
+    use AuditableTrait;
     protected $table = 'pessoa';
     protected $fillable = [
         'id',
@@ -79,5 +82,9 @@ class Pessoa extends Model
 
     public function revisarPessoa($id){
         return RevisarPessoa::where('pessoa_id', $id)->get()->last();
+    }
+
+    public function reprovarMotivo(){
+        return $this->hasOne(ReprovarPessoa::class, 'pessoa_id', 'id')->latest();
     }
 }

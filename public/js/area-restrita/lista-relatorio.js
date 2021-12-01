@@ -148,11 +148,18 @@ $(document).ready(function() {
         if (tipo == 2) {
             $('#divTitulo').removeAttr('hidden')
             $('#divShowPNE').removeAttr('hidden')
+            $('#divConstruirExcel').attr('hidden', true)
         }
         else {
             $('#divTitulo').attr('hidden', true)
             $('#divShowPNE').attr('hidden', true)
+            $('#divConstruirExcel').attr('hidden', true)
             $('#titulo').val('')
+        }
+
+        if (tipo == 3) {
+            $('#divConstruirExcel').removeAttr('hidden')
+            $('#divShowPNE').removeAttr('hidden')
         }
     })
 } );

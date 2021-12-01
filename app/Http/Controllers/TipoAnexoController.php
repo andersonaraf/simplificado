@@ -21,13 +21,25 @@ class TipoAnexoController extends Controller
 
     public function store(Request $request)
     {
-        $tipoAnexo = new TipoAnexo();
-        $tipoAnexo->tipo = $request->inputTitulo;
+        try {
+            if ($this->searchExist(mb_strtoupper($request->inputTitulo))) {
+                $tipoAnexo = new TipoAnexo();
+                $tipoAnexo->tipo = mb_strtoupper($request->inputTitulo);
 
-        if ($tipoAnexo->save()) {
-            session()->put('sucess', 'Título criado com sucesso.');
-        } else session()->put('error', 'Não foi possível criar um novo título.');
+                $tipoAnexo->save();
+                return redirect()->route('edital.formulario.anexo', $request->editalDinamicoID)->with(['type' => 'success', 'msg' => 'Título criado com sucesso']);
+            }
+            return redirect()->route('edital.formulario.anexo',$request->editalDinamicoID)->with(['type'=> 'error', 'msg' => 'Esse título já existe.']);
+        } catch (\Exception $exception) {
+            return redirect()->route('edital.formulario.anexo',$request->editalDinamicoID)->with(['type' => 'error', 'msg' => $exception->getMessage()]);
+        }
 
-        return redirect()->route('edital.formulario.anexo', $request->editalDinamicoID);
+    }
+
+    public function searchExist($titulo)
+    {
+        $tipoAnexo = TipoAnexo::where('tipo', $titulo)->first();
+        if (is_null($tipoAnexo)) return true;
+        return false;
     }
 }
