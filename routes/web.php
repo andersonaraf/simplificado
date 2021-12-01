@@ -148,6 +148,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //LISTA CANDIDATOS
     Route::get('lista/candidatos/{pessoas?}', [\App\Http\Controllers\ListaCandidatos\ListaController::class, 'index'])->name('lista.candidatos.index');
+    Route::post('lista/candidatos/filtro', [\App\Http\Controllers\ListaCandidatos\ListaController::class, 'filtro'])->name('lista.candidatos.filtro');
+    Route::get('candidato/{id}', [\App\Http\Controllers\ListaCandidatos\ListaController::class, 'devolverAvaliacao'])->name('lista.candidatos.devolverAvaliacao');
 });
 
 Route::group(['middleware' => 'auth'], function () {

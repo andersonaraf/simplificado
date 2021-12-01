@@ -35,7 +35,8 @@
 @yield('recurso')
 
 <!--   Core JS Files   -->
-<script src="{{ asset('material') }}/js/core/jquery.min.js"></script>
+{{--<script src="{{ asset('material') }}/js/core/jquery.min.js"></script>--}}
+<script src="{{asset('assets/jquery-3.6.0.min.js')}}"></script>
 <script src="{{ asset('material') }}/js/core/popper.min.js"></script>
 <script src="{{ asset('material') }}/js/core/bootstrap-material-design.min.js"></script>
 <script src="{{ asset('material') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
