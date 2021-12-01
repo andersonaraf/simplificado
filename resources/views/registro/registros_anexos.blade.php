@@ -84,7 +84,7 @@
                         @endforeach
 
                         @if ($key < ($tipoAnexoCargo->count() - 1))
-                            <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                            <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                         @endif
                         @if($key != 0)
                             <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>

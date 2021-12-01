@@ -27,9 +27,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($pessoas as $pessoa)
+                    @foreach($pessoas as $key=>$pessoa)
                         <tr>
-                            <td>{{$pessoa->id}}</td>
+                            <td>{{$key+1}}</td>
                             <td>{{$pessoa->nome_completo}}</td>
                             <td>{{$pessoa->cpf}}</td>
                             <td>{{$pessoa->cargo->cargo}}</td>

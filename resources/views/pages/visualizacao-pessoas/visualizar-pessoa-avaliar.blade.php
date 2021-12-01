@@ -73,7 +73,7 @@
                                         @else
                                             <input type="text" value="Não" disabled/>
                                         @endif
-                                        <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                                        <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                                     </fieldset>
 
                                     <fieldset>
@@ -85,7 +85,7 @@
                                         <p>Endereço</p>
                                         <input type="text" placeholder="Informe seu Endereço" value="{{$pessoa->endereco->endereco}}"
                                                disabled/>
-                                        <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                                        <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                                         <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
                                     </fieldset>
 
@@ -101,7 +101,7 @@
                                             <a target="_blank" href="{{asset('storage/anexos/documentos/'.$pessoa->anexos->anexo_escolaridade)}}">Anexo de Escolaridade</a>
                                         </div>
 
-                                        <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                                        <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                                         <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
                                     </fieldset>
 
@@ -135,7 +135,7 @@
                                                 <strong>Não possui Anexos!</strong>
                                             </div>
                                         @endif
-                                        <input type="button" id="next" class="next acao" value="Proximo"/>
+                                        <input type="button" id="next" class="next acao" value="Próximo"/>
                                         <input type="button" id="prev" class="prev acao" value="Anterior"/>
                                     </fieldset>
                                     @if($pessoa->escolaridade->id == '3')
@@ -168,7 +168,7 @@
                                                     <strong>Não possui Anexos!</strong>
                                                 </div>
                                             @endif
-                                            <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                                            <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                                             <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
                                         </fieldset>
 
@@ -202,7 +202,7 @@
                                                     <strong>Não possui Anexos!</strong>
                                                 </div>
                                             @endif
-                                            <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                                            <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                                             <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
                                         </fieldset>
 
@@ -233,7 +233,7 @@
                                                     <strong>Não possui Anexos!</strong>
                                                 </div>
                                             @endif
-                                            <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                                            <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                                             <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
                                         </fieldset>
                                     @endif

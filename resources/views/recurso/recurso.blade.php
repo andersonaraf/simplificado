@@ -44,7 +44,7 @@
                     @error('editalDinamicoID')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                    <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                    <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                 </fieldset>
 
                 <fieldset>
