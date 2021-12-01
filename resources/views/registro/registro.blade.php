@@ -66,7 +66,7 @@
                     @enderror
 
                     <select name="nacionalidade" id="nacionalidade">
-                        <option>Informe sua Nacionalidade</option>
+                        <option value="">Informe sua Nacionalidade</option>
                         <option value="Brasil" >Brasil</option>
                         <option value="Afeganistão">Afeganistão</option>
                         <option value="África do Sul">África do Sul</option>
@@ -322,7 +322,7 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <select name="naturalidade" id="naturalidade">
-                        <option>Informe sua Naturalidade Caso Brasileiro</option>
+                        <option value="">Informe sua Naturalidade Caso Brasileiro</option>
                         <option value="Acre">Acre</option>
                         <option value="Alagoas">Alagoas</option>
                         <option value="AP">Amapá</option>
@@ -378,6 +378,7 @@
 
                     <p>Sexo</p>
                     <select class="@error('sexo') is-invalid @enderror form-control" name="sexo" id="sexo">
+                        <option value="">Selecione</option>
                         <option value="H">Masculino</option>
                         <option value="M">Feminino</option>
                     </select>

@@ -32,6 +32,10 @@
                     </li>
                     @if(auth()->check())
                         <li>
+                            <a class="nav-link" href="{{route('home')}}">Área administrativa</a>
+                        </li>
+
+                        <li>
                             <a class="nav-link" href="{{route('sair')}}">Sair</a>
                         </li>
                     @endif

@@ -9,6 +9,11 @@
             border: 1px solid #fff;
             padding-top: 3%;
         }
+
+        #formulario_registro #progress li:hover {
+            background: #058bff;
+            cursor: pointer;
+        }
     </style>
 @endsection
 @section('content')
@@ -23,7 +28,9 @@
                         @error('motivo_recusar.*')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-
+                        @error('motivo_rep')
+                        <div class="alert alert-danger font-weight-bold">{{ mb_strtoupper($message) }}</div>
+                        @enderror
                         <ul id="progress">
                             <li class="ativo progress-click h-auto" data-pos="0">Informações Pessoais</li>
                             <li class="progress-click h-auto" data-pos="1">Endereço</li>
@@ -33,13 +40,15 @@
                         </ul>
 
                         @if (!is_null($pessoa->status_revisado) && $pessoa->status_revisado == 0)
-                            <div class="card text-primary bg-warning">
-                                <div class="card-header"><h4 class="font-weight-bold">Motivo Reavaliar</h4></div>
-                                <div class="card-body">
-                                    <p class="card-text"
-                                       style="font-size: 16px">{{$pessoa->revisarPessoa($pessoa->id)->motivo}}</p>
+                            @if (!is_null($pessoa->revisarPessoa($pessoa->id)))
+                                <div class="card text-primary bg-warning">
+                                    <div class="card-header"><h4 class="font-weight-bold">Motivo Reavaliar</h4></div>
+                                    <div class="card-body">
+                                        <p class="card-text"
+                                           style="font-size: 16px">{{$pessoa->revisarPessoa($pessoa->id)->motivo}}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         @endif
 
                         @error('limite')
@@ -103,7 +112,7 @@
                             @endif
                             <p>Data de Inscrição</p>
                             <input type="text" value="{{$pessoa->created_at->format('d-m-Y H:i')}}" disabled>
-                            <input type="button" name="next" id="next" class="next acao" value="Proximo" data-pos="0"/>
+                            <input type="button" name="next" id="next" class="next acao" value="Próximo" data-pos="0"/>
                         </fieldset>
 
                         <fieldset data-pos="1" class="fild">
@@ -118,7 +127,7 @@
                             <input type="text" placeholder="Informe seu Endereço"
                                    value="{{$pessoa->endereco->endereco}}"
                                    disabled/>
-                            <input type="button" name="next" id="next" class="next acao" value="Proximo" data-pos="1"/>
+                            <input type="button" name="next" id="next" class="next acao" value="Próximo" data-pos="1"/>
                             <input type="button" name="prev" id="prev" class="prev acao" value="Anterior" data-pos="1"/>
                         </fieldset>
                         @foreach($tipoAnexoCargo as $key=>$progresso)
@@ -228,7 +237,7 @@
                                     </div>
                                 @endforeach
                                 @if($key != $tipoAnexoCargo->count() - 1)
-                                    <input type="button" name="next" id="next" class="next acao" value="Proximo" data-pos="{{$key+2}}"/>
+                                    <input type="button" name="next" id="next" class="next acao" value="Próximo" data-pos="{{$key+2}}"/>
                                 @endif
                                 @if($key == $tipoAnexoCargo->count() - 1)
                                     <div class="row justify-content-end">

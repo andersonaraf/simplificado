@@ -33,10 +33,11 @@ $(function () {
         // atual_fs.hide(800)
         // next_fs.show(800)
         $('.fild').map(function () {
+            $(`.progress-click[data-pos=${$(this).attr('data-pos')}]`).css('background', '#e96b56')
             return $(this).css('display', 'none')
         })
         $(`.fild[data-pos=${$(this).attr('data-pos')}]`).css('display', 'block')
-
+        $(this).css('background', '#058bff')
         $('html,body').scrollTop(0);
         $('html, body').animate({scrollTop: 0}, 'slow');
 

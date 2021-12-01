@@ -117,11 +117,11 @@
                             <th>Ações</th>
                         </tr>
                         </thead>
-                        <tbody @foreach($pessoas as $pessoa)
+                        <tbody @foreach($pessoas as $key=>$pessoa)
 
 
                             <tr>
-                                <td>{{$pessoa->id}}</td>
+                                <td>{{$key+1}}</td>
                                 <td>{{$pessoa->nome_completo}}</td>
                                 <td>{{$pessoa->cpf}}</td>
                                 <td>{{$pessoa->cargo->cargo}}</td>

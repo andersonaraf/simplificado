@@ -6,7 +6,7 @@
         Tip 2: you can also add an image using data-image tag
     -->
     <div class="logo">
-        <a href="#" class="simple-text logo-normal">
+        <a href="{{route('home')}}" class="simple-text logo-normal">
             {{ __('Início') }}
         </a>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AvaliacaoReprovarRequest;
 use App\Models\Pessoa;
 use App\Models\PessoaEditalAnexo;
 use App\Models\Pontuacao;
@@ -148,8 +149,9 @@ class AvaliadorAvaliarController extends Controller
         }
     }
 
-    public function reprovar(Request $request)
+    public function reprovar(AvaliacaoReprovarRequest $request)
     {
+        dd($request->all());
         try {
             DB::beginTransaction();
 

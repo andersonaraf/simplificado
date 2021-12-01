@@ -9,6 +9,10 @@
             border: 1px solid #fff;
             padding-top: 3%;
         }
+        #formulario_registro #progress li:hover {
+            background: #058bff;
+            cursor: pointer;
+        }
     </style>
 @endsection
 @section('content')
@@ -24,10 +28,10 @@
                         @enderror
 
                         <ul id="progress">
-                            <li class="ativo">Informações Pessoais</li>
-                            <li>Endereço</li>
-                            @foreach($tipoAnexoCargo as $tipo)
-                                <li>{{$tipo->tipoAnexo->tipo}}</li>
+                            <li class="ativo progress-click" data-pos="0">Informações Pessoais</li>
+                            <li class="progress-click" data-pos="1">Endereço</li>
+                            @foreach($tipoAnexoCargo as $key=>$tipo)
+                                <li class="progress-click" data-pos="{{$key+2}}">{{$tipo->tipoAnexo->tipo}}</li>
                             @endforeach
                         </ul>
                         @if (!is_null($pessoa->status_avaliado) && $pessoa->status_avaliado == 0)
@@ -40,7 +44,7 @@
                             </div>
                         @endif
 
-                        <fieldset>
+                        <fieldset class="fild" data-pos="0">
                             <h2>Informações Pessoais</h2>
                             <p>Nome Completo</p>
                             <input type="text" placeholder="Nome Completo"
@@ -95,10 +99,10 @@
                                        value="Não"
                                        disabled/>
                             @endif
-                            <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                            <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset class="fild" data-pos="1">
                             <h2>Endereço</h2>
                             <p>CEP</p>
                             <input type="text" placeholder="Informe seu CEP"
@@ -110,11 +114,11 @@
                             <input type="text" placeholder="Informe seu Endereço"
                                    value="{{$pessoa->endereco->endereco}}"
                                    disabled/>
-                            <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                            <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                             <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
                         </fieldset>
                         @foreach($tipoAnexoCargo as $key=>$progresso)
-                            <fieldset>
+                            <fieldset class="fild" data-pos="{{$key+2}}">
                                 <div class="row">
                                     <div class="col col-sm-12">
                                         <input type="button" name="next" class="btn btn-danger float-right mr-2"
@@ -187,7 +191,7 @@
                                 @endforeach
 
                                 @if($key != $tipoAnexoCargo->count() - 1)
-                                    <input type="button" name="next" id="next" class="next acao" value="Proximo"/>
+                                    <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                                 @endif
                                 @if($key == $tipoAnexoCargo->count() - 1)
                                     <div class="row justify-content-end">
