@@ -145,6 +145,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/relatorio/gerar/', [\App\Http\Controllers\RelatoriosController::class, 'gerarRelatorio'])->name('relatorio.gerar');
     Route::get('/relatorio/unico/{id}', [\App\Http\Controllers\RelatoriosController::class, 'visualizar'])->name('relatorio.unico');
     Route::get('/controller/bloquear/{id}', [\App\Http\Controllers\UserController::class, 'block'])->name('user.block');
+
+    //LISTA CANDIDATOS
+    Route::get('lista/candidatos/{pessoas?}', [\App\Http\Controllers\ListaCandidatos\ListaController::class, 'index'])->name('lista.candidatos.index');
 });
 
 Route::group(['middleware' => 'auth'], function () {
