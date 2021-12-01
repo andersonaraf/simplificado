@@ -31,23 +31,22 @@
                             @endforeach
                         </ul>
                         @if(!is_null($pessoa->recurso))
-                            <div class="card text-primary bg-warning">
-                                <div class="card-header"><h4 class="font-weight-bold">Recurso</h4></div>
+                            <div class="card text-primary bg-info">
+                                <div class="card-header"><h4 class="font-weight-bold text-white">Recurso</h4></div>
                                 <div class="card-body">
-                                    <p class="card-text"
+                                    <p class="card-text text-white"
                                        style="font-size: 16px">{{$pessoa->recurso->recurso}}</p>
                                 </div>
                                 @if(!is_null($pessoa->recurso->url_anexo))
                                     <h5>
-                                        <a target="_blank" class="text-justify text-body"
-                                           href="{{asset('recurso/'.$pessoa->recurso->url_anexo)}}">Anexo</a>
+                                        <a target="_blank" class="text-justify text-body text-white font-weight-bold"
+                                           href="{{asset('storage/'.$pessoa->recurso->url_anexo)}}">Anexo</a>
                                     </h5>
                                 @endif
                             </div>
-
                         @endif
                         @if (!is_null($pessoa->status_avaliado) && $pessoa->status_avaliado == 0)
-                            <div class="card text-white bg-warning">
+                            <div class="card text-white bg-info">
                                 <div class="card-header"><h4 class="font-weight-bold">Motivo Reprovar</h4></div>
                                 <div class="card-body">
                                     <p class="card-text"

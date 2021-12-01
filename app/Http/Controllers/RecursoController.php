@@ -42,7 +42,7 @@ class RecursoController extends Controller
             //Define o nome do arquivo
             $nameFile = "{$name}.{$extesion}";
             //Faz Upload
-            $upload = $documento->move('recurso', $nameFile);
+            $nameFile = $documento->store('recurso');
         }
 
         //CADASTRA O RECURSO
