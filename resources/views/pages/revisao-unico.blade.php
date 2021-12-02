@@ -35,10 +35,10 @@
                             @endforeach
                         </ul>
                         @if (!is_null($pessoa->status_avaliado) && $pessoa->status_avaliado == 0)
-                            <div class="card text-primary bg-warning">
-                                <div class="card-header"><h4 class="font-weight-bold">Motivo Reprovar</h4></div>
+                            <div class="card text-primary bg-info">
+                                <div class="card-header"><h4 class="font-weight-bold text-white">MOTIVO DA REPROVAÇÃO</h4></div>
                                 <div class="card-body">
-                                    <p class="card-text"
+                                    <p class="card-text text-white"
                                        style="font-size: 16px">{{$pessoa->reprovarPessoa($pessoa->id)->motivo}}</p>
                                 </div>
                             </div>

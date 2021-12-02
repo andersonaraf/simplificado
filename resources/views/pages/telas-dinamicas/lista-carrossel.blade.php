@@ -23,9 +23,9 @@
                         </tr>
                         </thead>
                         <tbody id="myTable">
-                        @forelse($carrossels as $carrossel)
+                        @forelse($carrossels as $key=>$carrossel)
                             <tr>
-                                <th>{{$carrossel->id}}</th>
+                                <th>{{$key+1}}</th>
                                 <th><a target="_blank" href="{{asset('images/caruosel/'.$carrossel->url_img)}}">Imagem</a></th>
                                 <th><a href="{{$carrossel->url_link}}" target="_blank">LINK</a></th>
                                 <th>

@@ -61,10 +61,11 @@ class RelatoriosController extends Controller
         //TIPO
         //1 = TABELA | 2  = PDF | 3 = execel
         $tipo = $request->tipo;
-        ////
+        //
         $cargos = Cargo::all();
         $niveisEscolaridades = Escolaridade::all();
         $editalDinamico = EditalDinamico::findOrFail($request->editalDinamicoID);
+        $listaDoMultiSelect = $this->listaDoMultiSelect;
         //VERIFICAR SE TODOS ESTÃO VAZIOS
         if (is_null($request->cargoID) && is_null($request->escolaridadeID) && is_null($request->status)) {
             if (!is_null($request->titulo)) {
@@ -72,7 +73,7 @@ class RelatoriosController extends Controller
             } else $titulo = 'Processo Seletivo Simplificado ' . date('Y');
             if ($tipo == 1) {
                 $pessoas = $this->gerarTodasPessoas($request);
-                return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico'));
+                return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico', 'listaDoMultiSelect'));
             } else if ($tipo == 2) {
                 $pessoas = $this->gerarPessoasS($request, 0);
                 $pessoasPNE = $this->gerarPessoasS($request, 0);
@@ -91,7 +92,7 @@ class RelatoriosController extends Controller
         }
         if ($tipo == 1) {
             $pessoas = $this->gerarTodasPessoas($request);
-            return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico'));
+            return view('pages.relatorio.relatorios', compact('pessoas', 'cargos', 'niveisEscolaridades', 'editalDinamico', 'listaDoMultiSelect'));
         } // GENERATE PDF
         else if ($tipo == 2) {
             $pessoas = $this->gerarPessoasS($request, 0);
@@ -173,6 +174,11 @@ class RelatoriosController extends Controller
                 $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
             }
         }
+
+        //caso não exista filtro
+        if(!isset($pessoas)){
+            $pessoas = new Pessoa();
+        }
         $pessoas->with('pontuacao2')->where('portador_deficiencia', $status);
 
         $pessoas = $pessoas->get()->sortBy([
@@ -208,6 +214,10 @@ class RelatoriosController extends Controller
             if (!is_null($request->escolaridadeID)) {
                 $pessoas = Pessoa::where('escolaridade_id', $request->escolaridadeID);
             }
+        }
+
+        if(!isset($pessoas)){
+            $pessoas = new Pessoa();
         }
         $pessoas->where('edital_dinamico_id', $request->editalDinamicoID);
         $pessoas = $pessoas->get();

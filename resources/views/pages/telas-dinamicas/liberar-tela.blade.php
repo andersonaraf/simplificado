@@ -16,7 +16,7 @@
                             <th scope="col">Tipo</th>
                             <th scope="col">Nome da Tela</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Data Liberar</th>
+                            <th scope="col">Status da Tela</th>
                             <th scope="col">Opções</th>
                         </tr>
                         </thead>

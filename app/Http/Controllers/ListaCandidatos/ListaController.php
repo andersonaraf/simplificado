@@ -18,7 +18,7 @@ class ListaController extends Controller
     }
 
     public function filtro(Request $request){
-        $pessoas = Pessoa::orWhere('cargo_id', $request->cargo_id)->orwhere('nome_completo', 'like', "%".$request->nome_completo."%")->get();
+        $pessoas = Pessoa::where('cargo_id', $request->cargo_id)->where('nome_completo', 'like', "%".$request->nome_completo."%")->get();
         return $this->index($pessoas);
     }
 
