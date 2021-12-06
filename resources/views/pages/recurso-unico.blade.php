@@ -132,8 +132,7 @@
                             <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
                             <input type="button" name="prev" id="prev" class="prev acao" value="Anterior"/>
                         </fieldset>
-                        @foreach($progress as $key=>$progresso)
-
+                        @foreach($tipoAnexoCargo as $key=>$progresso)
                             <fieldset class="fild" data-pos="{{$key+2}}">
                                 <div class="row">
                                     <div class="col col-sm-12">
@@ -186,7 +185,7 @@
                                         </label>
                                     </div>
                                 @endif
-                                @foreach($progresso->tipoAnexo->pessoaEditalAnexosPessoa($pessoa->id, $progresso->edital_dinamico_id, $progresso->tipo_anexo_id) as $anexo)
+                                @foreach($progresso->pessoaEditalAnexos($pessoa->id, $pessoa->edital_dinamico_id, $progresso->tipoAnexo->id) as $anexo)
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">{{$anexo->documentoDinamico->nome_documento}}</h3>
