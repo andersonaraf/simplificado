@@ -26,7 +26,7 @@ class RecursoAdminRequest extends FormRequest
         return [
             //
             'pessoa_id' => 'required|exists:pessoa,id',
-            'motivo_reav' => 'required|string|max:500',
+            'motivo_reav' => 'required|string|max:16777214',
         ];
     }
 
