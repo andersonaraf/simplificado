@@ -21,7 +21,7 @@
                                 <input type="file" id="fupload1" name="file_img"  class="fupload form-control"/>
                                 <h5><strong>Banner</strong></h5>
                                 <div class="row justify-content-center">
-                                    <img src="{{asset('images/caruosel/'.$carrossel->url_img)}}" width="420px">
+                                    <img src="{{asset('storage/'.$carrossel->url_img)}}" width="420px" alt="IMAGEM NÃO ENCONTRADA">
                                 </div>
                             </div>
                             @error('file_img')
