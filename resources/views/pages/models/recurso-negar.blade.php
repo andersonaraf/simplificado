@@ -15,7 +15,7 @@
                     <h5 class="card-title mb-3">Motivo para Nega o Recurso</h5>
                     <div class="form-group mt-3">
                         <label for="motivo_reav">Descreva o motivo</label>
-                        <textarea class="form-control mt-4" name="motivo_reav" id="motivo_reav" maxlength = "500" rows="5"></textarea>
+                        <textarea class="form-control mt-4" name="motivo_reav" id="motivo_reav" maxlength = "16777214" rows="5"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
