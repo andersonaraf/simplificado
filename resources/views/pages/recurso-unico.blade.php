@@ -44,7 +44,7 @@
                                 @if(!is_null($pessoa->recurso->url_anexo))
                                     <h5>
                                         <a target="_blank" class="text-justify text-body text-white font-weight-bold"
-                                           href="{{asset('storage/'.$pessoa->recurso->url_anexo)}}">Anexo</a>
+                                           href="{{asset('storage/'.(str_contains($pessoa->recurso->url_anexo, 'recurso') ? $pessoa->recurso->url_anexo : 'recurso/'.$pessoa->recurso->url_anexo))}}">Anexo</a>
                                     </h5>
                                 @endif
                             </div>
