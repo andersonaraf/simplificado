@@ -100,8 +100,7 @@ class CarrosselController extends Controller
     {
         $carrosel = Carrossel::findOrFail($id);
         if (isset($request->file_img)) {
-            $fileName = $carrosel->id . '-' . time() . '.'.$request->file_img->extension();
-            $request->file_img->move(public_path('images/caruosel'), $fileName);
+            $fileName = $request->file_img->store('carrossel');
            $carrosel->update([
                'url_img' => $fileName,
            ]);

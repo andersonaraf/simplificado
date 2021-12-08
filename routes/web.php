@@ -94,7 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('alterar-titulo/{id}', 'TelasDinamicas\TituloController@update')->name('titulo.update');
 
     Route::get('lista-carrossel', 'TelasDinamicas\CarrosselController@index')->name('lista.carrossel.index');
-    Route::get('carrossel-edit/{id}', 'TelasDinamicas\CarrosselController@edit')->name('carrossel.edit');
+    Route::get('carrossel-edit/{id}', [\App\Http\Controllers\TelasDinamicas\CarrosselController::class, 'edit'])->name('carrossel.edit');
     Route::post('carrossel-update/{id}', 'TelasDinamicas\CarrosselController@update')->name('carrossel.update');
     Route::get('carrossel-delete/{id}', 'TelasDinamicas\CarrosselController@destroy')->name('carrossel.delete');
     Route::get('carrossel-create', 'TelasDinamicas\CarrosselController@create')->name('carrossel.create');
