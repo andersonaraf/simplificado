@@ -5,10 +5,11 @@
     <style>
         #progress li {
             width: {{$progressQuantiadePorcento}}% !important;
-            height: 120px;
+            height: 155px;
             border: 1px solid #fff;
             padding-top: 3%;
         }
+
         #formulario_registro #progress li:hover {
             background: #058bff;
             cursor: pointer;
@@ -21,7 +22,7 @@
             <main class="container" id="ajuste">
                 <div class="row">
                     <form id="formulario_registro" method="post" action="{{route('recurso.aceitar')}}">
-                        <input type="number" name="pessoa_id" value="{{$pessoa->id}}" hidden/>
+                        <input type="number" name="pessoa_id" id="pessoa_id" value="{{$pessoa->id}}" hidden/>
                         @csrf
                         @error('motivo_recusar.*')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -114,7 +115,7 @@
                                        value="Não"
                                        disabled/>
                             @endif
-                            <input type="button" name="next" id="next" class="next acao" value="Próximo"/>
+                            <input type="button" style="width: 26%" name="next" id="next" class="next acao" value="Próximo"/>
                         </fieldset>
 
                         <fieldset class="fild" data-pos="1">
@@ -209,12 +210,12 @@
                                 @endif
                                 @if($key == $tipoAnexoCargo->count() - 1)
                                     <div class="row justify-content-end">
-                                        <input type="submit" name="next" class="btn btn-success mr-3"
+                                        <input type="button" name="next" id="aceitarRecurso" class="btn btn-success mr-3"
                                                style="width: 25%"
                                                value="Aceitar Recurso"/>
                                     </div>
                                 @endif
-                                <input type="button" name="prev" id="prev" style="width: 25%" class="prev acao"
+                                <input type="button" name="prev" id="prev" class="prev acao"
                                        value="Anterior"/>
                             </fieldset>
                         @endforeach
@@ -225,8 +226,61 @@
     </div>
 @endsection
 @include('pages.models.recurso-negar')
-@section('script')
+@push('js')
     <script src="{{asset('js/contador.js')}}"></script>
     <script src="{{asset('js/area-restrita/functions.js')}}"></script>
     <script src="{{asset('js/registro/function.js')}}"></script>
-@endsection
+
+    <script>
+        $('#aceitarRecurso').click(function () {
+            Swal.fire({
+                title: 'Pontuar recurso',
+                text: "Pontuação total {{!is_null($pessoa->pontuacao($pessoa->id)) ? $pessoa->pontuacao($pessoa->id)->pontuacao_total : 0}} + Recurso: ",
+                input: 'number',
+                inputAttributes: {
+                    autocapitalize: 'off',
+                    min:0,
+                    max: {{100 - (!is_null($pessoa->pontuacao($pessoa->id)) ? $pessoa->pontuacao($pessoa->id)->pontuacao_total : 0)}}
+                },
+                inputPlaceholder: "PONTUAR",
+                showCancelButton: true,
+                confirmButtonText: 'SALVAR',
+                showLoaderOnConfirm: true,
+                preConfirm: (recurso_pontuacao) => {
+                    $.ajax({
+                        url: "{{ route('recurso.aceitar') }}",
+                        type:'POST',
+                        data: {
+                            _token: "{{csrf_token()}}",
+                            pessoa_id: $('#pessoa_id').val(),
+                            pontuar_recurso: recurso_pontuacao
+                        },
+                        success: function(data) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Recurso avaliado com sucesso.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location.href = "{{route('visualizacao-recurso', $pessoa->edital_dinamico_id)}}"
+                            })
+                        },
+                        error: function (data) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Problema com o recurso.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location.href = "{{route('visualizacao-recurso', $pessoa->edital_dinamico_id)}}"
+                            })
+                        }
+                    });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+        })
+    </script>
+@endpush

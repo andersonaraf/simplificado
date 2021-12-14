@@ -20,6 +20,7 @@ class RecursoModel extends Model implements Auditable
         'recurso',
         'recusar_motivo',
         'url_anexo',
+        'pontuacao',
     ];
 
     public function pessoa(){
