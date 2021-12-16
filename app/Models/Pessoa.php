@@ -87,4 +87,8 @@ class Pessoa extends Model implements Auditable
     public function reprovarMotivo(){
         return $this->hasOne(ReprovarPessoa::class, 'pessoa_id', 'id')->latest();
     }
+
+    public function numeroContato(){
+        return $this->hasMany(NumeroContato::class, 'pessoa_id', 'id');
+    }
 }
