@@ -65,6 +65,7 @@ class RegistroController extends Controller
             dd($request->all());
 
 
+
         } catch (Exception $ex) {
             DB::rollBack();
             return redirect()->route('inical')->withInput()->withErrors([
