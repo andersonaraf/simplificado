@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddGeneroIdPessoaTable extends Migration
+class RemoveTelefoneColumnPessoaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,7 @@ class AddGeneroIdPessoaTable extends Migration
     {
         Schema::table('pessoa', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('genero_id');
-            $table->foreign('genero_id')->references('id')->on('generos');
+            $table->dropColumn(['telefone']);
         });
     }
 

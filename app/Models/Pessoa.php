@@ -20,13 +20,13 @@ class Pessoa extends Model implements Auditable
         'endereco_id',
         'pontuacao_id',
         'edital_dinamico_id',
+        'user_id',
         'nome_completo',
         'check_cadastro_anexo',
         'cpf',
         'rg',
         'orgao_emissor',
         'pis',
-        'telefone',
         'nacionalidade',
         'naturalidade',
         'data_nascimento',
@@ -86,5 +86,9 @@ class Pessoa extends Model implements Auditable
 
     public function reprovarMotivo(){
         return $this->hasOne(ReprovarPessoa::class, 'pessoa_id', 'id')->latest();
+    }
+
+    public function numeroContato(){
+        return $this->hasMany(NumeroContato::class, 'pessoa_id', 'id');
     }
 }
