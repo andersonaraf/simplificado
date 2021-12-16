@@ -39,7 +39,7 @@ Route::get('/solicitacao/recurso', [\App\Http\Controllers\RecursoController::cla
 Route::post('/recurso-pedir', 'RecursoController@pedirRecurso')->name('recurso-pedir');
 
 Route::get('/registro/{id}', [\App\Http\Controllers\RegistroController::class, 'index'])->name('registro');
-Route::any('registro/parte1', [\App\Http\Controllers\RegistroController::class, 'storePart1'])->name('registro/parte1');
+Route::any('registro/parte1', [\App\Http\Controllers\RegistroController::class, 'store'])->name('registro/parte1');
 Route::post('registro/parte2', 'RegistroController@storePart2')->name('registro/parte2');
 Route::get('/registro/anexos/{id}', [\App\Http\Controllers\RegistroController::class, 'buscaIndex'])->name('registro/anexos');
 

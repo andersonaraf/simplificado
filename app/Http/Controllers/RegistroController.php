@@ -5,6 +5,7 @@ ini_set('post_max_size', '500M');
 ini_set('upload_max_filesize', '500M');
 
 use App\Http\Requests\Registro;
+use App\Http\Requests\RegistroPessoa;
 use App\Models\Cargo;
 use App\Models\EditalDinamico;
 use App\Models\EditalDinamicoTipoAnexo;
@@ -57,69 +58,12 @@ class RegistroController extends Controller
     }
 
     //CADASTRO DA PESSOA NA 1 REQUISAO
-    public function storePart1(Registro $request)
+    public function store(RegistroPessoa $request)
     {
         try {
             DB::beginTransaction();
+            dd($request->all());
 
-            $editalDinamico = EditalDinamico::where('telas_edital_id', $request->type_edital)->first();
-            //CASO O CPF EXISTA
-            $pessoa_confirma = Pessoa::where('cpf', $request->cpf)->where('edital_dinamico_id', $editalDinamico->id)->first();
-            if (!isset($request->termo_de_condicao) && !isset($request->termo_de_privacidade)) {
-                session()->put('error', 'Ops, parece que você não aceito os termos e políticas de privacidade!');
-                return redirect()->route('registro');
-            }
-
-            if (!is_null($pessoa_confirma)) {
-                session()->put('sucess', 'Ops, parece que você já concluiu seu cadastro!');
-                return redirect()->route('inical');
-            }
-
-            //VERIFICAO DE CARGOS -> IMPEDIR DE PASSAR CARGOS DE OUTRO NIVEL DE ESCOLARIDADE
-            $cargo = Cargo::findOrFail($request->CARGO);
-            if ($cargo->escolaridadeEditalDinamico->escolaridade_id != $request->escolaridade) {
-                session()->put('error', 'Ops, parece que o cargo não condizem com o nível de escolaridade selecionado.');
-                return redirect()->route('registro', $editalDinamico->id);
-            }
-
-            $endereco = new Endereco();
-            $endereco->endereco = $request->endereco . ', ' . $request->numero;
-            $endereco->bairro = $request->bairro;
-            $endereco->cep = $request->cep;
-
-            if ($request->deficiencia == 'Nao') {
-                $deficiencia = 0;
-            } else {
-                $deficiencia = 1;
-            }
-            $pessoa = new Pessoa();
-            $pessoa->edital_dinamico_id = $editalDinamico->id;
-            $pessoa->nome_completo = strtoupper($request->nome_completo);
-            $pessoa->cargo_id = $request->CARGO;
-            $pessoa->escolaridade_id = $request->escolaridade;
-            $pessoa->cpf = strtoupper($request->cpf);
-            $pessoa->rg = $request->rg;
-            $pessoa->orgao_emissor = strtoupper($request->orgao_emissor);
-            $pessoa->pis = $request->pis;
-            $pessoa->telefone = $request->telefone;
-            $pessoa->nacionalidade = strtoupper($request->nacionalidade);
-            $pessoa->naturalidade = strtoupper($request->naturalidade);
-            $pessoa->email = strtolower($request->email);
-            $pessoa->data_nascimento = $request->data_nascimento;
-            $pessoa->portador_deficiencia = $deficiencia;
-            $pessoa->sexo = $request->sexo;
-
-            //SALVA NO CACHE
-            $expiresAt = 1440;
-            $tempoExpirar = date('d-m-Y H:i', strtotime('+24 Hours'));
-            Cookie::queue('pessoa', $pessoa, $expiresAt);
-            Cookie::queue('endereco', $endereco, $expiresAt);
-            Cookie::queue('type_edital', $request->type_edital, $expiresAt);
-            Cookie::queue('tempo_expirar', $tempoExpirar);
-
-            DB::commit();
-
-            return redirect()->route('registro/anexos', $request->type_edital);
 
         } catch (Exception $ex) {
             DB::rollBack();
