@@ -30,7 +30,7 @@ class Pessoa extends Model implements Auditable
         'nacionalidade',
         'naturalidade',
         'data_nascimento',
-        'sexo',
+        'genero_id',
         'email',
         'portador_deficiencia',
         'status',

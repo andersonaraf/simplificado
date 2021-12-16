@@ -17,7 +17,10 @@ use App\Models\Escolaridade;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//FALBACK
+Route::fallback(function (){
+   dd(1);
+});
 //LOGIN
 Auth::routes([
     'register' => false

@@ -10,7 +10,7 @@
     </style>
 @endsection
 @section('content')
-{{--    @extends('layouts.modal-cache')--}}
+    {{--    @extends('layouts.modal-cache')--}}
     <section class="container-fluid">
         <div class="row justify-content-center">
             <div id="carouselExampleIndicators" class="carousel slide w-100 text-center" data-ride="carousel">
@@ -67,9 +67,9 @@
                     @if(!is_null($protocolo))
                         @if ($protocolo->status_liberar == '1' || !is_null($protocolo->data_liberar) )
                             @if ($protocolo->nome_ou_anexo == 'Protocolo' && ($protocolo->status_liberar == 1) || strtotime($protocolo->data_liberar) <= strtotime(date('Y-m-d H:i')))
-                                <div class="col-lg-4 mt-4 mt-lg-0">
+                                <div class="col-lg-4 mt-3">
                                     <a href="{{route('protocolo')}}">
-                                        <button class="icon-box">
+                                        <button class="icon-box" style="height: 250px">
                                             <i class="icofont-ui-note"></i>
                                             <h3>Buscar Protocolo</h3>
                                         </button>
@@ -110,30 +110,7 @@
 
     <!-- ======= Services Section ======= -->
         <section id="services" class="services ">
-            <div class="container">
-                <div class="section-title" data-aos="fade-up">
-                    <h2>Editais</h2>
-                </div>
-                <div class="row justify-content-center">
-                    {{--                    @dd($pdfs)--}}
-                    @foreach($pdfs as $pdf)
-                        {{--                        @dd($pdf)--}}
-                        @if ( ($pdf->status_liberar == '1' || !is_null($pdf->data_liberar)) && (is_null($pdf->data_fecha) || strtotime($pdf->data_fecha) > strtotime(date('Y-m-d H:i'))))
-                            @if (($pdf->status_liberar == '1') || strtotime($pdf->data_liberar) <= strtotime(date('Y-m-d H:i')))
-                                <div class="col-lg-4 col-md-4  align-items-stretch mt-2">
-                                    <a href="{{asset('anexos/'.$pdf->nome_ou_anexo)}}" target="_blank">
-                                        <button class="icon-box">
-                                            <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                                            <h4>{{$pdf->nome_anexo_mostrar}}</h4>
-                                            <p>Clique aqui para baixar</p>
-                                        </button>
-                                    </a>
-                                </div>
-                            @endif
-                        @endif
-                    @endforeach
-                </div>
-            </div>
+
         </section><!-- End Services Section -->
 
     </main>

@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 ini_set('post_max_size', '500M');
 ini_set('upload_max_filesize', '500M');
+
 use App\Http\Requests\Registro;
 use App\Models\Cargo;
 use App\Models\EditalDinamico;
 use App\Models\EditalDinamicoTipoAnexo;
 use App\Models\Endereco;
+use App\Models\Genero;
 use App\Models\Pessoa;
 use App\Models\PessoaEditalAnexo;
 use App\Models\Progress;
 use App\Models\Termos;
 use App\Models\TipoAnexoCargo;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cookie;
@@ -24,28 +27,30 @@ class RegistroController extends Controller
 {
     public function index($id)
     {
+        try {
+            $cargos = \App\Models\Cargo::all();
+            $editalDinamico = EditalDinamico::where('telas_edital_id', $id)->first();
+            $telasEdital = $editalDinamico->telasEdital;
+            $generos = Genero::all();
 
-        $cargos = \App\Models\Cargo::all();
-        $editalDinamico = EditalDinamico::where('telas_edital_id', $id)->first();
+            if ($telasEdital->status_liberar == 0 && !is_null($telasEdital->data_fecha)) {
 
-        $telasEdital = $editalDinamico->telasEdital;
+                if (strtotime($telasEdital->data_liberar) >= strtotime(date('Y-m-d H:i'))) {
+                    return redirect()->route('inical');
+                }
 
+                if (strtotime($telasEdital->data_fecha) < strtotime(date('Y-m-d H:i'))) {
 
-        if ($telasEdital->status_liberar == 0 && !is_null($telasEdital->data_fecha)) {
-
-            if (strtotime($telasEdital->data_liberar) >= strtotime(date('Y-m-d H:i'))) {
+                    return redirect()->route('inical');
+                }
+            }
+            if (($telasEdital->status_liberar == 0 && is_null($telasEdital->data_liberar) && is_null($telasEdital->data_fecha))) {
                 return redirect()->route('inical');
             }
-
-            if (strtotime($telasEdital->data_fecha) < strtotime(date('Y-m-d H:i'))) {
-
-                return redirect()->route('inical');
-            }
+            return view('registro.registro', compact('editalDinamico', 'cargos', 'id', 'generos'));
+        } catch (Exception $exception) {
+            return view('errors.500');
         }
-        if (($telasEdital->status_liberar == 0 && is_null($telasEdital->data_liberar) && is_null($telasEdital->data_fecha))) {
-            return redirect()->route('inical');
-        }
-        return view('registro.registro', compact('editalDinamico', 'cargos', 'id'));
     }
 
     //CADASTRO DA PESSOA NA 1 REQUISAO

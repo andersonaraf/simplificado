@@ -7,6 +7,11 @@
     <div class="content">
         <div class="container-fluid">
             <div class="container">
+
+                <div class="row justify-content-end">
+                    <a href="{{route('tela-criar')}}" class="btn btn-outline-info">CRIAR TELA</a>
+                </div>
+
                 <div class="row">
                     <input class="form-control" id="pesquisa" type="text" placeholder="Procurar..">
                     <table class="table">
