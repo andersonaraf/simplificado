@@ -12,9 +12,10 @@ class Endereco extends Model implements Auditable
     use AuditableTrait;
     protected $table = 'endereco';
     protected $fillable = [
-        'id',
-        'endereco',
         'bairro',
         'cep',
+        'rua',
+        'numero',
+        'complemento'
     ];
 }
