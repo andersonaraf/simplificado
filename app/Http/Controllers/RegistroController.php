@@ -32,6 +32,9 @@ class RegistroController extends Controller
             $editalDinamico = EditalDinamico::where('telas_edital_id', $id)->first();
             $telasEdital = $editalDinamico->telasEdital;
             $generos = Genero::all();
+            //VALIDAR SE A TELA ESTÁ LIBERADA
+            $verificarRotaLiberada = new VerificarRotaLiberadaController();
+            if (!$verificarRotaLiberada->verificarTelaEdital($telasEdital)) return redirect()->route('inicio');
 
             if ($telasEdital->status_liberar == 0 && !is_null($telasEdital->data_fecha)) {
 

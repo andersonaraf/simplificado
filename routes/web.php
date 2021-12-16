@@ -32,7 +32,7 @@ Route::get('/sair', function () {
     return redirect()->route('inical');
 })->name('sair');
 
-Route::get('/', [\App\Http\Controllers\WeelcomeController::class, 'index'])->name('inical');
+Route::get('/', [\App\Http\Controllers\WeelcomeController::class, 'index'])->name('inicio');
 
 Route::get('/solicitacao/recurso', [\App\Http\Controllers\RecursoController::class, 'index'])->name('recurso');
 

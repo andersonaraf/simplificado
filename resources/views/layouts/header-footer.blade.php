@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-md">
         <div class="container d-flex">
             <div class="logo mr-auto ">
-                <h1 class="text-light"><a href="{{route('inical')}}"><span>{{is_null(title()) ? 'PS SIMPLIFICADO' : title()->titulo}}</span></a></h1>
+                <h1 class="text-light"><a href="{{route('inicio')}}"><span>{{is_null(title()) ? 'PS SIMPLIFICADO' : title()->titulo}}</span></a></h1>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false"
@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" style="justify-content: flex-end;" id="navbarsExample04">
                 <ul class="navbar-nav ">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{route('inical')}}">Início</a>
+                        <a class="nav-link" href="{{route('inicio')}}">Início</a>
                     </li>
                     @if(auth()->check())
                         <li>
@@ -88,6 +88,6 @@
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/area-restrita/functions.js')}}"></script>
-@yield('script')
+@stack('script')
 </html>
 

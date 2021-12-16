@@ -116,7 +116,7 @@
     </main>
 @endsection
 
-@section('script')
+@push('script')
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/area-restrita/functions.js')}}"></script>
-@endsection
+@endpush
