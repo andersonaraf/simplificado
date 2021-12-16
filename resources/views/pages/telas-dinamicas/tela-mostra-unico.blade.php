@@ -8,6 +8,11 @@
     <div class="content">
         <div class="container-fluid">
             <main class="container" id="ajuste">
+                <div class="row justify-content-end">
+                    <a href="{{route('tela-liberar')}}" class="btn btn-outline-info">
+                        <i class="fas fa-long-arrow-alt-left"></i> VOLTAR
+                    </a>
+                </div>
                 <div class="row">
                     <form id="formulario_registro" method="post" action="{{route('tela-editar', $tela->id)}}">
                         @csrf

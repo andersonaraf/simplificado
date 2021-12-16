@@ -7,9 +7,11 @@
         .dataTables_length {
             text-align: right;
         }
+
         .dataTables_filter {
             text-align: right;
         }
+
         .dataTables_filter label {
             color: #000 !important;
             font-weight: bold;
@@ -35,11 +37,9 @@
                             <td>{{$key+1}}</td>
                             <td>{{$lista->nome_ou_anexo}}</td>
                             <td>
-                                @if(!is_null($lista->data_liberar) || $lista->status_liberar == 0)
-                                    <p class="text-danger">Fechado</p>
-                                @else
-                                    <p class="text-success">Aberto</p>
-                                @endif
+                                <a href="{{route('tela-unica-mostra', $lista->id)}}" class="{{!is_null($lista->data_liberar) || $lista->status_liberar == 0 ? 'text-danger' : 'text-success'}}">
+                                    {{!is_null($lista->data_liberar) || $lista->status_liberar == 0 ? 'FECHADO' : 'ABERTO'}}
+                                </a>
                             </td>
                             <td>
                                 <a href="{{route('escolaridade.lista.index', $lista->id)}}">
