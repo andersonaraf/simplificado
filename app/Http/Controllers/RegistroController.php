@@ -30,29 +30,11 @@ class RegistroController extends Controller
     public function index($id)
     {
         try {
-            $cargos = \App\Models\Cargo::all();
-            $editalDinamico = EditalDinamico::where('telas_edital_id', $id)->first();
-            $telasEdital = $editalDinamico->telasEdital;
             $generos = Genero::all();
+
             //VALIDAR SE A TELA ESTÁ LIBERADA
             $verificarRotaLiberada = new VerificarRotaLiberadaController();
-            if (!$verificarRotaLiberada->verificarTelaEdital($telasEdital)) return redirect()->route('inicio');
-
-            if ($telasEdital->status_liberar == 0 && !is_null($telasEdital->data_fecha)) {
-
-                if (strtotime($telasEdital->data_liberar) >= strtotime(date('Y-m-d H:i'))) {
-                    return redirect()->route('inical');
-                }
-
-                if (strtotime($telasEdital->data_fecha) < strtotime(date('Y-m-d H:i'))) {
-
-                    return redirect()->route('inical');
-                }
-            }
-            if (($telasEdital->status_liberar == 0 && is_null($telasEdital->data_liberar) && is_null($telasEdital->data_fecha))) {
-                return redirect()->route('inical');
-            }
-            return view('registro.registro', compact('editalDinamico', 'cargos', 'id', 'generos'));
+            return view('registro.registro', compact('generos'));
         } catch (Exception $exception) {
             return view('errors.500');
         }

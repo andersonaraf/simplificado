@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $pessoa = Pessoa::all()->count();
-        $pontuacao = Pessoa::whereNotNull('status')->get()->count();
+        $pontuacao = 0;
         $recurso = RecursoModel::all()->count();
         return view('dashboard', [
             'inscricao_total' => $pessoa,

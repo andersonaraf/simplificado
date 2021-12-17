@@ -2,7 +2,6 @@
 @extends('layouts.modal-message')
 @section('css')
     <link rel="stylesheet" href="{{asset('css/registro/style.css')}}">
-
 @endsection
 @section('content')
     <div class="content">
@@ -11,82 +10,89 @@
                 @foreach($arquivos as $arquivo)
                 @endforeach
                 <div class="row">
-                    <form id="formulario_registro" method="post" action="{{route('tela-criar-salvar')}}"
+                    <form id="formulario_registro" method="post" action="{{route('tela-criar-salvar')}}" class="w-100"
                           enctype="multipart/form-data">
                         @csrf
-                        <ul id="progress">
-                            <li class="ativo" style="width: 100%">Criar</li>
-                        </ul>
-
-                        <fieldset>
-                            <h2>Criar Tela</h2>
-                            <h3>Tipo Tela</h3>
-                            <select id="tipo_tela" name="tipo_tela">
-                                <option value="0">Não Selecionado</option>
-                                @foreach($telas as $tela)
-                                    <option value="{{$tela->id}}">{{$tela->tipo}}</option>
-                                @endforeach
-                            </select>
-                            <div id="tela" hidden>
-                                <p id="texto"></p>
-                                <input type="text" name="tela_nome" value=""/>
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Criar Tela</h2>
                             </div>
-
-                            <div id="pontuacao" hidden>
-                                <p>Pontuação Máxima do Edital</p>
-                                <input type="number" name="pontuacao_maxima" id="pontuacao_maxima" value="" placeholder="0.0" required disabled/>
-                            </div>
-
-                            <div id="pdf" hidden>
-                                <p>Nome da Tela</p>
-                                <input type="text" name="tela_nome_pdf" value=""/>
-                                <p>Escolha o PDF</p>
-                                <input type="file" name="pdf_carregar" class="form_control">
-                                @error('pdf_carregar')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div id="liberar" hidden>
-                                <p>Liberar tela</p>
-                                <select id="status_liberar" name="status_liberar">
-                                    @if ($tela->status_liberar == 1)
-                                        <option value="1" selected>Sim</option>
-                                    @else
-                                        <option value="1">Sim</option>
-                                    @endif
-                                    @if ($tela->status_liberar == 0)
-                                        <option value="0" selected>Não</option>
-                                    @else
-                                        <option value="0">Não</option>
-                                    @endif
-                                </select>
-                            </div>
-
-                            @if ($tela->status_liberar == 0)
-                                <div id="data_liberar" hidden>
-                                    <p>Selecione uma Data para liberar a Tela</p>
-                                    @if(!is_null($tela->data_liberar) && !is_null($tela->data_fecha))
-                                        <p><strong>Data Inicial: {{$tela->data_liberar}} - Até
-                                                - {{$tela->data_fecha}}</strong></p>
-                                    @endif
-                                    <h3><strong>Data Inicial</strong></h3>
-                                    <input type="datetime-local" id="input-data_liberar" name="data_liberar"
-                                           value="{{date('d/m/Y H:i', strtotime($tela->data_liberar))}}">
-
-                                    <h3><strong>Data Final</strong></h3>
-                                    <input type="datetime-local" id="input-data_liberar" name="data_final"
-                                           value="{{date('d/m/Y H:i', strtotime($tela->data_liberar))}}">
+                            <div class="card-body">
+                                <h3>Tipo Tela</h3>
+                                <div class="form-group">
+                                    <select id="tipo_tela" name="tipo_tela" class="custom-select">
+                                        <option value="0">Não Selecionado</option>
+                                        @foreach($telas as $tela)
+                                            <option value="{{$tela->id}}">{{$tela->tipo}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                            @else
-                                <div id="data_liberar" hidden>
-                                    <p>Selecione uma Data para liberar a Tela</p>
-                                    <input type="date" id="input-data_liberar" name="data_liberar">
-                                </div>
-                            @endif
 
-                            <input type="submit" name="next" id="confirma" class="acao" value="Criar"/>
-                        </fieldset>
+                                <div class="form-group" id="tela" hidden>
+                                    <p id="texto"></p>
+                                    <input type="text" class="form-control" name="tela_nome" value=""/>
+                                </div>
+
+                                <div class="form-group" id="pontuacao" hidden>
+                                    <p>Pontuação Máxima do Edital</p>
+                                    <input type="number" class="form-control" name="pontuacao_maxima" id="pontuacao_maxima" value="" placeholder="0.0" required disabled/>
+                                </div>
+
+                                <div class="form-group" id="pdf" hidden>
+                                    <p>Nome da Tela</p>
+                                    <input type="text" class="form-control" name="tela_nome_pdf" value=""/>
+{{--                                    <p>Escolha o PDF</p>--}}
+{{--                                    <input type="file" name="pdf_carregar" class="form_control">--}}
+{{--                                    @error('pdf_carregar')--}}
+{{--                                    <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--                                    @enderror--}}
+                                </div>
+
+                                <div class="form-group" id="liberar" hidden>
+                                    <p>Liberar tela</p>
+                                    <select id="status_liberar" name="status_liberar" class="custom-select">
+                                        @if ($tela->status_liberar == 1)
+                                            <option value="1" selected>Sim</option>
+                                        @else
+                                            <option value="1">Sim</option>
+                                        @endif
+                                        @if ($tela->status_liberar == 0)
+                                            <option value="0" selected>Não</option>
+                                        @else
+                                            <option value="0">Não</option>
+                                        @endif
+                                    </select>
+                                </div>
+
+                                @if ($tela->status_liberar == 0)
+                                    <div class="form-group" id="data_liberar" hidden>
+                                        <p>Selecione uma Data para liberar a Tela</p>
+                                        @if(!is_null($tela->data_liberar) && !is_null($tela->data_fecha))
+                                            <p><strong>Data Inicial: {{$tela->data_liberar}} - Até
+                                                    - {{$tela->data_fecha}}</strong></p>
+                                        @endif
+                                        <h3><strong>Data Inicial</strong></h3>
+                                        <input type="datetime-local" class="form-control" id="input-data_liberar" name="data_liberar"
+                                               value="{{date('d/m/Y H:i', strtotime($tela->data_liberar))}}">
+
+                                        <h3><strong>Data Final</strong></h3>
+                                        <input type="datetime-local" class="form-control" id="input-data_liberar" name="data_final"
+                                               value="{{date('d/m/Y H:i', strtotime($tela->data_liberar))}}">
+                                    </div>
+                                @else
+                                    <div class="form-group" id="data_liberar" hidden>
+                                        <p>Selecione uma Data para liberar a Tela</p>
+                                        <input type="date" class="form-control" id="input-data_liberar" name="data_liberar">
+                                    </div>
+                                @endif
+
+                                <div class="row justify-content-end">
+                                    <div class="col col-12 col-md-12 col-lg-12 text-center text-md-right text-lg-right">
+                                        <input type="submit" name="next" id="confirma" class="btn btn-outline-info" value="Criar"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </main>

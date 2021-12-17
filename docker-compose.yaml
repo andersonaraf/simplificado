@@ -7,6 +7,7 @@ services:
       #      para não matar minha mudança ao dar docker compose down
     volumes:
       - ./:/usr/share/nginx
+      - ./nginx:/etc/nginx/
     networks:
       - app-network
   mysql-app:

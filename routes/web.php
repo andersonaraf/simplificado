@@ -29,7 +29,7 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 
 Route::get('/sair', function () {
     auth()->logout();
-    return redirect()->route('inical');
+    return redirect()->route('inicio');
 })->name('sair');
 
 Route::get('/', [\App\Http\Controllers\WeelcomeController::class, 'index'])->name('inicio');
