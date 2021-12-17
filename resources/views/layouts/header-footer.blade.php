@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{is_null(title()) ? 'RB SIMPLIFICADO' : title()->title}}</title>
+    <title>{{is_null(title()) ? 'RB SIMPLIFICADO' : title()->titulo}}</title>
     <link rel="stylesheet" href="{{asset('css/head-footer.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/icofont/icofont/icofont.min.css')}}">
@@ -30,15 +30,28 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route('inicio')}}">Início</a>
                     </li>
-                    @if(auth()->check())
-                        <li>
-                            <a class="nav-link" href="{{route('home')}}">Área administrativa</a>
-                        </li>
-
-                        <li>
-                            <a class="nav-link" href="{{route('sair')}}">Sair</a>
-                        </li>
-                    @endif
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                            Usuário
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @if(!auth()->check())
+                                <a class="dropdown-item" href="{{route('login')}}">Login</a>
+                                <a class="dropdown-item" href="{{route('cadastro-simplificado')}}">Criar Conta</a>
+                            @endif
+                            @if(auth()->check())
+                                @if(strtoupper(auth()->user()->tipo) == 'ADMIN')
+                                    <a class="dropdown-item" href="{{route('home')}}">Área administrativa</a>
+                                @else
+                                    <a class="dropdown-item" href="#">Meus Cadastros</a>
+                                @endif
+                            @endif
+                            <div class="dropdown-divider"></div>
+                            @if(auth()->check())
+                                <a class="dropdown-item" href="{{route('sair')}}">Sair</a>
+                            @endif
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>

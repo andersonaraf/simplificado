@@ -18,7 +18,7 @@
                 <hr>
             </div>
             <div id="accordion" style="width: 100%">
-                <form id="formulario_registro" method="post" action="{{route('registro/parte1')}}">
+                <form id="formulario_registro" method="post" action="{{route('cadastro-simplificado.store')}}">
                     @csrf
                     <div class="card">
                         <div class="card-header text-center bg-dark-blue set-pointer" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"

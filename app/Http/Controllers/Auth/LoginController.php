@@ -51,6 +51,9 @@ class LoginController extends Controller
             if (auth()->user()->block == 1) {
                 auth()->logout();
             }
+            if (strtoupper(auth()->user()->tipo) != 'ADMIN') {
+                return redirect()->route('inicio');
+            }
             return redirect()->intended($this->redirectPath());
             //this redirect if user is the db line 2
         }

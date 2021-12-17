@@ -28,11 +28,10 @@ use Illuminate\Support\Facades\Validator;
 
 class RegistroController extends Controller
 {
-    public function index($id)
+    public function index()
     {
         try {
             $generos = Genero::all();
-
             //VALIDAR SE A TELA ESTÁ LIBERADA
             $verificarRotaLiberada = new VerificarRotaLiberadaController();
             return view('registro.registro', compact('generos'));
