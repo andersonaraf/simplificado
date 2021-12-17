@@ -1,5 +1,4 @@
 @extends('layouts.header-footer')
-@extends('layouts.modal-message')
 @section('css')
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <style>

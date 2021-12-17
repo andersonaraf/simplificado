@@ -20,6 +20,7 @@ use App\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -44,7 +45,6 @@ class RegistroController extends Controller
     public function store(RegistroPessoa $request)
     {
         try {
-//            dd($request->all());
             DB::beginTransaction();
 
             //CRIAR USER
@@ -54,7 +54,7 @@ class RegistroController extends Controller
             $user->password = bcrypt($request->password);
             $user->tipo = 'CANDIDATO';
             $user->block = 0;
-//            $user->save();
+            $user->save();
 
             //CRIAR ENDEREÇO
             $endereco = [];
@@ -63,8 +63,37 @@ class RegistroController extends Controller
             $endereco['rua'] = $request->rua;
             $endereco['numero'] = $request->numero;
             $endereco['complemento'] = $request->complemento;
-//            EnderecoController::store($endereco);
 
+            $pessoa = new Pessoa();
+            $pessoa->nome_completo = $request->nomeCompleto;
+            $pessoa->endereco_id = EnderecoController::store($endereco);
+            $pessoa->cpf = $request->cpf;
+            $pessoa->rg = $request->rg;
+            $pessoa->orgao_emissor = $request->orgaoExpedidor;
+            $pessoa->pis = (isset($request->pis) ? $request->pis : null);
+            $pessoa->nacionalidade = (isset($request->nacionalidade) ? $request->nacionalidade : '');
+            $pessoa->naturalidade = (isset($request->naturalidade) ? $request->naturalidade : '');
+            $pessoa->data_nascimento = (isset($request->data_nascimento) ? $request->data_nascimento : date('Y-m-d'));
+            $pessoa->email = $request->email;
+            $pessoa->portador_deficiencia = $request->pne;
+            $pessoa->genero_id = $request->genero;
+            $pessoa->user_id = $user->id;
+            $pessoa->save();
+
+            //SALVAR OS NUMEROS
+            $pessoa->numeroContato()->create([
+                'numero' => $request->contato1,
+            ]);
+            if (!is_null($request->contato2)) {
+                $pessoa->numeroContato()->create([
+                    'numero' => $request->contato2,
+                ]);
+            }
+
+            DB::commit();
+
+            Auth::login($user);
+            return redirect()->route('inicio');
         } catch (Exception $ex) {
             dd($ex);
             DB::rollBack();

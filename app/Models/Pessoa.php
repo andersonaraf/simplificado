@@ -14,6 +14,7 @@ class Pessoa extends Model implements Auditable
     protected $fillable = [
         'id',
         'endereco_id',
+        'genero_id',
         'user_id',
         'nome_completo',
         'cpf',
@@ -23,7 +24,6 @@ class Pessoa extends Model implements Auditable
         'nacionalidade',
         'naturalidade',
         'data_nascimento',
-        'genero_id',
         'email',
         'portador_deficiencia',
     ];
