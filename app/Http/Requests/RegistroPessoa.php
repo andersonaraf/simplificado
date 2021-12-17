@@ -27,7 +27,7 @@ class RegistroPessoa extends FormRequest
             //
             'nomeCompleto' => 'required|string|max:100',
             'nomeSocial' => 'nullable|string|max:100|min:0',
-            'cpf' => 'required|string|max:100|min:0',
+            'cpf' => 'required|string|max:100|min:0|unique:App\Models\Pessoa,cpf',
             'rg' => 'required|string|max:100|min:0',
             'orgaoExpedidor' => 'required|string|max:100|min:0',
             'contato1' => 'required|celular_com_ddd',

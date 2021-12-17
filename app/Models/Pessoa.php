@@ -13,16 +13,9 @@ class Pessoa extends Model implements Auditable
     protected $table = 'pessoa';
     protected $fillable = [
         'id',
-        'cargo_id',
-        'escolaridade_id',
-        'anexo_id',
-        'comprovante_id',
         'endereco_id',
-        'pontuacao_id',
-        'edital_dinamico_id',
         'user_id',
         'nome_completo',
-        'check_cadastro_anexo',
         'cpf',
         'rg',
         'orgao_emissor',
@@ -33,11 +26,6 @@ class Pessoa extends Model implements Auditable
         'genero_id',
         'email',
         'portador_deficiencia',
-        'status',
-        'status_avaliado',
-        'status_revisado',
-        'status_pericia_pne',
-        'motivo_rev',
     ];
 
     public function pessoaEditalAnexos(){

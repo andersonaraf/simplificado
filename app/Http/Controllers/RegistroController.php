@@ -16,6 +16,7 @@ use App\Models\PessoaEditalAnexo;
 use App\Models\Progress;
 use App\Models\Termos;
 use App\Models\TipoAnexoCargo;
+use App\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -61,14 +62,31 @@ class RegistroController extends Controller
     public function store(RegistroPessoa $request)
     {
         try {
+//            dd($request->all());
             DB::beginTransaction();
-            dd($request->all());
 
+            //CRIAR USER
+            $user = new User();
+            $user->name = mb_strtoupper($request->nomeCompleto);
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->tipo = 'CANDIDATO';
+            $user->block = 0;
+//            $user->save();
 
+            //CRIAR ENDEREÇO
+            $endereco = [];
+            $endereco['bairro'] = $request->bairro;
+            $endereco['cep'] = $request->cep;
+            $endereco['rua'] = $request->rua;
+            $endereco['numero'] = $request->numero;
+            $endereco['complemento'] = $request->complemento;
+//            EnderecoController::store($endereco);
 
         } catch (Exception $ex) {
+            dd($ex);
             DB::rollBack();
-            return redirect()->route('inical')->withInput()->withErrors([
+            return redirect()->route('inicio')->withInput()->withErrors([
                 'message' => $ex->getMessage()
             ]);
         }
