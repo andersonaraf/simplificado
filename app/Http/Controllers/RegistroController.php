@@ -95,7 +95,6 @@ class RegistroController extends Controller
             Auth::login($user);
             return redirect()->route('inicio');
         } catch (Exception $ex) {
-            dd($ex);
             DB::rollBack();
             return redirect()->route('inicio')->withInput()->withErrors([
                 'message' => $ex->getMessage()
