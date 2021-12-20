@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{asset('assets/fontawesome-free-5.15.2-web/css/all.min.css')}}">
     <!--CS PAGE-->
     <link rel="stylesheet" href="{{asset('assets/sweetalert2/sweetalert2.min.css')}}">
-    @yield('css')
+    @stack('css')
 </head>
 
 <body class="{{ $class ?? '' }}">

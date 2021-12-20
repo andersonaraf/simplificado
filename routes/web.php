@@ -50,7 +50,8 @@ Route::get('/comprovante/{comprovante}', 'ComprovanteController@index')->name('r
 Route::get('/protocolo', 'ComprovanteController@protocolo')->name('protocolo');
 Route::post('comprovante-procurar', 'ComprovanteController@procurar')->name('comprovante-procurar');
 
-Route::group(['middleware' => 'acesso.restrito'], function () {
+Route::group(['middleware' => 'acesso.restrito'] , function () {
+    Route::resource('formulario', FormularioController::class);
     Route::get('table-list', function () {
         return view('pages.table_list');
     })->name('table');
