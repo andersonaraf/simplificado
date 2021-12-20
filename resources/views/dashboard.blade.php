@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'home', 'title' => __('DashBoard')])
+@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'home', 'subActivePage' => 'home', 'title' => __('DashBoard')])
 @extends('layouts.modal-message')
 @section('content')
     <div class="content content-center">

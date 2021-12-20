@@ -21,55 +21,61 @@
             @if(auth()->user()->tipo == 'Admin')
                 <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
                     <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
-                      <i class="material-icons">settings</i>
+                        <i class="material-icons">settings</i>
                         <p>{{ __('Configurações') }}
                             <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse" id="laravelExample">
+                    <div class="collapse {{$activePage == 'user-management' ? 'show' : ''}}" id="laravelExample">
                         <ul class="nav">
-                            <li class="nav-item{{ $activePage == 'TituloAlterar' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('titulo.index')}}">
-                                    <span class="sidebar-mini"> ATS </span>
-                                    <span class="sidebar-normal"> {{ __('Alterar Título do Sistema') }} </span>
+                            <li class="nav-item{{ $subActivePage == 'Formulários' ? ' active' : '' }}">
+                                <a class="nav-link" href="{{route('formulario.index')}}">
+                                    <span class="sidebar-mini"> FOR </span>
+                                    <span class="sidebar-normal"> {{ __('FORMULÁRIOS') }} </span>
                                 </a>
                             </li>
-                            <li class="nav-item{{ $activePage == 'ListaCarrossel' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('lista.carrossel.index')}}">
-                                    <span class="sidebar-mini"> C/AB </span>
-                                    <span class="sidebar-normal"> {{ __('Criar/Alterar  Banner') }} </span>
-                                </a>
-                            </li>
-                            <li class="nav-item{{ $activePage == 'Gestao' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{ route('user.index') }}">
-                                    <span class="sidebar-mini"> GU </span>
-                                    <span class="sidebar-normal"> {{ __('Gestão de Usuário') }} </span>
-                                </a>
-                            </li>
-                            <li class="nav-item{{ $activePage == 'TelaCriar' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('tela-criar')}}">
-                                    <span class="sidebar-mini"> LT </span>
-                                    <span class="sidebar-normal"> {{ __('Criar Tela/Anexos') }} </span>
-                                </a>
-                            </li>
-                            <li class="nav-item{{ $activePage == 'TelaLiberar' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('tela-liberar')}}">
-                                    <span class="sidebar-mini"> LT </span>
-                                    <span class="sidebar-normal"> {{ __('Liberar Tela/Anexos') }} </span>
-                                </a>
-                            </li>
-                            <li class="nav-item{{ $activePage == 'list_formulario_ativo' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('lista.formularios')}}">
-                                    <span class="sidebar-mini"> LFA </span>
-                                    <span class="sidebar-normal"> {{ __('Lista de Formulários Ativos') }} </span>
-                                </a>
-                            </li>
-                            <li class="nav-item{{ $activePage == 'lista_participantes' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('lista.candidatos.index')}}">
-                                    <span class="sidebar-mini"> CA </span>
-                                    <span class="sidebar-normal"> {{ __('Candidatos') }} </span>
-                                </a>
-                            </li>
+                            {{--                            <li class="nav-item{{ $activePage == 'TituloAlterar' ? ' active' : '' }}">--}}
+                            {{--                                <a class="nav-link" href="{{route('titulo.index')}}">--}}
+                            {{--                                    <span class="sidebar-mini"> ATS </span>--}}
+                            {{--                                    <span class="sidebar-normal"> {{ __('Alterar Título do Sistema') }} </span>--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
+                            {{--                            <li class="nav-item{{ $activePage == 'ListaCarrossel' ? ' active' : '' }}">--}}
+                            {{--                                <a class="nav-link" href="{{route('lista.carrossel.index')}}">--}}
+                            {{--                                    <span class="sidebar-mini"> C/AB </span>--}}
+                            {{--                                    <span class="sidebar-normal"> {{ __('Criar/Alterar  Banner') }} </span>--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
+                            {{--                            <li class="nav-item{{ $activePage == 'Gestao' ? ' active' : '' }}">--}}
+                            {{--                                <a class="nav-link" href="{{ route('user.index') }}">--}}
+                            {{--                                    <span class="sidebar-mini"> GU </span>--}}
+                            {{--                                    <span class="sidebar-normal"> {{ __('Gestão de Usuário') }} </span>--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
+                            {{--                            <li class="nav-item{{ $activePage == 'TelaCriar' ? ' active' : '' }}">--}}
+                            {{--                                <a class="nav-link" href="{{route('tela-criar')}}">--}}
+                            {{--                                    <span class="sidebar-mini"> LT </span>--}}
+                            {{--                                    <span class="sidebar-normal"> {{ __('Criar Tela/Anexos') }} </span>--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
+                            {{--                            <li class="nav-item{{ $activePage == 'TelaLiberar' ? ' active' : '' }}">--}}
+                            {{--                                <a class="nav-link" href="{{route('tela-liberar')}}">--}}
+                            {{--                                    <span class="sidebar-mini"> LT </span>--}}
+                            {{--                                    <span class="sidebar-normal"> {{ __('Liberar Tela/Anexos') }} </span>--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
+                            {{--                            <li class="nav-item{{ $activePage == 'list_formulario_ativo' ? ' active' : '' }}">--}}
+                            {{--                                <a class="nav-link" href="{{route('lista.formularios')}}">--}}
+                            {{--                                    <span class="sidebar-mini"> LFA </span>--}}
+                            {{--                                    <span class="sidebar-normal"> {{ __('Lista de Formulários Ativos') }} </span>--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
+                            {{--                            <li class="nav-item{{ $activePage == 'lista_participantes' ? ' active' : '' }}">--}}
+                            {{--                                <a class="nav-link" href="{{route('lista.candidatos.index')}}">--}}
+                            {{--                                    <span class="sidebar-mini"> CA </span>--}}
+                            {{--                                    <span class="sidebar-normal"> {{ __('Candidatos') }} </span>--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
                         </ul>
                     </div>
                 </li>
