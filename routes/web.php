@@ -52,6 +52,8 @@ Route::post('comprovante-procurar', 'ComprovanteController@procurar')->name('com
 
 Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::resource('formulario', FormularioController::class);
+    Route::resource('formulario/configuracao', ConfiguracaoFormularioController::class);
+    Route::get('formulario/configuracao/create/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class, 'create'])->name('configuracao.create');
     Route::get('table-list', function () {
         return view('pages.table_list');
     })->name('table');

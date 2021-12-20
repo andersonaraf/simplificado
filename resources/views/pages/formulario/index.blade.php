@@ -28,10 +28,13 @@
                                         @foreach($formularios as $formulario)
                                             <tr>
                                                 <td>{{$formulario->nome}}</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{$formulario->liberado == 0 ? 'DESATIVADO' : 'ATIVADO'}}</td>
+                                                <td>{{date('d/m/Y H:i:s', strtotime($formulario->data_liberar))}}</td>
+                                                <td>{{date('d/m/Y H:i:s', strtotime($formulario->data_fecha))}}</td>
+                                                <td>
+                                                    <a href="{{route('configuracao.create', $formulario->id)}}"><span class="material-icons text-info">settings</span></a> |
+                                                    <a href="{{route('configuracao.destroy', $formulario->id)}}"><span class="material-icons text-danger">delete</span></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -56,4 +59,8 @@
 @endsection
 @push('js')
     <script src="{{asset('js/dashboard/tabela.js')}}" defer></script>
+{{--    DELETAR FORMULÁRIO--}}
+    <script>
+
+    </script>
 @endpush

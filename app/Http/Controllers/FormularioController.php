@@ -52,7 +52,10 @@ class FormularioController extends Controller
                 $formulario->liberado = false;
                 $formulario->save();
                 \DB::commit();
-
+                return redirect()->route('configuracao.create', $formulario->id)->with([
+                    'type' => 'success',
+                    'msg' => 'Formulário criado com sucesso. Agora é hora de configurar.'
+                ]);
             } catch (\Exception $exception) {
                 \DB::rollBack();
                 return redirect()->back()->with([
