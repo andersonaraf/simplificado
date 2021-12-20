@@ -14,7 +14,6 @@ class Cargo extends Model implements Auditable
     protected $fillable = [
         'id',
         'escolaridade_id',
-        'escolaridade_edital_dinamico_id',
         'cargo'
     ];
 
@@ -22,15 +21,4 @@ class Cargo extends Model implements Auditable
         return $this->hasOne(Escolaridade::class, 'id', 'escolaridade_id');
     }
 
-    public function tipoAnexo(){
-        return $this->hasMany(TipoAnexo::class, 'cargo_id', 'id');
-    }
-
-    public function escolaridadeEditalDinamico(){
-        return $this->belongsTo(EscolaridadeEditalDinamico::class, 'escolaridade_edital_dinamico_id', 'id');
-    }
-
-    public function pessoas(){
-        return $this->hasMany(Pessoa::class, 'cargo_id', 'id');
-    }
 }

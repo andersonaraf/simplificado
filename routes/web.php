@@ -53,6 +53,8 @@ Route::post('comprovante-procurar', 'ComprovanteController@procurar')->name('com
 Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::resource('formulario', FormularioController::class);
     Route::resource('formulario/configuracao', ConfiguracaoFormularioController::class);
+    Route::resource('formulario/configuracao/escolaridade', EscolaridadeController::class);
+    Route::resource('formulario/configuracao/escolaridade/cargo', CargoController::class);
     Route::get('formulario/configuracao/create/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class, 'create'])->name('configuracao.create');
     Route::get('table-list', function () {
         return view('pages.table_list');
@@ -115,16 +117,10 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::post('salvar/tipoAnexo', [\App\Http\Controllers\TipoAnexoController::class, 'store'])->name('tipoanexo.store');
 
     //Configurações do edital
-    Route::get('lista/escolaridade/{id}', [\App\Http\Controllers\EscolaridadeController::class, 'index'])->name('escolaridade.lista.index');
-    Route::post('/escolaridade/salvar', [\App\Http\Controllers\EscolaridadeController::class, 'store'])->name('escolaridade.store');
     Route::get('/escolaridade/aceitar/{idEdital}/{idEscolaridade}', [\App\Http\Controllers\EscolaridadeEditalDinamicoController::class, 'aceito'])->name('escolaridade.edital.dinamico');
     Route::get('/escolaridade/remover/{idEdital}/{idEscolaridade}', [\App\Http\Controllers\EscolaridadeEditalDinamicoController::class, 'remover'])->name('escolaridade.edital.dinamico.remover');
 
     Route::get('/escolaridade/cargo/{idEdital}/{idEscolaridade}', [\App\Http\Controllers\EscolaridadeEditalDinamicoController::class, 'escolaridadeEditalCargo'])->name('escolaridade.edital.cargo');
-    Route::post('/cargo/salvar', [\App\Http\Controllers\CargoController::class, 'store'])->name('cargo.store');
-    Route::get('/cargo/deletar/{id}', [\App\Http\Controllers\CargoController::class, 'destroy'])->name('cargo.delete');
-    Route::get('/cargo/editar', [\App\Http\Controllers\CargoController::class, 'edit'])->name('cargo.edita');
-    Route::post('/cargo/update', [\App\Http\Controllers\CargoController::class, 'update'])->name('cargo.update');
 
     Route::get('pontuacao/{id}', [\App\Http\Controllers\EscolaridadeController::class, 'index'])->name('escolaridade.lista.index');
 

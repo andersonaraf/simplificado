@@ -13,14 +13,14 @@ class DatabaseSeeder extends Seeder
     {
         #Schema::disableForeignKeyConstraints();
         $this->call([UsersTableSeeder::class]);
-        $this->call([EscolaridadesTableSeeder::class]);
-        $this->call(TipoTelasTableSeeder::class);
-        $this->call([TelasEditalSeeder::class]);
-        $this->call(EscolaridadeEditalDinamicosTableSeeder::class);
-//        $this->call([CargoTableSeeder::class]);
-        $this->call(TituloTableSeeder::class);
-        $this->call(CarrosselTableSeeder::class);
-        $this->call(TipoAnexoTableSeeder::class);
+//        $this->call([EscolaridadesTableSeeder::class]);
+//        $this->call(TipoTelasTableSeeder::class);
+//        $this->call([TelasEditalSeeder::class]);
+//        $this->call(EscolaridadeEditalDinamicosTableSeeder::class);
+////        $this->call([CargoTableSeeder::class]);
+//        $this->call(TituloTableSeeder::class);
+//        $this->call(CarrosselTableSeeder::class);
+//        $this->call(TipoAnexoTableSeeder::class);
         #$this->call(ComprovanteTableSeeder::class);
         #$this->call(EnderecoTableSeeder::class);
         #$this->call(AnexoTableSeeder::class);

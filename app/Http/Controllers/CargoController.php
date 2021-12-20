@@ -38,21 +38,24 @@ class CargoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-//        dd($request->all());
-        $escolaridadeEditalDinamico = EscolaridadeEditalDinamico::findOrFail($request->escolaridadeEditalDinamicoID);
-        $idEdital = $escolaridadeEditalDinamico->edital_dinamico_id;
-        $escolaridade_id = $escolaridadeEditalDinamico->escolaridade_id;
-
-        $cargo = Cargo::create([
-            'escolaridade_id' => $escolaridadeEditalDinamico->escolaridade_id,
-            'cargo' => $request->inputCargo,
-            'escolaridade_edital_dinamico_id' => $escolaridadeEditalDinamico->id
-        ]);
-        if (!is_null($cargo)) session('sucess', 'Cargo criado com sucesso.');
-        else session()->put('error', 'Não possível criar o cargo.');
-
-        return redirect()->route('escolaridade.edital.cargo', [$idEdital, $escolaridade_id]);
+        try {
+            DB::beginTransaction();
+            $cargo = new Cargo();
+            $cargo->escolaridade_id = $request->escolaridade;
+            $cargo->cargo = $request->nomeCargo;
+            $cargo->save();
+            DB::commit();
+            return redirect()->route('configuracao.show', $request->formularioID)->with([
+                'type' => 'success',
+                'msg' => 'Cargo cadastrado com sucesso.'
+            ]);
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return redirect()->back()->with([
+                'type' => 'error',
+                'msg' => 'Ops, ago de errado aconteceu: ' . $exception->getMessage()
+            ]);
+        }
     }
 
 
