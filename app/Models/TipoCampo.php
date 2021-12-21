@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TipoCampo extends Model
 {
     use HasFactory;
+    protected $table = 'tipo_campos';
+    protected $fillable = [
+        'tipo',
+    ];
 }
