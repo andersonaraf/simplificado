@@ -12,7 +12,7 @@ $(function () {
         Swal.fire({
             title: 'Tem Certeza?',
             text: "Esta ação não poderá ser revertida!",
-            type: 'warning',
+            icon: 'warning',
             allowOutsideClick: false,
             allowEscapeKey: false,
             showCancelButton: true,
@@ -32,24 +32,25 @@ $(function () {
                 });
 
                 $.ajax({
-                    type: 'GET',
+                    type: 'DELETE',
                     url: action,
                     dataType: 'JSON',
                     data: {
-                        "token": $('input[name="_token"]').val()
+                        "token": $('input[name="_token"]').val(),
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (response) {
-                        console.log(response)
                         if (response) {
                             Swal.fire({
                                 title: 'Excluido!',
                                 text: response.message,
-                                type: 'success',
+                                icon: 'success',
                                 showConfirmButton: false,
-                                timer: 3000,
+                                timer: 2000,
                                 allowOutsideClick: false,
                                 allowEscapeKey: false,
-                                onClose: window.location.replace(window.location.href)
+                            }).then(() => {
+                                location.reload()
                             })
                         }
 
@@ -60,7 +61,7 @@ $(function () {
                         Swal.fire({
                             title: 'Não Excluido!',
                             text: 'Não é possivel excluir esse registro',
-                            type: 'error',
+                            icon: 'error',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
                             showConfirmButton: true

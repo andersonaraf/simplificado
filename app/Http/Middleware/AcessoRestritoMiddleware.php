@@ -21,5 +21,9 @@ class AcessoRestritoMiddleware
             if (strtoupper(auth()->user()->tipo) != 'ADMIN') return redirect()->route('inicio');
             return $next($request);
         }
+
+        if (!auth()->check()) return redirect()->route('login');
+        if (strtoupper(auth()->user()->tipo) != 'ADMIN') return redirect()->route('inicio');
+        return $next($request);
     }
 }

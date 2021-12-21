@@ -25,6 +25,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @csrf
                                         @foreach($formularios as $formulario)
                                             <tr>
                                                 <td>{{$formulario->nome}}</td>
@@ -33,7 +34,9 @@
                                                 <td>{{date('d/m/Y H:i:s', strtotime($formulario->data_fecha))}}</td>
                                                 <td>
                                                     <a href="{{route('configuracao.create', $formulario->id)}}"><span class="material-icons text-info">settings</span></a> |
-                                                    <a href="{{route('configuracao.destroy', $formulario->id)}}"><span class="material-icons text-danger">delete</span></a>
+                                                    <a href="javascript:void(0);" class="delete_item_sweet" data-action="{{route('formulario.destroy', $formulario->id)}}">
+                                                        <span class="material-icons text-danger">delete</span>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -60,7 +63,5 @@
 @push('js')
     <script src="{{asset('js/dashboard/tabela.js')}}" defer></script>
 {{--    DELETAR FORMULÁRIO--}}
-    <script>
-
-    </script>
+    <script src="{{asset('js/confirmaDelete.js')}}"></script>
 @endpush
