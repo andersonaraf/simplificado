@@ -168,7 +168,7 @@ return [
          *
          */
         OwenIt\Auditing\AuditingServiceProvider::class,
-
+        Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -232,6 +232,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
     ],
 
 ];

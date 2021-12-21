@@ -66,6 +66,10 @@
 
                                                                         </div>
                                                                         <div class="col col-6 col-md-6 col-lg-6 text-right">
+                                                                            <a href="#" title="CONFIGURAR FORMULÁRIO">
+                                                                                <span class="material-icons text-info">settings</span>
+                                                                            </a>
+                                                                            <span class="font-weight-bold"> | </span>
                                                                             <a href="javascript:void(0);" class="delete_item_sweet"
                                                                                data-action="{{route('cargo.destroy', $cargo->id)}}">
                                                                                 <span class="material-icons text-danger">delete</span>
