@@ -23,6 +23,7 @@ $(function () {
         }).then((result) => {
             if (result.value) {
                 Swal.fire({
+                    icon: 'info',
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                     onBeforeOpen: () => {

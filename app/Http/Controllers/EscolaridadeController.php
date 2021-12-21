@@ -30,7 +30,7 @@ class EscolaridadeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -59,7 +59,7 @@ class EscolaridadeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -70,7 +70,7 @@ class EscolaridadeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -81,8 +81,8 @@ class EscolaridadeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -93,11 +93,21 @@ class EscolaridadeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+        try {
+            \DB::beginTransaction();
+            $escolaridade = Escolaridade::findOrFail($id);
+            $escolaridade->delete();
+            \DB::commit();
+            return response()->json('Cargo deletado com sucesso.');
+        } catch (\Exception $exception) {
+            \DB::rollBack();
+            return response()->json(false, 405);
+        }
     }
 }

@@ -34,11 +34,23 @@
                                                 @foreach($formulario->escolaridade as $key=>$escolaridade)
                                                     <div class="card">
                                                         <div class="card-header card-header-info" id="healing{{$key}}">
-                                                            <h2 class="mb-0">
-                                                                <input class="btn btn-link btn-block text-left font-weight-bold text-white" type="button" data-toggle="collapse"
-                                                                       data-target="#collapse{{$key}}" aria-expanded="true" aria-controls="collapse{{$key}}"
-                                                                       value="{{$escolaridade->nivel_escolaridade}}">
-                                                            </h2>
+                                                            <div class="row align-middle">
+                                                                <div class="col col-6 col-lg-6 col-md-6">
+                                                                    <h2 class="mb-0">
+                                                                        <input class="btn btn-link btn-block text-left font-weight-bold text-white" type="button"
+                                                                               data-toggle="collapse"
+                                                                               data-target="#collapse{{$key}}" aria-expanded="true" aria-controls="collapse{{$key}}"
+                                                                               value="{{$escolaridade->nivel_escolaridade}}">
+                                                                    </h2>
+                                                                </div>
+
+                                                                <div class="col col-6 col-lg-6 col-md-6 text-right align-middle">
+                                                                    <a href="javascript:void(0);" class="delete_item_sweet"
+                                                                       data-action="{{route('escolaridade.destroy', $escolaridade->id)}}">
+                                                                        <span class="material-icons text-danger">delete</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
                                                         </div>
 
                                                         <div id="collapse{{$key}}" class="collapse show" aria-labelledby="healing{{$key}}" data-parent="#accordionExample">
@@ -54,14 +66,15 @@
 
                                                                         </div>
                                                                         <div class="col col-6 col-md-6 col-lg-6 text-right">
-                                                                            <a href="javascript:void(0);" class="delete_item_sweet" data-action="{{route('cargo.destroy', $cargo->id)}}">
+                                                                            <a href="javascript:void(0);" class="delete_item_sweet"
+                                                                               data-action="{{route('cargo.destroy', $cargo->id)}}">
                                                                                 <span class="material-icons text-danger">delete</span>
                                                                             </a>
                                                                         </div>
                                                                     </div>
                                                                     <hr>
                                                                     @if(count($escolaridade->cargos)-1 == $key)
-                                                                       @include('pages.formulario.configuração.cargo.create')
+                                                                        @include('pages.formulario.configuração.cargo.create')
                                                                     @endif
                                                                 @empty
                                                                     @include('pages.formulario.configuração.cargo.create')
