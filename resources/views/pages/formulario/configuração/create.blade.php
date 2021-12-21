@@ -54,7 +54,9 @@
 
                                                                         </div>
                                                                         <div class="col col-6 col-md-6 col-lg-6 text-right">
-                                                                            <span class="material-icons text-danger">delete</span>
+                                                                            <a href="javascript:void(0);" class="delete_item_sweet" data-action="{{route('cargo.destroy', $cargo->id)}}">
+                                                                                <span class="material-icons text-danger">delete</span>
+                                                                            </a>
                                                                         </div>
                                                                     </div>
                                                                     <hr>
@@ -81,3 +83,6 @@
     </div>
     @include('pages.formulario.configuração.escolaridade.create')
 @endsection
+@push('js')
+    <script src="{{asset('js/confirmaDelete.js')}}"></script>
+@endpush
