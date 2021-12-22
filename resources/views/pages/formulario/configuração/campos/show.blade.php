@@ -39,13 +39,17 @@
                                                     <div class="card-header card-header-info">
                                                         <div class="row">
                                                             <div class="col col-6">
-                                                                <div class="form-group has-warning">
-                                                                    <input type="text"
-                                                                           class="font-weight-bold text-white form-control collapse-send"
-                                                                           data-collapse-id="{{$collapse->id}}"
-                                                                           data-form="{{route('collapse.update', $collapse->id)}}"
-                                                                           name="collapseName"
-                                                                           value="{{$collapse->nome}}">
+                                                                <div class="row">
+                                                                    <div class="col col-12">
+                                                                        <div class="form-group has-warning">
+                                                                            <input type="text"
+                                                                                   class="font-weight-bold text-white form-control collapse-send"
+                                                                                   data-collapse-id="{{$collapse->id}}"
+                                                                                   data-form="{{route('collapse.update', $collapse->id)}}"
+                                                                                   name="collapseName"
+                                                                                   value="{{$collapse->nome}}">
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col col-6 text-right" id="heading{{$key}}"
@@ -53,7 +57,10 @@
                                                                  href="#collapse{{$key}}" aria-expanded="true"
                                                                  aria-controls="collapse{{$key}}"
                                                                  style="cursor:pointer;">
-                                                                <i class="material-icons text-white">keyboard_arrow_down</i>
+                                                                <a href="javascript:void(0);" class="delete_item_sweet"
+                                                                   data-action="{{route('collapse.destroy', $collapse->id)}}">
+                                                                    <span class="material-icons text-danger">delete</span>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -62,10 +69,10 @@
                                                          data-parent="#accordionExample">
                                                         <div class="card-body">
                                                             @forelse($collapse->campos as $campo)
+
                                                             @empty
                                                                 <div class="row justify-content-center">
-                                                                    <h5 class="font-weight-bold">ESSE CAMPO NÃO POSSUI
-                                                                        ANEXOS.</h5>
+                                                                    <h5 class="font-weight-bold">ESSE CAMPO NÃO POSSUI ANEXOS.</h5>
                                                                 </div>
                                                             @endforelse
                                                         </div>
@@ -74,8 +81,7 @@
                                             @empty
                                                 <div class="card-body">
                                                     <div class="row justify-content-center">
-                                                        <h5 class="font-weight-bold">ESSE FORMULÁRIO NÃO POSSUI
-                                                            CAMPOS</h5>
+                                                        <h5 class="font-weight-bold">ESSE FORMULÁRIO NÃO POSSUI CAMPOS</h5>
                                                     </div>
                                                 </div>
                                             @endforelse
@@ -106,7 +112,7 @@
                     "id": $(this).attr('data-collapse-id'),
                     "nomeCollapse": $(this).val(),
                 },
-                success: function(data) {
+                success: function (data) {
                     Swal.fire({
                         icon: 'success',
                         title: 'AVISO',

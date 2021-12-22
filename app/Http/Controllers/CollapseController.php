@@ -46,13 +46,20 @@ class CollapseController extends Controller
             return response()->json(true);
         } catch (\Exception $exception) {
             \DB::rollBack();
-            return response()->json('Ocorreu um problema: '. $exception->getMessage(), '405');
+            return response()->json('Ocorreu um problema: ' . $exception->getMessage(), '405');
         }
 
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-
+        try {
+            \DB::beginTransaction();
+            $collapse = Collapse::destroy($id);
+            \DB::commit();
+            return true;
+        } catch (\Exception $exception) {
+            return response()->json($exception->getMessage(), $exception->getCode());
+        }
     }
 }
