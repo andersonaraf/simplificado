@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class CollapseController extends Controller
 {
     //
-    public function store(CollapseRequest $request){
+    public function store(CollapseRequest $request)
+    {
         try {
             \DB::beginTransaction();
             $collapse = new Collapse();
@@ -27,7 +28,31 @@ class CollapseController extends Controller
         }
     }
 
-    public function destroy(){
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            \DB::beginTransaction();
+            $collapse = Collapse::findOrFail($id);
+            $collapse->nome = $request->nomeCollapse;
+            $collapse->save();
+            \DB::commit();
+            return response()->json(true);
+        } catch (\Exception $exception) {
+            \DB::rollBack();
+            return response()->json('Ocorreu um problema: '. $exception->getMessage(), '405');
+        }
+
+    }
+
+    public function destroy()
+    {
 
     }
 }

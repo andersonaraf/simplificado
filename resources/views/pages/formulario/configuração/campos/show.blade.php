@@ -37,13 +37,25 @@
                                             @forelse($cargo->collapse as $key=>$collapse)
                                                 <div class="card">
                                                     <div class="card-header card-header-info">
-                                                        <a class="font-weight-bold text-white"  id="heading{{$key}}"
-                                                           data-toggle="collapse"
-                                                           href="#collapse{{$key}}" aria-expanded="true"
-                                                           aria-controls="collapse{{$key}}">
-                                                            {{$collapse->nome}}
-                                                            <i class="material-icons text-white">keyboard_arrow_down</i>
-                                                        </a>
+                                                        <div class="row">
+                                                            <div class="col col-6">
+                                                                <div class="form-group has-warning">
+                                                                    <input type="text"
+                                                                           class="font-weight-bold text-white form-control collapse-send"
+                                                                           data-collapse-id="{{$collapse->id}}"
+                                                                           data-form="{{route('collapse.update', $collapse->id)}}"
+                                                                           name="collapseName"
+                                                                           value="{{$collapse->nome}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-6 text-right" id="heading{{$key}}"
+                                                                 data-toggle="collapse"
+                                                                 href="#collapse{{$key}}" aria-expanded="true"
+                                                                 aria-controls="collapse{{$key}}"
+                                                                 style="cursor:pointer;">
+                                                                <i class="material-icons text-white">keyboard_arrow_down</i>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div id="collapse{{$key}}" class="collapse show"
                                                          aria-labelledby="heading{{$key}}"
@@ -74,9 +86,8 @@
                         </div>
                     </div>
                 </div>
+            </main>
         </div>
-        </main>
-    </div>
     </div>
     @include('pages.formulario.configuração.campos.create')
 @endsection
@@ -85,5 +96,36 @@
         @error('nomeCollapse')
         $('#novoCollapse').modal().show()
         @enderror
+
+        $('.collapse-send').change(function () {
+            $.ajax({
+                url: $(this).attr('data-form'),
+                method: 'PUT',
+                data: {
+                    "token": "{{csrf_token()}}",
+                    "id": $(this).attr('data-collapse-id'),
+                    "nomeCollapse": $(this).val(),
+                },
+                success: function(data) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'AVISO',
+                        text: 'Alterado com sucesso.',
+                        timer: 1000,
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    })
+                },
+                error: function (data) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'AVISO',
+                        text: 'Ocorreu um error.',
+
+                    })
+                }
+            });
+        })
     </script>
 @endpush
