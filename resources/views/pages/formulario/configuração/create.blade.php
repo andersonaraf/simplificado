@@ -66,7 +66,7 @@
 
                                                                         </div>
                                                                         <div class="col col-6 col-md-6 col-lg-6 text-right">
-                                                                            <a href="#" title="CONFIGURAR FORMULÁRIO">
+                                                                            <a href="{{route('configurar.cargo.show', $cargo->id)}}" title="CONFIGURAR FORMULÁRIO">
                                                                                 <span class="material-icons text-info">settings</span>
                                                                             </a>
                                                                             <span class="font-weight-bold"> | </span>
