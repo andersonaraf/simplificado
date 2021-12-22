@@ -12,7 +12,7 @@ $(function () {
         Swal.fire({
             title: 'Tem Certeza?',
             text: "Esta ação não poderá ser revertida!",
-            icon: 'warning',
+            icon: 'question',
             allowOutsideClick: false,
             allowEscapeKey: false,
             showCancelButton: true,

@@ -21,4 +21,7 @@ class Cargo extends Model implements Auditable
         return $this->hasOne(Escolaridade::class, 'id', 'escolaridade_id');
     }
 
+    public function collapse(){
+        return $this->hasMany(Collapse::class, 'cargo_id', 'id');
+    }
 }
