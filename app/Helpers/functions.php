@@ -2,7 +2,7 @@
 function title(){
     $title = \App\Models\Title::all()->first();
     if (is_null($title)) {
-        $title = null;
+        $title = 'RB SIMPLIFICADO';
     }
     return $title;
 }

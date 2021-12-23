@@ -2,7 +2,8 @@
 @push('css')
     <style>
         ::placeholder {
-            color: white !important;
+            color: black !important;
+            opacity: 0.5 !important;
         }
     </style>
 @endpush
@@ -20,9 +21,18 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title font-weight-bold">
-                                CONFIGURAÇÃO: {{$cargo->escolaridade->formulario->nome}}</h4>
-                            <b class="card-subtitle">{{$cargo->cargo}}</b>
+                            <div class="row">
+                                <div class="col col-8">
+                                    <h4 class="card-title font-weight-bold">
+                                        CONFIGURAÇÃO: {{$cargo->escolaridade->formulario->nome}}</h4>
+                                    <b class="card-subtitle">{{$cargo->cargo}}</b>
+                                </div>
+                                <div class="col col-4 text-right">
+                                    <a href="#">
+                                        <span class="material-icons text-info">visibility</span>
+                                    </a>
+                                </div>
+                            </div>
                             <hr>
                         </div>
                         <div class="card-body">
@@ -41,13 +51,18 @@
                                                             <div class="col col-6">
                                                                 <div class="row">
                                                                     <div class="col col-12">
-                                                                        <div class="form-group has-warning">
+                                                                        <div class="input-group has-warning">
                                                                             <input type="text"
                                                                                    class="font-weight-bold text-white form-control collapse-send"
                                                                                    data-collapse-id="{{$collapse->id}}"
                                                                                    data-form="{{route('collapse.update', $collapse->id)}}"
                                                                                    name="collapseName"
                                                                                    value="{{$collapse->nome}}">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text material-icons text-white">
+                                                                                    edit
+                                                                                </span>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -59,7 +74,8 @@
                                                                  style="cursor:pointer;">
                                                                 <a href="javascript:void(0);" class="delete_item_sweet"
                                                                    data-action="{{route('collapse.destroy', $collapse->id)}}">
-                                                                    <span class="material-icons text-danger">delete</span>
+                                                                    <span
+                                                                        class="material-icons text-danger">delete</span>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -68,11 +84,18 @@
                                                          aria-labelledby="heading{{$key}}"
                                                          data-parent="#accordionExample">
                                                         <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col col-12 text-right">
+                                                                    <b>Pontuação sobrando: <b id="pontosTotal">100</b></b>
+                                                                </div>
+                                                            </div>
                                                             @forelse($collapse->campos as $campo)
 
                                                             @empty
+                                                                @include('pages.formulario.configuração.campos.create', ['$collapse_id' => $collapse->id])
                                                                 <div class="row justify-content-center">
-                                                                    <h5 class="font-weight-bold">ESSE CAMPO NÃO POSSUI ANEXOS.</h5>
+                                                                    <h5 class="font-weight-bold">ESSE CAMPO NÃO POSSUI
+                                                                        ANEXOS.</h5>
                                                                 </div>
                                                             @endforelse
                                                         </div>
@@ -81,7 +104,8 @@
                                             @empty
                                                 <div class="card-body">
                                                     <div class="row justify-content-center">
-                                                        <h5 class="font-weight-bold">ESSE FORMULÁRIO NÃO POSSUI CAMPOS</h5>
+                                                        <h5 class="font-weight-bold">ESSE FORMULÁRIO NÃO POSSUI
+                                                            CAMPOS</h5>
                                                     </div>
                                                 </div>
                                             @endforelse
@@ -95,7 +119,7 @@
             </main>
         </div>
     </div>
-    @include('pages.formulario.configuração.campos.create')
+    @include('pages.formulario.configuração.collapse.create')
 @endsection
 @push('js')
     <script>
@@ -132,6 +156,16 @@
                     })
                 }
             });
+        })
+
+        $('.campoNome').keypress(function () {
+            $('#campoLabel').text($(this).val());
+        });
+
+        let pontuacaoMaxima = "{{$cargo->escolaridade->formulario->pontuacao}}"
+        $('.pontuarCampo').change(function () {
+            pontuacaoMaxima = pontuacaoMaxima - $(this).val()
+            $('#pontosTotal').text(pontuacaoMaxima)
         })
     </script>
 @endpush

@@ -1,9 +1,5 @@
 @extends('layouts.header-footer')
 
-@section('title')
-    <title>SEINFRA - REGISTRO</title>
-@endsection
-
 @section('css')
     <link rel="stylesheet" href="{{asset('css/registro/style.css')}}">
     <style>
