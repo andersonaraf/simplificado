@@ -8,13 +8,13 @@
                         <a href="{{route('formulario.create')}}"><input type="button" class="btn btn-outline-info font-weight-bold col-12 col-md-3 col-lg-2" value="NOVO FORMULÁRIO"></a>
                     </div>
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title font-weight-bold">Lista de Formulários</h4>
+                        <div class="card-header bg-primary">
+                            <h4 class="text-white font-weight-bold">Lista de Formulários</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 col-lg-12 col-md-12">
-                                    <table id="dataTable" class="display nowrap" style="width: 100%">
+                                    <table  id="dataTable" class="display table-hover nowrap" style="width: 100%">
                                         <thead>
                                         <tr>
                                             <th>FORMULÁRIO</th>

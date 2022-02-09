@@ -22,7 +22,6 @@ class RemoveColumnPessoaTable extends Migration
             $table->dropColumn(['cargo_id']);
             $table->dropColumn(['escolaridade_id']);
             $table->dropColumn(['comprovante_id']);
-            $table->dropColumn(['edital_dinamico_id']);
             $table->dropColumn(['status']);
             $table->dropColumn(['status_avaliado']);
             $table->dropColumn(['status_revisado']);
