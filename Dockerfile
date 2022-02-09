@@ -1,1 +1,1 @@
-FROM wyveo/nginx-php-fpm:php74
+FROM wyveo/nginx-php-fpm:php80

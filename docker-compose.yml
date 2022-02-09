@@ -1,13 +1,14 @@
 version: '3.3'
 services:
-  laravel-app:
+  ponto-app:
     build: .
     ports:
       - "8181:80"
       #      para não matar minha mudança ao dar docker compose down
     volumes:
       - ./:/usr/share/nginx
-      - ./nginx:/etc/nginx/
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    #      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
       - app-network
   mysql-app:
@@ -15,7 +16,7 @@ services:
     ports:
       - "3305:3306"
     environment:
-      MYSQL_DATABASE: "ps_semsa20212_db"
+      MYSQL_DATABASE: "rb_simplificado"
       MYSQL_ROOT_PASSWORD: "password"
     networks:
       - app-network
