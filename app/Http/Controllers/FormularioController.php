@@ -115,16 +115,17 @@ class FormularioController extends Controller
     public function destroy($id)
     {
         //
-        try {
-            \DB::beginTransaction();
-            $formulario = Formulario::findOrFail($id);
-            $formulario->delete();
-            \DB::commit();
-            return response()->json('Formulário removido com sucesso.');
-        } catch (\Exception $exception) {
-            \DB::rollBack();
-            return response()->json(false, '405');
-        }
+//        try {
+//            \DB::beginTransaction();
+//            $formulario = Formulario::findOrFail($id);
+//            $formulario->delete();
+//            \DB::commit();
+//            return response()->json('Formulário removido com sucesso.');
+//        } catch (\Exception $exception) {
+//            dd($exception);
+//            \DB::rollBack();
+//            return response()->json(false, '405');
+//        }
 
 
     }
