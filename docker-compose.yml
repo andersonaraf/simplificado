@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-  ponto-app:
+  rb_simplificado:
     build: .
     ports:
       - "8181:80"
