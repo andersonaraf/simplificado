@@ -27,7 +27,6 @@
                                         CONFIGURAÇÃO: {{$cargo->escolaridade->formulario->nome}}</h4>
                                     <b class="card-subtitle">{{$cargo->cargo}}</b>
                                 </div>
-                                @dd($cargo)
                                 <div class="col col-4 text-right">
                                     <a href="#">
                                         <span class="material-icons text-info">visibility</span>
@@ -159,7 +158,7 @@
             });
         })
 
-        $('.campoNome').keypress(function () {
+        $('.campoNome').keyup(function () {
             $('#campoLabel').text($(this).val());
         });
 
