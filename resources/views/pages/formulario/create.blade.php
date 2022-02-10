@@ -20,6 +20,14 @@
                                         <div class="form-group has-info">
                                             <label for="nomeFormulario" class="font-weight-bold">NOME FORMULÁRIO</label>
                                             <input type="text" class="form-control" name="nomeFormulario" id="nomeFormulario" placeholder="RB SIMPLIFICADO {{date('Y')}}">
+                                            @if($errors->has('nomeFormulario'))
+                                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                    {{$errors->first('nomeFormulario')}}
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
 
@@ -28,6 +36,14 @@
                                             <label for="pontuacaoTotal" class="font-weight-bold">PONTUAÇÃO TOTAL: </label>
                                             <input type="number" class="form-control" name="pontuacaoTotal" id="pontuacaoTotal" min="0" max="100"
                                                    placeholder="PONTUAÇÃO MÁXIMA DO FORMULÁRIO">
+                                            @if($errors->has('pontuacaoTotal'))
+                                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                    {{$errors->first('pontuacaoTotal')}}
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -37,6 +53,14 @@
                                         <div class="form-group has-info">
                                             <label for="dataInicio" class="font-weight-bold">DATA PARA LIBERAR FORMULÁRIO: </label>
                                             <input type="datetime-local" class="form-control" name="dataInicio" id="dataInicio">
+                                            @if($errors->has('dataInicio'))
+                                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                    {{$errors->first('dataInicio')}}
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
 
@@ -44,6 +68,14 @@
                                         <div class="form-group has-info">
                                             <label for="dataFinalizar" class="font-weight-bold">DATA PARA FINALIZAR FORMULÁRIO: </label>
                                             <input type="datetime-local" class="form-control" name="dataFinalizar" id="dataFinalizar">
+                                            @if($errors->has('dataInicio'))
+                                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                    {{$errors->first('dataInicio')}}
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

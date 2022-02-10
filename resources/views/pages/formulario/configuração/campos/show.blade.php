@@ -5,6 +5,10 @@
             color: black !important;
             opacity: 0.5 !important;
         }
+
+        span{
+            cursor: pointer;
+        }
     </style>
 @endpush
 @section('content')
@@ -59,9 +63,12 @@
                                                                                    name="collapseName"
                                                                                    value="{{$collapse->nome}}">
                                                                             <div class="input-group-prepend">
-                                                                                <span class="input-group-text material-icons text-white">
+                                                                                <button
+                                                                                    class=" input-group-text material-icons text-white">
+                                                                                <span>
                                                                                     edit
                                                                                 </span>
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -86,7 +93,8 @@
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col col-12 text-right">
-                                                                    <b>Pontuação sobrando: <b id="pontosTotal">100</b></b>
+                                                                    <b>Pontuação sobrando: <b
+                                                                            id="pontosTotal">100</b></b>
                                                                 </div>
                                                             </div>
                                                             @forelse($collapse->campos as $campo)
