@@ -33,9 +33,9 @@
                                                 <td>{{date('d/m/Y H:i:s', strtotime($formulario->data_liberar))}}</td>
                                                 <td>{{date('d/m/Y H:i:s', strtotime($formulario->data_fecha))}}</td>
                                                 <td>
-                                                    <a href="{{route('configuracao.create', $formulario->id)}}"><span class="material-icons text-info">settings</span></a> |
-                                                    <a href="javascript:void(0);" class="delete_item_sweet" data-action="{{route('formulario.destroy', $formulario->id)}}">
-                                                        <span class="material-icons text-danger">delete</span>
+                                                    <a href="{{route('configuracao.create', $formulario->id)}}"><span class="material-icons text-info">add_circle_outline</span></a> |
+                                                    <a href="{{route('formulario.edit', $formulario->id)}}">
+                                                        <span class="material-icons text-info">settings</span>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -63,5 +63,5 @@
 @push('js')
     <script src="{{asset('js/dashboard/tabela.js')}}" defer></script>
 {{--    DELETAR FORMULÁRIO--}}
-    <script src="{{asset('js/confirmaDelete.js')}}"></script>
+{{--    <script src="{{asset('js/confirmaDelete.js')}}"></script>--}}
 @endpush

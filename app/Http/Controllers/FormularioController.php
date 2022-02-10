@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FormularioRequest;
 use App\Models\Formulario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FormularioController extends Controller
 {
@@ -91,7 +92,8 @@ class FormularioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $formulario = Formulario::findOrFail($id);
+        return view('pages.formulario.edit', compact('formulario'));
     }
 
     /**
@@ -103,7 +105,22 @@ class FormularioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $formulario = Formulario::findOrFail($id);
+            $formulario->update($request->all());
+            DB::commit();
+            return redirect()->route('formulario.index', $formulario->id)->with([
+                'type' => 'success',
+                'msg' => 'Formulário Atualizado com sucesso. '
+            ]);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back()->with([
+                'type' => 'error',
+                'msg' => $exception->getMessage()
+            ]);
+        }
     }
 
     /**
@@ -114,18 +131,17 @@ class FormularioController extends Controller
      */
     public function destroy($id)
     {
-        //
-//        try {
-//            \DB::beginTransaction();
-//            $formulario = Formulario::findOrFail($id);
-//            $formulario->delete();
-//            \DB::commit();
-//            return response()->json('Formulário removido com sucesso.');
-//        } catch (\Exception $exception) {
-//            dd($exception);
-//            \DB::rollBack();
-//            return response()->json(false, '405');
-//        }
+        try {
+            \DB::beginTransaction();
+            $formulario = Formulario::findOrFail($id);
+            $formulario->delete();
+            \DB::commit();
+            return response()->json('Formulário removido com sucesso.');
+        } catch (\Exception $exception) {
+            dd($exception);
+            \DB::rollBack();
+            return response()->json(false, '405');
+        }
 
 
     }
