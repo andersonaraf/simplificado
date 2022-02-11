@@ -1,9 +1,11 @@
+<form method="POST" action="{{route('formulario.store')}}">
+    @csrf
 <div class="row">
     <div class="col col-10">
         <div class="row form-group has-info d-flex justify-content-around">
             <div class="col-6">
                 <label class="font-weight-bold bmd-label-static">Título do campo</label>
-                <input type="text" class="form-control campoNome" id="input{{$collapse->id}}" id="{{$collapse->id}}"
+                <input name="titulo_campo" type="text" class="form-control campoNome" id="input{{$collapse->id}}" id="{{$collapse->id}}"
                        onkeyup="label({{$collapse->id}})"/>
 
             </div>
@@ -13,10 +15,10 @@
                 <div id="resultadoinput{{$collapse->id}}">
                 </div>
             </div>
-            {{--            <div class="col-4">--}}
-            {{--                <label for="checkbox" class="">Campo Obrigatório</label>--}}
-            {{--                <input value="required" type="checkbox">--}}
-            {{--            </div>--}}
+            <div class="col-4">
+                <label for="checkbox" class="">Campo Obrigatório</label>
+                <input name="required_campo"  type="checkbox">
+            </div>
         </div>
         <div id="collapseCampo{{$key}}" class="collapse show">
             <div class="card-body">
@@ -25,7 +27,7 @@
                         <div class="form-group has-info">
                             <div class="row">
                                 <div class="col col-6">
-                                    <select class="form-control" id="select{{$collapse->id}}"
+                                    <select name="tipo_campo" class="form-control" id="select{{$collapse->id}}"
                                             onclick="select({{$collapse->id}})">
                                         <option value="">----</option>
                                         @foreach($tipo_campo as $campo)
@@ -36,7 +38,7 @@
                                 <div class="col col-6">
                                     <div class="form-group">
                                         <label class="font-weight-bold text-dark">Pontuar: </label>
-                                        <input type="number" id="pontuarCampo{{$collapse->id}}"
+                                        <input name="pontuacao" type="number" id="pontuarCampo{{$collapse->id}}"
                                                class='form-control pontuarCampo'
                                                placeholder="PONTUAÇÃO DO CAMPO / VAZIO PARA NÃO PONTUAR" step="0.1"
                                                min="0" max="{{$cargo->escolaridade->formulario->pontuacao}}">
@@ -44,7 +46,7 @@
                                 </div>
                                 <div class="row justify-content-end">
                                     <div class="col col-12 py-4">
-                                        <a class="btn btn-primary" href="#">Salvar</a>
+                                        <button type="submit" class="btn btn-primary">Salvar</button>
                                     </div>
                                 </div>
                             </div>
@@ -66,3 +68,4 @@
     </div>
 </div>
 <hr>
+</form>

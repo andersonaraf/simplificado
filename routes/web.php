@@ -56,7 +56,7 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::post('/formulario/configurar/collapse/store', [\App\Http\Controllers\CollapseController::class, 'store'])->name('collapse.store');
     Route::put('/formulario/configurar/collapse/update/{id}', [\App\Http\Controllers\CollapseController::class, 'update'])->name('collapse.update');
     Route::delete('/formulario/configurar/collapse/destroy/{id}', [\App\Http\Controllers\CollapseController::class, 'destroy'])->name('collapse.destroy');
-//    Route::post('/formulario/delete/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class,'destroy'])->name('formulario.destroy');
+    Route::post('/formulario/cargo/salvar', [\App\Http\Controllers\ConfiguracaoFormularioController::class,'store'])->name('formulario.store');
     Route::get('table-list', function () {
         return view('pages.table_list');
     })->name('table');
