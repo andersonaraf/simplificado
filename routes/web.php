@@ -28,7 +28,7 @@ Route::get('/sair', function () {
 
 Route::get('/', [\App\Http\Controllers\WeelcomeController::class, 'index'])->name('inicio');
 Route::get('/cadastro/simplificado', [\App\Http\Controllers\RegistroController::class, 'index'])->name('cadastro-simplificado');
-Route::get('/cadastro/simplificado/salvar', [\App\Http\Controllers\RegistroController::class, 'store'])->name('cadastro-simplificado.store');
+Route::post('/cadastro/simplificado/salvar', [\App\Http\Controllers\RegistroController::class, 'store'])->name('cadastro-simplificado.store');
 
 Route::get('/solicitacao/recurso', [\App\Http\Controllers\RecursoController::class, 'index'])->name('recurso');
 
@@ -36,8 +36,9 @@ Route::post('/recurso-pedir', 'RecursoController@pedirRecurso')->name('recurso-p
 
 Route::get('/registro/edital/{id}', [\App\Http\Controllers\RegistroController::class, 'index'])->name('registro');
 Route::any('registro/parte1', [\App\Http\Controllers\RegistroController::class, 'store'])->name('registro/parte1');
-Route::post('registro/parte2', 'RegistroController@storePart2')->name('registro/parte2');
-Route::get('/registro/anexos/{id}', [\App\Http\Controllers\RegistroController::class, 'buscaIndex'])->name('registro/anexos');
+Route::prefix('usuario')->name('usuario.')->group(function (){
+    Route::resource('formulario', \App\Http\Controllers\Usuario\UsuarioFormularioController::class);
+});
 
 Route::get('/comprovante/{comprovante}', 'ComprovanteController@index')->name('registro/comprovante'); //
 
