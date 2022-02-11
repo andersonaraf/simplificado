@@ -1,16 +1,5 @@
 <?php
-
-use App\Http\Controllers\CampoController;
-use App\Http\Controllers\CargoController;
-use App\Http\Controllers\ConfiguracaoFormularioController;
-use App\Http\Controllers\EscolaridadeController;
-use App\Http\Controllers\FormularioController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TelasDinamicas\TelasEditalController;
-use App\Http\Controllers\TelasDinamicas\TelaLiberarController;
-use App\Http\Controllers\TelasDinamicas\TelaCriarController;
-use App\Models\Cargo;
-use App\Models\Escolaridade;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,11 +45,11 @@ Route::get('/protocolo', 'ComprovanteController@protocolo')->name('protocolo');
 Route::post('comprovante-procurar', 'ComprovanteController@procurar')->name('comprovante-procurar');
 
 Route::group(['middleware' => 'acesso.restrito'] , function () {
-    Route::resource('formulario', FormularioController::class);
-    Route::resource('formulario/configuracao', ConfiguracaoFormularioController::class);
-    Route::resource('formulario/configuracao/escolaridade', EscolaridadeController::class);
-    Route::resource('formulario/configuracao/escolaridade/cargo', CargoController::class);
-    Route::resource('formulario/configuracao/campo', CampoController::class);
+    Route::resource('formulario', \App\Http\Controllers\FormularioController::class);
+    Route::resource('formulario/configuracao', \App\Http\Controllers\ConfiguracaoFormularioController::class);
+    Route::resource('formulario/configuracao/escolaridade', \App\Http\Controllers\EscolaridadeController::class);
+    Route::resource('formulario/configuracao/escolaridade/cargo', \App\Http\Controllers\CargoController::class);
+    Route::resource('formulario/configuracao/campo', \App\Http\Controllers\CampoController::class);
     Route::get('formulario/configuracao/collapse/show/{id}', [\App\Http\Controllers\ConfigurarCargoController::class, 'show'])->name('configurar.cargo.show');
     Route::get('formulario/configuracao/create/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class, 'create'])->name('configuracao.create');
     Route::post('/formulario/configurar/collapse/store', [\App\Http\Controllers\CollapseController::class, 'store'])->name('collapse.store');
@@ -95,12 +84,12 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::get('/unico-transparencia/{id}', 'TransparenciaController@show')->name('unico-transparencia');
     Route::post('/pesquisa-transparencia', 'TransparenciaController@search')->name('pesquisa-transparencia');
 
-    Route::get('/tela-criar', [TelaCriarController::class, 'index'])->name('tela-criar');
-    Route::get('/tela-liberar', [TelaLiberarController::class, 'index'])->name('tela-liberar');
-    Route::post('tela-criar-salvar', [TelasEditalController::class, 'store'])->name('tela-criar-salvar');
-    Route::get('tela-deletar/{id}', [TelasEditalController::class, 'delete'])->name('tela-deletar');
-    Route::get('tela-unica-mostra/{id}', [TelasEditalController::class, 'show'])->name('tela-unica-mostra');
-    Route::match(['post', 'get'], 'tela-editar/{id}', [TelasEditalController::class, 'update'])->name('tela-editar');
+    Route::get('/tela-criar', [\App\Http\Controllers\TelasDinamicas\TelaCriarController::class, 'index'])->name('tela-criar');
+    Route::get('/tela-liberar', [\App\Http\Controllers\TelasDinamicas\TelaLiberarController::class, 'index'])->name('tela-liberar');
+    Route::post('tela-criar-salvar', [\App\Http\Controllers\TelasDinamicas\TelasEditalController::class, 'store'])->name('tela-criar-salvar');
+    Route::get('tela-deletar/{id}', [\App\Http\Controllers\TelasDinamicas\TelasEditalController::class, 'delete'])->name('tela-deletar');
+    Route::get('tela-unica-mostra/{id}', [\App\Http\Controllers\TelasDinamicas\TelasEditalController::class, 'show'])->name('tela-unica-mostra');
+    Route::match(['post', 'get'], 'tela-editar/{id}', [\App\Http\Controllers\TelasDinamicas\TelasEditalController::class, 'update'])->name('tela-editar');
 
     Route::get('avaliacao-pne', 'PNE\AvaliacaoPNEController@index')->name('avaliacao-pne');
     Route::get('avaliacao-pne-aceitar/{id}', 'PNE\AvaliacaoPNEController@update')->name('avaliacao-pne-aceitar');
