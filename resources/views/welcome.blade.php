@@ -49,20 +49,7 @@
                     <h2>Processos Seletivos</h2>
                 </div>
                 <div class="row justify-content-md-center">
-                    @foreach($inscricoes as $inscricao)
-                        @if (($inscricao->status_liberar == '1' || !is_null($inscricao->data_liberar)) && (is_null($inscricao->data_fecha) || strtotime($inscricao->data_fecha) > strtotime(date('Y-m-d H:i'))))
-                            @if (($inscricao->status_liberar == 1) || strtotime($inscricao->data_liberar) <= strtotime(date('Y-m-d H:i')))
-                                <div class="col-lg-4 mt-3">
-                                    <a href="{{route('registro', $inscricao->id)}}">
-                                        <button class="icon-box" style="height: 250px">
-                                            <i class="icofont-plus"></i>
-                                            <h3>{{$inscricao->nome_ou_anexo}}</h3>
-                                        </button>
-                                    </a>
-                                </div>
-                            @endif
-                        @endif
-                    @endforeach
+                    @include('usuario.formulario.box')
                     @if(!is_null($protocolo))
                         @if ($protocolo->status_liberar == '1' || !is_null($protocolo->data_liberar) )
                             @if ($protocolo->nome_ou_anexo == 'Protocolo' && ($protocolo->status_liberar == 1) || strtotime($protocolo->data_liberar) <= strtotime(date('Y-m-d H:i')))
