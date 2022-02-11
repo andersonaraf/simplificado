@@ -1,7 +1,8 @@
 <div class="row">
     <div class="col col-10">
         <div class="form-group has-info">
-            <input type="text" class="form-control campoNome" placeholder="Titulo do campo"/>
+            <input type="text" class="form-control campoNome" placeholder="Titulo do campo" id="input{{$collapse->id}}"                                                                                    id="{{$collapse->id}}"
+            onkeyup="label({{$collapse->id}})"/>
         </div>
         <div id="collapseCampo{{$key}}" class="collapse show">
             <div class="card-body">
@@ -11,7 +12,7 @@
                             <div class="row">
                                 <div class="col col-6">
                                     <label for="exampleFormControlFile1" class="font-weight-bold text-dark"
-                                           id="campoLabel"></label>
+                                           id="label{{$collapse->id}}"></label>
                                     <input type="file" class="form-control-file" id="exampleFormControlFile1" disabled>
                                 </div>
                                 <div class="col col-6">

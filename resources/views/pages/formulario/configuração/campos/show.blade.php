@@ -165,10 +165,12 @@
                 }
             });
         })
+        function label(campo){
+            $('#input'+campo).keyup(function () {
+                $('#label'+campo).text($(this).val());
+            });
+        }
 
-        $('.campoNome').keyup(function () {
-            $('#campoLabel').text($(this).val());
-        });
 
         let pontuacaoMaxima = "{{$cargo->escolaridade->formulario->pontuacao}}"
         $('.pontuarCampo').change(function () {
