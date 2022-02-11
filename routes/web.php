@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\CampoController;
+use App\Http\Controllers\CargoController;
+use App\Http\Controllers\ConfiguracaoFormularioController;
+use App\Http\Controllers\EscolaridadeController;
+use App\Http\Controllers\FormularioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TelasDinamicas\TelasEditalController;
 use App\Http\Controllers\TelasDinamicas\TelaLiberarController;
@@ -61,7 +66,7 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::post('/formulario/configurar/collapse/store', [\App\Http\Controllers\CollapseController::class, 'store'])->name('collapse.store');
     Route::put('/formulario/configurar/collapse/update/{id}', [\App\Http\Controllers\CollapseController::class, 'update'])->name('collapse.update');
     Route::delete('/formulario/configurar/collapse/destroy/{id}', [\App\Http\Controllers\CollapseController::class, 'destroy'])->name('collapse.destroy');
-//    Route::get('/formulario/delete/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class,'destroy'])->name('formulario.destroy');
+//    Route::post('/formulario/delete/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class,'destroy'])->name('formulario.destroy');
     Route::get('table-list', function () {
         return view('pages.table_list');
     })->name('table');

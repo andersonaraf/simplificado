@@ -39,6 +39,7 @@ class CargoController extends Controller
     public function store(Request $request)
     {
         try {
+
             DB::beginTransaction();
             $cargo = new Cargo();
             $cargo->escolaridade_id = $request->escolaridade;

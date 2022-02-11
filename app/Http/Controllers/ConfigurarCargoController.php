@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cargo;
+use App\Models\TipoCampo;
 use Illuminate\Http\Request;
 
 class ConfigurarCargoController extends Controller
@@ -49,7 +50,8 @@ class ConfigurarCargoController extends Controller
     {
         //
         $cargo = Cargo::findOrFail($id);
-        return view('pages.formulario.configuração.campos.show', compact('cargo'));
+        $tipo_campo = TipoCampo::all();
+        return view('pages.formulario.configuração.campos.show', compact('cargo','tipo_campo'));
     }
 
     /**

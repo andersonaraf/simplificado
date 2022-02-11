@@ -95,10 +95,10 @@
 
                                                             @empty
                                                                 @include('pages.formulario.configuração.campos.create', ['$collapse_id' => $collapse->id])
-                                                                <div class="row justify-content-center">
-                                                                    <h5 class="font-weight-bold">ESSE CAMPO NÃO POSSUI
-                                                                        ANEXOS.</h5>
-                                                                </div>
+{{--                                                                <div class="row justify-content-center">--}}
+{{--                                                                    <h5 class="font-weight-bold">ESSE CAMPO NÃO POSSUI--}}
+{{--                                                                        ANEXOS.</h5>--}}
+{{--                                                                </div>--}}
                                                             @endforelse
                                                         </div>
                                                     </div>
