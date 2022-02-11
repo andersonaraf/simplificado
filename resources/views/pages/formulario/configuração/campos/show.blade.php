@@ -6,7 +6,7 @@
             opacity: 0.5 !important;
         }
 
-        span{
+        span {
             cursor: pointer;
         }
     </style>
@@ -95,10 +95,10 @@
 
                                                             @empty
                                                                 @include('pages.formulario.configuração.campos.create', ['$collapse_id' => $collapse->id])
-{{--                                                                <div class="row justify-content-center">--}}
-{{--                                                                    <h5 class="font-weight-bold">ESSE CAMPO NÃO POSSUI--}}
-{{--                                                                        ANEXOS.</h5>--}}
-{{--                                                                </div>--}}
+                                                                {{--                                                                <div class="row justify-content-center">--}}
+                                                                {{--                                                                    <h5 class="font-weight-bold">ESSE CAMPO NÃO POSSUI--}}
+                                                                {{--                                                                        ANEXOS.</h5>--}}
+                                                                {{--                                                                </div>--}}
                                                             @endforelse
                                                         </div>
                                                     </div>
@@ -159,10 +159,29 @@
                 }
             });
         })
-        function label(campo){
-            $('#input'+campo).keyup(function () {
-                $('#label'+campo).text($(this).val());
+
+        function label(campo) {
+            $('#input' + campo).keyup(function () {
+                $('#label' + campo).text($(this).val());
             });
+        }
+
+        function select(select) {
+            let val = $('#select' + select).val()
+            if (val == 1) {
+                let input = "<input type='text' class='form-control'/>"
+                $('#resultadoinput' + select).empty()
+                $('#resultadoinput' + select).append(input)
+            } else if (val == 2) {
+                let input = "<input type='file' class='form-control' />"
+                $('#resultadoinput' + select).empty()
+                $('#resultadoinput' + select).append(input)
+            } else if (val == 3) {
+                let input = "<select class='form-control'></select>"
+                $('#resultadoinput' + select).empty()
+                $('#resultadoinput' + select).append(input)
+            }
+
         }
 
 
