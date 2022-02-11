@@ -91,12 +91,6 @@
                                                          aria-labelledby="heading{{$key}}"
                                                          data-parent="#accordionExample">
                                                         <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col col-12 text-right">
-                                                                    <b>Pontuação sobrando: <b
-                                                                            id="pontosTotal">100</b></b>
-                                                                </div>
-                                                            </div>
                                                             @forelse($collapse->campos as $campo)
 
                                                             @empty
@@ -172,10 +166,5 @@
         }
 
 
-        let pontuacaoMaxima = "{{$cargo->escolaridade->formulario->pontuacao}}"
-        $('.pontuarCampo').change(function () {
-            pontuacaoMaxima = pontuacaoMaxima - $(this).val()
-            $('#pontosTotal').text(pontuacaoMaxima)
-        })
     </script>
 @endpush

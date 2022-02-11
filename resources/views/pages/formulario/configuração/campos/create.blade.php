@@ -18,7 +18,7 @@
                                 <div class="col col-6">
                                     <div class="form-group">
                                         <label class="font-weight-bold text-dark">Pontuar: </label>
-                                        <input type="number" class='form-control pontuarCampo' placeholder="PONTUAÇÃO DO CAMPO / VAZIO PARA NÃO PONTUAR" step="0.1" min="0" max="{{$cargo->escolaridade->formulario->pontuacao}}">
+                                        <input type="number" id="pontuarCampo{{$collapse->id}}" class='form-control pontuarCampo' placeholder="PONTUAÇÃO DO CAMPO / VAZIO PARA NÃO PONTUAR" step="0.1" min="0" max="{{$cargo->escolaridade->formulario->pontuacao}}">
                                     </div>
                                 </div>
                                 <div class="row justify-content-end">
