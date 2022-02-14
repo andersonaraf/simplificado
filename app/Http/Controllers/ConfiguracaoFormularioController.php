@@ -25,40 +25,41 @@ class ConfiguracaoFormularioController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        dd($request);
-        $request->tipo_campo;
-        $request->required_campo;
         try {
-            if ($request->tipo_campo) {
-                Atributo::create([
-                    'name' =>$request->titulo_campo ,
-                    'required'=> true,
-                ]);
-                if (is_null($request->pontuacao) && isset($request->titulo_campo)) {
-                    Campo::create([
-                        'ponto' => $request->pontuacao,
-                        'nome' => $request->titulo_campo,
-                        'pontuar'=> false,
-                    ]);
-                }elseif (!is_null($request->pontuacao) && isset($request->titulo_campo)){
-                    Campo::create([
-                        'ponto' => $request->pontuacao,
-                        'nome' => $request->titulo_campo,
-                        'pontuar'=> $request->pontuacao ,
-                    ]);
-                }
-            }
-        }catch (\Exception $e) {
+            dd($request);
+            DB::beginTransaction();
+            $atributo = new Atributo();
+            $atributo->name = $this->textformat($request->titulo_campo);
+            $atributo->attr_id = $this->textformat($request->titulo_campo);;
+            $atributo->placeholder = !is_null($request->placeholder) ? $request->placeholder : '';
+            $atributo->required = isset($request->required_campo) ? 1: 0;
+            $atributo-> save();
+
+            $campo = new Campo();
+            $campo->collapse_id = $request->collapse_id;
+            $campo->atributo_id = $atributo->id;
+            $campo->nome = $request->titulo_campo;
+            $campo->pontuar = !is_null($request->pontuacao) ? 1 : 0  ;
+            $campo->ponto = !is_null($request->pontuacao) ? $request->pontuacao : 0  ;
+            $campo->tipo_campo_id = $request->tipo_campo;
+            $campo-> save();
+            DB::commit();
+            return redirect()->back()->with('status','Salvo Com Sucesso');
+        } catch (\Exception $e) {
             DB::rollBack();
             return response()->withException($e->getMessage());
         }
-
     }
+
+   public function textformat($string){
+      $string =strtolower( str_replace(' ','', $string));
+       return preg_replace(array("/(ç)/","/(Ç)/","/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/"),explode(" ","c C a A e E i I o O u U n N"),$string);
+   }
 
     /**
      * Display the specified resource.
@@ -86,7 +87,7 @@ class ConfiguracaoFormularioController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
      * @return \Illuminate\Http\Response
      */

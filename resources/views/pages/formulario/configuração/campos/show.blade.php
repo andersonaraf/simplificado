@@ -5,6 +5,10 @@
             color: black !important;
             opacity: 0.5 !important;
         }
+        .bg-hover:hover{
+            color: #ffffff !important;
+            background-color: #006eff !important;
+        }
 
         span {
             cursor: pointer;
@@ -27,6 +31,14 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col col-8">
+                                    @if(session('status'))
+                                        <span class="alert form-control alert-success font-weight-bold" role="alert">{{session('status')}}</span>
+                                        {{session()->forget('status')}}
+                                    @endif
+                                    @error('error')
+                                        <span class="alert form-control alert-success font-weight-bold">{{session('error')}}</span>
+                                        {{session()->forget('error')}}
+                                     @enderror
                                     <h4 class="card-title font-weight-bold">
                                         CONFIGURAÇÃO: {{$cargo->escolaridade->formulario->nome}}</h4>
                                     <b class="card-subtitle">{{$cargo->cargo}}</b>
@@ -41,8 +53,8 @@
                         </div>
                         <div class="card-body">
                             <div class="col col-12 co-lg-12 col-md-12 text-right">
-                                <input type="button" class="btn btn-outline-info font-weight-bold" data-toggle="modal"
-                                       data-target="#novoCollapse" value="NOVO CAMPO">
+                                <input type="button" class="btn bg-hover btn-outline-info font-weight-bold" data-toggle="modal"
+                                       data-target="#novoCollapse" value="NOVO CABEÇALHO">
                             </div>
                             <div class="row">
                                 <div class="col col-12 col-md-12 col-lg-12">
@@ -95,11 +107,9 @@
 
                                                             @empty
                                                                 @include('pages.formulario.configuração.campos.create', ['$collapse_id' => $collapse->id])
-                                                                {{--                                                                <div class="row justify-content-center">--}}
-                                                                {{--                                                                    <h5 class="font-weight-bold">ESSE CAMPO NÃO POSSUI--}}
-                                                                {{--                                                                        ANEXOS.</h5>--}}
-                                                                {{--                                                                </div>--}}
                                                             @endforelse
+                                                            <h1>Listar formulario</h1>
+                                                            <p>exemplo</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -166,18 +176,28 @@
             });
         }
 
+        function place(campo) {
+            $('#placeholder' + campo).keyup(function () {
+                $('#inputresult'+campo).attr('placeholder',$(this).val());
+            });
+        }
+
         function select(select) {
             let val = $('#select' + select).val()
             if (val == 1) {
-                let input = "<input type='text' class='form-control'/>"
+                let input = "<input type='text' id='inputresult"+select+"' class='form-control' disabled/>"
                 $('#resultadoinput' + select).empty()
                 $('#resultadoinput' + select).append(input)
             } else if (val == 2) {
-                let input = "<input type='file' class='form-control' />"
+                let input = "<input type='file' class='form-control' disabled/>"
                 $('#resultadoinput' + select).empty()
                 $('#resultadoinput' + select).append(input)
             } else if (val == 3) {
-                let input = "<select class='form-control'></select>"
+                let input = "<select class='form-control'><option>Exmplo 1</option><option>Exmplo 2</option></select>"
+                $('#resultadoinput' + select).empty()
+                $('#resultadoinput' + select).append(input)
+            } else if (val == 4) {
+                let input = "<input type='date' class='form-control'disabled/>Exemplo Campo Data"
                 $('#resultadoinput' + select).empty()
                 $('#resultadoinput' + select).append(input)
             }

@@ -21,7 +21,7 @@
                 <form id="formulario_registro" method="post" action="{{route('cadastro-simplificado.store')}}">
                     @csrf
                     <div class="card">
-                        <div class="card-header text-center bg-dark-blue set-pointer" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                        <div class="card-header text-center bg-primary set-pointer" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
                              aria-controls="collapseOne">
                             <h5 class="mb-0">
                                 <input type="button" class="btn btn-link text-white font-weight-bold" value="DADOS PESSOAIS">
@@ -136,7 +136,7 @@
                     </div>
                     {{--                    ENDEREÇO--}}
                     <div class="card">
-                        <div class="card-header text-center bg-dark-blue set-pointer" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                        <div class="card-header text-center bg-primary set-pointer" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
                              aria-controls="collapseTwo">
                             <h5 class="mb-0">
                                 <input type="button" class="btn btn-link collapsed text-white font-weight-bold" value="ENDEREÇO">
@@ -199,7 +199,7 @@
                     </div>
                     {{--USUARIO--}}
                     <div class="card">
-                        <div class="card-header text-center bg-dark-blue set-pointer" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
+                        <div class="card-header text-center bg-primary set-pointer" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
                              aria-controls="collapseThree">
                             <h5 class="mb-0">
                                 <input type="button" class="btn btn-link collapsed text-white font-weight-bold" value="USUÁRIO">
