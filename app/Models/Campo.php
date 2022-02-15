@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Campo extends Model
 {
     use HasFactory;
+
     protected $table = 'campos';
     protected $fillable = [
         'collapse_id',
@@ -17,4 +18,14 @@ class Campo extends Model
         'pontuar',
         'ponto',
     ];
+
+    public function tipoCampo()
+    {
+        return $this->belongsTo(TipoCampo::class, 'tipo_campo_id', 'id');
+    }
+
+    public function atributos()
+    {
+        return $this->belongsTo(Atributo::class, 'atributo_id', 'id');
+    }
 }

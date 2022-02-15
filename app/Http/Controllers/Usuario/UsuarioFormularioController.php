@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
+use App\Models\Collapse;
 use App\Models\Formulario;
 use Illuminate\Http\Request;
 
@@ -23,9 +24,10 @@ class UsuarioFormularioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $collapses = Collapse::where('cargo_id', $id)->get();
+        return view('usuario.formulario.cadastro', compact('collapses'));
     }
 
     /**
