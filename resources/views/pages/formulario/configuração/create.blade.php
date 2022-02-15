@@ -41,6 +41,7 @@
                                                                                data-toggle="collapse"
                                                                                data-target="#collapse{{$key}}" aria-expanded="true" aria-controls="collapse{{$key}}"
                                                                                value="{{$escolaridade->nivel_escolaridade}}">
+{{--                                                                        @dd($key)--}}
                                                                     </h2>
                                                                 </div>
 

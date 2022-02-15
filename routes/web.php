@@ -20,17 +20,21 @@ Auth::routes([
     'register' => false
 ]);
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/sair', function () {
     auth()->logout();
     return redirect()->route('inicio');
 })->name('sair');
 
+//AREA DO USUÁRIO ::INICIO::
 Route::get('/', [\App\Http\Controllers\WeelcomeController::class, 'index'])->name('inicio');
 Route::get('/cadastro/simplificado', [\App\Http\Controllers\RegistroController::class, 'index'])->name('cadastro-simplificado');
 Route::post('/cadastro/simplificado/salvar', [\App\Http\Controllers\RegistroController::class, 'store'])->name('cadastro-simplificado.store');
 Route::get('usuario/formulario/{id}', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'show'])->name('usuario.formulario.show');
 Route::get('usuario/inscricao/{id}', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'create'])->name('usuario.formulario.create');
+
+Route::get('/usuario', [\App\Http\Controllers\Usuario\UsuarioController::class, 'index'])->name('usuario.index');
+
+//AREA DO USUÁRIO ::FIM::
 
 Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::resource('formulario', \App\Http\Controllers\FormularioController::class);

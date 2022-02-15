@@ -32,8 +32,10 @@
 @endauth
 @guest()
     @include('layouts.page_templates.guest')
+
 @endguest
 @yield('recurso')
+
 
 <!--   Core JS Files   -->
 {{--<script src="{{ asset('material') }}/js/core/jquery.min.js"></script>--}}

@@ -44,8 +44,8 @@ class RegistroController extends Controller
     public function store(RegistroPessoa $request)
     {
         try {
-            DB::beginTransaction();
 
+            DB::beginTransaction();
             //CRIAR USER
             $user = new User();
             $user->name = mb_strtoupper($request->nomeCompleto);
@@ -62,6 +62,7 @@ class RegistroController extends Controller
             $endereco['rua'] = $request->rua;
             $endereco['numero'] = $request->numero;
             $endereco['complemento'] = $request->complemento;
+//            $endereco->save();
 
             $pessoa = new Pessoa();
             $pessoa->nome_completo = $request->nomeCompleto;
@@ -79,6 +80,7 @@ class RegistroController extends Controller
             $pessoa->user_id = $user->id;
             $pessoa->save();
 
+            dd(1);
             //SALVAR OS NUMEROS
             $pessoa->numeroContato()->create([
                 'numero' => $request->contato1,
@@ -88,10 +90,11 @@ class RegistroController extends Controller
                     'numero' => $request->contato2,
                 ]);
             }
-
             DB::commit();
             Auth::login($user);
+            session()->put('status', 'Salvo Com Sucesso');
             return redirect()->route('inicio');
+
         } catch (Exception $ex) {
             DB::rollBack();
             return redirect()->route('inicio')->withInput()->withErrors([
@@ -106,12 +109,9 @@ class RegistroController extends Controller
         $editalDinamico = EditalDinamico::where('telas_edital_id', $id)->first();
         $pessoa = json_decode(Cookie::get('pessoa'));
         $progress = $this->gerarProgress($editalDinamico->id, $pessoa->cargo_id);
-
-
         $tipoAnexoCargo = TipoAnexoCargo::where('cargo_id', $pessoa->cargo_id)->get();
         //VAI VERIFICAR SE EXISTE ESSE ANEXO NO EDITAL
         $tipoAnexoCargo = $this->gerarTipoAnexoCargo($tipoAnexoCargo, $pessoa->cargo_id, $editalDinamico->id);
-
         if ($tipoAnexoCargo->count() > 0) {
             $porcetagemProgress = 100 / $tipoAnexoCargo->count();
         } else $porcetagemProgress = 0;

@@ -58,7 +58,7 @@
     </nav>
 </header>
 @yield('content')
-
+@yield('user')
 <!-- ======= Footer ======= -->
 <footer id="footer">
 
