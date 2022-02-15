@@ -25,7 +25,7 @@ class Formulario extends Model
         });
     }
 
-    public function escolaridade(){
+    public function escolaridades(){
         return $this->hasMany(Escolaridade::class, 'formulario_id', 'id');
     }
 }
