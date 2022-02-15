@@ -31,7 +31,6 @@ class ConfiguracaoFormularioController extends Controller
     public function store(Request $request)
     {
         try {
-            dd($request);
             DB::beginTransaction();
             $atributo = new Atributo();
             $atributo->name = $this->textformat($request->titulo_campo);

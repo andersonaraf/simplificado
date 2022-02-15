@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Configuracao\Formulario;
 
+use App\Http\Controllers\Controller;
+use App\Models\Atributo;
+use App\Models\Campo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CampoController extends Controller
 {
@@ -80,5 +84,17 @@ class CampoController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            DB::beginTransaction();
+            $campo = Campo::findOrFail($id);
+            $atributos = $campo->atributos;
+            $campo->delete();
+            $atributos->delete();
+            DB::commit();
+            return response()->json(['type' => 'success', 'msg' => 'Campo excluído com sucesso!']);
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['type' => 'error', 'msg' => 'Erro ao excluir o campo!']);
+        }
     }
 }

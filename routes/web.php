@@ -50,7 +50,7 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::resource('formulario/configuracao', \App\Http\Controllers\ConfiguracaoFormularioController::class);
     Route::resource('formulario/configuracao/escolaridade', \App\Http\Controllers\EscolaridadeController::class);
     Route::resource('formulario/configuracao/escolaridade/cargo', \App\Http\Controllers\CargoController::class);
-    Route::resource('formulario/configuracao/campo', \App\Http\Controllers\CampoController::class);
+    Route::resource('formulario/configuracao/campo', \App\Http\Controllers\Admin\Configuracao\Formulario\CampoController::class);
     Route::get('formulario/configuracao/collapse/show/{id}', [\App\Http\Controllers\ConfigurarCargoController::class, 'show'])->name('configurar.cargo.show');
     Route::get('formulario/configuracao/create/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class, 'create'])->name('configuracao.create');
     Route::post('/formulario/configurar/collapse/store', [\App\Http\Controllers\CollapseController::class, 'store'])->name('collapse.store');
