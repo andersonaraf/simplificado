@@ -50,49 +50,9 @@
                 </div>
                 <div class="row justify-content-md-center">
                     @include('usuario.formulario.box')
-                    @if(!is_null($protocolo))
-                        @if ($protocolo->status_liberar == '1' || !is_null($protocolo->data_liberar) )
-                            @if ($protocolo->nome_ou_anexo == 'Protocolo' && ($protocolo->status_liberar == 1) || strtotime($protocolo->data_liberar) <= strtotime(date('Y-m-d H:i')))
-                                <div class="col-lg-4 mt-3">
-                                    <a href="{{route('protocolo')}}">
-                                        <button class="icon-box" style="height: 250px">
-                                            <i class="icofont-ui-note"></i>
-                                            <h3>Buscar Protocolo</h3>
-                                        </button>
-                                    </a>
-                                </div>
-                            @endif
-                        @endif
-                    @endif
                 </div>
             </div>
         </section><!-- End Featured Section -->
-        @if(!is_null($recurso))
-            @if ($recurso->status_liberar == '1' || !is_null($recurso->data_liberar) )
-                @if ($recurso->nome_ou_anexo == 'Recurso' && ($recurso->status_liberar == 1) || strtotime($recurso->data_liberar) <= strtotime(date('Y-m-d H:i')))
-                    <section id="featured" class="featured">
-                        <div class="container">
-                            <div class="section-title" data-aos="fade-up">
-                                <h2>Recurso</h2>
-                            </div>
-                            <div class="row justify-content-md-center">
-
-                                <div class="col-lg-4 mt-4 mt-lg-0">
-                                    <a href="{{route('recurso')}}">
-                                        <button class="icon-box">
-                                            <i class="icofont-tasks-alt"></i>
-                                            <h3>Recurso</h3>
-                                        </button>
-                                    </a>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </section><!-- End Featured Section -->
-            @endif
-        @endif
-    @endif
 
     <!-- ======= Services Section ======= -->
         <section id="services" class="services ">

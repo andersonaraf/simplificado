@@ -28,6 +28,7 @@ class HomeController extends Controller
         $pessoa = Pessoa::all()->count();
         $pontuacao = 0;
         $recurso = RecursoModel::all()->count();
+
         return view('dashboard', [
             'inscricao_total' => $pessoa,
             'avaliacao_total' => $pontuacao,
