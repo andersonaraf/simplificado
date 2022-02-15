@@ -36,9 +36,9 @@ Route::post('/recurso-pedir', 'RecursoController@pedirRecurso')->name('recurso-p
 
 Route::get('/registro/edital/{id}', [\App\Http\Controllers\RegistroController::class, 'index'])->name('registro');
 Route::any('registro/parte1', [\App\Http\Controllers\RegistroController::class, 'store'])->name('registro/parte1');
-Route::prefix('usuario')->name('usuario.')->group(function (){
-    Route::resource('formulario', \App\Http\Controllers\Usuario\UsuarioFormularioController::class);
-});
+
+Route::get('usuario/formulario/{id}', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'show'])->name('usuario.formulario.show');
+Route::get('usuario/inscricao/{id}', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'create'])->name('usuario.formulario.create');
 
 Route::get('/comprovante/{comprovante}', 'ComprovanteController@index')->name('registro/comprovante'); //
 
