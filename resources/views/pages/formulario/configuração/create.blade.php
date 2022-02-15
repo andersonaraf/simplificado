@@ -31,7 +31,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="accordion" id="accordionExample">
-                                                @foreach($formulario->escolaridade as $key=>$escolaridade)
+                                                @foreach($formulario->escolaridades as $key=>$escolaridade)
                                                     <div class="card">
                                                         <div class="card-header card-header-info" id="healing{{$key}}">
                                                             <div class="row align-middle">
