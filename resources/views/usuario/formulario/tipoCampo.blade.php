@@ -20,7 +20,9 @@
         <label for="{{$campo->atributos->attr_id}}">{{strtoupper($campo->nome)}}:</label>
         <select class="form-control" id="{{$campo->atributos->attr}}"
                 name="{{$campo->atributos->name}}" {{$campo->atributos->required == 1 ? 'required' : ''}}>
-
+            @foreach($campo->intemCampo as $item)
+                <option value="{{$item->id}}">{{$item->item}}</option>
+            @endforeach
         </select>
     </div>
 @endif

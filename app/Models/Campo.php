@@ -24,8 +24,13 @@ class Campo extends Model
         return $this->belongsTo(TipoCampo::class, 'tipo_campo_id', 'id');
     }
 
+
     public function atributos()
     {
         return $this->belongsTo(Atributo::class, 'atributo_id', 'id');
+    }
+
+    public function intemCampo(){
+        return $this->hasMany(ItemCampo::class, 'campo_id', 'id');
     }
 }
