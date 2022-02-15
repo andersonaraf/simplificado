@@ -35,6 +35,12 @@ class TipoCampoSeeder extends Seeder
                     'created_at' => now(),
                     'updated_at' => now()
                 ),
+            3 =>
+                array(
+                    'type' => 'Data',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ),
         ]);
     }
 }
