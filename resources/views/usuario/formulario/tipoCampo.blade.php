@@ -1,21 +1,11 @@
-@if($campo->tipoCampo->tipo == 'Texto')
+@if(mb_strtoupper($campo->tipoCampo->tipo) != 'SELECIONAR')
     <div class="row mb-2">
         <label for="{{$campo->atributos->attr_id}}">{{strtoupper($campo->nome)}}:</label>
-        <input type="text" class="form-control" id="{{$campo->atributos->attr_id}}" name="{{$campo->atributos->name}}"
-               placeholder="{{!is_null($campo->atributos->placeholder) ? $campo->atributos->placeholder : ''}}"
+        <input type="{{$campo->tipoCampo->tipo == 'Texto' ? 'text' : ($campo->tipoCampo->tipo == 'Arquivo' ? 'file' : ($campo->tipoCampo->tipo == 'Data' ? 'date' : 'Text'))}}" class="form-control" id="{{$campo->atributos->attr_id}}" name="{{$campo->atributos->name}}"
+               placeholder="{{!is_null($campo->atributos->placeholder) ? $campo->atributos->placeholder : ''}}" data-id="{{$campo->id}}"
             {{$campo->atributos->required == 1 ? 'required' : ''}}>
     </div>
-@endif
-
-@if($campo->tipoCampo->tipo == 'Arquivo')
-    <div class="row mb-2">
-        <label for="{{$campo->atributos->attr_id}}">{{strtoupper($campo->nome)}}:</label>
-        <input type="file" class="form-control" id="{{$campo->atributos->attr_id}}" name="{{$campo->atributos->name}}"
-            {{$campo->atributos->required == 1 ? 'required' : ''}}>
-    </div>
-@endif
-
-@if($campo->tipoCampo->tipo == 'Selecionar')
+@else
     <div class="row mb-2">
         <label for="{{$campo->atributos->attr_id}}">{{strtoupper($campo->nome)}}:</label>
         <select class="form-control" id="{{$campo->atributos->attr}}"
@@ -24,13 +14,5 @@
                 <option value="{{$item->id}}">{{$item->item}}</option>
             @endforeach
         </select>
-    </div>
-@endif
-
-@if($campo->tipoCampo->tipo == 'Data')
-    <div class="row mb-2">
-        <label for="{{$campo->atributos->attr_id}}">{{strtoupper($campo->nome)}}:</label>
-        <input type="date" class="form-control" id="{{$campo->atributos->attr_id}}" name="{{$campo->atributos->name}}"
-            {{$campo->atributos->required == 1 ? 'required' : ''}}>
     </div>
 @endif

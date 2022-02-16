@@ -41,23 +41,25 @@ class UsuarioFormularioController extends Controller
      */
     public function store(Request $request)
     {
-            dd($request->except(['formulario', 'cargo']));
-        try{
-            DB::beginTransaction();
+        dd($request->files);
+        foreach ($request->files as $key=>$file){
+            dd($file);
+        }
+//        try{
+//            DB::beginTransaction();
             $formulario_usuario =  new FormularioUsuario();
-            $formulario_usuario->user_id = Auth::user()->id;
-            $formulario_usuario->formulario_id = $request->formulario;
-            $formulario_usuario->cargo_id = $request->cargo;
-            $formulario_usuario->save();
-            dd($formulario_usuario);
-//            DB::commit();
-        }catch(\Exception $exception){
-            DB::rollBack();
-            return redirect()->back();
-        }
-        foreach ($request->except(['formulario', 'cargo']) as $key=>$input){
-            dd($request[$key]);
-        }
+//            $formulario_usuario->user_id = Auth::user()->id;
+//            $formulario_usuario->formulario_id = $request->formulario;
+//            $formulario_usuario->cargo_id = $request->cargo;
+//            $formulario_usuario->save();
+////            DB::commit();
+//        }catch(\Exception $exception){
+//            DB::rollBack();
+//            return redirect()->back();
+//        }
+//        foreach ($request->except(['formulario', 'cargo']) as $key=>$input){
+//
+//        }
     }
 
     /**
