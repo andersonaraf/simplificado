@@ -18,6 +18,7 @@ class UsuarioFormularioController extends Controller
     {
         $this->middleware('acesso.formulario');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,8 +49,11 @@ class UsuarioFormularioController extends Controller
      */
     public function store(Request $request)
     {
+        //VERIFICAR SE O USUÁRIO JÁ ESTÁ NO EDITAL
+        $formularioUsuario = FormularioUsuario::where('formulario_id', $request->formulario)->where('user_id', Auth::id())->first();
+        if (!is_null($formularioUsuario)) return response()->json(['error' => 'Você já está cadastrado nesse formulário.'], 422);
+
         //SALVAR INFORMAÇÕES DO FORMULÁRIO
-//        dd($request->all());
         try {
             DB::beginTransaction();
             $formulario_usuario = new FormularioUsuario();
@@ -57,7 +61,6 @@ class UsuarioFormularioController extends Controller
             $formulario_usuario->formulario_id = $request->formulario;
             $formulario_usuario->cargo_id = $request->cargo;
             $formulario_usuario->save();
-
 
             //SALVA OS CAMPOS DO FORMULÁRIO
             foreach ($request->all() as $key => $item) {
@@ -68,12 +71,11 @@ class UsuarioFormularioController extends Controller
                     $formularioUsuarioCampo->campo_id = $campo->id;
 
                     //VERIFICAR SE É DO TIPO ARQUIVO
-                    if (mb_strtoupper($campo->tipoCampo) == 'ARQUIVO'){
+                    if (mb_strtoupper($campo->tipoCampo->tipo) == 'ARQUIVO') {
                         $fileName = $item->store('usuario/arquivos');
                         $formularioUsuarioCampo->valor = $fileName;
-                    }
-                    else{
-                        $formularioUsuarioCampo->valor = $item;
+                    } else {
+                        $formularioUsuarioCampo->valor = mb_strtoupper($item);
                     }
                     $formularioUsuarioCampo->save();
                 }

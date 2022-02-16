@@ -76,12 +76,13 @@
                         }
                     } else {
                         $(this).removeClass('is-invalid');
-                        let campoSave = Object.create(campo);
-                        campoSave.setId($(this).data('id'));
-                        campoSave.setValue($(this).val());
-                        campos.push(campoSave);
+                        if ($(this).attr('type') === 'file') {
+                            ajaxData.append($(this).data('id'), $(this)[0].files[0]);
+                        }
+                        else {
+                            ajaxData.append($(this).data('id'), $(this).val());
+                        }
                     }
-                    ajaxData.append('campos', campos);
                 });
                 //ENVIAR OS DADOS
                 if (true) {
@@ -118,9 +119,11 @@
                             }
                         },
                         error: function (data) {
+                            data = JSON.parse(data.responseText);
+                            console.log(data)
                             Swal.fire({
                                 title: 'Erro!',
-                                text: 'Erro ao cadastrar formulário!',
+                                text: data.error,
                                 icon: 'error',
                                 confirmButtonText: 'Ok'
                             });
