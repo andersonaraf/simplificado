@@ -25,4 +25,8 @@ class Collapse extends Model
     public function campos(){
         return $this->hasMany(Campo::class, 'collapse_id', 'id');
     }
+
+    public function cargo(){
+        return $this->belongsTo(Cargo::class, 'cargo_id', 'id');
+    }
 }

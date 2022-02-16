@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cargo;
 use App\Models\EscolaridadeEditalDinamico;
+use App\Models\Formulario;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -38,8 +39,10 @@ class CargoController extends Controller
      */
     public function store(Request $request)
     {
+        //BLOQUEAR FORMULARIO
+        $formulario = Formulario::find($request->formulario_id);
+        if ($formulario->formularioUsuario->count > 0) return response()->json(['type' => 'error', 'msg' => 'Formulário bloqueado para edição!'], 403);
         try {
-
             DB::beginTransaction();
             $cargo = new Cargo();
             $cargo->escolaridade_id = $request->escolaridade;

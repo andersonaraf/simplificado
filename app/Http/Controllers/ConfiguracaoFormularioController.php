@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Atributo;
 use App\Models\Campo;
+use App\Models\Collapse;
 use App\Models\Formulario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,9 @@ class ConfiguracaoFormularioController extends Controller
     {
         //
         $formulario = Formulario::findOrFail($id);
+        //BLOQUEAR FORMULÁRIO
+        if ($formulario->formularioUsuario->count() > 0) return redirect()->back()->with(['type' => 'error', 'msg' => 'Formulário bloqueado para edição!'], 403);
+
         return view('pages.formulario.configuração.create', compact('formulario'));
     }
 
@@ -30,6 +34,8 @@ class ConfiguracaoFormularioController extends Controller
      */
     public function store(Request $request)
     {
+        $colapse = Collapse::findOrFail($request->collapse_id);
+        if ($colapse->cargo->escolaridade->formulario->formularioUsuario->count() > 0) return redirect()->back()->with(['type' => 'error', 'msg' => 'Formulário bloqueado para edição!'], 403);
         try {
             DB::beginTransaction();
             $atributo = new Atributo();
@@ -50,7 +56,6 @@ class ConfiguracaoFormularioController extends Controller
             DB::commit();
             return redirect()->back()->with('status','Salvo Com Sucesso');
         } catch (\Exception $e) {
-            dd($e->getMessage());
             DB::rollBack();
             return response()->withException($e->getMessage());
         }

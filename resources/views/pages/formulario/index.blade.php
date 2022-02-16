@@ -5,7 +5,9 @@
             <main class="container" id="ajuste">
                 <div class="row">
                     <div class="col col-12 col-md-12 col-lg-12 text-md-right text-lg-right text-center">
-                        <a href="{{route('formulario.create')}}"><input type="button" class="btn btn-outline-info font-weight-bold col-12 col-md-3 col-lg-2" value="NOVO FORMULÁRIO"></a>
+                        <a href="{{route('formulario.create')}}"><input type="button"
+                                                                        class="btn btn-outline-info font-weight-bold col-12 col-md-3 col-lg-2"
+                                                                        value="NOVO FORMULÁRIO"></a>
                     </div>
                     <div class="card">
                         <div class="card-header bg-primary">
@@ -14,7 +16,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 col-lg-12 col-md-12">
-                                    <table  id="dataTable" class="display table-hover nowrap" style="width: 100%">
+                                    <table id="dataTable" class="display table-hover nowrap" style="width: 100%">
                                         <thead>
                                         <tr>
                                             <th>FORMULÁRIO</th>
@@ -33,7 +35,12 @@
                                                 <td>{{date('d/m/Y H:i:s', strtotime($formulario->data_liberar))}}</td>
                                                 <td>{{date('d/m/Y H:i:s', strtotime($formulario->data_fecha))}}</td>
                                                 <td>
-                                                    <a href="{{route('configuracao.create', $formulario->id)}}"><span class="material-icons text-info">add_circle_outline</span></a> |
+                                                    {{--SO ATIVAR SE O FORMULÁRIO NÃO TIVER PESSOAS CADASTRADAS--}}
+                                                    @if($formulario->formularioUsuario->count() <= 0)
+                                                        <a href="{{route('configuracao.create', $formulario->id)}}"><span
+                                                                class="material-icons text-info">add_circle_outline</span></a>
+                                                        |
+                                                    @endif
                                                     <a href="{{route('formulario.edit', $formulario->id)}}">
                                                         <span class="material-icons text-info">settings</span>
                                                     </a>
@@ -62,6 +69,6 @@
 @endsection
 @push('js')
     <script src="{{asset('js/dashboard/tabela.js')}}" defer></script>
-{{--    DELETAR FORMULÁRIO--}}
-{{--    <script src="{{asset('js/confirmaDelete.js')}}"></script>--}}
+    {{--    DELETAR FORMULÁRIO--}}
+    {{--    <script src="{{asset('js/confirmaDelete.js')}}"></script>--}}
 @endpush

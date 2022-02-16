@@ -28,4 +28,8 @@ class Formulario extends Model
     public function escolaridades(){
         return $this->hasMany(Escolaridade::class, 'formulario_id', 'id');
     }
+
+    public function formularioUsuario(){
+        return $this->hasMany(FormularioUsuario::class, 'formulario_id', 'id');
+    }
 }
