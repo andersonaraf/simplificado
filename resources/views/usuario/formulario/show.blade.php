@@ -20,7 +20,7 @@
                                 <div class="card col-12">
                                     <ul class="list-group list-group-flush">
                                         @foreach($escolaridade->cargos as $cargo)
-                                            <a href="{{route('usuario.formulario.create', $cargo->id)}}"><li class="list-group-item">{{$cargo->cargo}}</li></a>
+                                            <a href="{{route('usuario.formulario.create',['cargo_id'=> $cargo->id, 'formulario_id'=>$formulario->id])}}"><li class="list-group-item">{{$cargo->cargo}}</li></a>
                                         @endforeach
                                     </ul>
                                 </div>
