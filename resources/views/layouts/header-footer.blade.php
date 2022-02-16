@@ -43,7 +43,7 @@
                                 @if(strtoupper(auth()->user()->tipo) == 'ADMIN')
                                     <a class="dropdown-item" href="{{route('home')}}">Área administrativa</a>
                                 @else
-                                    <a class="dropdown-item" href="#">Meus Cadastros</a>
+                                    <a class="dropdown-item" href="{{route('usuario.index')}}">Meus Cadastros</a>
                                 @endif
                             @endif
                             <div class="dropdown-divider"></div>

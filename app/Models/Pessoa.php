@@ -56,9 +56,9 @@ class Pessoa extends Model implements Auditable
         return $pontuacao;
     }
 
-    public function pontuacao2(){
-       return $this->hasOne(Pontuacao::class, 'pessoa_id', 'id')->latest();
-    }
+//    public function pontuacao2(){
+//       return $this->hasOne(Pontuacao::class, 'pessoa_id', 'id')->latest();
+//    }
 
     public function recurso(){
         return $this->hasOne(RecursoModel::class, 'pessoa_id', 'id');
@@ -72,9 +72,9 @@ class Pessoa extends Model implements Auditable
         return RevisarPessoa::where('pessoa_id', $id)->get()->last();
     }
 
-    public function reprovarMotivo(){
-        return $this->hasOne(ReprovarPessoa::class, 'pessoa_id', 'id')->latest();
-    }
+//    public function reprovarMotivo(){
+//        return $this->hasOne(ReprovarPessoa::class, 'pessoa_id', 'id')->latest();
+//    }
 
     public function numeroContato(){
         return $this->hasMany(NumeroContato::class, 'pessoa_id', 'id');
