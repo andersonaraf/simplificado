@@ -76,12 +76,13 @@
                         }
                     } else {
                         $(this).removeClass('is-invalid');
-                        let campoSave = Object.create(campo);
-                        campoSave.setId($(this).data('id'));
-                        campoSave.setValue($(this).val());
-                        campos.push(campoSave);
+                        if ($(this).attr('type') === 'file') {
+                            ajaxData.append($(this).data('id'), $(this)[0].files[0]);
+                        }
+                        else {
+                            ajaxData.append($(this).data('id'), $(this).val());
+                        }
                     }
-                    ajaxData.append('campos', campos);
                 });
                 //ENVIAR OS DADOS
                 if (true) {
@@ -106,7 +107,7 @@
                                     icon: 'success',
                                     confirmButtonText: 'Ok'
                                 }).then(function () {
-                                    window.location.href = '{{route('inicio')}}';
+                                    {{--window.location.href = '{{route('inicio')}}';--}}
                                 });
                             } else {
                                 Swal.fire({
