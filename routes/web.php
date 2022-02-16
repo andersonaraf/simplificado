@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 */
 //FALBACK
 Route::fallback(function (){
-   dd(1);
+   dd('Sem resposta com o servidor');
 });
 //LOGIN
 Auth::routes([

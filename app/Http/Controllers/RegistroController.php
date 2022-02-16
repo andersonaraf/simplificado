@@ -70,9 +70,6 @@ class RegistroController extends Controller
             $pessoa->cpf = $request->cpf;
             $pessoa->rg = $request->rg;
             $pessoa->orgao_emissor = $request->orgaoExpedidor;
-            $pessoa->pis = (isset($request->pis) ? $request->pis : null);
-            $pessoa->nacionalidade = (isset($request->nacionalidade) ? $request->nacionalidade : '');
-            $pessoa->naturalidade = (isset($request->naturalidade) ? $request->naturalidade : '');
             $pessoa->data_nascimento = (isset($request->data_nascimento) ? $request->data_nascimento : date('Y-m-d'));
             $pessoa->email = $request->email;
             $pessoa->portador_deficiencia = $request->pne;

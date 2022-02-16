@@ -17,16 +17,17 @@ class UsuarioController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('auth')->except('logout');
     }
 
     public function index()
-    {   //TESTES
-
+    {
         if (Auth::user()->tipo == 'CANDIDATO') {
-
-            session()->put('status', 'Salvo Com Sucesso');
-            return view('usuario.area_user.index_user');
+            //acrescentar id dinamico (este funcionando apenas para testes)
+            $id = 2;
+            $nome_user = Auth::user()->name;
+            $pessoa = Pessoa::findOrFail($id)->all();
+            return view('usuario.area_user.index_user',compact('nome_user','pessoa'));
         } else {
             return view('inicio');
         }
