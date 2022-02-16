@@ -259,6 +259,45 @@
             })
         })
 
+        function editarCampo(campo_id) {
+            $('#editar' + campo_id).prop("disabled", false)
+            $('.edit_input' + campo_id).show()
+            $('.ocultar' + campo_id).hide()
+        }
+
+        function editarInput(campo_id) {
+            $.ajax({
+                url: $('#update' + campo_id).attr('data-action'),
+                method: 'put',
+                data: {
+                    "token": "{{csrf_token()}}",
+                    'nome': $('#nome' + campo_id).val(),
+                    'ponto': $('#editar' + campo_id).val()
+                },
+                success: function (data) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'AVISO',
+                        text: 'Alterado com sucesso.',
+                        timer: 1000,
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then((result) => {
+                        window.location.reload();
+                    })
+                },
+                error: function (data) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'AVISO',
+                        text: 'Ocorreu um error.',
+
+                    })
+                }
+
+            })
+        }
 
     </script>
 @endpush

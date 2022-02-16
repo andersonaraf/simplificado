@@ -32,11 +32,10 @@
                 <div class="has-info">
                     <div class="row">
 
-                        <div class="col col-12 col-md-6 col-lg-6">
-                            <label>Selecione o Tipo do Campo Clicando na Linha Abaixo:</label>
+                        <div class="col col-12 col-md-3 col-lg-3">
+                            <label class="font-weight-bold text-dark">Selecione o Tipo do Campo:</label>
                             <select name="tipo_campo" class="form-control" id="select{{$collapse->id}}"
                                     onclick="select({{$collapse->id}})" required>
-                                <option value=""></option>
                                 @foreach($tipo_campo as $campo)
                                     <option value="{{$campo->id}}">{{$campo->tipo}}</option>
                                 @endforeach
@@ -58,6 +57,13 @@
                                 slubinhado </label>
                             <input id='placeholder{{$collapse->id}}' type="text" name="placeholder"
                                    class="form-control" onkeyup="place({{$collapse->id}})">
+                        </div>
+
+                        <div class="col-12 col-md-3 col-lg3">
+                            <div class="form-check form-switch">
+                                <input type="checkbox" id="flexSwitchCheckDefault" name="required_campo">
+                                <label class="font-weight-bold text-dark" for="flexSwitchCheckDefault">Campo Obrigatório</label>
+                            </div>
                         </div>
 
                     </div>

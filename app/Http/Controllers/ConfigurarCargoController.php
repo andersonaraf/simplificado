@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campo;
 use App\Models\Cargo;
 use App\Models\ItemCampo;
 use App\Models\TipoCampo;
@@ -103,6 +104,19 @@ class ConfigurarCargoController extends Controller
             DB::commit();
             return response()->json(201);
         } catch (\Exception $exception) {
+            DB::rollBack();
+            return response()->json(500);
+        }
+    }
+
+    public function editarCampo(Request $request, $id){
+        try{
+            DB::beginTransaction();
+            $campo = Campo::findOrFail($id);
+            $campo->update($request->all());
+            DB::commit();
+            return response()->json(200);
+        }catch (\Exception $exception){
             DB::rollBack();
             return response()->json(500);
         }

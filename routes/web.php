@@ -49,7 +49,7 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::delete('/formulario/configurar/collapse/destroy/{id}', [\App\Http\Controllers\CollapseController::class, 'destroy'])->name('collapse.destroy');
     Route::post('/formulario/cargo/salvar', [\App\Http\Controllers\ConfiguracaoFormularioController::class,'store'])->name('formulario.store');
     Route::post('cadastrar/item/select/', [\App\Http\Controllers\ConfigurarCargoController::class, 'cadastarItemSelect'])->name('cadastrar.itemSelect');
-
+    Route::put('editar/campo/{id}', [\App\Http\Controllers\ConfigurarCargoController::class, 'editarCampo'])->name('editar.campo');
 });
 
 Route::group(['middleware' => 'auth'], function () {

@@ -2,7 +2,8 @@
     <div class="has-info row">
         <div class="col-6">
             <label for="{{$campo->atributos->attr_id}}"
-                   class="text-dark font-weight-bold">{{mb_strtoupper($campo->nome)}}</label>
+                   class="text-dark font-weight-bold ocultar{{$campo->id}}">{{mb_strtoupper($campo->nome)}}</label>
+            <input class="form-control edit_input{{$campo->id}}" id="nome{{$campo->id}}" type="text" value="{{$campo->nome}}" style="display: none">
             <input
                 type="{{$campo->tipoCampo->tipo == 'Texto' ? 'text' : ($campo->tipoCampo->tipo == 'Arquivo' ? 'file' : ($campo->tipoCampo->tipo == 'Data' ? 'date' : 'Text'))}}"
                 class="form-control" id="{{$campo->atributos->attr_id}}"
@@ -20,11 +21,21 @@
                 </div>
 
                 <div class="col col-4 text-right">
+                    <a href="javascript:void(0);" class="edit_item_sweet"
+                       data-action="" title="EDITAR O CAMPO" onclick="editarCampo({{$campo->id}})">
+                        <span class="material-icons text-info">edit</span>
+                    </a>
+
                     <a href="javascript:void(0);" class="delete_item_sweet"
                        data-action="{{route('campo.destroy', $campo->id)}}" title="REMOVER O CAMPO">
                         <span class="material-icons text-warning">delete</span>
                     </a>
                 </div>
+            </div>
+        </div>
+        <div class="row edit_input{{$campo->id}}" style="display:none">
+            <div class="col text-right">
+                <button id="update{{$campo->id}}" onclick="editarInput({{$campo->id}})" data-action="{{route('editar.campo', $campo->id)}}"class="btn btn-outline-info">Editar</button>
             </div>
         </div>
     </div>
