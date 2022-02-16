@@ -3,8 +3,10 @@
 @section('content')
     <div class="container">
         <h4 class="mt-5">Formulário de Inscrição</h4>
-        <form action="#" method="post">
+        <form action="{{route('usuario.formulario.store')}}" method="post" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name='formulario' value="{{$formulario_id}}">
+            <input type="hidden" name='cargo' value="{{$cargo_id}}">
             @foreach($collapses as $collapse)
                 <div class="card">
                     <div class="card-header bg-primary">
@@ -12,6 +14,7 @@
                     </div>
                     <div class="card-body">
                         @foreach($collapse->campos as $campo)
+                            <input type="hidden" name='input{{$campo->id}}' value="{{$campo->id}}">
                             @include('usuario.formulario.tipoCampo')
                         @endforeach
                     </div>
