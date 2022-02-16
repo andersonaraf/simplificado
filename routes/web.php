@@ -53,6 +53,8 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::put('editar/campo/{id}', [\App\Http\Controllers\ConfigurarCargoController::class, 'editarCampo'])->name('editar.campo');
     Route::post('/formulario/cargo/campo/salvar', [\App\Http\Controllers\ConfiguracaoFormularioController::class,'store'])->name('formulario.cargo.campo.store');
     Route::get('grupos', [\App\Http\Controllers\GrupoController::class, 'index'])->name('grupo.index');
+    Route::get('grupo', [\App\Http\Controllers\GrupoController::class, 'create'])->name('grupo.create');
+    Route::post('grupo', [\App\Http\Controllers\GrupoController::class, 'store'])->name('grupo.store');
 
 
 });

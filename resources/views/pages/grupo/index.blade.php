@@ -5,7 +5,7 @@
         <main class="container" id="ajuste">
             <div class="row">
                 <div class="col col-12 col-md-12 col-lg-12 text-md-right text-lg-right text-center">
-                    <a href="{{route('formulario.create')}}"><input type="button"
+                    <a href="{{route('grupo.create')}}"><input type="button"
                                                                     class="btn btn-outline-info font-weight-bold col-12 col-md-3 col-lg-2"
                                                                     value="NOVO GRUPO"></a>
                 </div>
@@ -27,7 +27,7 @@
                                     @csrf
                                     @foreach($grupos as $grupo)
                                         <tr>
-                                            <td>{{$formulario->nome}}</td>
+                                            <td>{{$grupo->nome}}</td>
                                             <td>
                                                 <a href="#">
                                                     <span class="material-icons text-info">settings</span>

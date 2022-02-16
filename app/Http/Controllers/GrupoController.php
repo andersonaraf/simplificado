@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GrupoRequest;
 use App\Models\Grupo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GrupoController extends Controller
 {
@@ -25,7 +27,7 @@ class GrupoController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.grupo.create');
     }
 
     /**
@@ -34,9 +36,23 @@ class GrupoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GrupoRequest $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $grupo = Grupo::create($request->all());
+            DB::commit();
+            return redirect()->route('grupo.index')->with([
+                'type' => 'success',
+                'msg' => 'Grupo criado com sucesso.'
+            ]);
+        }catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back()->with([
+                'type' => 'error',
+                'msg' => 'Algo de errado aconteceu. ' . $exception->getMessage()
+            ]);
+        }
     }
 
     /**
