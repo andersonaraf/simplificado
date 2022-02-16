@@ -17,6 +17,7 @@ class CreateFormularioUsuarioCamposTable extends Migration
             $table->id();
             $table->unsignedBigInteger('formulario_usuario_id');
             $table->unsignedBigInteger('campo_id');
+            $table->string('valor', 250)->nullable()->comment('INFORMAÇÕES DO CAMPO');
             $table->string('observacao', 500)->nullable()->comment('CAMPO DE TEXTO PARA INSERIR INFORMAÇÕES, TAIS COMO MOTIVO DA REPROVAR OU DÚVIDA EM AVALIÇÃO/REVISÃO.');
             $table->timestamps();
             $table->foreign('formulario_usuario_id')->references('id')->on('formulario_usuario');

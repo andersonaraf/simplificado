@@ -85,7 +85,9 @@
                 });
                 //ENVIAR OS DADOS
                 if (true) {
-                    console.log(campos);
+                    // INFORMAÇÕES NECESSÁRIAS
+                    ajaxData.append('formulario', '{{$formulario_id}}');
+                    ajaxData.append('cargo', '{{$cargo_id}}');
                     $.ajax({
                         url: '{{route('usuario.formulario.store')}}',
                         method: 'POST',
@@ -95,6 +97,7 @@
                         data: ajaxData,
                         contentType: false,
                         processData: false,
+                        async: true,
                         success: function (data) {
                             if (data.status) {
                                 Swal.fire({
@@ -103,7 +106,7 @@
                                     icon: 'success',
                                     confirmButtonText: 'Ok'
                                 }).then(function () {
-                                    {{--window.location.href = '{{route('usuario.formulario.index')}}';--}}
+                                    window.location.href = '{{route('inicio')}}';
                                 });
                             } else {
                                 Swal.fire({

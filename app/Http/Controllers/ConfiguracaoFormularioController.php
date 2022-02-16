@@ -50,6 +50,7 @@ class ConfiguracaoFormularioController extends Controller
             DB::commit();
             return redirect()->back()->with('status','Salvo Com Sucesso');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             DB::rollBack();
             return response()->withException($e->getMessage());
         }

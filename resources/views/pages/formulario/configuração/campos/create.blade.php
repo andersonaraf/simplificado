@@ -1,4 +1,4 @@
-<form method="POST" action="{{route('formulario.store')}}">
+<form method="POST" action="{{route('formulario.cargo.campo.store')}}">
     @csrf
     <input name="collapse_id" value="{{$collapse->id}}" hidden>
     <div class="row">
