@@ -74,7 +74,8 @@ class GrupoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $grupo = Grupo::findOrFail($id);
+        return view('pages.grupo.edit', compact('grupo'));
     }
 
     /**
@@ -84,9 +85,24 @@ class GrupoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GrupoRequest $request, $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $grupo = Grupo::findOrFail($id);
+            $grupo->update($request->all());
+            DB::commit();
+            return redirect()->route('grupo.index')->with([
+                'type' => 'success',
+                'msg' => 'Grupo atulizado com sucesso.'
+            ]);
+        }catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back()->with([
+                'type' => 'error',
+                'msg' => 'Algo de errado aconteceu. ' . $exception->getMessage()
+            ]);
+        }
     }
 
     /**

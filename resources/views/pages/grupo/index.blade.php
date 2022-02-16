@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-lg-12 col-md-12">
-                                <table id="dataTable" class="display table-hover nowrap" style="width: 100%">
+                                <table id="dataTable" width="100%">
                                     <thead>
                                     <tr>
                                         <th>Grupos</th>
@@ -24,12 +24,11 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @csrf
                                     @foreach($grupos as $grupo)
                                         <tr>
                                             <td>{{$grupo->nome}}</td>
                                             <td>
-                                                <a href="#">
+                                                <a href="{{route('grupo.edit', $grupo->id)}}" title="EDITAR">
                                                     <span class="material-icons text-info">settings</span>
                                                 </a>
                                             </td>
@@ -53,5 +52,5 @@
 </div>
 @endsection
 @push('js')
-    <script src="{{asset('js/dashboard/tabela.js')}}" defer></script>
+    <script src="{{asset('js/dashboard/tabela.js')}}"></script>
 @endpush

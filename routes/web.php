@@ -55,6 +55,8 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::get('grupos', [\App\Http\Controllers\GrupoController::class, 'index'])->name('grupo.index');
     Route::get('grupo', [\App\Http\Controllers\GrupoController::class, 'create'])->name('grupo.create');
     Route::post('grupo', [\App\Http\Controllers\GrupoController::class, 'store'])->name('grupo.store');
+    Route::get('grupo/{id}', [\App\Http\Controllers\GrupoController::class, 'edit'])->name('grupo.edit');
+    Route::put('grupo/{id}', [\App\Http\Controllers\GrupoController::class, 'update'])->name('grupo.update');
 
 
 });
