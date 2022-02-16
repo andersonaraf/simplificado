@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cargo;
+use App\Models\ItemCampo;
 use App\Models\TipoCampo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ConfigurarCargoController extends Controller
 {
@@ -51,7 +53,7 @@ class ConfigurarCargoController extends Controller
         //
         $cargo = Cargo::findOrFail($id);
         $tipo_campo = TipoCampo::all();
-        return view('pages.formulario.configuração.campos.show', compact('cargo','tipo_campo'));
+        return view('pages.formulario.configuração.campos.show', compact('cargo', 'tipo_campo'));
     }
 
     /**
@@ -91,5 +93,18 @@ class ConfigurarCargoController extends Controller
     public function teste($id)
     {
 
+    }
+
+    public function cadastarItemSelect(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            ItemCampo::create($request->all());
+            DB::commit();
+            return response()->json(201);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response()->json(500);
+        }
     }
 }

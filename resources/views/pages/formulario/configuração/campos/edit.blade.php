@@ -14,7 +14,8 @@
                 <div class="col col-8">
                     @if($campo->pontuar == 1)
                         <label for="editar{{$campo->id}}" class="text-dark font-weight-bold ">PONTUAÇÃO</label>
-                        <input type="number" class="form-control" name="editar{{$campo->id}}" id="editar{{$campo->id}}" value="{{$campo->ponto}}" step="0.1" min="0" max="100" disabled>
+                        <input type="number" class="form-control" name="editar{{$campo->id}}" id="editar{{$campo->id}}"
+                               value="{{$campo->ponto}}" step="0.1" min="0" max="100" disabled>
                     @endif
                 </div>
 
@@ -28,6 +29,42 @@
         </div>
     </div>
 @else
+    <div class="has-info row">
+        <div class="col-6">
+            <label for="{{$campo->atributos->attr_id}}"
+                   class="text-dark font-weight-bold">{{mb_strtoupper($campo->nome)}}</label>
+            <select class="form-control" id="{{$campo->atributos->attr_id}}" name="editar{{$campo->id}}">
+                @foreach($campo->intemCampo as $item)
+                    <option value="{{$item->id}}">{{$item->item}}</option>
+                @endforeach
+            </select>
+        </div>
 
+        <div class="col-6">
+            <div class="row">
+                <div class="col col-8">
+                    @if($campo->pontuar == 1)
+                        <label for="editar{{$campo->id}}" class="text-dark font-weight-bold ">PONTUAÇÃO</label>
+                        <input type="number" class="form-control" name="editar{{$campo->id}}" id="editar{{$campo->id}}"
+                               value="{{$campo->ponto}}" step="0.1" min="0" max="100" disabled>
+                    @endif
+                </div>
+
+                <div class="col col-4 text-right">
+                    <a href="#" class="adicioanar_item"
+                       data-action="{{route('cadastrar.itemSelect')}}" data-campo-id="{{$campo->id}}"
+                       title="ADICIONAR ITEM">
+                        <span class="material-icons text-primary">plus_one</span>
+                    </a>
+
+                    <a href="javascript:void(0);" class="delete_item_sweet"
+                       data-action="{{route('campo.destroy', $campo->id)}}" title="REMOVER O CAMPO">
+                        <span class="material-icons text-warning">delete</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endif
 

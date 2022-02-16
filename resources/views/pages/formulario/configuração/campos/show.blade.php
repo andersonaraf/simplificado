@@ -217,6 +217,48 @@
 
         }
 
+        $('.adicioanar_item').click(function (event) {
+            event.preventDefault()
+            Swal.fire({
+                title: 'Adicionar item no campo selecionar',
+                input: 'text',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Adicionar',
+                showLoaderOnConfirm: true,
+                preConfirm: (name) => {
+                    $.ajax({
+                        url: $(this).attr('data-action'),
+                        method: 'POST',
+                        data: {
+                            "token": "{{csrf_token()}}",
+                            "campo_id": $(this).attr('data-campo-id'),
+                            "item": name,
+                        },
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'AVISO',
+                        text: 'Alterado com sucesso.',
+                        timer: 1000,
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then((result) => {
+                        window.location.reload();
+                    })
+                }
+            })
+        })
+
 
     </script>
 @endpush
