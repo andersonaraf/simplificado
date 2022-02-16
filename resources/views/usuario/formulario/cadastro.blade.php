@@ -107,7 +107,7 @@
                                     icon: 'success',
                                     confirmButtonText: 'Ok'
                                 }).then(function () {
-                                    {{--window.location.href = '{{route('inicio')}}';--}}
+                                    window.location.href = '{{route('inicio')}}';
                                 });
                             } else {
                                 Swal.fire({
@@ -119,9 +119,11 @@
                             }
                         },
                         error: function (data) {
+                            data = JSON.parse(data.responseText);
+                            console.log(data)
                             Swal.fire({
                                 title: 'Erro!',
-                                text: 'Erro ao cadastrar formulário!',
+                                text: data.error,
                                 icon: 'error',
                                 confirmButtonText: 'Ok'
                             });
