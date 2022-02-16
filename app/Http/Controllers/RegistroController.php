@@ -55,6 +55,7 @@ class RegistroController extends Controller
             $user->block = 0;
             $user->save();
 
+
             //CRIAR ENDEREÇO
             $endereco = [];
             $endereco['bairro'] = $request->bairro;
@@ -62,7 +63,6 @@ class RegistroController extends Controller
             $endereco['rua'] = $request->rua;
             $endereco['numero'] = $request->numero;
             $endereco['complemento'] = $request->complemento;
-//            $endereco->save();
 
             $pessoa = new Pessoa();
             $pessoa->nome_completo = $request->nomeCompleto;
@@ -79,8 +79,6 @@ class RegistroController extends Controller
             $pessoa->genero_id = $request->genero;
             $pessoa->user_id = $user->id;
             $pessoa->save();
-
-            dd(1);
             //SALVAR OS NUMEROS
             $pessoa->numeroContato()->create([
                 'numero' => $request->contato1,
@@ -90,13 +88,15 @@ class RegistroController extends Controller
                     'numero' => $request->contato2,
                 ]);
             }
+
+//            dd($pessoa->id);
             DB::commit();
             Auth::login($user);
             session()->put('status', 'Salvo Com Sucesso');
-            return redirect()->route('inicio');
-
+            return view('usuario.area_user.index_user');
         } catch (Exception $ex) {
             DB::rollBack();
+            dd($ex);
             return redirect()->route('inicio')->withInput()->withErrors([
                 'message' => $ex->getMessage()
             ]);
@@ -128,7 +128,7 @@ class RegistroController extends Controller
 
     public function gerarProgress($id, $cargo_id)
     {
-        $progressM = Progress::where('edital_dinamico_id', $id)->get();
+//        $progressM = Progress::where('edital_dinamico_id', $id)->get();
         $progress = new Collection();
 
         foreach ($progressM as $item) {

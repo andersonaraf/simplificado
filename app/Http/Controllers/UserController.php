@@ -20,7 +20,8 @@ class UserController extends Controller
      */
     public function index(User $model)
     {
-        if (Auth::user()->tipo != 'Admin') {
+
+        if (Auth::user()->tipo == 'Admin') {
             session()->put('error', 'Você não tem acesso a essa página!');
             return redirect()->route('home');
         }
