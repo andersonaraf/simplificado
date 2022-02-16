@@ -45,14 +45,6 @@
         <!-- ======= Featured Section ======= -->
         <section id="featured" class="featured">
             <div class="container">
-                <div class="section-title" data-aos="fade-up">
-                    @if(session('status'))
-                        dd()
-                        <h1>{{session('status')}}</h1>
-                        {{session()->forget('status')}}
-                        @endif
-                    <h2>Processos Seletivos</h2>
-                </div>
                 <div class="row justify-content-md-center">
                     @include('usuario.formulario.box')
                 </div>

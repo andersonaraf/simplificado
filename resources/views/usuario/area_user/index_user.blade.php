@@ -18,13 +18,13 @@
         <hr>
         @if(session('status'))
         <span class="alert alert-info">{{session('status')}}</span>
-
+            {{session()->forget('status')}}
         @endif
         <nav class="row d-flex justify-content-end">
             <ul class="nav nav-tabs">
                 <li class="ml-5"><a href="#">Home</a></li>
                 <li class="ml-5"><a href="#">Perfil Usuário</a></li>
-                <li class="ml-5"><a href="#">Voltar</a></li>
+                <li class="ml-5"><a href="{{route('inicio')}}">Voltar</a></li>
             </ul>
         </nav>
         {{--BODY CARD--}}
