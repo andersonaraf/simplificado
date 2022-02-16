@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\DB;
 
 class UsuarioFormularioController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('acesso.formulario');
+    }
     /**
      * Display a listing of the resource.
      *
