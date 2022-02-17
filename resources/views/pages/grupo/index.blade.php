@@ -20,6 +20,7 @@
                                     <thead>
                                     <tr>
                                         <th>Grupos</th>
+                                        <th>PESSOAS</th>
                                         <th>AÇÕES</th>
                                     </tr>
                                     </thead>
@@ -28,8 +29,13 @@
                                         <tr>
                                             <td>{{$grupo->nome}}</td>
                                             <td>
+                                                <a href="{{route('grupo.people', $grupo->id)}}" title="PESSOAS">
+                                                    <span class="material-icons text-info">manage_accounts</span>
+                                                </a>
+                                            </td>
+                                            <td>
                                                 <a href="{{route('grupo.edit', $grupo->id)}}" title="EDITAR">
-                                                    <span class="material-icons text-info">settings</span>
+                                                    <span class="material-icons text-info">edit</span>
                                                 </a>
                                             </td>
                                         </tr>
@@ -38,6 +44,7 @@
                                     <tfoot>
                                     <tr>
                                         <th>Grupos</th>
+                                        <th>PESSOAS</th>
                                         <th>AÇÕES</th>
                                     </tr>
                                     </tfoot>

@@ -57,6 +57,10 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::post('grupo', [\App\Http\Controllers\GrupoController::class, 'store'])->name('grupo.store');
     Route::get('grupo/{id}', [\App\Http\Controllers\GrupoController::class, 'edit'])->name('grupo.edit');
     Route::put('grupo/{id}', [\App\Http\Controllers\GrupoController::class, 'update'])->name('grupo.update');
+    Route::get('pessoas/grupo/{id}', [\App\Http\Controllers\GrupoController::class, 'people'])->name('grupo.people');
+    Route::post('pessoas', [\App\Http\Controllers\GrupoController::class, 'search'])->name('grupo.search');
+    Route::post('remove/pessoa', [\App\Http\Controllers\GrupoController::class, 'removePeople'])->name('grupo.removepeople');
+    Route::post('adicionar/pessoas', [\App\Http\Controllers\GrupoController::class, 'addpeople'])->name('grupo.adicionarpeople');
 
 
 });
