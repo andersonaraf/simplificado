@@ -42,6 +42,7 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::resource('formulario/configuracao/escolaridade/cargo', \App\Http\Controllers\CargoController::class);
     Route::resource('formulario/configuracao/campo', \App\Http\Controllers\Admin\Configuracao\Formulario\CampoController::class);
     Route::resource('avaliar/formulario/escolher', \App\Http\Controllers\Admin\Avaliacao\FormularioController::class)->only(['index', 'show']);
+    Route::resource('avaliar/formulario/candidato', \App\Http\Controllers\Admin\Avaliacao\CandidatoController::class);
 
     Route::get('formulario/configuracao/collapse/show/{id}', [\App\Http\Controllers\ConfigurarCargoController::class, 'show'])->name('configurar.cargo.show');
     Route::get('formulario/configuracao/create/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class, 'create'])->name('configuracao.create');

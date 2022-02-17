@@ -28,7 +28,7 @@
                                                 <td>{{!is_null($formularioUsuario->user->pessoa) ? $formularioUsuario->user->pessoa->cpf : ''}}</td>
                                                 <td>{{$formularioUsuario->cargo->cargo}}</td>
                                                 <td class="text-right">
-                                                    <a href="#"
+                                                    <a href="{{route('candidato.show', $formularioUsuario->id)}}"
                                                        class="btn btn-sm btn-primary">
                                                         <i class="material-icons">remove_red_eye</i>
                                                     </a>

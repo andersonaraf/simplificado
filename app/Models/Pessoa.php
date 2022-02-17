@@ -28,10 +28,6 @@ class Pessoa extends Model implements Auditable
         'portador_deficiencia',
     ];
 
-    public function pessoaEditalAnexos(){
-        return $this->hasMany(PessoaEditalAnexo::class, 'pessoa_id', 'id');
-    }
-
     public function cargo(){
         return $this->hasOne(Cargo::class, 'id', 'cargo_id');
     }
@@ -48,18 +44,6 @@ class Pessoa extends Model implements Auditable
         return $this->hasOne(Endereco::class, 'id', 'endereco_id');
     }
 
-    public function pontuacao($id){
-        $pontuacao = Pontuacao::where('pessoa_id', $id)->get()->last();
-        if (is_null($pontuacao)){
-            return null;
-        }
-        return $pontuacao;
-    }
-
-//    public function pontuacao2(){
-//       return $this->hasOne(Pontuacao::class, 'pessoa_id', 'id')->latest();
-//    }
-
     public function recurso(){
         return $this->hasOne(RecursoModel::class, 'pessoa_id', 'id');
     }
@@ -71,10 +55,6 @@ class Pessoa extends Model implements Auditable
     public function revisarPessoa($id){
         return RevisarPessoa::where('pessoa_id', $id)->get()->last();
     }
-
-//    public function reprovarMotivo(){
-//        return $this->hasOne(ReprovarPessoa::class, 'pessoa_id', 'id')->latest();
-//    }
 
     public function numeroContato(){
         return $this->hasMany(NumeroContato::class, 'pessoa_id', 'id');

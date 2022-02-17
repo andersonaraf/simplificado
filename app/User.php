@@ -42,7 +42,7 @@ class User extends Authenticatable implements Auditable
     ];
 
     public function pessoa(){
-        return $this->belongsTo(Pessoa::class, 'user_id', 'id');
+        return $this->hasOne(Pessoa::class, 'user_id', 'id');
     }
 
     public function groupoUser(){
