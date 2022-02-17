@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FormularioRequest;
 use App\Models\Formulario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FormularioController extends Controller
@@ -51,6 +52,7 @@ class FormularioController extends Controller
                 $formulario->data_liberar = $request->dataInicio;
                 $formulario->data_fecha = $request->dataFinalizar;
                 $formulario->liberado = false;
+                $formulario->user_id = Auth::user()->id;
                 $formulario->save();
                 \DB::commit();
                 return redirect()->route('configuracao.create', $formulario->id)->with([

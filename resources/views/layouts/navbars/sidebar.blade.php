@@ -35,6 +35,15 @@
                                 </a>
                             </li>
                         </ul>
+
+                        <ul class="nav">
+                            <li class="nav-item{{ isset($subActivePage) == 'Grupos' ? ' active' : '' }}">
+                                <a class="nav-link" href="{{route('grupo.index')}}">
+                                    <span class="sidebar-mini"> GRU </span>
+                                    <span class="sidebar-normal"> {{ __('GRUPOS') }} </span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </li>
                 <li class="nav-item{{ $activePage == 'avaliacao' ? ' active' : '' }}">
