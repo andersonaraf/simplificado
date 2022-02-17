@@ -3,11 +3,10 @@
     <title>Processo Seletvo Simplificado - REGISTRO</title>
 @endsection
 
-@section('css')
-    {{--    <link rel="stylesheet" href="{{asset('css/registro/style.css')}}">--}}
-    {{--    <link rel="stylesheet" href="{{asset('css/registro/modal-confirmacao.css')}}">--}}
+
+        <link rel="stylesheet" href="{{asset('css/registro/style.css')}}">
+        <link rel="stylesheet" href="{{asset('css/registro/modal-confirmacao.css')}}">
     <link rel="stylesheet" href="{{asset('css/registro/style.css')}}">
-@endsection
 
 @section('content')
     <main class="container" id="ajuste">

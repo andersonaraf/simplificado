@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 */
 //FALBACK
 Route::fallback(function (){
-   dd(1);
+   dd('Sem resposta com o servidor');
 });
 //LOGIN
 Auth::routes([
@@ -26,13 +26,19 @@ Route::get('/sair', function () {
 })->name('sair');
 
 //AREA DO USUÁRIO ::INICIO::
+//Inscrição usuário
 Route::get('/', [\App\Http\Controllers\WeelcomeController::class, 'index'])->name('inicio');
 Route::get('/cadastro/simplificado', [\App\Http\Controllers\RegistroController::class, 'index'])->name('cadastro-simplificado');
 Route::post('/cadastro/simplificado/salvar', [\App\Http\Controllers\RegistroController::class, 'store'])->name('cadastro-simplificado.store');
 Route::get('usuario/formulario/{id}', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'show'])->name('usuario.formulario.show');
 Route::get('usuario/inscricao/{cargo_id}/{formulario_id}', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'create'])->name('usuario.formulario.create');
 Route::post('usuario/finalizar/inscricao', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'store'])->name('usuario.formulario.store');
+
+//retorna tela de admin do usuário
 Route::get('/usuario', [\App\Http\Controllers\Usuario\UsuarioController::class, 'index'])->name('usuario.index');
+//lista processos participados pelo usuário
+Route::get('/usuario/lista/{id}', [\App\Http\Controllers\Usuario\UsuarioController::class, 'show'])->name('usuario.lista.processos');
+
 //AREA DO USUÁRIO ::FIM::
 
 Route::group(['middleware' => 'acesso.restrito'] , function () {

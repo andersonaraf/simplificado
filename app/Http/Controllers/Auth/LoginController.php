@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -53,6 +54,8 @@ class LoginController extends Controller
             }
             if (strtoupper(auth()->user()->tipo) != 'ADMIN') {
                 return redirect()->route('inicio');
+            }elseif (Auth::user()->tipo == 'CANDIDATO') {
+                return view('usuario.area_user.index_user');
             }
             return redirect()->intended($this->redirectPath());
             //this redirect if user is the db line 2
