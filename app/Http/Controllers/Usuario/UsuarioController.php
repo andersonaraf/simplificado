@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
+use App\Models\FormularioUsuario;
 use App\Models\Pessoa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,12 +23,14 @@ class UsuarioController extends Controller
 
     public function index()
     {
+        $formularioUsuario = FormularioUsuario::where('user_id', Auth::id())->first();
+        $pessoa = Pessoa::where('user_id', Auth::id())->first();
+//        dd($pessoa);
         if (Auth::user()->tipo == 'CANDIDATO') {
             //acrescentar id dinamico (este funcionando apenas para testes)
-            $id = 2;
             $nome_user = Auth::user()->name;
-            $pessoa = Pessoa::findOrFail($id)->all();
-            return view('usuario.area_user.index_user',compact('nome_user','pessoa'));
+            $user_id = Auth::user()->id;
+            return view('usuario.area_user.index_user',compact('nome_user','pessoa','formularioUsuario','user_id'));
         } else {
             return view('inicio');
         }
@@ -51,7 +54,7 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -62,7 +65,10 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        //
+//        Listar todos os processo do usuario
+        $formularioUsuario = FormularioUsuario::where('user_id', $id)->first();
+        dd($formularioUsuario);
+
     }
 
     /**

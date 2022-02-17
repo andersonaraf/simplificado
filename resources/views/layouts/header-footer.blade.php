@@ -15,7 +15,7 @@
 <body>
 <!-- ======= Header ======= -->
 <header id="header">
-    <nav class="navbar navbar-expand-md">
+    <nav class="navbar  navbar-expand-md bg-primary">
         <div class="container d-flex">
             <div class="logo mr-auto ">
                 <h1 class="text-light"><a href="{{route('inicio')}}"><span>RB SIMPLIFICADO</span></a></h1>
@@ -28,10 +28,10 @@
             <div class="collapse navbar-collapse" style="justify-content: flex-end;" id="navbarsExample04">
                 <ul class="navbar-nav ">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{route('inicio')}}">Início</a>
+                        <a class="nav-link text-white" href="{{route('inicio')}}">Início</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                             Usuário
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -57,26 +57,22 @@
         </div>
     </nav>
 </header>
+{{--BODY PAGINA--}}
 @yield('content')
 @yield('user')
 <!-- ======= Footer ======= -->
 <footer id="footer">
-
     <div class="footer-top">
         <div class="container">
             <div class="row">
-
                 <div class="col-lg-6 col-md-6 footer-links">
-                    <h4>Links mais Usados</h4>
+                    <h4>Informações</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Início</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a
                                 href="http://www.riobranco.ac.gov.br/files/politicadeprivacidade.pdf" target="_blank">Política
                                 de Privacidade</a></li>
                     </ul>
                 </div>
-
-
                 <div class="col-lg-3 col-md-6 footer-contact">
                     <h4>Contato</h4>
                     <p>
@@ -99,8 +95,11 @@
 </footer><!-- End Footer -->
 </body>
 <script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/jquery.inputmask.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/area-restrita/functions.js')}}"></script>
+<script src="{{asset('js/registro/cep.js')}}"></script>
+<script src="{{asset('js/registro/mask.js')}}"></script>
 @stack('script')
 </html>
 

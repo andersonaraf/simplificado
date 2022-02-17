@@ -4,7 +4,6 @@ $('#confirma').click(function () {
     $('#cpf_conf').html($('#cpf').val())
     $('#rg_conf').html($('#rg').val())
     $('#orgao_emissor_conf').html($('#orgao_emissor').val())
-    // $('#pis_conf').html($('#pis').val())
     $('#telefone_conf').html($('#telefone').val())
     $('#nacionalidade_conf').html($('#nacionalidade').val())
     $('#naturalidade_conf').html($('#naturalidade').val())

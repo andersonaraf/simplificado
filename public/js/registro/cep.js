@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     function limpa_formulário_cep() {
         // Limpa valores do formulário de cep.
         $("#rua").val("");
@@ -7,7 +6,6 @@ $(document).ready(function() {
         $("#cidade").val("");
         $("#uf").val("");
     }
-
     //Quando o campo cep perde o foco.
     $("#cep").blur(function() {
 
@@ -27,6 +25,7 @@ $(document).ready(function() {
                 $("#endereco").val("...");
                 $("#bairro").val("...");
                 $("#cidade").val("...");
+                $("#rua").val("...");
                 //Consulta o webservice viacep.com.br/
                 $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
 
@@ -35,6 +34,8 @@ $(document).ready(function() {
                         $("#endereco").val(dados.logradouro + ', ' + dados.localidade + ' - ' + dados.uf);
                         $("#bairro").val(dados.bairro);
                         $("#cidade").val(dados.localidade);
+                        $("#rua").val(dados.logradouro);
+
                     } //end if.
                     else {
                         //CEP pesquisado não foi encontrado.

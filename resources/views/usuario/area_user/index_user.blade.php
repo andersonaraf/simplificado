@@ -29,20 +29,24 @@
                 <li class="ml-5"><a href="{{route('inicio')}}">Voltar</a></li>
             </ul>
         </nav>
+{{--FUNCIONALIDADE DE BUSCAR TODOS OS PROCESSOS--}}
 
-        <div class="row col-4">
-           <label class="label">Buscar CPF</label>
-           <input type="text" class="form-control" placeholder="Apenas Numeros">
-            <button type="button" class="btn btn-outline-primary">Buscar</button>
-        </div>
+{{--        <div class="row col-4">--}}
+{{--            <form></form>--}}
+{{--           <label class="label">Buscar CPF</label>--}}
+{{--           <input type="text" class="form-control" placeholder="Apenas Numeros">--}}
+{{--            <button type="button" class="btn btn-outline-primary">Buscar</button>--}}
+{{--        </div>--}}
+
         {{--BODY CARD--}}
         <div class="card card-body">
             <div class="row col-12 justify-content-center">
                 <div class="col-6" style="text-align: center;">
                     <div class="card py-4 bg-to-primary bg-primary">
                         <h6 class="text-white">
+
                             {{-- adcionar processos seletivos do usuário--}}
-                            <a href="#" class="text-white">Meus Processos Seletivos</a>
+                            <a href="{{route('usuario.lista.processos', $user_id)}}" class="text-white">Meus Processos Seletivos</a>
                         </h6>
                     </div>
                 </div>

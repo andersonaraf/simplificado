@@ -86,7 +86,6 @@ class RegistroController extends Controller
                 ]);
             }
 
-//            dd($pessoa->id);
             DB::commit();
             Auth::login($user);
             session()->put('status', 'Salvo Com Sucesso');
