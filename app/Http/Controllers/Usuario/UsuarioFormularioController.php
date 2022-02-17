@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Comprovante;
 use App\Models\Campo;
 use App\Models\Collapse;
 use App\Models\Formulario;
@@ -11,6 +12,7 @@ use App\Models\FormularioUsuarioCampo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class UsuarioFormularioController extends Controller
 {
@@ -80,11 +82,12 @@ class UsuarioFormularioController extends Controller
                     $formularioUsuarioCampo->save();
                 }
             }
+            Mail::send(new Comprovante(Auth::user()));
             DB::commit();
             return response()->json(['status' => true], 200);
         } catch (\Exception $exception) {
             DB::rollBack();
-            return response()->json(['message' => 'Erro ao salvar formulário'], 500);
+            return response()->json(['message' => $exception->getMessage()], 500);
         }
     }
 
