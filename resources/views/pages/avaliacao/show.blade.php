@@ -1,4 +1,4 @@
-@extends('layouts.app', [ 'activePage' => 'avaliacao', 'titlePage' => __('Formulários')])
+@extends('layouts.app', [ 'activePage' => 'avaliacao', 'titlePage' => __('Lista de Candidatos')])
 @section('content')
     <div class="content">
         <div class="container-fluid">
@@ -14,29 +14,33 @@
                                     <table id="dataTable" class="display table-hover nowrap" style="width: 100%">
                                         <thead>
                                         <tr>
-                                            <th>FORMULÁRIO</th>
-                                            <th>CANDIDATOS</th>
+                                            <th>NOME CANDIDATO</th>
+                                            <th>CPF</th>
+                                            <th>CARGO</th>
                                             <th class="text-right">OPÇÕES</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @csrf
-                                        @foreach($formularios as $formulario)
+                                        @foreach($formulario->formularioUsuario as $formularioUsuario)
                                             <tr>
-                                               <td>{{$formulario->nome}}</td>
-                                               <td>{{$formulario->formularioUsuario->count()}}</td>
-                                               <td class="text-right">
-                                                   <a href="{{route('escolher.show', $formulario->id)}}" title="LISTA DE PARTICIPANTES">
-                                                       <span class="material-icons user text-info">settings</span>
-                                                   </a>
-                                               </td>
+                                                <td>{{mb_strtoupper($formularioUsuario->user->name)}}</td>
+                                                <td>{{!is_null($formularioUsuario->user->pessoa) ? $formularioUsuario->user->pessoa->cpf : ''}}</td>
+                                                <td>{{$formularioUsuario->cargo->cargo}}</td>
+                                                <td class="text-right">
+                                                    <a href="#"
+                                                       class="btn btn-sm btn-primary">
+                                                        <i class="material-icons">remove_red_eye</i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th>FORMULÁRIO</th>
-                                            <th>CANDIDATOS</th>
+                                            <th>NOME CANDIDATO</th>
+                                            <th>CPF</th>
+                                            <th>CARGO</th>
                                             <th class="text-right">OPÇÕES</th>
                                         </tr>
                                         </tfoot>
