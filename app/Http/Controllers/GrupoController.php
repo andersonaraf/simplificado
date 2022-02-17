@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GrupoRequest;
+use App\Models\Formulario;
 use App\Models\Grupo;
+use App\Models\GrupoFormulario;
 use App\Models\GrupoUser;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GrupoController extends Controller
@@ -29,7 +32,8 @@ class GrupoController extends Controller
      */
     public function create()
     {
-        return view('pages.grupo.create');
+        $formularios = Formulario::where('user_id', '=', Auth::user()->id)->get();
+        return view('pages.grupo.create', compact('formularios'));
     }
 
     /**
@@ -43,6 +47,10 @@ class GrupoController extends Controller
         try {
             DB::beginTransaction();
             $grupo = Grupo::create($request->all());
+            GrupoFormulario::create([
+                'formulario_id' => $request->formulario_id,
+                'grupo_id' => $grupo->id
+            ]);
             DB::commit();
             return redirect()->route('grupo.index')->with([
                 'type' => 'success',

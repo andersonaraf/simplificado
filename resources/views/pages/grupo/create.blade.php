@@ -8,7 +8,7 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="card">
+                    <div class="card col=12">
                         <div class="card-header">
                             <h4 class="card-title font-weight-bold">CRIAR GRUPO</h4>
                         </div>
@@ -16,11 +16,11 @@
                             <form method="post" action="{{route('grupo.store')}}">
                                 @csrf
                                 <div class="row">
-                                    <div class="col col-12 col-md-6 col-lg-6">
-                                        <div class="form-group has-info">
-                                            <label for="nomeFormulario" class="font-weight-bold">NOME GRUPO</label>
+                                    <div class="col col-12 col-md-6 py-1 col-lg-5">
+                                        <div class=" has-info">
+                                            <label for="nomeGrupo" class="font-weight-bold text-info">NOME GRUPO</label>
                                             <input type="text" class="form-control" name="nome"
-                                                   id="nomeFormulario" placeholder="AUDITORES">
+                                                   id="nomeGrupo" placeholder="AUDITORES">
                                             @if($errors->has('nome'))
                                                 <div class="alert alert-warning alert-dismissible fade show"
                                                      role="alert">
@@ -31,6 +31,17 @@
                                                     </button>
                                                 </div>
                                             @endif
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 col-md-6 col-lg-5">
+                                        <div class="has-info">
+                                            <label for="nomeFormulario"
+                                                   class="font-weight-bold text-info">FORMULÁRIOS</label>
+                                            <select name="formulario_id" id="nomeFormulario" class="form-control">
+                                                @foreach($formularios as $formulario)
+                                                    <option value="{{$formulario->id}}">{{$formulario->nome}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
 

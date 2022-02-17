@@ -1,4 +1,7 @@
 @extends('layouts.app', [ 'activePage' => 'user-management', 'subActivePage' => 'Grupos', 'titlePage' => __('Grupos')])
+@push('css')
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+@endpush
 @section('content')
     <div class="content">
         <div class="container-fluid">
