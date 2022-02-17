@@ -33,15 +33,16 @@ Route::get('usuario/formulario/{id}', [\App\Http\Controllers\Usuario\UsuarioForm
 Route::get('usuario/inscricao/{cargo_id}/{formulario_id}', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'create'])->name('usuario.formulario.create');
 Route::post('usuario/finalizar/inscricao', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'store'])->name('usuario.formulario.store');
 Route::get('/usuario', [\App\Http\Controllers\Usuario\UsuarioController::class, 'index'])->name('usuario.index');
-
 //AREA DO USUÁRIO ::FIM::
 
 Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::resource('formulario', \App\Http\Controllers\FormularioController::class);
-    Route::resource('formulario/configuracao', \App\Http\Controllers\ConfiguracaoFormularioController::class);
+    Route::resource('formulario/configuracao', \App\Http\Controllers\ConfiguracaoFormularioController::class)->only(['index', 'store', 'show', 'edit', 'update']);
     Route::resource('formulario/configuracao/escolaridade', \App\Http\Controllers\EscolaridadeController::class);
     Route::resource('formulario/configuracao/escolaridade/cargo', \App\Http\Controllers\CargoController::class);
     Route::resource('formulario/configuracao/campo', \App\Http\Controllers\Admin\Configuracao\Formulario\CampoController::class);
+    Route::resource('avaliar/formulario/escolher', \App\Http\Controllers\Admin\Avaliacao\FormularioController::class);
+
     Route::get('formulario/configuracao/collapse/show/{id}', [\App\Http\Controllers\ConfigurarCargoController::class, 'show'])->name('configurar.cargo.show');
     Route::get('formulario/configuracao/create/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class, 'create'])->name('configuracao.create');
     Route::post('/formulario/configurar/collapse/store', [\App\Http\Controllers\CollapseController::class, 'store'])->name('collapse.store');
@@ -52,16 +53,9 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::post('/formulario/cargo/campo/salvar', [\App\Http\Controllers\ConfiguracaoFormularioController::class,'store'])->name('formulario.cargo.campo.store');
 
 
+
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('user', 'UserController', ['except' => ['show']]);
-    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-    Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+    Route::resource('user', \App\Http\Controllers\UserController::class, ['except' => ['show']]);
 });
-
-Route::get('/gerarPDF/{comprovante}', 'ComprovanteController@gerarComprovanteCpf')->name('gerarpdf-comprovante');
-Route::get('pdf', function () {
-    return view('pdf');
-})->name('pdf');

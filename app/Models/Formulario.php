@@ -32,4 +32,8 @@ class Formulario extends Model
     public function formularioUsuario(){
         return $this->hasMany(FormularioUsuario::class, 'formulario_id', 'id');
     }
+
+    public function grupoFormulario(){
+        return $this->hasMany(GrupoFormulario::class, 'formulario_id', 'id');
+    }
 }

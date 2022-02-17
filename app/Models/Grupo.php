@@ -12,4 +12,8 @@ class Grupo extends Model
     protected $fillable = ['nome'];
 
 
+    public function grupoUsers(){
+        return $this->hasMany(GrupoUser::class);
+    }
+
 }
