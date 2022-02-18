@@ -34,6 +34,7 @@
                     let inputs = $('#formPontuar').find('input')
                     //MAP INPUTS
                     let pontuacoes = []
+                    let send = false;
                     inputs.map(function (index, element) {
                         if ($(this).data('usuario-campo') != undefined || $(this).data('usuario-campo') != null) {
                             //VALIDATE MAX
@@ -41,13 +42,6 @@
                                 //SHOW SPAN ERRO
                                 $('#span-' + $(this).data('usuario-campo')).css('display', 'block')
                                 $('#error-' + $(this).data('usuario-campo')).text('Valor máximo de ' + $(this).attr('max'))
-                                return false;
-                            }
-                            //VALIDATE DATA REQURIED
-                            if ($(this).data('required') == 1 && ($(this).val() == '' || $(this).val() == null)) {
-                                //SHOW SPAN ERRO
-                                $('#span-' + $(this).data('usuario-campo')).css('display', 'block')
-                                $('#error-' + $(this).data('usuario-campo')).text('Campo obrigatório')
                                 return false;
                             }
 
@@ -59,38 +53,44 @@
                                 'pontuacao': $(this).val() == 0 ? 0 : $(this).val()
                             }
                             pontuacoes.push(campo)
-
+                            //verificar se tudo ocorrou certo
+                            if (pontuacoes.length == index) {
+                                send = true;
+                            }
                         }
                     });
                     //SEND AJAX
-                    $.ajax({
-                        url: '{{route('candidato.store')}}',
-                        type: 'POST',
-                        data: {
-                            _token: '{{csrf_token()}}',
-                            formularioUsuarioID: '{{$formulariUsuario->id}}',
-                            pontuacoes: pontuacoes,
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                Swal.fire({
-                                    title: 'Sucesso!',
-                                    text: 'Avaliação realizada com sucesso!',
-                                    type: 'success',
-                                    confirmButtonText: 'OK'
-                                }).then(function () {
-{{--                                    window.location.href = '{{route('avaliacao.candidato.index')}}'--}}
-                                })
-                            } else {
-                                Swal.fire({
-                                    title: 'Erro!',
-                                    text: 'Ocorreu um erro ao realizar a avaliação!',
-                                    type: 'error',
-                                    confirmButtonText: 'OK'
-                                })
+                    console.log(send)
+                    if (send) {
+                        $.ajax({
+                            url: '{{route('pontuar.store')}}',
+                            type: 'POST',
+                            data: {
+                                _token: '{{csrf_token()}}',
+                                formularioUsuarioID: '{{$formulariUsuario->id}}',
+                                pontuacoes: pontuacoes,
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: 'Sucesso!',
+                                        text: 'Avaliação realizada com sucesso!',
+                                        type: 'success',
+                                        confirmButtonText: 'OK'
+                                    }).then(function () {
+                                        {{--                                    window.location.href = '{{route('avaliacao.candidato.index')}}'--}}
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: 'Erro!',
+                                        text: 'Ocorreu um erro ao realizar a avaliação!',
+                                        type: 'error',
+                                        confirmButtonText: 'OK'
+                                    })
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
             })
         });
