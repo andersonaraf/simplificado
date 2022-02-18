@@ -14,8 +14,8 @@ class AddColumnFormularioUsuarioIdComprovante extends Migration
     public function up()
     {
         Schema::table('comprovante', function (Blueprint $table) {
-            $table->unsignedBigInteger('fromulario_usuario_id');
-            $table->foreign('fromulario_usuario_id')->references('id')->on('formulario_usuario');
+            $table->unsignedBigInteger('formulario_usuario_id');
+            $table->foreign('formulario_usuario_id')->references('id')->on('formulario_usuario');
         });
     }
 

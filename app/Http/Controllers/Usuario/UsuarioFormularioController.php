@@ -85,10 +85,11 @@ class UsuarioFormularioController extends Controller
             }
             $formulario = Formulario::findOrFail($request->formulario);
             $comprovante =  \App\Models\Comprovante::create([
-                'comprovante' => Hash::make(Auth::user()->id.date('Y-m-d H:i:s'))
+                'comprovante' => Hash::make(Auth::user()->id.date('Y-m-d H:i:s')),
+                'formulario_usuario_id'=>$formulario_usuario->id
             ]);
             DB::commit();
-            Mail::queue(new Comprovante(Auth::user(), $formulario, $comprovante));
+            \App\Jobs\Comprovante::dispatch(Auth::user(), $formulario, $comprovante)->delay(now()->addSeconds('15'));
             return response()->json(['status' => true], 200);
         } catch (\Exception $exception) {
             DB::rollBack();
