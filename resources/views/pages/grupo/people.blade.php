@@ -16,7 +16,7 @@
                             <h4 class="card-title font-weight-bold">PESSOAS</h4>
                         </div>
                         <div class="card-body">
-                            <form method="post">
+                            <div>
                                 @csrf
                                 <input type="hidden" value="{{$id}}" id="grupo_id">
                                 <div class="row">
@@ -43,10 +43,15 @@
                                             </tr>
                                             </thead>
                                             <tbody id="tbody">
-                                            @foreach($grupoUsers as $grupo)
+                                            @foreach($grupoUsers as $key=>$grupo)
                                                 <tr id="">
                                                     <td scope="row">{{$grupo->user->name}}</td>
                                                     <td>
+                                                        <a href="{{route('definir.avaliador', ['formulario_id' => $grupo->grupo->grupoFormularios[$key]->formulario_id, 'user_id' => $grupo->user->id])}}">
+                                                            <button class="btn btn-info">
+                                                                PESSOAS A AVALIAR
+                                                            </button>
+                                                        </a>
                                                         <button class="btn btn-danger remove"
                                                                 data-list-id="{{$grupo->id}}" id="remove{{$grupo->id}}"
                                                                 type="button">Remove
@@ -58,7 +63,7 @@
                                         </table>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,6 +135,8 @@
                                 title: 'LISTA SALVA COM SUCESSO.',
                                 showConfirmButton: false,
                                 timer: 1500
+                            }).then(() => {
+                                window.location.reload()
                             })
                             peoples = [];
                         },
@@ -192,7 +199,7 @@
                 return false;
 
 
-        })
+            })
 
 
         })

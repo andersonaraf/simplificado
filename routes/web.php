@@ -67,6 +67,8 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::post('pessoas', [\App\Http\Controllers\GrupoController::class, 'search'])->name('grupo.search');
     Route::post('remove/pessoa', [\App\Http\Controllers\GrupoController::class, 'removePeople'])->name('grupo.removepeople');
     Route::post('adicionar/pessoas', [\App\Http\Controllers\GrupoController::class, 'addpeople'])->name('grupo.adicionarpeople');
+    Route::get('definir/avaliador/{formulario_id}/{user_id}', [\App\Http\Controllers\GrupoController::class, 'definirAvaliador'])->name('definir.avaliador');
+    Route::post('definir/avaliador/',[\App\Http\Controllers\GrupoController::class, 'avaliarStore'])->name('avaliador.store');
 
 });
 
