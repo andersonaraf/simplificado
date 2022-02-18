@@ -179,9 +179,9 @@ class GrupoController extends Controller
         Avaliador::all();
         $candidatos = new Collection();
         foreach ($formulario->formularioUsuario as $formUser){
-            $candidato = Avaliador::where('candidato', $formUser->user->id)->first();
+            $candidato = Avaliador::where('formulario_usuario',$formUser->id )->first();
             if (is_null($candidato)){
-                $candidatos->add($formUser->user);
+                $candidatos->add($formUser);
             }
         }
         return view('pages.grupo.avaliacao.candidato', compact('candidatos', 'user_id'));
@@ -192,7 +192,7 @@ class GrupoController extends Controller
             DB::beginTransaction();
             $avaliador = Avaliador::create([
                 'avaliador' => $request->avaliador,
-                'candidato' => $request->candidato
+                'formulario_usuario' => $request->formulario_usuario
             ]);
             DB::commit();
             return response()->json(['success' => true]);

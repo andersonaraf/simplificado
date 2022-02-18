@@ -16,10 +16,10 @@ class CreateAvaliadorTable extends Migration
         Schema::create('avaliador', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('avaliador');
-            $table->unsignedBigInteger('candidato');
+            $table->unsignedBigInteger('formulario_usuario');
 
             $table->foreign('avaliador')->references('id')->on('users');
-            $table->foreign('candidato')->references('id')->on('users');
+            $table->foreign('formulario_usuario')->references('id')->on('formulario_usuario');
             $table->timestamps();
         });
     }

@@ -14,11 +14,11 @@ class Avaliador extends Model
 
     protected $fillable = [
         'avaliador',
-        'candidato',
+        'formulario_usuario',
     ];
 
-    public function cadidatos()
+    public function formularioUsuario()
     {
-        return $this->belongsTo(User::class, 'candidato', 'id');
+        return $this->belongsTo(FormularioUsuario::class, 'formulario_usuario', 'id');
     }
 }

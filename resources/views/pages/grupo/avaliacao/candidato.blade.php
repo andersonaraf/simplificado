@@ -32,7 +32,7 @@
                                             <tbody id="tbody">
                                             @foreach($candidatos as $candidato)
                                                 <tr id="">
-                                                    <td scope="row">{{$candidato->name}}</td>
+                                                    <td scope="row">{{$candidato->user->name}}</td>
                                                     <td>
                                                         <button class="btn btn-info avaliar"
                                                                 data-participante-id="{{$candidato->id}}">
@@ -61,7 +61,7 @@
                 method: 'post',
                 data: {
                     avaliador: $('#avaliador_id').val(),
-                    candidato: $(this).attr('data-participante-id'),
+                    formulario_usuario: $(this).attr('data-participante-id'),
                     _token: '{{csrf_token()}}'
                 },
                 success: function (data) {

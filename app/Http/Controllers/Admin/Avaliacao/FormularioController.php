@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\Avaliacao;
 
 use App\Http\Controllers\Controller;
+use App\Models\Avaliador;
 use App\Models\Formulario;
+use Illuminate\Support\Facades\Auth;
 
 class FormularioController extends Controller
 {
@@ -34,7 +36,10 @@ class FormularioController extends Controller
     public function show($id)
     {
         //
+
         $formulario = Formulario::findOrFail($id);
-        return view('pages.avaliacao.show', compact('formulario'));
+        $avaliador = Avaliador::where('avaliador', Auth::user()->id)->get();
+
+        return view('pages.avaliacao.show', compact('formulario','avaliador'));
     }
 }
