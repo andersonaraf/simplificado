@@ -68,7 +68,6 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::post('remove/pessoa', [\App\Http\Controllers\GrupoController::class, 'removePeople'])->name('grupo.removepeople');
     Route::post('adicionar/pessoas', [\App\Http\Controllers\GrupoController::class, 'addpeople'])->name('grupo.adicionarpeople');
 
-
 });
 
 Route::group(['middleware' => 'auth'], function () {
