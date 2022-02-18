@@ -16,4 +16,8 @@ class Grupo extends Model
         return $this->hasMany(GrupoUser::class);
     }
 
+    public function grupoFormularios(){
+        return $this->hasMany(GrupoFormulario::class);
+    }
+
 }

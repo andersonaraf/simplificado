@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GrupoRequest;
+use App\Models\Avaliador;
 use App\Models\Formulario;
 use App\Models\Grupo;
 use App\Models\GrupoFormulario;
 use App\Models\GrupoUser;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -164,10 +166,39 @@ class GrupoController extends Controller
             }
             DB::commit();
             return response()->json(['success' => true]);
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             DB::rollBack();
             return response()->json(['error' => $exception->getMessage()], 500);
 
+        }
+    }
+
+    public function definirAvaliador($formulario_id,$user_id)
+    {
+        $formulario = Formulario::findOrFail($formulario_id);
+        Avaliador::all();
+        $candidatos = new Collection();
+        foreach ($formulario->formularioUsuario as $formUser){
+            $candidato = Avaliador::where('formulario_usuario',$formUser->id )->first();
+            if (is_null($candidato)){
+                $candidatos->add($formUser);
+            }
+        }
+        return view('pages.grupo.avaliacao.candidato', compact('candidatos', 'user_id'));
+    }
+
+    public function avaliarStore(Request $request){
+        try {
+            DB::beginTransaction();
+            $avaliador = Avaliador::create([
+                'avaliador' => $request->avaliador,
+                'formulario_usuario' => $request->formulario_usuario
+            ]);
+            DB::commit();
+            return response()->json(['success' => true]);
+        }catch(\Exception $exception){
+            DB::rollBack();
+            return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
 }
