@@ -12,6 +12,7 @@ use App\Models\FormularioUsuarioCampo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class UsuarioFormularioController extends Controller
@@ -82,8 +83,12 @@ class UsuarioFormularioController extends Controller
                     $formularioUsuarioCampo->save();
                 }
             }
-            Mail::send(new Comprovante(Auth::user()));
+            $formulario = Formulario::findOrFail($request->formulario);
+            $comprovante =  \App\Models\Comprovante::create([
+                'comprovante' => Hash::make(Auth::user()->id.date('Y-m-d H:i:s'))
+            ]);
             DB::commit();
+            Mail::queue(new Comprovante(Auth::user(), $formulario, $comprovante));
             return response()->json(['status' => true], 200);
         } catch (\Exception $exception) {
             DB::rollBack();

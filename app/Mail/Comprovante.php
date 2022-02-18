@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Formulario;
 use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -12,15 +13,19 @@ class Comprovante extends Mailable
 {
     use Queueable, SerializesModels;
     private $user;
+    private $formulario;
+    private $comprovante;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, Formulario $formulario, $comprovante)
     {
         $this->user = $user;
+        $this->formulario = $formulario;
+        $this->comprovante = $comprovante;
     }
 
     /**
@@ -32,6 +37,10 @@ class Comprovante extends Mailable
     {
         $this->subject('COMPROVANTE RB SIMPLIFICADO');
         $this->to($this->user->email, $this->user->name);
-        return $this->view('mail.comprovante');
+        return $this->markdown('mail.comprovante', [
+            'user' => $this->user,
+            'formulario' => $this->formulario,
+            'comprovante' => $this->comprovante
+        ]);
     }
 }
