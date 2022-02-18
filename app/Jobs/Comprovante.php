@@ -40,7 +40,7 @@ class Comprovante implements ShouldQueue
      */
     public function handle()
     {
-        Mail::queue(new \App\Mail\Comprovante($this->user, $this->formulario, $this->comprovante));
+        Mail::send(new \App\Mail\Comprovante($this->user, $this->formulario, $this->comprovante));
 
     }
 }
