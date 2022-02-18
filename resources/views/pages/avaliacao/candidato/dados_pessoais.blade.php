@@ -1,6 +1,6 @@
 <div class="card" style="width: 100%">
     <div class="card-header bg-info">
-        <h5 class="card-title text-white font-weight-bold">DADOS PESSOAIS</h5>
+        <h5 class="card-title text-white font-weight-bold">INFORMAÇÕES PESSOAIS</h5>
     </div>
     <div class="card-body">
         <div class="row">

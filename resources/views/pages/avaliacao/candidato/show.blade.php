@@ -7,6 +7,7 @@
                     <h4 class="text-dark font-weight-bold">INFORMAÇÕES DO PARTICIPANTE</h4>
                     <hr style="width: 100%;">
                     @include('pages.avaliacao.candidato.dados_pessoais')
+                    @include('pages.avaliacao.candidato.anexos', ['pontuavel' => false])
                 </div>
             </main>
         </div>
