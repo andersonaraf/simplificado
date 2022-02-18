@@ -62,7 +62,6 @@
 
                         }
                     });
-                    console.log(pontuacoes)
                     //SEND AJAX
                     $.ajax({
                         url: '{{route('candidato.store')}}',
