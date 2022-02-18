@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-header bg-primary">
-                            <h4 class="text-white font-weight-bold">LISTA DE FORMULÁRIOS</h4>
+                            <h4 class="text-white font-weight-bold">LISTA DE CANDIDATOS</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -17,6 +17,7 @@
                                             <th>NOME CANDIDATO</th>
                                             <th>CPF</th>
                                             <th>CARGO</th>
+                                            <th class="text-right">STATUS</th>
                                             <th class="text-right">OPÇÕES</th>
                                         </tr>
                                         </thead>
@@ -27,10 +28,15 @@
                                                 <td>{{mb_strtoupper($formularioUsuario->user->name)}}</td>
                                                 <td>{{!is_null($formularioUsuario->user->pessoa) ? $formularioUsuario->user->pessoa->cpf : ''}}</td>
                                                 <td>{{$formularioUsuario->cargo->cargo}}</td>
+                                                <td class="text-right"></td>
                                                 <td class="text-right">
                                                     <a href="{{route('candidato.show', $formularioUsuario->id)}}"
                                                        class="btn btn-sm btn-primary">
                                                         <i class="material-icons">remove_red_eye</i>
+                                                    </a>
+                                                    <a href="{{route('candidato.edit', $formularioUsuario->id)}}"
+                                                       class="btn btn-sm btn-primary" title="REALIZAR PONTUAÇÃO">
+                                                        <i class="material-icons">123</i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -41,6 +47,7 @@
                                             <th>NOME CANDIDATO</th>
                                             <th>CPF</th>
                                             <th>CARGO</th>
+                                            <th class="text-right">STATUS</th>
                                             <th class="text-right">OPÇÕES</th>
                                         </tr>
                                         </tfoot>

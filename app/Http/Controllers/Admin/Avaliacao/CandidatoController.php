@@ -62,6 +62,8 @@ class CandidatoController extends Controller
     public function edit($id)
     {
         //
+        $formulariUsuario = FormularioUsuario::findOrFail($id);
+        return view('pages.avaliacao.candidato.edit', compact('formulariUsuario'));
     }
 
     /**

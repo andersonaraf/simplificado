@@ -14,4 +14,8 @@ class FormularioUsuarioCampo extends Model
     public function formularioUsuario(){
         return $this->belongsTo(FormularioUsuario::class, 'formulario_usuario_id', 'id');
     }
+
+    public function campo(){
+        return $this->belongsTo(Campo::class, 'campo_id', 'id');
+    }
 }
