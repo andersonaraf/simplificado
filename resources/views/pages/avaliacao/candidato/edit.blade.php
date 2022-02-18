@@ -60,7 +60,6 @@
                         }
                     });
                     //SEND AJAX
-                    console.log(send)
                     if (send) {
                         $.ajax({
                             url: '{{route('pontuar.store')}}',
@@ -71,23 +70,36 @@
                                 pontuacoes: pontuacoes,
                             },
                             success: function (response) {
-                                if (response.success) {
+                                if (response.msg) {
                                     Swal.fire({
+                                        icon: 'success',
                                         title: 'Sucesso!',
                                         text: 'Avaliação realizada com sucesso!',
                                         type: 'success',
-                                        confirmButtonText: 'OK'
+                                        confirmButtonText: 'OK',
+                                        timer: 3000
                                     }).then(function () {
-                                        {{--                                    window.location.href = '{{route('avaliacao.candidato.index')}}'--}}
+                                        window.location.href = '{{route('escolher.show', $formulariUsuario->formulario_id)}}'
                                     })
                                 } else {
                                     Swal.fire({
+                                        icon: 'error',
                                         title: 'Erro!',
                                         text: 'Ocorreu um erro ao realizar a avaliação!',
                                         type: 'error',
                                         confirmButtonText: 'OK'
                                     })
                                 }
+                            },
+                            error: function (response) {
+                                let error = JSON.parse(response.responseText);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Erro!',
+                                    text: error.error + ' Campo inválido: ' + error.campo,
+                                    type: 'error',
+                                    confirmButtonText: 'OK'
+                                })
                             }
                         })
                     }

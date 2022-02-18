@@ -22,15 +22,15 @@ class PontuacaoController extends Controller
     public function store(Request $request)
     {
         //
-//        dd($request->all());
         $formularioUsuario = FormularioUsuario::findOrFail($request->formularioUsuarioID);
-//        dd($formularioUsuario);
         //VALIDAR CAMPOS
         $valido = $this->validarCampos($request->pontuacoes);
         if ($valido != true) return response()->json(['error' => 'Campos inválidos. A pontuação passou do limite do campo ou está negativa!', 'campo' => $valido], 422);
         //REALIZAR PONTUACAO
         $pontuacao = $this->salvarPontuacao($request->pontuacoes);
-        dd($pontuacao);
+        if (!$pontuacao) return response()->json(['error' => 'Erro ao salvar pontuação'], 422);
+        //ENVIAR MSG DE SUCESSO
+        return response()->json(['msg' => 'Avaliação salva com sucesso!'], 200);
     }
 
     /**
@@ -75,7 +75,6 @@ class PontuacaoController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();
             return $e->getMessage();
         }
