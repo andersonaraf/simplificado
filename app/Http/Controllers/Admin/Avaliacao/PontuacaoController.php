@@ -29,6 +29,9 @@ class PontuacaoController extends Controller
         //REALIZAR PONTUACAO
         $pontuacao = $this->salvarPontuacao($request->pontuacoes);
         if (!$pontuacao) return response()->json(['error' => 'Erro ao salvar pontuação'], 422);
+        //ALTERAR A COLUNA AVALIADO PARA TRUE
+        $formularioUsuario->avaliado = true;
+        $formularioUsuario->save();
         //ENVIAR MSG DE SUCESSO
         return response()->json(['msg' => 'Avaliação salva com sucesso!'], 200);
     }
