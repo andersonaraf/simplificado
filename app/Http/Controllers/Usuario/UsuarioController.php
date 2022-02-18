@@ -67,7 +67,16 @@ class UsuarioController extends Controller
     {
 //        Listar todos os processo do usuario
         $formularioUsuario = FormularioUsuario::where('user_id', $id)->first();
-        dd($formularioUsuario);
+        if(!is_null($formularioUsuario)){
+            return view('usuario.area_user.processos_seletivos_user', compact('formularioUsuario'));
+        }else{
+            $formularioUsuario = null;
+            return view('usuario.area_user.processos_seletivos_user', compact('formularioUsuario'));
+
+        }
+
+
+
 
     }
 

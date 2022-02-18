@@ -18,6 +18,10 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
+                @if(session('status'))
+                    <span class="alert alert-success">{{session('status')}}</span>
+                {{session()->forget('status')}}
+                @endif
                 <div class="carousel-inner">
                     @foreach($carrossels as $carrossel)
                         <div class="carousel-item active">

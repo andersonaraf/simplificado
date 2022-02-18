@@ -60,6 +60,7 @@
 {{--BODY PAGINA--}}
 @yield('content')
 @yield('user')
+@yield('lista')
 <!-- ======= Footer ======= -->
 <footer id="footer">
     <div class="footer-top">
