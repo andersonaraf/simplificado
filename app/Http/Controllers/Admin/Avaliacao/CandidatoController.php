@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Avaliacao;
 use App\Http\Controllers\Controller;
 use App\Models\FormularioUsuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class CandidatoController extends Controller
 {
@@ -64,7 +66,14 @@ class CandidatoController extends Controller
     {
         //
         $formulariUsuario = FormularioUsuario::findOrFail($id);
-        return view('pages.avaliacao.candidato.edit', compact('formulariUsuario'));
+        //VERIFICAR SE ESTÁ BLOQUEADO
+        if (!$formulariUsuario->lock || (strtotime($formulariUsuario->lock) < strtotime('-15minutes')) || $formulariUsuario->user_id_is_assessing == Auth::id()) {
+            $formulariUsuario->lock = Carbon::now();
+            $formulariUsuario->user_id_is_assessing = Auth::id();
+            $formulariUsuario->save();
+            return view('pages.avaliacao.candidato.edit', compact('formulariUsuario'));
+        }
+        else return redirect()->back()->with(['type' => 'warning', 'msg' => 'O formulário está sendo avaliado por outro usuário, por favor, tente novamente mais tarde.']);
     }
 
     /**

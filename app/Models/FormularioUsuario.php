@@ -13,7 +13,9 @@ class FormularioUsuario extends Model
     protected $fillabel = [
         'user_id',
         'formulario_id',
-        'cargo_id'
+        'cargo_id',
+        'user_id_is_assessing',
+        'lock'
     ];
 
     public function user()
@@ -32,5 +34,10 @@ class FormularioUsuario extends Model
 
     public function formularioUsuarioCampo(){
         return $this->hasMany(FormularioUsuarioCampo::class, 'formulario_usuario_id', 'id');
+    }
+
+    public function userIsAssessing()
+    {
+        return $this->belongsTo(User::class, 'user_id_is_assessing', 'id');
     }
 }
