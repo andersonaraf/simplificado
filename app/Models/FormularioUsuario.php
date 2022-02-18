@@ -26,4 +26,11 @@ class FormularioUsuario extends Model
         return $this->belongsTo(Cargo::class, 'cargo_id', 'id');
     }
 
+    public function formulario(){
+        return $this->belongsTo(Formulario::class, 'formulario_id', 'id');
+    }
+
+    public function formularioUsuarioCampo(){
+        return $this->hasMany(FormularioUsuarioCampo::class, 'formulario_usuario_id', 'id');
+    }
 }
