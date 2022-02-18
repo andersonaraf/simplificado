@@ -15,7 +15,9 @@ class FormularioUsuario extends Model
         'formulario_id',
         'cargo_id',
         'user_id_is_assessing',
-        'lock'
+        'lock',
+        'avaliado',
+        'revisado'
     ];
 
     public function user()
