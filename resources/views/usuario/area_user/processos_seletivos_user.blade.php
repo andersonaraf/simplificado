@@ -5,31 +5,35 @@
     @if(isset($formularioUsuario))
         <div class="container">
             <div class="py-5">
-                <div class="card-header">
-                    <h5>titulo</h5>
+                <div class="card card-header bg-primary py-4">
+                    {{--APENAS DIV ESTETICA PARA LAYOUT--}}
+                </div>
+                <div class=" card card-body">
+                    <table class="table  table-bordered table-hover">
+                        <thead class="thead-dark">
+                        <tr class="">
+                            <th>Processo</th>
+                            <th>Cargo</th>
+                            <th>Data</th>
+                            <th>acoes</th>
 
-                    <div class=" card card-body">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Processo</th>
-                                <th>Cargo</th>
-                                <th>acoes</th>
-                            </tr>
+                        </tr>
 
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>TESTE</td>
-                                <td>TESTE</td>
-                                <td><button type="button" class="btn btn-success">Visualizar</button></td>
-                                <td><button type="button" class="btn">ddad</button></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        </thead>
+                        <tbody>
+                        <tr class="table-light">
+                            <td>TESTE</td>
+                            <td>TESTE</td>
+                            <td>11/12/30</td>
+                            <td><a href="{{route('inicio')}}">
+                                    <button type="button" class="btn btn-success">Vizualizar</button>
+                                </a></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
         </div>
     @endif
 
@@ -39,6 +43,12 @@
     {{--    TELA QUANDO USUÁRIO NAO SE ESCREVEU EM NENHUM PROCESSO SELETIVO--}}
     @if(is_null($formularioUsuario))
         <div class="container">
+            <div class="py-5">
+                <div class="card card-header bg-primary py-4">
+                    {{--APENAS DIV ESTETICA PARA LAYOUT--}}
+                </div>
+
+            </div>
             <h1>Não possui processos</h1>
         </div>
 
