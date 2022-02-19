@@ -30,11 +30,11 @@
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->cargo->cargo : $formularioUsuario->cargo->cargo}}</td>
                                                 <td class="text-right"></td>
                                                 <td class="text-right">
-                                                    <a href="{{route('candidato.show', $formularioUsuario->id)}}"
+                                                    <a href="{{route('candidato.show',isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->id : $formularioUsuario->id)}}"
                                                        class="btn btn-sm btn-primary">
                                                         <i class="material-icons">remove_red_eye</i>
                                                     </a>
-                                                    <a href="{{route('candidato.edit', $formularioUsuario->id)}}"
+                                                    <a href="{{route('candidato.edit',isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->id : $formularioUsuario->id)}}"
                                                        class="btn btn-sm btn-primary" title="REALIZAR PONTUAÇÃO">
                                                         <i class="material-icons">123</i>
                                                     </a>
