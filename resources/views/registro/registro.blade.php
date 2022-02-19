@@ -240,7 +240,7 @@
 
                                 <div class="row">
                                     <div class="col col-12 text-right">
-                                        <input type="submit" class="btn btn-outline-info font-weight-bold" value="Cadastrar">
+                                        <input type="submit" class="btn btn-outline-dark font-weight-bold" value="Cadastrar">
                                     </div>
                                 </div>
                             </div>
