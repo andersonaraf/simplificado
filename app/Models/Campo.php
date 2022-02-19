@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Campo extends Model
+class Campo extends Model implements Auditable
 {
     use HasFactory;
+    use AuditableTrait;
 
     protected $table = 'campos';
     protected $fillable = [
@@ -30,7 +33,8 @@ class Campo extends Model
         return $this->belongsTo(Atributo::class, 'atributo_id', 'id');
     }
 
-    public function intemCampo(){
+    public function intemCampo()
+    {
         return $this->hasMany(ItemCampo::class, 'campo_id', 'id');
     }
 }
