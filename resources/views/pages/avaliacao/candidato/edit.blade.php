@@ -37,8 +37,9 @@
                     let send = false;
                     inputs.map(function (index, element) {
                         if ($(this).data('usuario-campo') != undefined || $(this).data('usuario-campo') != null) {
+                            //VEFICAR O MAX INPUT
                             //VALIDATE MAX
-                            if ($(this).val() > $(this).attr('max')) {
+                            if (parseFloat($(this).val()) > parseFloat($(this).attr('max'))) {
                                 //SHOW SPAN ERRO
                                 $('#span-' + $(this).data('usuario-campo')).css('display', 'block')
                                 $('#error-' + $(this).data('usuario-campo')).text('Valor máximo de ' + $(this).attr('max'))
@@ -79,7 +80,7 @@
                                         confirmButtonText: 'OK',
                                         timer: 3000
                                     }).then(function () {
-                                        window.location.href = '{{route('escolher.show', $formulariUsuario->formulario_id)}}'
+                                        {{--window.location.href = '{{route('escolher.show', $formulariUsuario->formulario_id)}}'--}}
                                     })
                                 } else {
                                     Swal.fire({
