@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Usuario;
 use App\Http\Controllers\Controller;
 use App\Mail\Comprovante;
 use App\Models\Campo;
+use App\Models\Cargo;
 use App\Models\Collapse;
 use App\Models\Formulario;
 use App\Models\FormularioUsuario;
@@ -39,7 +40,8 @@ class UsuarioFormularioController extends Controller
      */
     public function create($cargo_id, $formulario_id)
     {
-
+        $cargo = Cargo::findOrFail($cargo_id);
+        if ($cargo->bloquear == 1) return redirect()->route('inicio');
         $collapses = Collapse::where('cargo_id', $cargo_id)->get();
         return view('usuario.formulario.cadastro', compact('collapses', 'formulario_id', 'cargo_id'));
     }

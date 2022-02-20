@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Escolaridade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EscolaridadeController extends Controller
 {
@@ -41,6 +42,7 @@ class EscolaridadeController extends Controller
             $escolaridade = new Escolaridade();
             $escolaridade->formulario_id = $request->formularioID;
             $escolaridade->nivel_escolaridade = mb_strtoupper($request->nomeEscolaridade);
+            $escolaridade->bloquear = 0;
             $escolaridade->save();
             \DB::commit();
             return redirect()->route('configuracao.create', $request->formularioID)->with([
@@ -108,6 +110,25 @@ class EscolaridadeController extends Controller
         } catch (\Exception $exception) {
             \DB::rollBack();
             return response()->json(false, 405);
+        }
+    }
+
+    public function bloquear(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $escolaridade = Escolaridade::findOrFail($request->escolaridade_id);
+            $escolaridade->bloquear = !$escolaridade->bloquear;
+            $escolaridade->save();
+            foreach ($escolaridade->cargos as $cargo){
+                $cargo->bloquear = $escolaridade->bloquear;
+                $cargo->save();
+            }
+            DB::commit();
+            return response()->json(true, 200);
+        }catch (\Exception $exception){
+            DB::rollBack();
+            return response()->json(false, 500);
         }
     }
 }

@@ -14,7 +14,8 @@ class Cargo extends Model implements Auditable
     protected $fillable = [
         'id',
         'escolaridade_id',
-        'cargo'
+        'cargo',
+        'bloquear',
     ];
 
     public function escolaridade(){
