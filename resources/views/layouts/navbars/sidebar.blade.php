@@ -28,7 +28,7 @@
                     </a>
                     <div class="collapse {{$activePage == 'user-management' ? 'show' : ''}}" id="laravelExample">
                         <ul class="nav">
-                            <li class="nav-item{{ isset($subActivePage) == 'Formulários' ? ' active' : '' }}">
+                            <li class="nav-item{{ isset($subActivePage)  ? ($subActivePage == 'Formulários' ? ' active' : '') : '' }}">
                                 <a class="nav-link" href="{{route('formulario.index')}}">
                                     <span class="sidebar-mini"> FOR </span>
                                     <span class="sidebar-normal"> {{ __('FORMULÁRIOS') }} </span>
@@ -37,7 +37,7 @@
                         </ul>
 
                         <ul class="nav">
-                            <li class="nav-item{{ isset($subActivePage) == 'Grupos' ? ' active' : '' }}">
+                            <li class="nav-item{{ isset($subActivePage) ? ($subActivePage  == 'Grupos' ? ' active' : '') : '' }}">
                                 <a class="nav-link" href="{{route('grupo.index')}}">
                                     <span class="sidebar-mini"> GRU </span>
                                     <span class="sidebar-normal"> {{ __('GRUPOS') }} </span>
