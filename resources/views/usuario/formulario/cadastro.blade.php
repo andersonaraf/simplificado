@@ -57,12 +57,14 @@
             $('#enviarForm').click(function () {
                 let campos = [];
                 let camposObrigatoriosOk = true;
+                let enviar = true;
                 let ajaxData = new FormData();
                 $('#formData').find('input').each(function () {
                     if ($(this).attr('required')) {
                         if ($(this).val() === '') {
                             camposObrigatoriosOk = false;
                             $(this).addClass('is-invalid');
+                            enviar = false
                             return false;
                         } else {
                             $(this).removeClass('is-invalid');
@@ -86,7 +88,7 @@
                     }
                 });
                 //ENVIAR OS DADOS
-                if (true) {
+                if (enviar) {
                     // INFORMAÇÕES NECESSÁRIAS
                     ajaxData.append('formulario', '{{$formulario_id}}');
                     ajaxData.append('cargo', '{{$cargo_id}}');
