@@ -41,7 +41,7 @@ class UsuarioFormularioController extends Controller
     public function create($cargo_id, $formulario_id)
     {
         $cargo = Cargo::findOrFail($cargo_id);
-        if ($cargo->bloquear == 0) return redirect()->route('inicio');
+        if ($cargo->bloquear == 1) return redirect()->route('inicio');
         $collapses = Collapse::where('cargo_id', $cargo_id)->get();
         return view('usuario.formulario.cadastro', compact('collapses', 'formulario_id', 'cargo_id'));
     }
