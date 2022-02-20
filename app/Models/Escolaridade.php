@@ -15,6 +15,7 @@ class Escolaridade extends Model implements Auditable
         'id',
         'formulario_id',
         'nivel_escolaridade',
+        'bloquear',
     ];
 
     public function cargos(){

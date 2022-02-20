@@ -47,6 +47,7 @@ class CargoController extends Controller
             $cargo = new Cargo();
             $cargo->escolaridade_id = $request->escolaridade;
             $cargo->cargo = $request->nomeCargo;
+            $cargo->bloquear = 0;
             $cargo->save();
             DB::commit();
             return redirect()->route('configuracao.show', $request->formularioID)->with([
@@ -125,6 +126,20 @@ class CargoController extends Controller
         } catch (Exception $ex) {
             DB::rollBack();
             return response()->withException($ex->getMessage());
+        }
+    }
+
+    public function bloquear(Request $request)
+    {
+        try {
+            $cargo = Cargo::findOrFail($request->cargo_id);
+            $cargo->bloquear = !$cargo->bloquear;
+            $cargo->save();
+            DB::commit();
+            return response()->json(true, 200);
+        }catch (Exception $exception){
+            DB::rollBack();
+            return response()->json(false, 500);
         }
     }
 }
