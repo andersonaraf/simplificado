@@ -43,7 +43,8 @@
                                 //SHOW SPAN ERRO
                                 $('#span-' + $(this).data('usuario-campo')).css('display', 'block')
                                 $('#error-' + $(this).data('usuario-campo')).text('Valor máximo de ' + $(this).attr('max'))
-                                return false;
+                                send = false
+                                return send
                             }
 
                             //HIDE SPAN ERRO
@@ -54,10 +55,7 @@
                                 'pontuacao': $(this).val() == 0 ? 0 : $(this).val()
                             }
                             pontuacoes.push(campo)
-                            //verificar se tudo ocorrou certo
-                            if (pontuacoes.length == index) {
-                                send = true;
-                            }
+                            send = true
                         }
                     });
                     //SEND AJAX
