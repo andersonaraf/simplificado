@@ -33,6 +33,8 @@
                                                         <span class="badge badge-pill badge-danger">NÃO AVALIADO</span>
                                                     @elseif($formularioUsuario->avaliado == 1)
                                                         <span class="badge badge-pill badge-success">AVALIADO</span>
+                                                    @elseif($formularioUsuario->avaliado == 0)
+                                                        <span class="badge badge-pill badge-danger">REPROVADO</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-right">

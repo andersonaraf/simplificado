@@ -104,6 +104,62 @@
                             }
                         })
                     }
+                } else {
+                    //SWEET ALERT COM INPUT DE MOTIVO PARA REPROVAR
+                    Swal.fire({
+                        title: 'Motivo',
+                        text: 'Digite o motivo para reprovar o formulário',
+                        input: 'text',
+                        inputAttributes: {
+                            autocapitalize: 'off'
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: 'Reprovar',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (motivo) => {
+                            //CONFIRMAR DECISÃO
+                            swal.fire({
+                                icon: 'question',
+                                text: 'Tem certeza que deseja reprovar esse formulário?',
+                                showCancelButton: true,
+                                confirmButtonText: 'Sim',
+                                cancelButtonText: 'Não'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $.ajax({
+                                        url: '{{route('reprovar.store')}}',
+                                        type: 'POST',
+                                        data: {
+                                            _token: '{{csrf_token()}}',
+                                            formularioUsuarioID: '{{$formulariUsuario->id}}',
+                                            motivo: motivo,
+                                        },
+                                        success: (reponse) => {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Sucesso!',
+                                                text: 'Formulário reprovado com sucesso!',
+                                                type: 'success',
+                                                confirmButtonText: 'OK',
+                                                timer: 3000
+                                            }).then(function () {
+                                                window.location.href = '{{route('escolher.show', $formulariUsuario->formulario_id)}}'
+                                            })
+                                        }, error: (response) => {
+                                            let error = JSON.parse(response.responseText);
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Erro!',
+                                                text: error.error,
+                                                type: 'error',
+                                                confirmButtonText: 'OK'
+                                            })
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
                 }
             })
         });

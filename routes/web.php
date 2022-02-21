@@ -50,6 +50,7 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::resource('avaliar/formulario/escolher', \App\Http\Controllers\Admin\Avaliacao\FormularioController::class)->only(['index', 'show']);
     Route::resource('avaliar/formulario/candidato', \App\Http\Controllers\Admin\Avaliacao\CandidatoController::class)->only(['store', 'show', 'edit']);
     Route::resource('avaliar/formulario/candidato/pontuar', \App\Http\Controllers\Admin\Avaliacao\PontuacaoController::class)->only(['store', 'update']);
+    Route::resource('avaliar/formulario/candidato/reprovar', \App\Http\Controllers\Admin\Avaliacao\ReprovarController::class)->only(['store']);
     Route::get('formulario/configuracao/collapse/show/{id}', [\App\Http\Controllers\ConfigurarCargoController::class, 'show'])->name('configurar.cargo.show');
     Route::get('formulario/configuracao/create/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class, 'create'])->name('configuracao.create');
     Route::post('/formulario/configurar/collapse/store', [\App\Http\Controllers\CollapseController::class, 'store'])->name('collapse.store');
