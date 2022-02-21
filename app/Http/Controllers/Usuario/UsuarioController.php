@@ -96,7 +96,8 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+//        dd($id);
+        return view('usuario.area_user.view_processo_user');
     }
 
     /**

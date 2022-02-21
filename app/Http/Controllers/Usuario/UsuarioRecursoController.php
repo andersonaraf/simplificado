@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Recurso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioRecursoController extends Controller
 {
@@ -35,7 +37,14 @@ class UsuarioRecursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
+        $extension = $request->arquivo->extension();
+        $arquivo = $request->arquivo->hasFile();
+        $up = $request->arquivo->storeAs('' , $nameFile);
+        $url_anexo;
+        $id= Auth::user()->id;
+        $recurso = Recurso::findOrFail($id);
+
     }
 
     /**
@@ -46,7 +55,7 @@ class UsuarioRecursoController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

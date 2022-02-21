@@ -62,6 +62,7 @@
 @yield('user')
 @yield('lista')
 @yield('recurso_user')
+@yield('view_user')
 <!-- ======= Footer ======= -->
 <footer id="footer">
     <div class="footer-top">

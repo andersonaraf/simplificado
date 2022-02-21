@@ -17,6 +17,7 @@
         </div>
         <hr>
 
+
         @if(session('status'))
         <span class="alert alert-info">{{session('status')}}</span>
             {{session()->forget('status')}}
