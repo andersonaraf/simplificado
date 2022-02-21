@@ -61,6 +61,7 @@
 @yield('content')
 @yield('user')
 @yield('lista')
+@yield('recurso_user')
 <!-- ======= Footer ======= -->
 <footer id="footer">
     <div class="footer-top">
@@ -101,6 +102,7 @@
 <script src="{{asset('js/area-restrita/functions.js')}}"></script>
 <script src="{{asset('js/registro/cep.js')}}"></script>
 <script src="{{asset('js/registro/mask.js')}}"></script>
+<script src="{{asset('js/registro/functions.js')}}"></script>
 @stack('script')
 </html>
 
