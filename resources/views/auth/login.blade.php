@@ -58,6 +58,9 @@
                                         {{ __('Entrar') }}
                                     </button>
                                 </div>
+                                <div class="col-md-8 offset-md-4">
+                                    <a href="{{route('password.request')}}">Esqueceu sua senha</a>
+                                </div>
                             </div>
                         </form>
                     </div>
