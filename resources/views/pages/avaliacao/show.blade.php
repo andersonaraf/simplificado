@@ -26,8 +26,8 @@
                                         @foreach(isset($avaliador[0]) ? $avaliador : $formulario->formularioUsuario as $formularioUsuario)
                                             <tr>
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->name : mb_strtoupper($formularioUsuario->user->name)}}</td>
-                                                <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->pessoa->cpf : ''}}</td>
-                                                <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->cargo->cargo : ''}}</td>
+                                                <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->pessoa->cpf : (!is_null($formularioUsuario->user->pessoa) ? $formularioUsuario->user->pessoa->cpf : '')}}</td>
+                                                <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->cargo->cargo : (!is_null($formularioUsuario->cargo) ? $formularioUsuario->cargo->cargo : '')}}</td>
                                                 <td class="text-right">
                                                     @if(is_null($formularioUsuario->avaliado))
                                                         <span class="badge badge-pill badge-danger">NÃO AVALIADO</span>
