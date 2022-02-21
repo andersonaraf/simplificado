@@ -16,15 +16,7 @@ class FormularioController extends Controller
      */
     public function index()
     {
-        //TRAZER SOMENTE OS FORMULARIO QUE O USUÁRIO TEM ACESSO.
-        $formularios = Formulario::with(['grupoFormulario' => function ($query) {
-            $query->with(['grupo' => function ($query) {
-                $query->with(['grupoUsers' => function ($query) {
-                    $query->where('user_id', auth()->user()->id);
-                }]);
-            }]);
-        }])->get();
-        return view('pages.avaliacao.index', compact('formularios'));
+        return view('pages.avaliacao.index');
     }
 
     /**
@@ -36,7 +28,6 @@ class FormularioController extends Controller
     public function show($id)
     {
         //
-
         $formulario = Formulario::findOrFail($id);
         $avaliador = Avaliador::where('avaliador', Auth::user()->id)->get();
 

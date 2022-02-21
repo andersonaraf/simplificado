@@ -11,36 +11,22 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 col-lg-12 col-md-12">
-                                    <table id="dataTable" class="display table-hover nowrap" style="width: 100%">
-                                        <thead>
-                                        <tr>
-                                            <th>FORMULÁRIO</th>
-                                            <th>CANDIDATOS</th>
-                                            <th class="text-right">OPÇÕES</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+                                    <x-formulario>
                                         @csrf
-                                        @foreach($formularios as $formulario)
+                                        @foreach(auth()->user()->formularios() as $formulario)
                                             <tr>
-                                               <td>{{$formulario->nome}}</td>
-                                               <td>{{$formulario->formularioUsuario->count()}}</td>
-                                               <td class="text-right">
-                                                   <a href="{{route('escolher.show', $formulario->id)}}" title="LISTA DE PARTICIPANTES">
-                                                       <span class="material-icons user text-info">settings</span>
-                                                   </a>
-                                               </td>
+                                                <td>{{$formulario->nome}}</td>
+                                                <td>{{$formulario->formularioUsuario->count()}}</td>
+                                                <td class="text-right">
+                                                    <a href="{{route('escolher.show', $formulario->id)}}"
+                                                       title="LISTA DE PARTICIPANTES">
+                                                        <span class="material-icons user text-info">settings</span>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th>FORMULÁRIO</th>
-                                            <th>CANDIDATOS</th>
-                                            <th class="text-right">OPÇÕES</th>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
+                                    </x-formulario>
+
                                 </div>
                             </div>
                         </div>

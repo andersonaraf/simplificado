@@ -4,7 +4,6 @@ namespace App;
 
 use App\Models\GrupoUser;
 use App\Models\Pessoa;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -47,5 +46,16 @@ class User extends Authenticatable implements Auditable
 
     public function groupoUser(){
         return $this->hasMany(GrupoUser::class, 'user_id', 'id');
+    }
+
+    public function formularios(){
+        $formularios = \App\Models\Formulario::with(['grupoFormulario' => function ($query) {
+            $query->with(['grupo' => function ($query) {
+                $query->with(['grupoUsers' => function ($query) {
+                    $query->where('user_id', auth()->user()->id);
+                }]);
+            }]);
+        }])->get();
+        return $formularios;
     }
 }
