@@ -23,6 +23,8 @@ class PontuacaoController extends Controller
     {
         //
         $formularioUsuario = FormularioUsuario::findOrFail($request->formularioUsuarioID);
+        //VERIFICAR SE JÁ FOI AVALIADO
+        if (!is_null($formularioUsuario->avaliado)) return response()->json(['error' => 'Formulário já avaliado'], 400);
         //VALIDAR CAMPOS
         $valido = $this->validarCampos($request->pontuacoes);
         if ($valido != true) return response()->json(['error' => 'Campos inválidos. A pontuação passou do limite do campo ou está negativa!', 'campo' => $valido], 422);

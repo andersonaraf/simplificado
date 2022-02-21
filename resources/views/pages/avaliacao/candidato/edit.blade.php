@@ -80,7 +80,7 @@
                                         confirmButtonText: 'OK',
                                         timer: 3000
                                     }).then(function () {
-                                        {{--window.location.href = '{{route('escolher.show', $formulariUsuario->formulario_id)}}'--}}
+                                        window.location.href = '{{route('escolher.show', $formulariUsuario->formulario_id)}}'
                                     })
                                 } else {
                                     Swal.fire({
@@ -97,7 +97,7 @@
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Erro!',
-                                    text: error.error + ' Campo inválido: ' + error.campo,
+                                    text: error.error + (error.campo != undefined ? ' Campo inválido: ' + error.campo : '.'),
                                     type: 'error',
                                     confirmButtonText: 'OK'
                                 })

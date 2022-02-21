@@ -28,16 +28,25 @@
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->name : mb_strtoupper($formularioUsuario->user->name)}}</td>
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->pessoa->cpf : $formularioUsuario->user->pessoa->cpf}}</td>
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->cargo->cargo : $formularioUsuario->cargo->cargo}}</td>
-                                                <td class="text-right"></td>
+                                                <td class="text-right">
+                                                    @if(is_null($formularioUsuario->avaliado))
+                                                        <span class="badge badge-pill badge-danger">NÃO AVALIADO</span>
+                                                    @elseif($formularioUsuario->avaliado == 1)
+                                                        <span class="badge badge-pill badge-success">AVALIADO</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-right">
                                                     <a href="{{route('candidato.show',isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->id : $formularioUsuario->id)}}"
                                                        class="btn btn-sm btn-primary">
                                                         <i class="material-icons">remove_red_eye</i>
                                                     </a>
-                                                    <a href="{{route('candidato.edit',isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->id : $formularioUsuario->id)}}"
-                                                       class="btn btn-sm btn-primary" title="REALIZAR PONTUAÇÃO">
-                                                        <i class="material-icons">123</i>
-                                                    </a>
+                                                    {{--                                                    SÓ LIBERAR LINK CASO NÃO TENHA SIDO AVALIADO--}}
+                                                    @if(is_null($formularioUsuario->avaliado))
+                                                        <a href="{{route('candidato.edit',isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->id : $formularioUsuario->id)}}"
+                                                           class="btn btn-sm btn-primary" title="REALIZAR PONTUAÇÃO">
+                                                            <i class="material-icons">123</i>
+                                                        </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
