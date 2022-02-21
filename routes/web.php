@@ -75,6 +75,7 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::get('revisao', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'index'])->name('revisao.index');
     Route::get('revisar/listar/pessoas/{id}', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'show'])->name('revisao.show');
     Route::get('revisar/listar/dados/{id}', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'showDados'])->name('revisao.candidato.dados');
+    Route::post('voltar/avaliacao', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'voltarAvaliacao'])->name('voltar.avaliacao');
 
 });
 

@@ -7,6 +7,7 @@ use App\Models\Formulario;
 use App\Models\FormularioUsuario;
 use App\Models\ReprovarMotivo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RevisaoController extends Controller
 {
@@ -33,6 +34,21 @@ class RevisaoController extends Controller
         $formularioUsuario = FormularioUsuario::findOrFail($id);
         $reprovar = ReprovarMotivo::where('formulario_usuario_id', $id)->first();
         return view('pages.revisao.candidato.show', compact('formularioUsuario', 'reprovar'));
+    }
+
+    public function voltarAvaliacao(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $formularioUsuario = FormularioUsuario::findOrFail($request->formularioUsuarioID);
+            $formularioUsuario->avaliado = null;
+            $formularioUsuario->save();
+            DB::commit();
+            return response()->json(true, 200);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response()->json(false, 500);
+        }
     }
 
 }
