@@ -52,6 +52,12 @@
                         <p>{{ __('Avaliação') }}</p>
                     </a>
                 </li>
+                <li class="nav-item{{ $activePage == 'revisao' ? ' active' : '' }}">
+                    <a class="nav-link" href="{{ route('revisao.index') }}">
+                        <i class="material-icons">preview</i>
+                        <p>{{ __('Revisão') }}</p>
+                    </a>
+                </li>
             @endif
 {{--            @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Avaliador' || auth()->user()->tipo == 'Supervisor')--}}
 {{--                <li class="nav-item{{ $activePage == 'avaliacao' ? ' active' : '' }}">--}}
