@@ -130,12 +130,11 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: '{{route('reprovar.store')}}',
+                                url: '{{route('reprovar.avaliacao')}}',
                                 type: 'POST',
                                 data: {
                                     _token: '{{csrf_token()}}',
                                     formularioUsuarioID: '{{$formularioUsuario->id}}',
-                                    motivo: motivo,
                                 },
                                 success: (reponse) => {
                                     Swal.fire({

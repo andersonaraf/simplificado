@@ -51,4 +51,19 @@ class RevisaoController extends Controller
         }
     }
 
+    public function reprovarAvaliacao(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $formularioUsuario = FormularioUsuario::findOrFail($request->formularioUsuarioID);
+            $formularioUsuario->revisado = 0;
+            $formularioUsuario->save();
+            DB::commit();
+            return response()->json(true, 200);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response()->json(false, 500);
+        }
+    }
+
 }
