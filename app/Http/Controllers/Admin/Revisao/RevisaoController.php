@@ -7,6 +7,8 @@ use App\Models\Formulario;
 use App\Models\FormularioUsuario;
 use App\Models\ReprovarMotivo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RevisaoController extends Controller
@@ -33,7 +35,13 @@ class RevisaoController extends Controller
     {
         $formularioUsuario = FormularioUsuario::findOrFail($id);
         $reprovar = ReprovarMotivo::where('formulario_usuario_id', $id)->first();
-        return view('pages.revisao.candidato.show', compact('formularioUsuario', 'reprovar'));
+        if (!$formularioUsuario->lock || (strtotime($formularioUsuario->lock) < strtotime('-15minutes')) || $formularioUsuario->user_id_is_assessing == Auth::id()) {
+            $formularioUsuario->lock = Carbon::now();
+            $formularioUsuario->user_id_is_assessing = Auth::id();
+            $formularioUsuario->save();
+            return view('pages.revisao.candidato.show', compact('formularioUsuario', 'reprovar'));
+        }
+        else return redirect()->back()->with(['type' => 'warning', 'msg' => 'O formulário está sendo avaliado por outro usuário, por favor, tente novamente mais tarde.']);
     }
 
     public function voltarAvaliacao(Request $request)
@@ -66,7 +74,8 @@ class RevisaoController extends Controller
         }
     }
 
-    public function aprovarAvaliacao(Request $request){
+    public function aprovarAvaliacao(Request $request)
+    {
         try {
             DB::beginTransaction();
             $formularioUsuario = FormularioUsuario::findOrFail($request->formularioUsuarioID);
