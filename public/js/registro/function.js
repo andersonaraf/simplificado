@@ -74,12 +74,12 @@ $(function () {
         })
     })
 
-    // $('#escolaridade').click(function () {
-    //     var nivel = $('#escolaridade').val()
-    //     if (nivel == 1 || nivel == 2 || nivel == 3) {
-    //         $('#cargo-div').removeAttr('hidden', false);
-    //     }
-    // });
+// FUNÇÃO DE MENSAGEM DE ALERTA DO BOTÃO RECURSO
+    $('#mensagem').click(function () {
+
+        // <span className="alert alert-danger">Atenção o botão "Recurso" so será habilitado quando período de recurso do formulário for liberado pelo sistema </span>
+
+    });
 
 
     $('#enviar').click(function () {

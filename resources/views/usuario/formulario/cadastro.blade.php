@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container">
+        <div class="col-12 card card-header bg-primary ">
+            <div class="d-flex justify-content-center">
+                <img style="width:20em;"  src="{{asset('images/brancapref.png')}}">
+            </div>
+        </div>
         <h4 class="mt-5">Formulário de Inscrição</h4>
         <hr>
         <form action="{{route('usuario.formulario.store')}}" id="formData" method="post" enctype="multipart/form-data">

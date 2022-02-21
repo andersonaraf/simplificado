@@ -34,10 +34,19 @@ Route::get('usuario/formulario/{id}', [\App\Http\Controllers\Usuario\UsuarioForm
 Route::get('usuario/inscricao/{cargo_id}/{formulario_id}', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'create'])->name('usuario.formulario.create');
 Route::post('usuario/finalizar/inscricao', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'store'])->name('usuario.formulario.store');
 
+##USUÁRIO ADMIN SECTION##
 //retorna tela de admin do usuário
 Route::get('/usuario', [\App\Http\Controllers\Usuario\UsuarioController::class, 'index'])->name('usuario.index');
 //lista processos participados pelo usuário
 Route::get('/usuario/lista/{id}', [\App\Http\Controllers\Usuario\UsuarioController::class, 'show'])->name('usuario.lista.processos');
+Route::get('/usuario/ver/{id}', [\App\Http\Controllers\Usuario\UsuarioController::class, 'edit'])->name('usuario.view.processos');
+
+//Tela Recurso
+Route::get('/usuario/Recurso',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'index'])->name('usuario.recurso');
+Route::post('/usuario/Recurso/salvar',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'store'])->name('usuario.recurso.salvar');
+
+##USUÁRIO ADMIN SECTION END##
+
 
 //AREA DO USUÁRIO ::FIM::
 
