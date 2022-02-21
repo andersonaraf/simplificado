@@ -24,7 +24,7 @@
                                         <tbody>
                                         @csrf
                                         @foreach($formulario->formularioUsuario as $formularioUsuario)
-                                            @if(!is_null($formularioUsuario->avaliado))
+                                            @if(!is_null($formularioUsuario->avaliado) && is_null($formularioUsuario->revisado))
                                                 <tr>
                                                     <td>{{mb_strtoupper($formularioUsuario->user->name)}}</td>
                                                     <td>{{ $formularioUsuario->user->pessoa->cpf}}</td>

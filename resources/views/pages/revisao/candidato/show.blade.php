@@ -44,80 +44,48 @@
         $(document).ready(function () {
             $('.avaliar').click(function () {
                 if ($(this).data('tipo-avaliacao') === 'APROVAR') {
-                    //GET ALL INPUTS
-                    let inputs = $('#formPontuar').find('input')
-                    //MAP INPUTS
-                    let pontuacoes = []
-                    let send = false;
-                    inputs.map(function (index, element) {
-                        if ($(this).data('usuario-campo') != undefined || $(this).data('usuario-campo') != null) {
-                            //VEFICAR O MAX INPUT
-                            //VALIDATE MAX
-                            if (parseFloat($(this).val()) > parseFloat($(this).attr('max'))) {
-                                //SHOW SPAN ERRO
-                                $('#span-' + $(this).data('usuario-campo')).css('display', 'block')
-                                $('#error-' + $(this).data('usuario-campo')).text('Valor máximo de ' + $(this).attr('max'))
-                                return false;
-                            }
-
-                            //HIDE SPAN ERRO
-                            $('#span-' + $(this).data('usuario-campo')).css('display', 'none')
-                            //ADD TO ARRAY
-                            let campo = {
-                                'usuarioCampoID': $(this).data('usuario-campo'),
-                                'pontuacao': $(this).val() == 0 ? 0 : $(this).val()
-                            }
-                            pontuacoes.push(campo)
-                            //verificar se tudo ocorrou certo
-                            if (pontuacoes.length == index) {
-                                send = true;
-                            }
-                        }
-                    });
-                    //SEND AJAX
-                    if (send) {
-                        $.ajax({
-                            url: '{{route('pontuar.store')}}',
-                            type: 'POST',
-                            data: {
-                                _token: '{{csrf_token()}}',
-                                formularioUsuarioID: '{{$formularioUsuario->id}}',
-                                pontuacoes: pontuacoes,
-                            },
-                            success: function (response) {
-                                if (response.msg) {
+                    swal.fire({
+                        icon: 'question',
+                        text: 'Tem certeza que deseja aprovar esse formulario?',
+                        showCancelButton: true,
+                        confirmButtonText: 'Sim',
+                        cancelButtonText: 'Não'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '{{route('aprovar.avaliacao')}}',
+                                type: 'POST',
+                                data: {
+                                    _token: '{{csrf_token()}}',
+                                    formularioUsuarioID: '{{$formularioUsuario->id}}',
+                                },
+                                success: (reponse) => {
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Sucesso!',
-                                        text: 'Avaliação realizada com sucesso!',
+                                        text: 'Formulário aprovado com sucesso!',
                                         type: 'success',
                                         confirmButtonText: 'OK',
                                         timer: 3000
                                     }).then(function () {
                                         window.location.href = '{{route('revisao.show', $formularioUsuario->formulario_id)}}'
                                     })
-                                } else {
+                                }, error: (response) => {
+                                    let error = JSON.parse(response.responseText);
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Erro!',
-                                        text: 'Ocorreu um erro ao realizar a avaliação!',
+                                        text: error.error,
                                         type: 'error',
                                         confirmButtonText: 'OK'
                                     })
                                 }
-                            },
-                            error: function (response) {
-                                let error = JSON.parse(response.responseText);
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Erro!',
-                                    text: error.error + (error.campo != undefined ? ' Campo inválido: ' + error.campo : '.'),
-                                    type: 'error',
-                                    confirmButtonText: 'OK'
-                                })
-                            }
-                        })
-                    }
+
+                            })
+                        }
+                    })
+
+
                 } else if ($(this).data('tipo-avaliacao') === 'REPROVAR') {
                     //SWEET ALERT COM INPUT DE MOTIVO PARA REPROVAR
                     //CONFIRMAR DECISÃO
