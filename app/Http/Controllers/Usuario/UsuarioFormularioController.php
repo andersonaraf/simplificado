@@ -65,6 +65,7 @@ class UsuarioFormularioController extends Controller
             $formulario_usuario->user_id = Auth::id();
             $formulario_usuario->formulario_id = $request->formulario;
             $formulario_usuario->cargo_id = $request->cargo;
+            $formulario_usuario->pontuacao_total = 0;
             $formulario_usuario->save();
 
             //SALVA OS CAMPOS DO FORMULÁRIO

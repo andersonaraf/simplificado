@@ -30,9 +30,10 @@ class PontuacaoController extends Controller
         if ($valido != true) return response()->json(['error' => 'Campos inválidos. A pontuação passou do limite do campo ou está negativa!', 'campo' => $valido], 422);
         //REALIZAR PONTUACAO
         $pontuacao = $this->salvarPontuacao($request->pontuacoes);
-        if (!$pontuacao) return response()->json(['error' => 'Erro ao salvar pontuação'], 422);
+        if (!is_numeric($pontuacao)) return response()->json(['error' => 'Erro ao salvar pontuação'], 422);
         //ALTERAR A COLUNA AVALIADO PARA TRUE
         $formularioUsuario->avaliado = true;
+        $formularioUsuario->pontuacao_total = $pontuacao;
         $formularioUsuario->save();
         //ENVIAR MSG DE SUCESSO
         return response()->json(['msg' => 'Avaliação salva com sucesso!'], 200);
@@ -69,16 +70,18 @@ class PontuacaoController extends Controller
     public function salvarPontuacao($pontuacoes){
         try {
             DB::beginTransaction();
+            $pontuacao_total = 0;
             foreach ($pontuacoes as $pontuacao) {
                 $formularioUsuarioCampo = FormularioUsuarioCampo::findOrFail($pontuacao['usuarioCampoID']);
                 $pontuacaoCampo = new PontuacaoCampo();
                 $pontuacaoCampo->formulario_usuario_campos_id = $formularioUsuarioCampo->id;
                 $pontuacaoCampo->user_id = Auth::id();
                 $pontuacaoCampo->pontuacao = $pontuacao['pontuacao'];
+                $pontuacao_total += $pontuacao['pontuacao'];
                 $pontuacaoCampo->save();
             }
             DB::commit();
-            return true;
+            return $pontuacao_total;
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();

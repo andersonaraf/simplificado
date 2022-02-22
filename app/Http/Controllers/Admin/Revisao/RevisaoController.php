@@ -50,6 +50,7 @@ class RevisaoController extends Controller
             DB::beginTransaction();
             $formularioUsuario = FormularioUsuario::findOrFail($request->formularioUsuarioID);
             $formularioUsuario->avaliado = null;
+            $formularioUsuario->pontuacao_total = 0;
             $formularioUsuario->save();
             DB::commit();
             return response()->json(true, 200);
