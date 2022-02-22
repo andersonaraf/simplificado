@@ -25,4 +25,8 @@ class Cargo extends Model implements Auditable
     public function collapse(){
         return $this->hasMany(Collapse::class, 'cargo_id', 'id');
     }
+
+    public function formularioUsuario(){
+        return $this->hasMany(FormularioUsuario::class, 'cargo_id', 'id');
+    }
 }

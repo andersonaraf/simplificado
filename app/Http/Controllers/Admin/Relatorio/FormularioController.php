@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Relatorio;
 
 use App\Http\Controllers\Controller;
+use App\Models\Formulario;
 use Illuminate\Http\Request;
 
 class FormularioController extends Controller
@@ -48,6 +49,8 @@ class FormularioController extends Controller
     public function show($id)
     {
         //
+        $formulario = Formulario::findOrFail($id);
+        dd($formulario);
     }
 
     /**
@@ -82,5 +85,10 @@ class FormularioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function relatorioCompleto($id) {
+        $formulario = Formulario::findOrFail($id);
+        return view('pages.relatorio.pdfs.completo', compact('formulario'));
     }
 }
