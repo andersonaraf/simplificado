@@ -11,6 +11,7 @@
                         <img style="width:20em;"  src="{{asset('images/brancapref.png')}}">
                     </div>
                 </div>
+{{--                @dd($formularioUsuario)--}}
                 <div class="card card-body">
                     <input type="text" value="">
                 </div>

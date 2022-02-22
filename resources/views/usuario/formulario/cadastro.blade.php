@@ -7,7 +7,7 @@
                 <img style="width:20em;"  src="{{asset('images/brancapref.png')}}">
             </div>
         </div>
-        <h4 class="mt-5">Formulário de Inscrição</h4>
+        <h4 class="mt-5">Inscrição</h4>
         <hr>
         <form action="{{route('usuario.formulario.store')}}" id="formData" method="post" enctype="multipart/form-data">
             {{--            <input type="hidden" name='formulario' value="{{$formulario_id}}">--}}
@@ -17,11 +17,11 @@
                     @foreach($collapses as $collaps)
                         <div class="card-header  bg-primary" id="heading{{$collaps->id}}">
                             <h5 class="mb-0 ">
-                                <button type="button" class="bg-primary text-white" data-toggle="collapse"
+                                <a type="button" class="text-white" data-toggle="collapse"
                                         data-target="#collapse{{$collaps->id}}" aria-expanded="true"
                                         aria-controls="collapse{{$collaps->id}}">
                                     {{$collaps->nome}}
-                                </button>
+                                </a>
                             </h5>
                         </div>
                         <div id="collapse{{$collaps->id}}" class="collapse show" aria-labelledby="heading{{$collaps->id}}"
