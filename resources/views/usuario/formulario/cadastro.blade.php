@@ -115,7 +115,7 @@
                                     icon: 'success',
                                     confirmButtonText: 'Ok'
                                 }).then(function () {
-                                    window.location.href = '{{route('inicio')}}';
+                                    window.location.href = '{{route('usuario.index')}}';
                                 });
                             } else {
                                 Swal.fire({
