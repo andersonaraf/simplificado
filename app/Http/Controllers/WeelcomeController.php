@@ -13,7 +13,7 @@ class WeelcomeController extends Controller
 
     public function index(){
         $carrossels = Carrossel::all();
-        $formularios = Formulario::where('liberado', 1)->get();
+        $formularios = Formulario::where('liberado', 1)->where('data_fecha', '>=', date('Y-m-d H:i:s'))->get();
 
         return view('welcome', compact( 'carrossels', 'formularios'));
     }
