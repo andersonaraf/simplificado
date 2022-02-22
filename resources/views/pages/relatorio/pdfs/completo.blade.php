@@ -22,14 +22,16 @@
     <div class="row">
         @foreach($formulario->escolaridades as $escolaridade)
             <div class="col col-12 pl-0">
-                <label class="w-100 font-weight-bold mb-0 ml-0">ESCOLARIDADE: <label class="mb-0 pb-0 font-weight-normal">{{$escolaridade->nivel_escolaridade}}</label></label>
+                <label class="w-100 font-weight-bold mb-0 ml-0">ESCOLARIDADE: <label
+                        class="mb-0 pb-0 font-weight-normal">{{$escolaridade->nivel_escolaridade}}</label></label>
             </div>
             <div class="col col-9">
                 <label class="font-weight-normal"></label>
             </div>
             @foreach($escolaridade->cargos as $cargo)
                 <div class="col col-3 pl-0">
-                    <label class="w-100 font-weight-bold mb-0 ml-0">CARGO: <label class="font-weight-normal">{{$cargo->cargo}}</label></label>
+                    <label class="w-100 font-weight-bold mb-0 ml-0">CARGO: <label
+                            class="font-weight-normal">{{$cargo->cargo}}</label></label>
                 </div>
                 <hr class="w-100 mt-0">
                 <table id="dataTable" class="display table-hover nowrap" style="width: 100%">

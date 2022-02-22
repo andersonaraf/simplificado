@@ -91,6 +91,6 @@ class FormularioController extends Controller
         $formulario = Formulario::findOrFail($id);
         $pdf = PDF::loadView('pages.relatorio.pdfs.completo', compact('formulario'));
         return $pdf->stream('relatorio_completo.pdf');
-        return view('pages.relatorio.pdfs.completo', compact('formulario'));
+//        return view('pages.relatorio.pdfs.completo', compact('formulario'));
     }
 }

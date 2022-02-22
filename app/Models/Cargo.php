@@ -27,6 +27,11 @@ class Cargo extends Model implements Auditable
     }
 
     public function formularioUsuario(){
-        return $this->hasMany(FormularioUsuario::class, 'cargo_id', 'id');
+        return $this->hasMany(FormularioUsuario::class, 'cargo_id', 'id')->with('user', function ($query){
+            $query->with('pessoa', function ($query){
+               //ORDENAR POR DATA DE NASCIMENTO
+                $query->orderBy('data_nascimento', 'desc')->get();
+            });
+        });
     }
 }
