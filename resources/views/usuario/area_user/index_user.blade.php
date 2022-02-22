@@ -13,7 +13,7 @@
         {{--DIV NOME DO USUARIO--}}
         <div class="col-8 py-4">
             {{--ADCIONAR NOME DO USUÁRIO DINAMICAMENTE--}}
-            <span class="alert alert-info">Bem Vindo! <b> {{$nome_user}}</b></span>
+            <span class="alert alert-info">Bem Vindo! <b> {{Auth::user()->name}}</b></span>
         </div>
         <hr>
 
@@ -46,7 +46,7 @@
                         <h6 class="text-white">
 
                             {{-- adcionar processos seletivos do usuário--}}
-                            <a href="{{route('usuario.lista.processos', $user_id)}}" class="text-white">Meus Processos Seletivos</a>
+                            <a href="{{route('usuario.lista.processos', Auth::user()->id)}}" class="text-white">Meus Processos Seletivos</a>
                         </h6>
                     </div>
                 </div>

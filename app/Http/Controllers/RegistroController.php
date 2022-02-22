@@ -54,7 +54,7 @@ class RegistroController extends Controller
             $user->tipo = 'CANDIDATO';
             $user->block = 0;
             $user->save();
-
+            $credenciais = $request->only('email', 'password');
 
             //CRIAR ENDEREÇO
             $endereco = [];
@@ -85,9 +85,10 @@ class RegistroController extends Controller
                     'numero' => $request->contato2,
                 ]);
             }
+            Auth::attempt($credenciais);
             DB::commit();
             session()->put('status', 'Seu Usuário foi Cadastrado com Sucesso');
-            return view('inicio');
+            return view('usuario.area_user.index_user');
         } catch (Exception $ex) {
             DB::rollBack();
             dd($ex);
