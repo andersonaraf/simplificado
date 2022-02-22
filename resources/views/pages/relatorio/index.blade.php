@@ -47,46 +47,16 @@
     <script>
         $(document).ready(function () {
             $('#relatorio-completo').click(function (e) {
-                //sweetalert avisando que o pdf será enviado por e-mail quando concluir de processar
+                //SWETALERT COM LOADING E AVISO
                 Swal.fire({
-                    title: "Aviso",
-                    text: "O relatório será enviado por e-mail quando concluir de processar",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        //ENVIAR REQUISIÇÃO PARA PROCESSAR O RELATÓRIO
-                        $.ajax({
-                            url: $(this).data('route'),
-                            type: "GET",
-                            success: function (data) {
-                                //sweetalert avisando que o relatório foi processado com sucesso
-                                Swal.fire({
-                                    title: "Aviso",
-                                    text: "O relatório foi processado com sucesso",
-                                    icon: "success",
-                                    buttons: false,
-                                    dangerMode: true,
-                                });
-                                //redirecionar para o relatório
-                                // window.open(data.url, '_blank');
-
-                            },
-                            error: function (data) {
-                                //sweetalert avisando que o relatório não foi processado
-                                Swal.fire({
-                                    title: "Aviso",
-                                    text: "O relatório não foi processado.",
-                                    icon: "error",
-                                    buttons: false,
-                                    dangerMode: true,
-                                });
-                            }
-                        });
-                    }
-                });
-
+                    icon: 'info',
+                    title: 'Aguarde',
+                    text: 'Gerando relatório...',
+                    timer: 1500,
+                    didOpen:  () =>{
+                        swal.showLoading()
+                    },
+                })
             });
         });
     </script>

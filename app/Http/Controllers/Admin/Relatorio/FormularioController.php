@@ -90,7 +90,7 @@ class FormularioController extends Controller
     public function relatorioCompleto($id) {
         $formulario = Formulario::findOrFail($id);
         $pdf = PDF::loadView('pages.relatorio.pdfs.completo', compact('formulario'));
-        return $pdf->stream('relatorio_completo.pdf');
+        return $pdf->download('relatorio_completo.pdf', 'relatorio-completo-gerado-'.date('d/m/Y').'.pdf');
 //        return view('pages.relatorio.pdfs.completo', compact('formulario'));
     }
 }
