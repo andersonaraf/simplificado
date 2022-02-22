@@ -18,20 +18,24 @@
                                                 <td>{{$formulario->nome}}</td>
                                                 <td>{{$formulario->formularioUsuario->count()}}</td>
                                                 <td class="text-right">
-                                                    <a href="{{route('formulario.show', $formulario->id)}}"
-                                                       class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
+{{--                                                    <a href="{{route('formulario.show', $formulario->id)}}"--}}
+{{--                                                       class="btn btn-sm btn-primary">--}}
+{{--                                                        <i class="fas fa-eye"></i>--}}
+{{--                                                    </a>--}}
                                                     {{--relatorio completo--}}
-                                                    <a href="{{route('relatorio.formulario.completo', $formulario->id)}}" id="relatorio-completo" data-route="{{route('relatorio.formulario.completo', $formulario->id)}}"
-                                                       class="btn btn-sm btn-success">
+                                                    <a href="{{route('relatorio.formulario.completo', $formulario->id)}}"
+                                                       id="relatorio-completo" class="btn btn-sm btn-success">
                                                         <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                    {{--relatorio COM filtro--}}
+                                                    <a href="{{route('lista.show', $formulario->id)}}" id="relatorio-filtro"
+                                                       title="GERAR RELATÓRIOS POR FILTRO" class="btn btn-sm btn-dark">
+                                                        <i class="fa fa-search"></i>
                                                     </a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </x-formulario>
-
                                 </div>
                             </div>
                         </div>
@@ -53,7 +57,7 @@
                     title: 'Aguarde',
                     text: 'Gerando relatório...',
                     timer: 1500,
-                    didOpen:  () =>{
+                    didOpen: () => {
                         swal.showLoading()
                     },
                 })

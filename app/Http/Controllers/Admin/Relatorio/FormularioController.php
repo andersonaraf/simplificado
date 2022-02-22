@@ -50,7 +50,7 @@ class FormularioController extends Controller
     {
         //
         $formulario = Formulario::findOrFail($id);
-        dd($formulario);
+        return view('pages.relatorio.filtro', compact('formulario'));
     }
 
     /**
