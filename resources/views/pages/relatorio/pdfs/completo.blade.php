@@ -6,12 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RELATÓRIO COMPLETO</title>
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{public_path('css/app.css')}}">
 </head>
 <body>
 <div class="container">
     <div class="row justify-content-center">
-        <img src="{{asset('images/logo-riobranco-hd.png')}}" alt="IMAGEM NÃO ENCONTRADA" width="100%">
+        <img src="{{public_path('images/logo-riobranco-hd.jpg')}}" alt="IMAGEM NÃO ENCONTRADA" width="100%">
     </div>
     <div class="row justify-content-center">
         <h2 class="text-center mt-3">RELATÓRIO COMPLETO</h2>
@@ -21,18 +21,15 @@
     {{--CARREGAR TABELA--}}
     <div class="row">
         @foreach($formulario->escolaridades as $escolaridade)
-            <div class="col col-3 pl-0">
-                <label class="w-100 font-weight-bold mb-0 ml-0">ESCOLARIDADE: </label>
+            <div class="col col-12 pl-0">
+                <label class="w-100 font-weight-bold mb-0 ml-0">ESCOLARIDADE: <label class="mb-0 pb-0 font-weight-normal">{{$escolaridade->nivel_escolaridade}}</label></label>
             </div>
             <div class="col col-9">
-                <label class="font-weight-normal">{{$escolaridade->nivel_escolaridade}}</label>
+                <label class="font-weight-normal"></label>
             </div>
             @foreach($escolaridade->cargos as $cargo)
                 <div class="col col-3 pl-0">
-                    <label class="w-100 font-weight-bold mb-0 ml-0">CARGO: </label>
-                </div>
-                <div class="col col-9">
-                    <label class="font-weight-normal">{{$cargo->cargo}}</label>
+                    <label class="w-100 font-weight-bold mb-0 ml-0">CARGO: <label class="font-weight-normal">{{$cargo->cargo}}</label></label>
                 </div>
                 <hr class="w-100 mt-0">
                 <table id="dataTable" class="display table-hover nowrap" style="width: 100%">
