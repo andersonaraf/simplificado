@@ -35,13 +35,18 @@ class ConfiguracaoFormularioController extends Controller
     public function store(Request $request)
     {
         $colapse = Collapse::findOrFail($request->collapse_id);
-        $campos = $colapse->campos;
-        $pontos = 0;
-        foreach ($campos as $campo){
-            $pontos += $campo->ponto;
+        $formulario = Formulario::findOrFail($colapse->cargo->escolaridade->formulario->id);
+        $pontos = $request->pontuacao;;
+        foreach ($formulario->escolaridades as $escolaridade) {
+            foreach ($escolaridade->cargos as $cargo) {
+                foreach ($cargo->collapse as $collapse) {
+                    foreach ($collapse->campos as $campo) {
+                        $pontos += $campo->ponto;
+                    }
+                }
+            }
         }
-        $pontos += $request->pontuacao;
-        if ($pontos > $colapse->cargo->escolaridade->formulario->pontuacao) return redirect()->back()->with(['type' => 'error', 'msg' => 'Ultrapassou a quantidade de pontos!'], 403);
+        if ($pontos > $formulario->pontuacao) return redirect()->back()->with(['type' => 'error', 'msg' => 'Ultrapassou a quantidade de pontos!'], 403);
         if ($colapse->cargo->escolaridade->formulario->formularioUsuario->count() > 0) return redirect()->back()->with(['type' => 'error', 'msg' => 'Formulário bloqueado para edição!'], 403);
         try {
             DB::beginTransaction();
@@ -49,29 +54,30 @@ class ConfiguracaoFormularioController extends Controller
             $atributo->name = $this->textformat($request->titulo_campo);
             $atributo->attr_id = $this->textformat($request->titulo_campo);;
             $atributo->placeholder = !is_null($request->placeholder) ? $request->placeholder : '';
-            $atributo->required = isset($request->required_campo) ? 1: 0;
-            $atributo-> save();
+            $atributo->required = isset($request->required_campo) ? 1 : 0;
+            $atributo->save();
 
             $campo = new Campo();
             $campo->collapse_id = $request->collapse_id;
             $campo->atributo_id = $atributo->id;
             $campo->nome = $request->titulo_campo;
-            $campo->pontuar = !is_null($request->pontuacao) ? 1 : 0  ;
-            $campo->ponto = !is_null($request->pontuacao) ? $request->pontuacao : 0  ;
+            $campo->pontuar = !is_null($request->pontuacao) ? 1 : 0;
+            $campo->ponto = !is_null($request->pontuacao) ? $request->pontuacao : 0;
             $campo->tipo_campo_id = $request->tipo_campo;
-            $campo-> save();
+            $campo->save();
             DB::commit();
-            return redirect()->back()->with('status','Salvo Com Sucesso');
+            return redirect()->back()->with('status', 'Salvo Com Sucesso');
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->withException($e->getMessage());
         }
     }
 
-   public function textformat($string){
-      $string =strtolower( str_replace(' ','', $string));
-       return preg_replace(array("/(ç)/","/(Ç)/","/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/"),explode(" ","c C a A e E i I o O u U n N"),$string);
-   }
+    public function textformat($string)
+    {
+        $string = strtolower(str_replace(' ', '', $string));
+        return preg_replace(array("/(ç)/", "/(Ç)/", "/(á|à|ã|â|ä)/", "/(Á|À|Ã|Â|Ä)/", "/(é|è|ê|ë)/", "/(É|È|Ê|Ë)/", "/(í|ì|î|ï)/", "/(Í|Ì|Î|Ï)/", "/(ó|ò|õ|ô|ö)/", "/(Ó|Ò|Õ|Ô|Ö)/", "/(ú|ù|û|ü)/", "/(Ú|Ù|Û|Ü)/", "/(ñ)/", "/(Ñ)/"), explode(" ", "c C a A e E i I o O u U n N"), $string);
+    }
 
     /**
      * Display the specified resource.
