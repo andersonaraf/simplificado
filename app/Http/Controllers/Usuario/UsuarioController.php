@@ -90,10 +90,10 @@ class UsuarioController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($user_id, $form_id)
     {
-        $formularioUsuario = FormularioUsuario::findOrFail($id);
-        return view('usuario.area_user.view_processo_user',compact('formularioUsuario'));
+        $formularioUsuario = FormularioUsuario::where('user_id', $user_id)->where('formulario_id', $form_id)->get();
+        return view('usuario.area_user.view_processo_user', compact('formularioUsuario',));
     }
 
     /**

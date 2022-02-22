@@ -28,7 +28,7 @@
                                         <td>{{$formuser->formulario->nome}}</td>
                                         <td>{{$formuser->cargo->cargo}}</td>
                                         <td>{{date('d/m/Y',strtotime($formuser->created_at)  )}}</td>
-                                        <td><a href="{{route('usuario.view.processos', Auth::user()->id)}}">
+                                        <td><a href="{{route('usuario.view.processos',[Auth::user()->id,$formuser->formulario->id])}}">
                                                 <button type="button" class="btn btn-info">Vizualizar</button>
                                             </a>
                                             @if($recurso_hability == true)

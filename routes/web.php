@@ -39,7 +39,7 @@ Route::post('usuario/finalizar/inscricao', [\App\Http\Controllers\Usuario\Usuari
 Route::get('/usuario', [\App\Http\Controllers\Usuario\UsuarioController::class, 'index'])->name('usuario.index');
 //lista processos participados pelo usuário
 Route::get('/usuario/lista/{id}', [\App\Http\Controllers\Usuario\UsuarioController::class, 'show'])->name('usuario.lista.processos');
-Route::get('/usuario/ver/{id}', [\App\Http\Controllers\Usuario\UsuarioController::class, 'edit'])->name('usuario.view.processos');
+Route::get('/usuario/ver/{user_id}/{form_id}', [\App\Http\Controllers\Usuario\UsuarioController::class, 'edit'])->name('usuario.view.processos');
 
 //Tela Recurso
 Route::get('/usuario/Recurso',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'index'])->name('usuario.recurso');
