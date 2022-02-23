@@ -87,4 +87,39 @@ class UserController extends Controller
         session()->put('sucess', 'O usuário foi bloqueado com sucesso!');
         return redirect('user');
     }
+
+    public function create(){
+        return view('usuario.create');
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            if ($request->password != $request->password2) {
+                return redirect()->back()->with([
+                    'type' => 'error',
+                    'msg' => 'As senhas digitas não são iguais'
+                ]);
+            }
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => hash::make($request->password),
+                'block' => 0,
+                'tipo' => $request->tipo
+            ]);
+            DB::commit();
+            return redirect()->back()->with([
+                'type' => 'success',
+                'msg' => 'Usuário cadastrado com sucesso'
+            ]);
+        }catch (\Exception $exception){
+            DB::rollBack();
+            return redirect()->back()->with([
+                'type' => 'error',
+                'msg' => $exception->getMessage()
+            ]);
+        }
+    }
 }

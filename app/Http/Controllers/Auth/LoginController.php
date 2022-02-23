@@ -53,7 +53,7 @@ class LoginController extends Controller
             if (auth()->user()->block == 1) {
                 auth()->logout();
             }
-            if (strtoupper(auth()->user()->tipo) != 'ADMIN') {
+            if (strtoupper(auth()->user()->tipo) != 'ADMIN' || strtoupper(auth()->user()->tipo) != 'ADMIN') {
                 return redirect()->route('inicio');
             }elseif (Auth::user()->tipo == 'CANDIDATO') {
                 return view('usuario.area_user.index_user');
