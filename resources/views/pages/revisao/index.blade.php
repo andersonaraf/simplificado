@@ -21,16 +21,19 @@
                                         </thead>
                                         <tbody>
                                         @csrf
-                                        @foreach($formularios as $key=> $formulario)
-                                            <tr>
-                                                <td>{{$formulario->nome}}</td>
-                                                <td>{{count($formulario->formularioUsuario)}}</td>
-                                                <td class="text-right">
-                                                    <a href="{{route('revisao.show', $formulario->id)}}" title="LISTA DE PARTICIPANTES">
-                                                        <span class="material-icons user text-info">settings</span>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                        @foreach($grupoUsers as $grupoUser)
+                                            @foreach($grupoUser->grupo->grupoFormularios as $grupoFormulario)
+                                                <tr>
+                                                    <td>{{$grupoFormulario->formulario->nome}}</td>
+                                                    <td>{{$grupoFormulario->formulario->formularioUsuario->count()}}</td>
+                                                    <td class="text-right">
+                                                        <a href="{{route('revisao.show', $grupoFormulario->formulario->id)}}"
+                                                           title="LISTA DE PARTICIPANTES">
+                                                            <span class="material-icons user text-info">settings</span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endforeach
                                         </tbody>
                                         <tfoot>

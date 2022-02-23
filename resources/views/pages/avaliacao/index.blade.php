@@ -13,17 +13,19 @@
                                 <div class="col-12 col-lg-12 col-md-12">
                                     <x-formulario>
                                         @csrf
-                                        @foreach(auth()->user()->formularios() as $formulario)
-                                            <tr>
-                                                <td>{{$formulario->nome}}</td>
-                                                <td>{{$formulario->formularioUsuario->count()}}</td>
-                                                <td class="text-right">
-                                                    <a href="{{route('escolher.show', $formulario->id)}}"
-                                                       title="LISTA DE PARTICIPANTES">
-                                                        <span class="material-icons user text-info">settings</span>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                        @foreach($grupoUsers as $grupoUser)
+                                            @foreach($grupoUser->grupo->grupoFormularios as $grupoFormulario)
+                                                <tr>
+                                                    <td>{{$grupoFormulario->formulario->nome}}</td>
+                                                    <td>{{$grupoFormulario->formulario->formularioUsuario->count()}}</td>
+                                                    <td class="text-right">
+                                                        <a href="{{route('escolher.show', $grupoFormulario->formulario->id)}}"
+                                                           title="LISTA DE PARTICIPANTES">
+                                                            <span class="material-icons user text-info">settings</span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endforeach
                                     </x-formulario>
 

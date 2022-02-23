@@ -44,20 +44,23 @@
                                             </thead>
                                             <tbody id="tbody">
                                             @foreach($grupoUsers as $key=>$grupo)
-                                                <tr id="">
-                                                    <td scope="row">{{$grupo->user->name}}</td>
-                                                    <td>
-                                                        <a href="{{route('definir.avaliador', ['formulario_id' => $grupo->grupo->grupoFormularios[$key]->formulario_id, 'user_id' => $grupo->user->id])}}">
-                                                            <button class="btn btn-info">
-                                                                PESSOAS A AVALIAR
+                                                @foreach($grupo->grupo->grupoFormularios as $grupoFormulario)
+                                                    <tr id="">
+                                                        <td scope="row">{{$grupo->user->name}}</td>
+                                                        <td>
+                                                            <a href="{{route('definir.avaliador', ['formulario_id' => $grupoFormulario->formulario_id, 'user_id' => $grupo->user->id])}}">
+                                                                <button class="btn btn-info">
+                                                                    PESSOAS A AVALIAR
+                                                                </button>
+                                                            </a>
+                                                            <button class="btn btn-danger remove"
+                                                                    data-list-id="{{$grupo->id}}"
+                                                                    id="remove{{$grupo->id}}"
+                                                                    type="button">Remove
                                                             </button>
-                                                        </a>
-                                                        <button class="btn btn-danger remove"
-                                                                data-list-id="{{$grupo->id}}" id="remove{{$grupo->id}}"
-                                                                type="button">Remove
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             @endforeach
                                             </tbody>
                                         </table>

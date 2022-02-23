@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin\Relatorio;
 
 use App\Http\Controllers\Controller;
 use App\Models\Formulario;
+use App\Models\GrupoUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 class FormularioController extends Controller
 {
@@ -15,8 +17,8 @@ class FormularioController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.relatorio.index');
+        $grupoUsers = GrupoUser::where('user_id', Auth::user()->id)->get();
+        return view('pages.relatorio.index', compact('grupoUsers'));
     }
 
     /**

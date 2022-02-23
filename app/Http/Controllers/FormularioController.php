@@ -18,7 +18,7 @@ class FormularioController extends Controller
     public function index()
     {
         //
-        $formularios = Formulario::all();
+        $formularios = Formulario::where('user_id', Auth::user()->id)->get();
         return view('pages.formulario.index', compact('formularios'));
     }
 

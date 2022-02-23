@@ -13,27 +13,31 @@
                                 <div class="col-12 col-lg-12 col-md-12">
                                     <x-formulario>
                                         @csrf
-                                        @foreach(auth()->user()->formularios() as $formulario)
-                                            <tr>
-                                                <td>{{$formulario->nome}}</td>
-                                                <td>{{$formulario->formularioUsuario->count()}}</td>
-                                                <td class="text-right">
-{{--                                                    <a href="{{route('formulario.show', $formulario->id)}}"--}}
-{{--                                                       class="btn btn-sm btn-primary">--}}
-{{--                                                        <i class="fas fa-eye"></i>--}}
-{{--                                                    </a>--}}
-                                                    {{--relatorio completo--}}
-                                                    <a href="{{route('relatorio.formulario.completo', $formulario->id)}}"
-                                                       id="relatorio-completo" class="btn btn-sm btn-success">
-                                                        <i class="fas fa-file-pdf"></i>
-                                                    </a>
-                                                    {{--relatorio COM filtro--}}
-                                                    <a href="{{route('lista.show', $formulario->id)}}" id="relatorio-filtro"
-                                                       title="GERAR RELATÓRIOS POR FILTRO" class="btn btn-sm btn-dark">
-                                                        <i class="fa fa-search"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                        @foreach($grupoUsers as $grupoUser)
+                                            @foreach($grupoUser->grupo->grupoFormularios as $grupoFormulario)
+                                                <tr>
+                                                    <td>{{$grupoFormulario->formulario->nome}}</td>
+                                                    <td>{{$grupoFormulario->formulario->formularioUsuario->count()}}</td>
+                                                    <td class="text-right">
+                                                        {{--                                                    <a href="{{route('formulario.show', $formulario->id)}}"--}}
+                                                        {{--                                                       class="btn btn-sm btn-primary">--}}
+                                                        {{--                                                        <i class="fas fa-eye"></i>--}}
+                                                        {{--                                                    </a>--}}
+                                                        {{--relatorio completo--}}
+                                                        <a href="{{route('relatorio.formulario.completo', $grupoFormulario->formulario->id)}}"
+                                                           id="relatorio-completo" class="btn btn-sm btn-success">
+                                                            <i class="fas fa-file-pdf"></i>
+                                                        </a>
+                                                        {{--relatorio COM filtro--}}
+                                                        <a href="{{route('lista.show', $grupoFormulario->formulario->id)}}"
+                                                           id="relatorio-filtro"
+                                                           title="GERAR RELATÓRIOS POR FILTRO"
+                                                           class="btn btn-sm btn-dark">
+                                                            <i class="fa fa-search"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endforeach
                                     </x-formulario>
                                 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Revisao;
 use App\Http\Controllers\Controller;
 use App\Models\Formulario;
 use App\Models\FormularioUsuario;
+use App\Models\GrupoUser;
 use App\Models\ReprovarMotivo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -15,14 +16,8 @@ class RevisaoController extends Controller
 {
     public function index()
     {
-        $formularios = Formulario::with(['grupoFormulario' => function ($query) {
-            $query->with(['grupo' => function ($query) {
-                $query->with(['grupoUsers' => function ($query) {
-                    $query->where('user_id', auth()->user()->id);
-                }]);
-            }]);
-        }])->get();
-        return view('pages.revisao.index', compact('formularios'));
+        $grupoUsers = GrupoUser::where('user_id', Auth::user()->id)->get();
+        return view('pages.revisao.index', compact('grupoUsers'));
     }
 
     public function show($id)
