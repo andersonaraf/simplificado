@@ -98,16 +98,15 @@
     </div>
 </footer><!-- End Footer -->
 </body>
-@push('js')
+
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/jquery.inputmask.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/area-restrita/functions.js')}}"></script>
 <script src="{{asset('js/registro/cep.js')}}"></script>
 <script src="{{asset('js/registro/mask.js')}}"></script>
-<script src="{{asset('js/registro/functions.js')}}"></script>
+<script src="{{asset('js/registro/function.js')}}"></script>
 
-@endpush
 @stack('script')
 </html>
 
