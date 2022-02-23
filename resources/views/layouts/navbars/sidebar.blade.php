@@ -46,18 +46,24 @@
                         </ul>
                     </div>
                 </li>
+            @endif
+            @if(auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Avaliador')
                 <li class="nav-item{{ $activePage == 'avaliacao' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('escolher.index') }}">
                         <i class="material-icons">library_books</i>
                         <p>{{ __('Avaliação') }}</p>
                     </a>
                 </li>
+            @endif
+            @if(auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Revisor')
                 <li class="nav-item{{ $activePage == 'revisao' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('revisao.index') }}">
-                        <i class="material-icons">preview</i>
+                        <i clasas="material-icons">preview</i>
                         <p>{{ __('Revisão') }}</p>
                     </a>
                 </li>
+            @endif
+            @if(auth()->user()->tipo == 'Admin')
                 <li class="nav-item{{ $activePage == 'formularios-relatorios' ? ' active' : '' }}">
                     <a class="nav-link" href="{{route('lista.index')}}">
                         <i class="material-icons">picture_as_pdf</i>

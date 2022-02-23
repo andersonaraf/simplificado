@@ -18,7 +18,7 @@ class AcessoRestritoMiddleware
     {
         if (! $request->expectsJson()) {
             if (!auth()->check()) return redirect()->route('login');
-            if (strtoupper(auth()->user()->tipo) != 'ADMIN') return redirect()->route('inicio');
+            if (strtoupper(auth()->user()->tipo) != 'ADMIN' && strtoupper(auth()->user()->tipo) != 'REVISOR' && strtoupper(auth()->user()->tipo) != 'AVALIADOR') return redirect()->route('inicio');
             return $next($request);
         }
 

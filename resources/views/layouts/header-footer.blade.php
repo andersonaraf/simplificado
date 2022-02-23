@@ -41,7 +41,7 @@
                                 <a class="dropdown-item" href="{{route('cadastro-simplificado')}}">Criar Conta</a>
                             @endif
                             @if(auth()->check())
-                                @if(strtoupper(auth()->user()->tipo) == 'ADMIN')
+                                @if(strtoupper(auth()->user()->tipo) == 'ADMIN' || strtoupper(auth()->user()->tipo) == 'REVISOR'|| strtoupper(auth()->user()->tipo) == 'AVALIADOR')
                                     <a class="dropdown-item" href="{{route('home')}}">Área administrativa</a>
                                 @else
                                     <a class="dropdown-item" href="{{route('usuario.index')}}">Meus Cadastros</a>

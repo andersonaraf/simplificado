@@ -106,7 +106,8 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => hash::make($request->password),
-                'block' => 0
+                'block' => 0,
+                'tipo' => $request->tipo
             ]);
             DB::commit();
             return redirect()->back()->with([
