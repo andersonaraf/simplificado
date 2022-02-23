@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/icofont/icofont/icofont.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/DataTables/datatables.min.css')}}">
     @yield('css')
 </head>
 <body>
@@ -97,6 +98,7 @@
     </div>
 </footer><!-- End Footer -->
 </body>
+@push('js')
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/jquery.inputmask.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -104,6 +106,8 @@
 <script src="{{asset('js/registro/cep.js')}}"></script>
 <script src="{{asset('js/registro/mask.js')}}"></script>
 <script src="{{asset('js/registro/functions.js')}}"></script>
+
+@endpush
 @stack('script')
 </html>
 

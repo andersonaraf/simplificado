@@ -1,19 +1,17 @@
 @extends('layouts.header-footer')
+
 @section('lista')
 
     {{--    VERIFICA SE O USUÁRIO ESTÁ PARTICIPANDO DE ALGUM PROESSO SELETIVO--}}
     @if(isset($formularioUsuario))
-
-
                     <div class="container">
                         <div class="py-5">
                             <div class="col- 12 col-md-12 col-lg-12 col-sm-12 card card-header bg-primary py-4">
                                 {{--APENAS DIV ESTETICA PARA LAYOUT--}}
                             </div>
                             <div class="col-12 col-md-12 col-lg-12 col-sm-12 card card-body">
-{{--                                                    @dd($formuser->cargo)--}}
-                                <table class="col-sm-12 table-bordered table table-responsive-lg table-hover">
-
+{{--                              @dd($formuser->cargo)--}}
+                                <table id="table" class="col-sm-12 table-bordered table table-responsive-lg table-hover">
                                     <thead class="thead-dark">
                                     <tr>
                                         <th>Processo</th>
@@ -47,9 +45,8 @@
                                     </tbody>
                                 </table>
                                 <div id="mensagem">
-                                    {{--                        MENSAGEM DE ALERTA AQUI AO CLICKAR NO NO BOTÃO DE RECURSO, INFORMANDO USUÁRIO!--}}
+                                    {{--MENSAGEM DE ALERTA AQUI AO CLICKAR NO NO BOTÃO DE RECURSO, INFORMANDO USUÁRIO!--}}
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -78,4 +75,14 @@
         </div>
 
     @endif
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/DataTables/datatables.js')}}"></script>
+    <script src="{{asset('assets/DataTables/datatables.min.js')}}"></script>
+
+   <script>
+       $(document).ready( function () {
+           $('#table').DataTable();
+       } );
+   </script>
+
 @endsection
