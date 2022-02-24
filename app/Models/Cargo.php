@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as AuditableTrait;
@@ -10,6 +11,7 @@ class Cargo extends Model implements Auditable
 {
     //
     use AuditableTrait;
+
     protected $table = 'cargos';
     protected $fillable = [
         'id',
@@ -18,20 +20,32 @@ class Cargo extends Model implements Auditable
         'bloquear',
     ];
 
-    public function escolaridade(){
+    public function escolaridade()
+    {
         return $this->hasOne(Escolaridade::class, 'id', 'escolaridade_id');
     }
 
-    public function collapse(){
+    public function collapse()
+    {
         return $this->hasMany(Collapse::class, 'cargo_id', 'id');
     }
 
-    public function formularioUsuario(){
-        return $this->hasMany(FormularioUsuario::class, 'cargo_id', 'id')->with('user', function ($query){
-            $query->with('pessoa', function ($query){
-               //ORDENAR POR DATA DE NASCIMENTO
-                $query->orderBy('data_nascimento', 'desc')->get();
+    public function formularioUsuario()
+    {
+        $x = $this->hasMany(FormularioUsuario::class, 'cargo_id', 'id');
+        if (isset($this->tipoAprovacao)) {
+            if ($this->tipoAprovacao != "TODOS" && $this->tipoAprovacao != "EM ANALISE") $x->where(['avaliado' => $this->tipoAprovacao, 'revisado' => $this->tipoAprovacao]);
+            else if ($this->tipoAprovacao == "EM ANALISE") $x->whereNull(['avaliado', 'revisado']);
+        }
+//        dd($this->pne);
+        $x->whereHas('user', function ($query) {
+            $query->whereHas('pessoa', function ($query) {
+                if (isset($this->pne)) {
+                    if ($this->pne == 1 || $this->pne == 0) $query->where('portador_deficiencia', $this->pne);
+                }
+                $query->orderBy('data_nascimento', 'desc');
             });
-        });
+        })->orderBy('pontuacao_total', 'desc')->get();
+        return $x;
     }
 }

@@ -32,7 +32,6 @@
 @endauth
 @guest()
     @include('layouts.page_templates.guest')
-
 @endguest
 @yield('recurso')
 
