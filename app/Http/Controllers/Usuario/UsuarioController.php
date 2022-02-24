@@ -8,9 +8,12 @@ use App\Models\Collapse;
 use App\Models\Formulario;
 use App\Models\FormularioUsuario;
 use App\Models\Pessoa;
+use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -103,9 +106,35 @@ class UsuarioController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        dd($request);
+        try {
+            DB::beginTransaction();
+            if ($request->password != $request->password2) {
+                return redirect()->back()->with([
+                    'type' => 'error',
+                    'msg' => 'As senhas digitas não são iguais'
+                ]);
+            }
+            User::update([
+                'email' => $request->email,
+                'password' => hash::make($request->password),
+                'block' => 0,
+                'tipo' => 'CANDIDATO'
+            ]);
+            DB::commit();
+            return redirect()->back()->with([
+                'type' => 'success',
+                'msg' => 'Usuário cadastrado com sucesso'
+            ]);
+        }catch (\Exception $exception){
+            DB::rollBack();
+            return redirect()->back()->with([
+                'type' => 'error',
+                'msg' => $exception->getMessage()
+            ]);
+        }
     }
 
     /**
@@ -118,4 +147,15 @@ class UsuarioController extends Controller
     {
         //
     }
+
+    public function perfil($id)
+    {
+        if($id == Auth::user()->id){
+            return view('usuario.area_user.perfil_user');
+        }else{
+            dd('Voce nao tem acesso');
+        }
+
+    }
+
 }

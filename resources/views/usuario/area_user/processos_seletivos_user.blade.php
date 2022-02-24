@@ -10,8 +10,8 @@
                     {{--APENAS DIV ESTETICA PARA LAYOUT--}}
                 </div>
                 <div class="col-12 col-md-12 col-lg-12 col-sm-12 card card-body">
-                    {{--                              @dd($formuser->cargo)--}}
-                    <table id="dataTable" class="col-sm-12 table-bordered table table-responsive-lg table-hover">
+
+                    <table id="dataTable" class=" table-bordered table table-responsive-lg table-hover">
                         <thead class="thead-dark">
                         <tr>
                             <th>Processo</th>

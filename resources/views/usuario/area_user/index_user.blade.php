@@ -17,52 +17,57 @@
         </div>
         <hr>
         @if(session('status'))
-        <span class="alert alert-info">{{session('status')}}</span>
+            <span class="alert alert-info">{{session('status')}}</span>
             {{session()->forget('status')}}
         @endif
         <nav class="row d-flex justify-content-end">
             <ul class="nav nav-tabs">
                 <li class="ml-5"><a href="{{route('home')}}">Home</a></li>
-                <li class="ml-5"><a href="#">Perfil Usuário</a></li>
+                <li class="ml-5"><a href="{{route('usuario.perfil',Auth::user()->id)}}">Perfil Usuário</a></li>
 
             </ul>
         </nav>
-{{--FUNCIONALIDADE DE BUSCAR TODOS OS PROCESSOS--}}
+        {{--FUNCIONALIDADE DE BUSCAR TODOS OS PROCESSOS--}}
 
-{{--        <div class="row col-4">--}}
-{{--            <form></form>--}}
-{{--           <label class="label">Buscar CPF</label>--}}
-{{--           <input type="text" class="form-control" placeholder="Apenas Numeros">--}}
-{{--            <button type="button" class="btn btn-outline-primary">Buscar</button>--}}
-{{--        </div>--}}
+        {{--        <div class="row col-4">--}}
+        {{--            <form></form>--}}
+        {{--           <label class="label">Buscar CPF</label>--}}
+        {{--           <input type="text" class="form-control" placeholder="Apenas Numeros">--}}
+        {{--            <button type="button" class="btn btn-outline-primary">Buscar</button>--}}
+        {{--        </div>--}}
 
         {{--BODY CARD--}}
         <div class="card card-body">
             <div class="row col-12 justify-content-center">
                 <div class="col-6" style="text-align: center;">
-                    <div class="card py-4 bg-to-primary bg-primary">
-                        <h6 class="text-white">
-
-                            {{-- adcionar processos seletivos do usuário--}}
-                            <a href="{{route('usuario.lista.processos', Auth::user()->id)}}" class="text-white">Meus Processos Seletivos</a>
-                        </h6>
-                    </div>
+                    <a href="{{route('usuario.lista.processos', Auth::user()->id)}}" class="text-white">
+                        <div class="card py-4 bg-to-primary bg-primary">
+                            <h6 class="text-white">
+                                {{-- adcionar processos seletivos do usuário--}}
+                                Meus Processos Seletivos
+                            </h6>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-6" style="text-align: center">
-                    <div class="card bg-to-primary  py-4  ">
-                        <h6 class="text-white">
-                            {{-- adcionar recursos--}}
-                            <a href="#" class="text-white">Meus Recursos</a>
-                        </h6>
-                    </div>
+                    <a href="#" class="text-white">
+                        <div class="card bg-to-primary  py-4  ">
+                            <h6 class="text-white">
+                                {{-- adcionar recursos--}}
+                                Meus Recursos
+                            </h6>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-6 py-4 " style="text-align: center">
-                    <div class="card bg-to-primary py-4">
-                        <h6 class="text-white">
-                            {{-- adicionar rotas comprovantes--}}
-                            <a href="#" class="text-white">Meus Comprovantes</a>
-                        </h6>
-                    </div>
+                    <a href="#" class="text-white">
+                        <div class="card bg-to-primary py-4">
+                            <h6 class="text-white">
+                                {{-- adicionar rotas comprovantes--}}
+                                Meus Comprovantes
+                            </h6>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

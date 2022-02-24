@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/icofont/icofont/icofont.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/DataTables/datatables.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/DataTables/datatables.min.css')}}"
+
     @yield('css')
 </head>
 <body>
