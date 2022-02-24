@@ -108,8 +108,8 @@ class FormularioController extends Controller
         $cargo->pne = $request->pne;
         $cargo->nomeParticipante = $request->nomeParticipante;
         $formulario = Formulario::findOrFail($request->formulario_id);
-        $pne = $request->pne;
-        $tipoAprovacao = $request->tipoAprovacao;
+
+
         $pdf = PDF::loadView('pages.relatorio.pdfs.filtro', compact('formulario', 'cargo'));
         return $pdf->download('relatorio-com-filtro.pdf', 'relatorio-com-filtro-gerado-'.date('d/m/Y').'.pdf');
 //        return view('pages.relatorio.pdfs.filtro', compact('cargo', 'formulario'));

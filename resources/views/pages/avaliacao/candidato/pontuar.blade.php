@@ -1,4 +1,4 @@
-@if($pontuavel && $campo->pontuar == 1)
+@if($pontuavel && $campo->pontuar == 1 && !is_null($formulariUsuario->formularioUsuarioCampo->where('campo_id', $campo->id)->first()))
     <div class="col col-12 has-info mt-4">
         <label class="font-weight-bold text-dark" for="{{$campo->nome}}">PONTUAR CAMPO</label>
         <input type="number" class="form-control"
