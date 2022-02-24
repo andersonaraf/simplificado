@@ -14,6 +14,7 @@
             <div class="col col-12">
                 <hr>
                 <h3>Cadastro Simplificado</h3>
+                <span class="alert alert-warning">Você precisa fazer seu cadastro para participar dos processos seltivos!</span>
                 <hr>
             </div>
             <div id="accordion" style="width: 100%">
