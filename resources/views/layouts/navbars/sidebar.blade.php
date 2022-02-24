@@ -72,7 +72,7 @@
                 </li>
 
                 <li class="nav-item{{ $activePage == 'cadastrar' ? ' active' : '' }}">
-                    <a class="nav-link" href="{{ route('usuario.create') }}">
+                    <a class="nav-link" href="{{ route('user.create') }}">
                         <i class="material-icons">person_add</i>
                         <p>{{ __('Cadastar Usuário') }}</p>
                     </a>
