@@ -106,6 +106,7 @@ class FormularioController extends Controller
         $cargo = Cargo::findOrFail($request->cargoId);
         $cargo->tipoAprovacao = $request->tipoAprovacao;
         $cargo->pne = $request->pne;
+        $cargo->nomeParticipante = $request->nomeParticipante;
         $formulario = Formulario::findOrFail($request->formulario_id);
         $pne = $request->pne;
         $tipoAprovacao = $request->tipoAprovacao;

@@ -37,12 +37,14 @@ class Cargo extends Model implements Auditable
             if ($this->tipoAprovacao != "TODOS" && $this->tipoAprovacao != "EM ANALISE") $x->where(['avaliado' => $this->tipoAprovacao, 'revisado' => $this->tipoAprovacao]);
             else if ($this->tipoAprovacao == "EM ANALISE") $x->whereNull(['avaliado', 'revisado']);
         }
-//        dd($this->pne);
+
         $x->whereHas('user', function ($query) {
             $query->whereHas('pessoa', function ($query) {
                 if (isset($this->pne)) {
                     if ($this->pne == 1 || $this->pne == 0) $query->where('portador_deficiencia', $this->pne);
                 }
+                if(isset($this->nomeParticipante))
+                    if(!is_null($this->nomeParticipante)) $query->where('nome_completo', 'like', '%'.$this->nomeParticipante.'%');
                 $query->orderBy('data_nascimento', 'desc');
             });
         })->orderBy('pontuacao_total', 'desc')->get();
