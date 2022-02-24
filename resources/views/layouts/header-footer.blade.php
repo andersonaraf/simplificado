@@ -99,13 +99,14 @@
 </footer><!-- End Footer -->
 </body>
 
-<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('assets/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('js/jquery.inputmask.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/area-restrita/functions.js')}}"></script>
 <script src="{{asset('js/registro/cep.js')}}"></script>
 <script src="{{asset('js/registro/mask.js')}}"></script>
 <script src="{{asset('js/registro/function.js')}}"></script>
+<script src="{{asset('assets/DataTables/datatables.min.js')}}"></script>
 
 @stack('script')
 </html>
