@@ -58,7 +58,7 @@
             @if(auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Revisor')
                 <li class="nav-item{{ $activePage == 'revisao' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('revisao.index') }}">
-                        <i clasas="material-icons">preview</i>
+                        <i class="material-icons">person_search</i>
                         <p>{{ __('Revisão') }}</p>
                     </a>
                 </li>
