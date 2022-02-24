@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin\Relatorio;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cargo;
 use App\Models\Formulario;
 use App\Models\GrupoUser;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -94,5 +96,22 @@ class FormularioController extends Controller
         $pdf = PDF::loadView('pages.relatorio.pdfs.completo', compact('formulario'));
         return $pdf->download('relatorio_completo.pdf', 'relatorio-completo-gerado-'.date('d/m/Y').'.pdf');
 //        return view('pages.relatorio.pdfs.completo', compact('formulario'));
+    }
+
+    public function relatorioPorFiltro(Request  $request){
+        if(is_null($request->cargoId)) return redirect()->back()->with(['type' => 'warning', 'msg' => 'Selecione um cargo para filtrar o relatório.']);
+        if (!is_null($request->nomeParticipante)) $user = User::where('name', 'like', '%'.mb_strtoupper($request->nomeParticipante).'%')->get();
+        else $user = null;
+
+        $cargo = Cargo::findOrFail($request->cargoId);
+        $cargo->tipoAprovacao = $request->tipoAprovacao;
+        $cargo->pne = $request->pne;
+        $formulario = Formulario::findOrFail($request->formulario_id);
+        $pne = $request->pne;
+        $tipoAprovacao = $request->tipoAprovacao;
+        $pdf = PDF::loadView('pages.relatorio.pdfs.filtro', compact('formulario', 'cargo'));
+        return $pdf->download('relatorio-com-filtro.pdf', 'relatorio-com-filtro-gerado-'.date('d/m/Y').'.pdf');
+//        return view('pages.relatorio.pdfs.filtro', compact('cargo', 'formulario'));
+
     }
 }
