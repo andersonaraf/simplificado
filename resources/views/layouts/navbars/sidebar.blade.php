@@ -44,6 +44,14 @@
                                 </a>
                             </li>
                         </ul>
+                        <ul class="nav">
+                            <li class="nav-item{{ $activePage == 'cadastrar' ? ' active' : '' }}">
+                                <a class="nav-link" href="{{ route('user.create') }}">
+                                    <i class="material-icons">person_add</i>
+                                    <p>{{ __('Cadastar Usuário') }}</p>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </li>
             @endif
@@ -70,22 +78,15 @@
                         <p>{{ __('Relatórios') }}</p>
                     </a>
                 </li>
-
-                <li class="nav-item{{ $activePage == 'cadastrar' ? ' active' : '' }}">
-                    <a class="nav-link" href="{{ route('user.create') }}">
-                        <i class="material-icons">person_add</i>
-                        <p>{{ __('Cadastar Usuário') }}</p>
-                    </a>
-                </li>
             @endif
-{{--            @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Avaliador' || auth()->user()->tipo == 'Supervisor')--}}
-{{--                <li class="nav-item{{ $activePage == 'avaliacao' ? ' active' : '' }}">--}}
-{{--                    <a class="nav-link" href="{{ route('visualizacao.escolher.edital') }}">--}}
-{{--                        <i class="material-icons">library_books</i>--}}
-{{--                        <p>{{ __('Avaliação') }}</p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            @endif--}}
+            {{--            @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Avaliador' || auth()->user()->tipo == 'Supervisor')--}}
+            {{--                <li class="nav-item{{ $activePage == 'avaliacao' ? ' active' : '' }}">--}}
+            {{--                    <a class="nav-link" href="{{ route('visualizacao.escolher.edital') }}">--}}
+            {{--                        <i class="material-icons">library_books</i>--}}
+            {{--                        <p>{{ __('Avaliação') }}</p>--}}
+            {{--                    </a>--}}
+            {{--                </li>--}}
+            {{--            @endif--}}
 
         </ul>
     </div>
