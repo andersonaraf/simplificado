@@ -23,7 +23,7 @@
         <nav class="row d-flex justify-content-end">
             <ul class="nav nav-tabs">
                 <li class="ml-5"><a href="{{route('home')}}">Home</a></li>
-                <li class="ml-5"><a href="{{route('usuario.perfil',Auth::user()->id)}}">Perfil Usuário</a></li>
+                <li class="ml-5"><a href="{{route('usuario.perfil', auth()->user()->id)}}">Perfil Usuário</a></li>
 
             </ul>
         </nav>

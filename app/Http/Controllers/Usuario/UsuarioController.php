@@ -108,7 +108,7 @@ class UsuarioController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request);
+
         try {
             DB::beginTransaction();
             if ($request->password != $request->password2) {
@@ -150,7 +150,7 @@ class UsuarioController extends Controller
 
     public function perfil($id)
     {
-        if($id == Auth::user()->id){
+        if($id == \auth()->user()->id){
             return view('usuario.area_user.perfil_user');
         }else{
             dd('Voce nao tem acesso');
