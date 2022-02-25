@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Recurso;
+use App\Http\Requests\UsuarioRecursoStoreRequest;
 use App\Models\Formulario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +30,9 @@ class UsuarioRecursoController extends Controller
     {
         //
         $formulario = Formulario::findOrFail($id);
-        if($formulario->liberar_recurso == 1 || (strtotime($formulario->data_liberar_recurso) <= strtotime(date('Y-m-d H:i:s')) && strtotime($formulario->data_fecha_recurso) >= strtotime(date('Y-m-d H:i:s')))){
+        if ($formulario->liberar_recurso == 1 || (strtotime($formulario->data_liberar_recurso) <= strtotime(date('Y-m-d H:i:s')) && strtotime($formulario->data_fecha_recurso) >= strtotime(date('Y-m-d H:i:s')))) {
             return view('usuario.area_user.recurso_user', compact('formulario'));
-        }
-        else {
+        } else {
             return redirect()->route('usuario.lista.processos', \auth()->user()->id)->with(['type' => 'warning', 'msg' => 'Recurso não liberado']);
         }
     }
@@ -40,25 +40,18 @@ class UsuarioRecursoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsuarioRecursoStoreRequest $request)
     {
-        dd($request);
-        $extension = $request->arquivo->extension();
-        $arquivo = $request->arquivo->hasFile();
-        $up = $request->arquivo->storeAs('' , $nameFile);
-        $url_anexo;
-        $id= Auth::user()->id;
-        $recurso = Recurso::findOrFail($id);
-
+        dd($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,7 +62,7 @@ class UsuarioRecursoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +73,8 @@ class UsuarioRecursoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -92,7 +85,7 @@ class UsuarioRecursoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
