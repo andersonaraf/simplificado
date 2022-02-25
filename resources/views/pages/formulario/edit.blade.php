@@ -50,7 +50,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col col-12 col-md-6 col-lg-6">
+                                    <div class="col col-12 col-md-6 col-lg-6 mt-2">
                                         <div class="form-group has-info">
                                             <label for="dataFinalizar" class="font-weight-bold">DATA PARA FINALIZAR
                                                 FORMULÁRIO: </label>
@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col col-12 col-md-6 col-lg-6">
+                                    <div class="col col-12 col-md-6 col-lg-6 mt-2">
                                         <div class="form-group has-info">
                                             <label for="dataFinalizarRecurso" class="font-weight-bold">DATA PARA FINALIZAR
                                                 FORMULÁRIO: </label>

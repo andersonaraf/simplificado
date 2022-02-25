@@ -51,7 +51,10 @@ class FormularioController extends Controller
                 $formulario->pontuacao = $request->pontuacaoTotal;
                 $formulario->data_liberar = $request->dataInicio;
                 $formulario->data_fecha = $request->dataFinalizar;
+                $formulario->data_liberar_recurso = $request->data_liberar_recurso;
+                $formulario->data_fecha_recurso = $request->data_fecha_recurso;
                 $formulario->liberado = false;
+                $formulario->liberar_recurso = false;
                 $formulario->user_id = Auth::user()->id;
                 $formulario->save();
                 \DB::commit();
