@@ -31,7 +31,7 @@
                                     <a href="{{route('usuario.view.processos',[Auth::user()->id,$formuser->formulario->id])}}">
                                         <button type="button" class="btn btn-info">Vizualizar</button>
                                     </a>
-                                    @if($formuser->formulario->liberar_recurso == 1 || (strtotime($formuser->data_liberar_recurso) >= strtotime(date('Y-m-d H:i:s')) && strtotime($formuser->formulario->data_fecha_recurso) <= strtotime(date('Y-m-d H:i:s'))))
+                                    @if($formuser->formulario->liberar_recurso == 1 || (strtotime($formuser->data_liberar_recurso) <= strtotime(date('Y-m-d H:i:s')) && strtotime($formuser->formulario->data_fecha_recurso) >= strtotime(date('Y-m-d H:i:s'))))
                                         <a href="{{route('usuario.recurso')}}">
                                             <button type="button" class="btn btn-warning">Recurso</button>
                                         </a>
