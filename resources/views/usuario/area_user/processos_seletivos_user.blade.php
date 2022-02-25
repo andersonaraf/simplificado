@@ -11,13 +11,13 @@
                 </div>
                 <div class="col-12 col-md-12 col-lg-12 col-sm-12 card card-body">
 
-                    <table id="dataTable" class=" table-bordered table table-responsive-lg table-hover">
+                    <table id="dataTable">
                         <thead class="thead-dark">
                         <tr>
                             <th>Processo</th>
                             <th>Cargo</th>
                             <th>Data Inscrição</th>
-                            <th>Ações</th>
+                            <th class="text-right">Ações</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -26,7 +26,7 @@
                                 <td>{{$formuser->formulario->nome}}</td>
                                 <td>{{$formuser->cargo->cargo}}</td>
                                 <td>{{date('d/m/Y',strtotime($formuser->created_at)  )}}</td>
-                                <td>
+                                <td class="text-right">
                                     <a href="{{route('usuario.view.processos',[Auth::user()->id,$formuser->formulario->id])}}">
                                         <button type="button" class="btn btn-info">Vizualizar</button>
                                     </a>
