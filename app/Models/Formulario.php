@@ -19,6 +19,9 @@ class Formulario extends Model implements Auditable
         'liberado',
         'data_liberar',
         'data_fecha',
+        'liberar_recurso',
+        'data_liberar_recurso',
+        'data_fecha_recurso',
     ];
 
     protected static function boot()
