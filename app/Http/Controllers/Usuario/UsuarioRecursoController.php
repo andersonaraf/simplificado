@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Recurso;
+use App\Models\Formulario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,7 @@ class UsuarioRecursoController extends Controller
      */
     public function index()
     {
-        return view('usuario.area_user.recurso_user');
+//        return view('usuario.area_user.recurso_user');
     }
 
     /**
@@ -24,9 +25,16 @@ class UsuarioRecursoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        $formulario = Formulario::findOrFail($id);
+        if($formulario->liberar_recurso == 1 || (strtotime($formulario->data_liberar_recurso) <= strtotime(date('Y-m-d H:i:s')) && strtotime($formulario->data_fecha_recurso) >= strtotime(date('Y-m-d H:i:s')))){
+            return view('usuario.area_user.recurso_user', compact('formulario'));
+        }
+        else {
+            return redirect()->route('usuario.lista.processos', \auth()->user()->id)->with(['type' => 'warning', 'msg' => 'Recurso não liberado']);
+        }
     }
 
     /**
