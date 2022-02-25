@@ -59,6 +59,27 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row mt-4">
+                                    <div class="col col-12 col-md-6 col-lg-6 mt-2">
+                                        <div class="form-group has-info">
+                                            <label for="dataInicioRecurso" class="font-weight-bold">DATA PARA LIBERAR
+                                                RECURSO: </label>
+                                            <input type="datetime-local" class="form-control" name="data_liberar_recurso"
+                                                   id="dataInicioRecurso"
+                                                   value="{{!is_null ($formulario->data_liberar_recurso) ? date('Y-m-d\TH:i',strtotime($formulario->data_liberar_recurso)) : ''}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col col-12 col-md-6 col-lg-6">
+                                        <div class="form-group has-info">
+                                            <label for="dataFinalizarRecurso" class="font-weight-bold">DATA PARA FINALIZAR
+                                                FORMULÁRIO: </label>
+                                            <input type="datetime-local" class="form-control" name="data_fecha_recurso"
+                                                   id="dataFinalizarRecurso" value="{{!is_null($formulario->data_fecha_recurso) ? date('Y-m-d\TH:i', strtotime($formulario->data_fecha_recurso)) : ''}}">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row mt-4">
 
                                     <div class="col col-12 col-md-6 col-lg-6">
@@ -74,6 +95,19 @@
                                         </div>
                                     </div>
 
+                                    <div class="col col-12 col-md-6 col-lg-6">
+                                        <div class="form-group has-info">
+                                            <label for="statusRecurso" class="font-weight-bold" style="color: #00bcd4">STATUS RECURSO</label>
+                                            <select name="liberar_recurso" id="statusRecurso" class="form-control">
+                                                <option value="1" {{$formulario->liberar_recurso ? 'selected' : ''}}>ATIVADO
+                                                </option>
+                                                <option value="0" {{!$formulario->liberar_recurso ? 'selected' : ''}}>
+                                                    DESATIVADO
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
                                     <div class="col col-12 text-md-right text-lg-right text-center">
                                         <div>
                                             <input type="submit" class="btn btn-outline-info font-weight-bold"
@@ -81,8 +115,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </form>
                         </div>
                     </div>
