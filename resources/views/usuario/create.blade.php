@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 col-lg-12 col-md-12">
-                                    <form action="{{route('user.store')}}" method="post">
+                                    <form action="{{route('novo.usuario.salvar')}}" method="post">
                                         @csrf
                                         <div class="row">
                                             <div class="col col-md-6 col-lg-6">

@@ -91,8 +91,8 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::post('voltar/avaliacao', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'voltarAvaliacao'])->name('voltar.avaliacao');
     Route::post('reprovar/avaliacao', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'reprovarAvaliacao'])->name('reprovar.avaliacao');
     Route::post('aprovar/avaliacao', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'aprovarAvaliacao'])->name('aprovar.avaliacao');
-    Route::get('cadastrar/usuario', [\App\Http\Controllers\UserController::class, 'create'])->name('user.create');
-    Route::post('cadastrar/usuario', [\App\Http\Controllers\UserController::class, 'store'])->name('user.store');
+    Route::get('cadastrar/usuario', [\App\Http\Controllers\UserController::class, 'create'])->name('novo.usuario');
+    Route::post('cadastrar/usuario', [\App\Http\Controllers\UserController::class, 'store'])->name('novo.usuario.salvar');
 });
 
 Route::group(['middleware' => 'auth'], function () {

@@ -46,7 +46,7 @@
                         </ul>
                         <ul class="nav">
                             <li class="nav-item{{ $activePage == 'cadastrar' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{ route('user.create') }}">
+                                <a class="nav-link" href="{{ route('novo.usuario') }}">
                                     <i class="material-icons">person_add</i>
                                     <p>{{ __('Cadastar Usuário') }}</p>
                                 </a>
