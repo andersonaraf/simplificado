@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PerfilUser;
+use App\Http\Requests\UserRequest;
 use App\Models\Cargo;
 use App\Models\Collapse;
 use App\Models\Formulario;
@@ -76,7 +78,7 @@ class UsuarioController extends Controller
         if (!is_null($formularioUsuario)) {
             //campo deve ser dinamico buscando em tabela
             $recurso_hability = true;
-            return view('usuario.area_user.processos_seletivos_user', compact('formularioUsuario',  'recurso_hability'));
+            return view('usuario.area_user.processos_seletivos_user', compact('formularioUsuario', 'recurso_hability'));
 
         } else {
             $formularioUsuario = null;
@@ -106,29 +108,33 @@ class UsuarioController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(PerfilUser $request)
     {
-
+//       dd($user_id->id);
         try {
             DB::beginTransaction();
             if ($request->password != $request->password2) {
                 return redirect()->back()->with([
-                    'type' => 'error',
-                    'msg' => 'As senhas digitas não são iguais'
+                    'msgerror' => 'As senhas digitadas não são iguais'
                 ]);
             }
-            User::update([
-                'email' => $request->email,
-                'password' => hash::make($request->password),
-                'block' => 0,
-                'tipo' => 'CANDIDATO'
-            ]);
+            if (is_null($request->email)) {
+                $user = User::findOrFail(Auth::user()->id);
+                $user->password = hash::make($request->password);
+                $user->save();
+            } else {
+                $user = User::findOrFail(Auth::user()->id);
+                $user->password = hash::make($request->password);
+                $user->email = $request->email;
+                $user->save();
+            }
             DB::commit();
             return redirect()->back()->with([
-                'type' => 'success',
-                'msg' => 'Usuário cadastrado com sucesso'
+                'msg' => 'Usuário alterado com sucesso'
             ]);
-        }catch (\Exception $exception){
+
+
+        } catch (\Exception $exception) {
             DB::rollBack();
             return redirect()->back()->with([
                 'type' => 'error',
@@ -136,6 +142,7 @@ class UsuarioController extends Controller
             ]);
         }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -150,10 +157,13 @@ class UsuarioController extends Controller
 
     public function perfil($id)
     {
-        if($id == \auth()->user()->id){
+        if ($id == \auth()->user()->id) {
             return view('usuario.area_user.perfil_user');
-        }else{
-            dd('Voce nao tem acesso');
+        } else {
+            return redirect()->back()->with([
+                'type' => 'error',
+                'msg' => 'Você Não Tem Acesso'
+            ]);
         }
 
     }
