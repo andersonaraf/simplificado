@@ -13,6 +13,7 @@ class Recurso extends Model
         'formulario_usuario_id',
         'aprovou_recurso',
         'texto',
+        'arquivo',
         'pontuacao',
     ];
 

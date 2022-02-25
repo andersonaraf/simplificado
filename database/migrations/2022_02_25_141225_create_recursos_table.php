@@ -18,6 +18,7 @@ class CreateRecursosTable extends Migration
             $table->unsignedBigInteger('formulario_usuario_id')->comment('ID DO FORMULÁRIO DO USUÁRIO QUE SOLICITOU O RECURSO');
             $table->unsignedBigInteger('aprovou_recurso')->nullable()->comment('ID DE QUEM APROVOU O RECURSO');
             $table->string('texto', 1000);
+            $table->string('arquivo', 200)->nullable();
             $table->float('pontuacao', 8, 2)->nullable();
             $table->timestamps();
 

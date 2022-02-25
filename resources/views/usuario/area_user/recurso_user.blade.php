@@ -11,7 +11,7 @@
 
                 <form method="POST" action="{{route('usuario.recurso.salvar')}}" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="formularioID" value="{{$formulario->id}}">
+                    <input type="hidden" name="formularioUsuarioID" value="{{$formularioUsuario->id}}">
                     <div class="card card-header bg-primary">
                         <h5 class="text-white">Recurso</h5>
                     </div>

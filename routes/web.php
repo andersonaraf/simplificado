@@ -44,7 +44,7 @@ Route::get('/usuario/perfil/{id}',[\App\Http\Controllers\Usuario\UsuarioControll
 Route::post('/usuario/alterar',[\App\Http\Controllers\Usuario\UsuarioController::class, 'update'])->name('usuario.perfil.update');
 //Tela Recurso
 Route::get('/usuario/recurso/{id}',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'create'])->name('usuario.recurso');
-Route::post('/usuario/Recurso/salvar',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'store'])->name('usuario.recurso.salvar');
+Route::post('/usuario/recurso/salvar',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'store'])->name('usuario.recurso.salvar');
 
 ##USUÁRIO ADMIN SECTION END##
 
