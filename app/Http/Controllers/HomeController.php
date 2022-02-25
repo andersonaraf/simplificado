@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pessoa;
 use App\Models\Pontuacao;
+use App\Models\Recurso;
 use App\Models\RecursoModel;
 
 class HomeController extends Controller
@@ -27,7 +28,7 @@ class HomeController extends Controller
     {
         $pessoa = Pessoa::all()->count();
         $pontuacao = 0;
-        $recurso = RecursoModel::all()->count();
+        $recurso = Recurso::all()->count();
 
         return view('dashboard', [
             'inscricao_total' => $pessoa,
