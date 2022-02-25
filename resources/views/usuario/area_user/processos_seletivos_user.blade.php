@@ -11,8 +11,9 @@
                 </div>
                 <div class="col-12 col-md-12 col-lg-12 col-sm-12 card card-body">
 
-                    <table id="dataTable">
-                        <thead class="thead-dark">
+                    <table id="dataTable" class=" table-bordered table table-responsive-lg table-hover">
+
+                    <thead class="thead-dark">
                         <tr>
                             <th>Processo</th>
                             <th>Cargo</th>
