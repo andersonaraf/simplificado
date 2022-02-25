@@ -52,6 +52,15 @@
                                 </a>
                             </li>
                         </ul>
+
+                        <ul class="nav">
+                            <li class="nav-item{{ $activePage == 'listarFormulario' ? ' active' : '' }}">
+                                <a class="nav-link" href="{{ route('voltar.listar.formularios') }}">
+                                    <i class="material-icons">history</i>
+                                    <p>{{ __('Voltar Usuário') }}</p>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </li>
             @endif
