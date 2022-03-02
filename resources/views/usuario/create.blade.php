@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-header bg-primary">
-                            <h4 class="text-white font-weight-bold">Lista de Formulários</h4>
+                            <h4 class="text-white font-weight-bold">CADASTRO DE NOVO USUÁRIO PARA COMISSÃO</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
