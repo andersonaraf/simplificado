@@ -33,8 +33,8 @@
                 </div>
             </div>
         </div>
-        <div class="row edit_input{{$campo->id}}" style="display:none">
-            <div class="col text-right">
+        <div class="col col-12 edit_input{{$campo->id}}" style="display:none">
+            <div class="col col-12 text-right">
                 <button id="update{{$campo->id}}" onclick="editarInput({{$campo->id}})" data-action="{{route('editar.campo', $campo->id)}}"class="btn btn-outline-info">Editar</button>
             </div>
         </div>
