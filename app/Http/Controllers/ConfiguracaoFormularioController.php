@@ -36,16 +36,14 @@ class ConfiguracaoFormularioController extends Controller
     {
         $colapse = Collapse::findOrFail($request->collapse_id);
         $formulario = Formulario::findOrFail($colapse->cargo->escolaridade->formulario->id);
-        $pontos = $request->pontuacao;;
-        foreach ($formulario->escolaridades as $escolaridade) {
-            foreach ($escolaridade->cargos as $cargo) {
-                foreach ($cargo->collapse as $collapse) {
-                    foreach ($collapse->campos as $campo) {
-                        $pontos += $campo->ponto;
-                    }
-                }
+        $pontos = $request->pontuacao;
+        $cargo = $colapse->cargo;
+        foreach ($cargo->collapse as $collapse) {
+            foreach ($collapse->campos as $campo) {
+                $pontos += $campo->ponto;
             }
         }
+
         if ($pontos > $formulario->pontuacao) return redirect()->back()->with(['type' => 'error', 'msg' => 'Ultrapassou a quantidade de pontos!'], 403);
         if ($colapse->cargo->escolaridade->formulario->formularioUsuario->count() > 0) return redirect()->back()->with(['type' => 'error', 'msg' => 'Formulário bloqueado para edição!'], 403);
         try {
