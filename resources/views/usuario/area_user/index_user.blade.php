@@ -20,13 +20,14 @@
             <span class="alert alert-info">{{session('status')}}</span>
             {{session()->forget('status')}}
         @endif
-        <nav class="row d-flex justify-content-end">
-            <ul class="nav nav-tabs">
-                <li class="ml-5"><a href="{{route('home')}}">Home</a></li>
-                <li class="ml-5"><a href="{{route('usuario.perfil', auth()->user()->id)}}">Perfil Usuário</a></li>
-
-            </ul>
-        </nav>
+       <div class="card-body">
+            <nav class="row d-flex justify-content-end">
+                <ul class="nav nav-tabs">
+                    <li class="ml-5"><a href="{{route('home')}}">Home</a></li>
+                    <li class="ml-5"><a href="{{route('usuario.perfil', auth()->user()->id)}}">Perfil Usuário</a></li>
+                </ul>
+            </nav>
+        </div>
         {{--FUNCIONALIDADE DE BUSCAR TODOS OS PROCESSOS--}}
 
         {{--        <div class="row col-4">--}}
