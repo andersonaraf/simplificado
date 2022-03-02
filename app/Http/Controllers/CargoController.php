@@ -46,8 +46,9 @@ class CargoController extends Controller
             DB::beginTransaction();
             $cargo = new Cargo();
             $cargo->escolaridade_id = $request->escolaridade;
-            $cargo->cargo = $request->nomeCargo;
+            $cargo->cargo = mb_strtoupper($request->nomeCargo);
             $cargo->bloquear = 0;
+            $cargo->informativo = mb_strtoupper($request->informativo);
             $cargo->save();
             DB::commit();
             return redirect()->route('configuracao.show', $request->formularioID)->with([

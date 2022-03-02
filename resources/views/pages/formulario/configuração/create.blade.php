@@ -261,5 +261,14 @@
                 }
             })
         })
+
+        //CONTADOR SOBRE A QUANTIDADE DE CARACTERES DO TEXTAREA
+        $('textarea').keyup(function () {
+            var texto = $(this).val();
+            var tamanho = texto.length;
+            var max = $(this).attr('maxlength');
+            var resto = max - tamanho;
+            $(this).next().text(resto + ' caracteres restantes');
+        });
     </script>
 @endpush
