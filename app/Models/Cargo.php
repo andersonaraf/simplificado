@@ -17,6 +17,7 @@ class Cargo extends Model implements Auditable
         'id',
         'escolaridade_id',
         'cargo',
+        'informativo',
         'bloquear',
     ];
 
