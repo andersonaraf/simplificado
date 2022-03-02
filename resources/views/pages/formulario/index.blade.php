@@ -37,12 +37,16 @@
                                                 <td>
                                                     {{--SO ATIVAR SE O FORMULÁRIO NÃO TIVER PESSOAS CADASTRADAS--}}
                                                     @if($formulario->formularioUsuario->count() <= 0)
-                                                        <a href="{{route('configuracao.create', $formulario->id)}}"><span
-                                                                class="material-icons text-info">add_circle_outline</span></a>
+                                                        <a href="{{route('configuracao.create', $formulario->id)}}" title="ADICIONAR ESCOLARIDADE"><span
+                                                                class="material-icons text-info">school</span></a>
                                                         |
                                                     @endif
-                                                    <a href="{{route('formulario.edit', $formulario->id)}}">
+                                                    <a href="{{route('formulario.edit', $formulario->id)}}" title="CONFIGURAR OU EDITAR FORMULÁRIO">
                                                         <span class="material-icons text-info">settings</span>
+                                                    </a>
+                                                    |
+                                                    <a href="{{route('voltar.listar.pessoas', $formulario->id)}}" title="LISTAR CANDIDATOS">
+                                                        <span class="material-icons text-info">people</span>
                                                     </a>
                                                 </td>
                                             </tr>

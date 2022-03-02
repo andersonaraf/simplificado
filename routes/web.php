@@ -93,7 +93,6 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::post('aprovar/avaliacao', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'aprovarAvaliacao'])->name('aprovar.avaliacao');
     Route::get('cadastrar/usuario', [\App\Http\Controllers\UserController::class, 'create'])->name('novo.usuario');
     Route::post('cadastrar/usuario', [\App\Http\Controllers\UserController::class, 'store'])->name('novo.usuario.salvar');
-    Route::get('listar/formularios', [\App\Http\Controllers\VoltarUsuarioController::class, 'index'])->name('voltar.listar.formularios');
     Route::get('listar/pessoas/{id}', [\App\Http\Controllers\VoltarUsuarioController::class, 'listarPessoas'])->name('voltar.listar.pessoas');
     Route::post('voltar/candidato/avaliacao', [\App\Http\Controllers\VoltarUsuarioController::class, 'voltarAvaliacao'])->name('voltar.usuario.avaliacao');
     Route::post('voltar/candidato/revisao', [\App\Http\Controllers\VoltarUsuarioController::class, 'voltarRevisao'])->name('voltar.usuario.revisao');
