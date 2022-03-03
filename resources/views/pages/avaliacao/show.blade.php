@@ -54,18 +54,17 @@
                                         <tbody>
                                         @csrf
                                         @foreach(isset($avaliador[0]) ? $avaliador : $formulario->formularioUsuario as $formularioUsuario)
-                                            @dd($formularioUsuario)
                                             <tr data-cargo-id="{{$formularioUsuario->formularioUsuario->cargo_id}}"
                                                 data-tipo-avaliacao="{{is_null($formularioUsuario->formularioUsuario->recurso) ? 1 : 2}}">
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->name : mb_strtoupper($formularioUsuario->user->name)}}</td>
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->pessoa->cpf : (!is_null($formularioUsuario->user->pessoa) ? $formularioUsuario->user->pessoa->cpf : '')}}</td>
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->cargo->cargo : (!is_null($formularioUsuario->cargo) ? $formularioUsuario->cargo->cargo : '')}}</td>
                                                 <td class="text-right">
-                                                    @if(is_null($formularioUsuario->avaliado))
+                                                    @if(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->avaliado): is_null($formularioUsuario->avaliado))
                                                         <span class="badge badge-pill badge-danger">NÃO AVALIADO</span>
-                                                    @elseif($formularioUsuario->avaliado == 1)
+                                                    @elseif(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->avaliado == 1: $formularioUsuario->avaliado == 1)
                                                         <span class="badge badge-pill badge-success">AVALIADO</span>
-                                                    @elseif($formularioUsuario->avaliado == 0)
+                                                    @elseif(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->avaliado == 0: $formularioUsuario->avaliado == 0)
                                                         <span class="badge badge-pill badge-danger">REPROVADO</span>
                                                     @endif
                                                 </td>
