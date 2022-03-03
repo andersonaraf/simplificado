@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Avaliacao;
 use App\Http\Controllers\Controller;
 use App\Models\Avaliador;
 use App\Models\Formulario;
+use App\Models\FormularioUsuario;
 use App\Models\GrupoUser;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +32,7 @@ class FormularioController extends Controller
     {
         //
         $formulario = Formulario::findOrFail($id);
-        $avaliador = Avaliador::where('avaliador', Auth::user()->id)->get();
+        $avaliador = $formulario->formularioUsuarioAvaliador;
         return view('pages.avaliacao.show', compact('formulario','avaliador'));
     }
 }

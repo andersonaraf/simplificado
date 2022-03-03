@@ -54,6 +54,7 @@
                                         <tbody>
                                         @csrf
                                         @foreach(isset($avaliador[0]) ? $avaliador : $formulario->formularioUsuario as $formularioUsuario)
+                                            @dd($formularioUsuario)
                                             <tr data-cargo-id="{{$formularioUsuario->formularioUsuario->cargo_id}}"
                                                 data-tipo-avaliacao="{{is_null($formularioUsuario->formularioUsuario->recurso) ? 1 : 2}}">
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->name : mb_strtoupper($formularioUsuario->user->name)}}</td>

@@ -9,8 +9,8 @@
                 <hr>
                 <div class="row">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title font-weight-bold">PARTICIPANTES</h4>
+                        <div class="card-header bg-primary">
+                            <h4 class="card-title font-weight-bold text-white">PARTICIPANTES</h4>
                         </div>
                         <div class="card-body">
                             <div>
@@ -20,7 +20,7 @@
                                 <div class="row">
                                     <div class="col col-12 p-0">
                                         <hr>
-                                        <h6>Lista De Participantes</h6>
+                                        <h6 class="ml-2">LISTA DE PARTICIPANTES</h6>
                                         <hr>
                                         <table class="table">
                                             <thead>
