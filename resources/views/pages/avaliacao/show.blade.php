@@ -74,7 +74,7 @@
                                                         <i class="material-icons">remove_red_eye</i>
                                                     </a>
                                                     {{--                                                    SÓ LIBERAR LINK CASO NÃO TENHA SIDO AVALIADO--}}
-                                                    @if(is_null($formularioUsuario->avaliado))
+                                                    @if(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->avaliado): is_null($formularioUsuario->avaliado))
                                                         <a href="{{route('candidato.edit',isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->id : $formularioUsuario->id)}}"
                                                            class="btn btn-sm btn-primary" title="REALIZAR PONTUAÇÃO">
                                                             <i class="material-icons">123</i>
