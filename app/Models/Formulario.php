@@ -46,4 +46,9 @@ class Formulario extends Model implements Auditable
     {
         return $this->hasMany(GrupoFormulario::class, 'formulario_id', 'id');
     }
+
+    public function cargos(){
+        return $this->hasManyThrough(Cargo::class, Escolaridade::class);
+    }
+
 }

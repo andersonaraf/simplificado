@@ -5,6 +5,36 @@
             <main class="container" id="ajuste">
                 <div class="row">
                     <div class="card">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold">FILTROS</h5>
+                            <hr/>
+
+                            <div class="row">
+                                <div class="col col-12 col-md-6 col-lg-6 has-info">
+                                    <label for="cargo">CARGO</label>
+                                    <select class="custom-select" id="cargo">
+                                        <option value="TODOS">TODOS</option>
+                                        @foreach($formulario->cargos as $cargo)
+                                            <option value="{{$cargo->id}}">{{$cargo->cargo}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col col-12 col-md-6 col-lg-6">
+                                    <label for="Tipo">TIPO</label>
+                                    <select class="custom-select" id="tipoAvaliacao">
+                                        <option value="0">TODOS</option>
+                                        <option value="1">SOMENTE AVALIAÇÃO</option>
+                                        <option value="2">SOMENTE RECURSO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="card">
                         <div class="card-header bg-primary">
                             <h4 class="text-white font-weight-bold">LISTA DE CANDIDATOS</h4>
                         </div>
@@ -24,7 +54,8 @@
                                         <tbody>
                                         @csrf
                                         @foreach(isset($avaliador[0]) ? $avaliador : $formulario->formularioUsuario as $formularioUsuario)
-                                            <tr>
+                                            <tr data-cargo-id="{{$formularioUsuario->formularioUsuario->cargo_id}}"
+                                                data-tipo-avaliacao="{{is_null($formularioUsuario->formularioUsuario->recurso) ? 1 : 2}}">
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->name : mb_strtoupper($formularioUsuario->user->name)}}</td>
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->pessoa->cpf : (!is_null($formularioUsuario->user->pessoa) ? $formularioUsuario->user->pessoa->cpf : '')}}</td>
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->cargo->cargo : (!is_null($formularioUsuario->cargo) ? $formularioUsuario->cargo->cargo : '')}}</td>
@@ -74,4 +105,41 @@
 @endsection
 @push('js')
     <script src="{{asset('js/dashboard/tabela.js')}}" defer></script>
+    <script>
+        $(document).ready(function () {
+            //ATUALIZAR TABELA COM OS CARGO SELECIONADO NO SELECT ATRAVES DO DATA-CARGO-ID
+            $('#cargo').change(function () {
+                let cargoId = $(this).val()
+                //MOSTRAR TR SOMENTE COM O MESMO CARGO ID
+                $('#dataTable tbody tr').each(function () {
+                    if (cargoId != "TODOS") {
+                        if ($(this).data('cargo-id') == cargoId) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+
+            //ATUALIZAR TABELA COM O TIPO DE AVALIACAO SELECIONADO NO SELECT ATRAVES DO DATA-TIPO-AVALIACAO-ID
+            $('#tipoAvaliacao').change(function () {
+                let tipoAvaliacaoId = $(this).val()
+                //MOSTRAR TR SOMENTE COM O MESMO TIPO DE AVALIACAO ID
+                $('#dataTable tbody tr').each(function () {
+                    if (tipoAvaliacaoId != 0) {
+                        if ($(this).data('tipo-avaliacao') == tipoAvaliacaoId) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

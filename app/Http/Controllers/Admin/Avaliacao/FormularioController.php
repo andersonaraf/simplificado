@@ -32,7 +32,6 @@ class FormularioController extends Controller
         //
         $formulario = Formulario::findOrFail($id);
         $avaliador = Avaliador::where('avaliador', Auth::user()->id)->get();
-
         return view('pages.avaliacao.show', compact('formulario','avaliador'));
     }
 }
