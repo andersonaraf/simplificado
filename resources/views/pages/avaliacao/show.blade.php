@@ -69,6 +69,18 @@
                                                         <span class="badge badge-pill badge-danger">REPROVADO</span>
                                                     @endif
                                                 </td>
+{{--                                                @dd($formularioUsuario->formularioUsuario->recurso)--}}
+                                                <td class="text-right">
+                                                    @if(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->recurso): is_null($formularioUsuario->recurso))
+                                                        <span class="badge badge-pill badge-warning">NÃO SOLICITADO</span>
+                                                    @elseif(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->recurso->aprovou_recurso): is_null($formularioUsuario->recurso->aprovou_recurso))
+                                                        <span class="badge badge-pill badge-warning">AGUADANDO APROVAÇÃO</span>
+                                                    @elseif(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->recurso->aprovou_recurso == 1: $formularioUsuario->recurso->aprovou_recurso == 1)
+                                                        <span class="badge badge-pill badge-success">RECUSO NA FILA DE AVALIAÇÃO</span>
+                                                    @elseif(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->recurso->aprovou_recurso == 0: $formularioUsuario->recurso->aprovou_recurso == 0)
+                                                        <span class="badge badge-pill badge-danger">RECUSO NEGADO</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-right">
                                                     @if(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->recurso): is_null($formularioUsuario->recurso))
                                                         <span class="badge badge-pill badge-warning">NÃO SOLICITADO</span>
