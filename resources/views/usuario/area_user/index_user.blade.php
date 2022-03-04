@@ -61,7 +61,7 @@
                     </a>
                 </div>
                 <div class="col-6 py-4 " style="text-align: center">
-                    <a href="#" class="text-white">
+                    <a href="{{ route('comprovante.index') }}" class="text-white">
                         <div class="card bg-to-primary py-4">
                             <h6 class="text-white">
                                 {{-- adicionar rotas comprovantes--}}

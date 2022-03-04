@@ -35,7 +35,7 @@ Route::get('usuario/inscricao/{cargo_id}/{formulario_id}', [\App\Http\Controller
 Route::post('usuario/finalizar/inscricao', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'store'])->name('usuario.formulario.store');
 
 ##USUÁRIO ADMIN SECTION##
-//retorna tela de admin do usuário
+//retorna tela de admin do usuário28072000
 Route::get('/usuario', [\App\Http\Controllers\Usuario\UsuarioController::class, 'index'])->name('usuario.index');
 //lista processos participados pelo usuário
 Route::get('/usuario/lista/{id}', [\App\Http\Controllers\Usuario\UsuarioController::class, 'show'])->name('usuario.lista.processos');
@@ -45,7 +45,8 @@ Route::post('/usuario/alterar',[\App\Http\Controllers\Usuario\UsuarioController:
 //Tela Recurso
 Route::get('/usuario/recurso/{id}',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'create'])->name('usuario.recurso');
 Route::post('/usuario/recurso/salvar',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'store'])->name('usuario.recurso.salvar');
-
+//listar Comprovantes
+Route::get('listar/comprovantes', [\App\Http\Controllers\ComprovanteController::class, 'listarComprovantes'])->name('comprovante.index');
 ##USUÁRIO ADMIN SECTION END##
 
 
