@@ -49,7 +49,9 @@ class RecursoController extends Controller
     {
         //
         $recurso = Recurso::findOrFail($id);
-        dd($recurso);
+        $formulariUsuario = $recurso->formularioUsuario;
+
+        return view('pages.avaliacao.recurso.show', compact('recurso', 'formulariUsuario'));
     }
 
     /**

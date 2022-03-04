@@ -18,7 +18,7 @@ class Recurso extends Model
     ];
 
     public function formularioUsuario(){
-        return $this->belongsTo(FormularioUsuario::class, 'formulario_usuaurio_id', 'id');
+        return $this->belongsTo(FormularioUsuario::class, 'formulario_usuario_id', 'id');
     }
 
 }
