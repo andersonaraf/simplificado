@@ -12,6 +12,8 @@ class Recurso extends Model
     protected $fillable = [
         'formulario_usuario_id',
         'aprovou_recurso',
+        'status',
+        'motivo_recusar',
         'texto',
         'arquivo',
         'pontuacao',

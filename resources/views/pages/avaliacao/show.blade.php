@@ -74,12 +74,12 @@
                                                     @if(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->recurso): is_null($formularioUsuario->recurso))
                                                         <span
                                                             class="badge badge-pill badge-warning">NÃO SOLICITADO</span>
-                                                    @elseif(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->recurso->aprovou_recurso): is_null($formularioUsuario->recurso->aprovou_recurso))
+                                                    @elseif(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->recurso->status): is_null($formularioUsuario->recurso->status))
                                                         <span
                                                             class="badge badge-pill badge-warning">AGUADANDO APROVAÇÃO</span>
-                                                    @elseif(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->recurso->aprovou_recurso == 1: $formularioUsuario->recurso->aprovou_recurso == 1)
+                                                    @elseif(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->recurso->status == 1: $formularioUsuario->recurso->status == 1)
                                                         <span class="badge badge-pill badge-success">RECUSO NA FILA DE AVALIAÇÃO</span>
-                                                    @elseif(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->recurso->aprovou_recurso == 0: $formularioUsuario->recurso->aprovou_recurso == 0)
+                                                    @elseif(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->recurso->status == 0: $formularioUsuario->recurso->status == 0)
                                                         <span class="badge badge-pill badge-danger">RECUSO NEGADO</span>
                                                     @endif
                                                 </td>
@@ -96,7 +96,7 @@
                                                         </a>
                                                     @endif
                                                     {{--LINK PARA VERIFICAR O RECURSO--}}
-                                                    @if(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->recurso->aprovou_recurso): is_null($formularioUsuario->recurso->aprovou_recurso))
+                                                    @if(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->recurso->status): is_null($formularioUsuario->recurso->status))
                                                         <a href="{{route('recurso.show', isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->recurso->id : $formularioUsuario->recurso->id)}}"
                                                            class="btn btn-sm btn-warning" title="REALIZAR AVALIAÇÃO DO RECURSO">
                                                             <i class="material-icons">published_with_changes</i>

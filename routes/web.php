@@ -63,7 +63,7 @@ Route::group(['middleware' => 'acesso.restrito'] , function () {
     Route::resource('avaliar/formulario/candidato/pontuar', \App\Http\Controllers\Admin\Avaliacao\PontuacaoController::class)->only(['store', 'update']);
     Route::resource('avaliar/formulario/candidato/reprovar', \App\Http\Controllers\Admin\Avaliacao\ReprovarController::class)->only(['store']);
     Route::resource('relatorio/formulario/lista', \App\Http\Controllers\Admin\Relatorio\FormularioController::class)->only(['index', 'show']);
-    Route::resource('formulario/avaliar/recurso', \App\Http\Controllers\Admin\Avaliacao\RecursoController::class)->only(['show']);
+    Route::resource('formulario/avaliar/recurso', \App\Http\Controllers\Admin\Avaliacao\RecursoController::class)->only(['show', 'store']);
 
     Route::get('relatorio/formulario/completo/{id}', [\App\Http\Controllers\Admin\Relatorio\FormularioController::class, 'relatorioCompleto'])->name('relatorio.formulario.completo');
     Route::post('relatorio/formulario/porfiltro', [\App\Http\Controllers\Admin\Relatorio\FormularioController::class, 'relatorioPorFiltro'])->name('relatorio.formulario.por.filtro');
