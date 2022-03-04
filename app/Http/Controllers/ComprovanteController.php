@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ComprovanteRequest;
 use App\Models\Comprovante;
+use App\Models\FormularioUsuario;
 use App\Models\Pessoa;
 use App\Models\Title;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 class ComprovanteController extends Controller
 {
@@ -49,5 +51,12 @@ class ComprovanteController extends Controller
         $comprovante = Comprovante::where('comprovante', $comprovante)->first();
         $pdf = PDF::loadView('pdf', ['comprovante' => $comprovante]);
         return $pdf->setPaper('a4')->stream('file_pdf.pdf');;
+    }
+
+
+    public function listarComprovantes()
+    {
+        $formularioUsuarios = FormularioUsuario::where('user_id', Auth::user()->id)->get();
+        return view('usuario.area_user.comprovantes', compact('formularioUsuarios'));
     }
 }

@@ -46,7 +46,7 @@ Route::post('/usuario/alterar',[\App\Http\Controllers\Usuario\UsuarioController:
 Route::get('/usuario/recurso/{id}',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'create'])->name('usuario.recurso');
 Route::post('/usuario/recurso/salvar',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'store'])->name('usuario.recurso.salvar');
 //listar Comprovantes
-Route::get('listar');
+Route::get('listar/comprovantes', [\App\Http\Controllers\ComprovanteController::class, 'listarComprovantes'])->name('comprovante.index');
 ##USUÁRIO ADMIN SECTION END##
 
 

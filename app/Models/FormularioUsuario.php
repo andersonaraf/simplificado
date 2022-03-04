@@ -56,4 +56,9 @@ class FormularioUsuario extends Model implements Auditable
     public function avaliador(){
         return $this->hasOne(Avaliador::class, 'formulario_usuario', 'id');
     }
+
+    public function comprovante()
+    {
+        return $this->hasOne(Comprovante::class);
+    }
 }
