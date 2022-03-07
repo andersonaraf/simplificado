@@ -33,6 +33,17 @@
             $('.avaliar').click(function () {
                 let tipoRecurso = $(this).data('validar-recurso')
                 if(tipoRecurso == 'ACEITA RECURSO'){
+                    //VERIFICAR NÃO UTRAPASSOU A PONTUAÇÃO MÁXIMA
+                    if (parseFloat($('#recursoPontuar').val()) > parseFloat($('#recursoPontuar').attr('max'))) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Pontuação inválida',
+                            text: 'A pontuação máxima é de ' + $('#recursoPontuar').attr('max'),
+                            type: 'error',
+                            confirmButtonText: 'OK'
+                        })
+                        return false;
+                    }
                     //ENVIAR UMA REQUISIÇÃO PARA O SERVIDOR LIBERANDO O RECURSO PARA AVALIAÇÃO NOVAMENTE COM PONTUAÇÃO
                     $.ajax({
                         url: '{{route('recurso.store')}}',
@@ -41,6 +52,7 @@
                             _token: '{{csrf_token()}}',
                             idRecurso: '{{$recurso->id}}',
                             tipoRecurso: 1,
+                            recursoPontuacao: $('#recursoPontuar').val(),
                         },
                         success: function (response) {
                             if (response.type== 'success') {

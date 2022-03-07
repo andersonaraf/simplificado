@@ -24,4 +24,8 @@ class FormularioUsuarioCampo extends Model implements Auditable
     {
         return $this->belongsTo(Campo::class, 'campo_id', 'id');
     }
+
+    public function pontuacaoCampoLast(){
+        return $this->hasOne(PontuacaoCampo::class, 'formulario_usuario_campos_id', 'id')->latest();
+    }
 }

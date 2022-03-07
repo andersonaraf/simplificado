@@ -17,6 +17,7 @@
                     </div>
                 @else
                     {{--CAMPO NORMAL--}}
+
                     <div class="has info">
                         <div class="col col-12 has-info">
                             <h4 for="{{$campo->nome}}" class="text-dark font-weight-bold">NOME DO CAMPO: {{$campo->nome}}</h4>
