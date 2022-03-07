@@ -3,6 +3,9 @@
     <div class="content">
         <div class="container-fluid">
             <main class="container" id="ajuste">
+                <div class="row justify-content-end has-info">
+                    <a href="{{route('revisao.show', $formularioUsuario->formulario->id)}}" class="font-weight-bold text-info"><span class="material-icons">arrow_back</span>VOLTAR</a>
+                </div>
                 <div class="row">
                     <h4 class="text-dark font-weight-bold">INFORMAÇÕES DO PARTICIPANTE</h4>
                     <hr style="width: 100%;">

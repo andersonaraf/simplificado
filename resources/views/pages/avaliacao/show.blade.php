@@ -3,6 +3,10 @@
     <div class="content">
         <div class="container-fluid">
             <main class="container" id="ajuste">
+                <div class="row justify-content-end has-info">
+                    <a href="{{route('escolher.index')}}" class="font-weight-bold text-info"><span class="material-icons">arrow_back</span>VOLTAR</a>
+                </div>
+
                 <div class="row">
                     <div class="card">
                         <div class="card-body">
