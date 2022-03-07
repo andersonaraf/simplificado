@@ -78,7 +78,7 @@
                                                         <span
                                                             class="badge badge-pill badge-warning">AGUADANDO APROVAÇÃO</span>
                                                     @elseif(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->recurso->status == 1: $formularioUsuario->recurso->status == 1)
-                                                        <span class="badge badge-pill badge-success">RECUSO NA FILA DE REVISÃO</span>
+                                                        <span class="badge badge-pill badge-success">RECUSO AVALIADO</span>
                                                     @elseif(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->recurso->status == 0: $formularioUsuario->recurso->status == 0)
                                                         <span class="badge badge-pill badge-danger">RECUSO NEGADO</span>
                                                     @endif
@@ -95,7 +95,8 @@
                                                             <i class="material-icons">123</i>
                                                         </a>
                                                     @endif
-                                                    {{--VERFICAR SE EXISTE RECURSO--}}
+                                                    {{--VERFICAR SE EXISTE RECURSO E LIBERAR SOMENTE SE JÁ TIVER PASSADO POR AVALIAÇAÕ E REVISAO--}}
+
                                                     @if(isset($avaliador[0]) ? !is_null($formularioUsuario->formularioUsuario->recurso): !is_null($formularioUsuario->recurso))
                                                         {{--VERIFICAR SE O RECURSO JÁ FOI LIBERADO PARA REVISÃO--}}
                                                         @if(isset($avaliador[0]) ? is_null($formularioUsuario->formularioUsuario->recurso->status) : is_null($formularioUsuario->recurso->status))
@@ -105,13 +106,6 @@
                                                                 <i class="material-icons">published_with_changes</i>
                                                             </a>
                                                         @endif
-                                                        {{--VERFICAR SE O RECURSO FOI AVALIADO--}}
-{{--                                                        @if(isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->recurso->status == 1: $formularioUsuario->recurso->status == 1)--}}
-{{--                                                            <a href="{{route('candidato.edit',isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->id : $formularioUsuario->id)}}" class="btn btn-sm btn-warning"--}}
-{{--                                                               title="REALIZAR AVALIAÇÃO COM PONTUAÇÃO PARA RECURSO">--}}
-{{--                                                                <i class="material-icons">done_outline</i>--}}
-{{--                                                            </a>--}}
-{{--                                                        @endif--}}
                                                     @endif
                                                 </td>
                                             </tr>

@@ -16,7 +16,6 @@ class AddStatusAvaliacaoERevisaoToRecursosTable extends Migration
         Schema::table('recursos', function (Blueprint $table) {
             //
             $table->boolean('status_avaliacao')->after('status')->nullable()->comment('CAMPO PARA VERIFICAR SE O RECURSO FOI AVALIADO, AMBOS PRECISAM ESTÁ EM CONCORDÂNCIA.');
-            $table->boolean('status_revisao')->after('status_avaliacao')->nullable()->comment('CAMPO PARA VERIFICAR SE O RECURSO FOI REVISADO, AMBOS PRECISAM ESTÁ EM CONCORDÂNCIA.');
         });
     }
 
@@ -30,7 +29,6 @@ class AddStatusAvaliacaoERevisaoToRecursosTable extends Migration
         Schema::table('recursos', function (Blueprint $table) {
             //
             $table->dropColumn('status_avaliacao');
-            $table->dropColumn('status_revisao');
         });
     }
 }

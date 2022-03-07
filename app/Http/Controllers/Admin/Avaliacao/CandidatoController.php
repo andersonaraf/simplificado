@@ -52,8 +52,8 @@ class CandidatoController extends Controller
     public function show($id)
     {
         //
-        $formulariUsuario = FormularioUsuario::findOrFail($id);
-        return view('pages.avaliacao.candidato.show', compact('formulariUsuario'));
+        $formularioUsuario = FormularioUsuario::findOrFail($id);
+        return view('pages.avaliacao.candidato.show', compact('formularioUsuario'));
     }
 
     /**
@@ -65,13 +65,13 @@ class CandidatoController extends Controller
     public function edit($id)
     {
         //
-        $formulariUsuario = FormularioUsuario::findOrFail($id);
+        $formularioUsuario = FormularioUsuario::findOrFail($id);
         //VERIFICAR SE ESTÁ BLOQUEADO
-        if (!$formulariUsuario->lock || (strtotime($formulariUsuario->lock) < strtotime('-15minutes')) || $formulariUsuario->user_id_is_assessing == Auth::id()) {
-            $formulariUsuario->lock = Carbon::now();
-            $formulariUsuario->user_id_is_assessing = Auth::id();
-            $formulariUsuario->save();
-            return view('pages.avaliacao.candidato.edit', compact('formulariUsuario'));
+        if (!$formularioUsuario->lock || (strtotime($formularioUsuario->lock) < strtotime('-15minutes')) || $formularioUsuario->user_id_is_assessing == Auth::id()) {
+            $formularioUsuario->lock = Carbon::now();
+            $formularioUsuario->user_id_is_assessing = Auth::id();
+            $formularioUsuario->save();
+            return view('pages.avaliacao.candidato.edit', compact('formularioUsuario'));
         }
         else return redirect()->back()->with(['type' => 'warning', 'msg' => 'O formulário está sendo avaliado por outro usuário, por favor, tente novamente mais tarde.']);
     }

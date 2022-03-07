@@ -65,7 +65,7 @@
                             type: 'POST',
                             data: {
                                 _token: '{{csrf_token()}}',
-                                formularioUsuarioID: '{{$formulariUsuario->id}}',
+                                formularioUsuarioID: '{{$formularioUsuario->id}}',
                                 pontuacoes: pontuacoes,
                             },
                             success: function (response) {
@@ -78,7 +78,7 @@
                                         confirmButtonText: 'OK',
                                         timer: 3000
                                     }).then(function () {
-                                        window.location.href = '{{route('escolher.show', $formulariUsuario->formulario_id)}}'
+                                        window.location.href = '{{route('escolher.show', $formularioUsuario->formulario_id)}}'
                                     })
                                 } else {
                                     Swal.fire({
@@ -129,7 +129,7 @@
                                         type: 'POST',
                                         data: {
                                             _token: '{{csrf_token()}}',
-                                            formularioUsuarioID: '{{$formulariUsuario->id}}',
+                                            formularioUsuarioID: '{{$formularioUsuario->id}}',
                                             motivo: motivo,
                                         },
                                         success: (reponse) => {
@@ -141,7 +141,7 @@
                                                 confirmButtonText: 'OK',
                                                 timer: 3000
                                             }).then(function () {
-                                                window.location.href = '{{route('escolher.show', $formulariUsuario->formulario_id)}}'
+                                                window.location.href = '{{route('escolher.show', $formularioUsuario->formulario_id)}}'
                                             })
                                         }, error: (response) => {
                                             let error = JSON.parse(response.responseText);

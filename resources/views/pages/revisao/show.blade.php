@@ -18,14 +18,13 @@
                                             <th>CPF</th>
                                             <th>CARGO</th>
                                             <th class="text-right">STATUS</th>
-                                            <th class="text-right">STATUS RECURSO</th>
                                             <th class="text-right">OPÇÕES</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @csrf
                                         @foreach($formulario->formularioUsuario as $formularioUsuario)
-                                            @if(!is_null($formularioUsuario->avaliado) && is_null($formularioUsuario->revisado))
+                                            @if(!is_null($formularioUsuario->avaliado) && (is_null($formularioUsuario->revisado)))
                                                 <tr>
                                                     <td>{{mb_strtoupper($formularioUsuario->user->name)}}</td>
                                                     <td>{{ $formularioUsuario->user->pessoa->cpf}}</td>
@@ -37,19 +36,6 @@
                                                             <span class="badge badge-pill badge-success">AVALIADO</span>
                                                         @elseif($formularioUsuario->avaliado == 0)
                                                             <span class="badge badge-pill badge-danger">REPROVADO</span>
-                                                        @endif
-                                                    </td>
-                                                    <td class="text-right">
-                                                        @if(is_null($formularioUsuario->recurso))
-                                                            <span
-                                                                class="badge badge-pill badge-warning">NÃO SOLICITADO</span>
-                                                        @elseif(is_null($formularioUsuario->recurso->status))
-                                                            <span
-                                                                class="badge badge-pill badge-warning">AGUADANDO VALIDAÇAÕ</span>
-                                                        @elseif($formularioUsuario->recurso->status == 1)
-                                                            <span class="badge badge-pill badge-success">RECUSO NA FILA DE REVISÃO</span>
-                                                        @elseif($formularioUsuario->recurso->status == 0)
-                                                            <span class="badge badge-pill badge-danger">RECUSO NEGADO</span>
                                                         @endif
                                                     </td>
                                                     <td class="text-right">
@@ -68,7 +54,6 @@
                                             <th>CPF</th>
                                             <th>CARGO</th>
                                             <th class="text-right">STATUS</th>
-                                            <th class="text-right">STATUS RECURSO</th>
                                             <th class="text-right">OPÇÕES</th>
                                         </tr>
                                         </tfoot>

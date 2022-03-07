@@ -14,7 +14,6 @@ class Recurso extends Model
         'aprovou_recurso',
         'status',
         'status_avaliacao',
-        'status_revisao',
         'motivo_recusar',
         'texto',
         'arquivo',

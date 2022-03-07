@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Revisao;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Recurso;
 use App\Models\Formulario;
 use App\Models\FormularioUsuario;
 use App\Models\GrupoUser;
@@ -84,5 +85,4 @@ class RevisaoController extends Controller
             return response()->json(false, 500);
         }
     }
-
 }

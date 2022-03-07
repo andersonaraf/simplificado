@@ -79,9 +79,16 @@ class RecursoController extends Controller
     {
         //
         $recurso = Recurso::findOrFail($id);
-        $formulariUsuario = $recurso->formularioUsuario;
+        //VERIFICAR SE O FORMULARIO JÁ FOI AVALIADO E REVISADO
+
+        if($recurso->formularioUsuario->avaliado != $recurso->formularioUsuario->revisado || (is_null($recurso->formularioUsuario->avaliado) || is_null($recurso->formularioUsuario->revisado))) {
+            return redirect()->back()->with(['type' => 'error', 'msg' => 'Formulário ainda não foi avaliado ou revisado!']);
+        }
+
+
+        $formularioUsuario = $recurso->formularioUsuario;
         //BLOQUEAR POR 15 MINUTOS O ACESSO AO FORMULÁRIO
-        return view('pages.avaliacao.recurso.show', compact('recurso', 'formulariUsuario'));
+        return view('pages.avaliacao.recurso.show', compact('recurso', 'formularioUsuario'));
     }
 
     /**

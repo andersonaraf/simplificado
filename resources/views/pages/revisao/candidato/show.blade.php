@@ -20,15 +20,17 @@
                         @include('pages.revisao.candidato.anexos', ['pontuavel' => true])
                         <div class="row justify-content-end">
                             <div class="col col-12 text-right">
-                                @if($formularioUsuario->avaliado == 1)
-                                    <input type="button" data-tipo-avaliacao="APROVAR"
-                                           class="btn btn-outline-success font-weight-bold avaliar" value="APROVAR">
-                                @elseif($formularioUsuario->avaliado == 0)
-                                    <input type="button" data-tipo-avaliacao="REPROVAR"
-                                           class="btn btn-outline-danger font-weight-bold avaliar" value="REPROVAR">
+                                @if(is_null($formularioUsuario->recurso) || (!is_null($formularioUsuario->avaliado) && is_null($formularioUsuario->revisado)))
+                                    @if($formularioUsuario->avaliado == 1)
+                                        <input type="button" data-tipo-avaliacao="APROVAR"
+                                               class="btn btn-outline-success font-weight-bold avaliar" value="APROVAR">
+                                    @elseif($formularioUsuario->avaliado == 0)
+                                        <input type="button" data-tipo-avaliacao="REPROVAR"
+                                               class="btn btn-outline-danger font-weight-bold avaliar" value="REPROVAR">
+                                    @endif
+                                    <input type="button" data-tipo-avaliacao="AVALIACAO"
+                                           class="btn btn-outline-warning font-weight-bold avaliar" value="AVALIAÇÃO">
                                 @endif
-                                <input type="button" data-tipo-avaliacao="AVALIACAO"
-                                       class="btn btn-outline-warning font-weight-bold avaliar" value="AVALIAÇÃO">
                             </div>
                         </div>
                     </form>
@@ -171,8 +173,7 @@
                 }
 
             })
-        })
-        ;
+        });
     </script>
 @endpush
 
