@@ -6,7 +6,8 @@
                data-required="{{$campo->atributos->required}}"
                id="{{$campo->nome}}"
                placeholder="0.0" step="0.1"
-               max="{{!is_null($campo->ponto) ? $campo->ponto : 100}}" min="0"  disabled value="{{$campo->ponto}}">
+               max="{{!is_null($campo->ponto) ? $campo->ponto : 100}}" min="0"  disabled
+               value="{{!is_null($formularioUsuario->formularioUsuarioCampo->where('campo_id', $campo->id)->first()->pontuacaoCampoLast) ? $formularioUsuario->formularioUsuarioCampo->where('campo_id', $campo->id)->first()->pontuacaoCampoLast->pontuacao : 0.0}}">
         {{--        SPAN ERROR--}}
         <span class="invalid-feedback" role="alert" id="span-{{$formularioUsuario->formularioUsuarioCampo->where('campo_id', $campo->id)->first()->id}}">
             <strong id="error-{{$formularioUsuario->formularioUsuarioCampo->where('campo_id', $campo->id)->first()->id}}"></strong>
