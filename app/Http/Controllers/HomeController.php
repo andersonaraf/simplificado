@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pessoa;
 use App\Models\Pontuacao;
+use App\Models\Recurso;
 use App\Models\RecursoModel;
 
 class HomeController extends Controller
@@ -15,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('acesso.restrito');
     }
 
     /**
@@ -26,8 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $pessoa = Pessoa::all()->count();
-        $pontuacao = Pessoa::whereNotNull('status')->get()->count();
-        $recurso = RecursoModel::all()->count();
+        $pontuacao = 0;
+        $recurso = Recurso::all()->count();
+
         return view('dashboard', [
             'inscricao_total' => $pessoa,
             'avaliacao_total' => $pontuacao,

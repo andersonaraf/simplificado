@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{is_null(title()) ? 'RB SIMPLIFICADO' : title()->titulo}}</title>
+
+    <title>{{title()}}</title>
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material') }}/img/apple-icon.png">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
@@ -19,7 +20,7 @@
     <link rel="stylesheet" href="{{asset('assets/fontawesome-free-5.15.2-web/css/all.min.css')}}">
     <!--CS PAGE-->
     <link rel="stylesheet" href="{{asset('assets/sweetalert2/sweetalert2.min.css')}}">
-    @yield('css')
+    @stack('css')
 </head>
 
 <body class="{{ $class ?? '' }}">
@@ -33,6 +34,7 @@
     @include('layouts.page_templates.guest')
 @endguest
 @yield('recurso')
+
 
 <!--   Core JS Files   -->
 {{--<script src="{{ asset('material') }}/js/core/jquery.min.js"></script>--}}

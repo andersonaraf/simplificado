@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -41,6 +42,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+
         $this->validate($request, [
             'email' => 'required|email', 'password' => 'required',
         ]);
@@ -50,6 +52,11 @@ class LoginController extends Controller
         if (auth()->attempt($credentials, $request->has('remember'))) { //this if validate if the user is on the database line 1
             if (auth()->user()->block == 1) {
                 auth()->logout();
+            }
+            if (strtoupper(auth()->user()->tipo) != 'ADMIN' || strtoupper(auth()->user()->tipo) != 'ADMIN') {
+                return redirect()->route('inicio');
+            }elseif (Auth::user()->tipo == 'CANDIDATO') {
+                return view('usuario.area_user.index_user');
             }
             return redirect()->intended($this->redirectPath());
             //this redirect if user is the db line 2

@@ -1,4 +1,4 @@
-@if (session()->has('sucess'))
+@if (session()->has('success'))
     <div class="modal" id="modal" tabindex="-1" role="dialog" style="display: block">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -6,7 +6,7 @@
 
                 </div>
                 <div class="modal-body text-center">
-                    <strong>{{session('sucess')}}</strong>
+                    <strong>{{session('success')}}</strong>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Fechar</button>

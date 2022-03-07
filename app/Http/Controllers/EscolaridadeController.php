@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EditalDinamico;
 use App\Models\Escolaridade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EscolaridadeController extends Controller
 {
@@ -13,12 +13,9 @@ class EscolaridadeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         //
-        $editalDinamico = EditalDinamico::where('telas_edital_id', $id)->first();
-        $escolaridades = Escolaridade::all();
-        return view('pages.lista-inscricoes.escolaridades.list', compact('escolaridades', 'editalDinamico'));
     }
 
     /**
@@ -34,27 +31,37 @@ class EscolaridadeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
-//        dd($request->all());
-        $escolaridade = new Escolaridade();
-        $editalDinamico = EditalDinamico::findOrFail($request->editalDinamicoID);
-        $escolaridade->nivel_escolaridade = $request->inputEscolaridade;
-
-        if($escolaridade->save()){
-            session()->put('sucess', 'Nível de Escolaridade criado com sucesso.');
-        } else session()->put('error', 'Não foi possível cadastrar essa escolaridade.');
-        return redirect()->route('escolaridade.lista.index', $editalDinamico->telas_edital_id);
+        try {
+            \DB::beginTransaction();
+            $escolaridade = new Escolaridade();
+            $escolaridade->formulario_id = $request->formularioID;
+            $escolaridade->nivel_escolaridade = mb_strtoupper($request->nomeEscolaridade);
+            $escolaridade->bloquear = 0;
+            $escolaridade->save();
+            \DB::commit();
+            return redirect()->route('configuracao.create', $request->formularioID)->with([
+                'type' => 'success',
+                'msg' => 'Nova escolaridade cadastrada.'
+            ]);
+        } catch (\Exception $exception) {
+            \DB::rollBack();
+            return redirect()->back()->with([
+                'type' => 'error',
+                'msg' => 'Algo de errado aconteceu: ' . $exception->getMessage()
+            ]);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -65,7 +72,7 @@ class EscolaridadeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -76,8 +83,8 @@ class EscolaridadeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -88,11 +95,40 @@ class EscolaridadeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+        try {
+            \DB::beginTransaction();
+            $escolaridade = Escolaridade::findOrFail($id);
+            $escolaridade->delete();
+            \DB::commit();
+            return response()->json('Cargo deletado com sucesso.');
+        } catch (\Exception $exception) {
+            \DB::rollBack();
+            return response()->json(false, 405);
+        }
+    }
+
+    public function bloquear(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $escolaridade = Escolaridade::findOrFail($request->escolaridade_id);
+            $escolaridade->bloquear = !$escolaridade->bloquear;
+            $escolaridade->save();
+            foreach ($escolaridade->cargos as $cargo){
+                $cargo->bloquear = $escolaridade->bloquear;
+                $cargo->save();
+            }
+            DB::commit();
+            return response()->json(true, 200);
+        }catch (\Exception $exception){
+            DB::rollBack();
+            return response()->json(false, 500);
+        }
     }
 }

@@ -21,98 +21,73 @@
             @if(auth()->user()->tipo == 'Admin')
                 <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
                     <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
-                      <i class="material-icons">settings</i>
+                        <i class="material-icons">settings</i>
                         <p>{{ __('Configurações') }}
                             <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse" id="laravelExample">
+                    <div class="collapse {{$activePage == 'user-management' ? 'show' : ''}}" id="laravelExample">
                         <ul class="nav">
-                            <li class="nav-item{{ $activePage == 'TituloAlterar' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('titulo.index')}}">
-                                    <span class="sidebar-mini"> ATS </span>
-                                    <span class="sidebar-normal"> {{ __('Alterar Título do Sistema') }} </span>
+                            <li class="nav-item{{ isset($subActivePage)  ? ($subActivePage == 'Formulários' ? ' active' : '') : '' }}">
+                                <a class="nav-link" href="{{route('formulario.index')}}">
+                                    <span class="sidebar-mini"> FOR </span>
+                                    <span class="sidebar-normal"> {{ __('FORMULÁRIOS') }} </span>
                                 </a>
                             </li>
-                            <li class="nav-item{{ $activePage == 'ListaCarrossel' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('lista.carrossel.index')}}">
-                                    <span class="sidebar-mini"> C/AB </span>
-                                    <span class="sidebar-normal"> {{ __('Criar/Alterar  Banner') }} </span>
+                        </ul>
+
+                        <ul class="nav">
+                            <li class="nav-item{{ isset($subActivePage) ? ($subActivePage  == 'Grupos' ? ' active' : '') : '' }}">
+                                <a class="nav-link" href="{{route('grupo.index')}}">
+                                    <span class="sidebar-mini"> GRU </span>
+                                    <span class="sidebar-normal"> {{ __('GRUPOS') }} </span>
                                 </a>
                             </li>
-                            <li class="nav-item{{ $activePage == 'Gestao' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{ route('user.index') }}">
-                                    <span class="sidebar-mini"> GU </span>
-                                    <span class="sidebar-normal"> {{ __('Gestão de Usuário') }} </span>
-                                </a>
-                            </li>
-                            <li class="nav-item{{ $activePage == 'TelaCriar' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('tela-criar')}}">
-                                    <span class="sidebar-mini"> LT </span>
-                                    <span class="sidebar-normal"> {{ __('Criar Tela/Anexos') }} </span>
-                                </a>
-                            </li>
-                            <li class="nav-item{{ $activePage == 'TelaLiberar' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('tela-liberar')}}">
-                                    <span class="sidebar-mini"> LT </span>
-                                    <span class="sidebar-normal"> {{ __('Liberar Tela/Anexos') }} </span>
-                                </a>
-                            </li>
-                            <li class="nav-item{{ $activePage == 'list_formulario_ativo' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('lista.formularios')}}">
-                                    <span class="sidebar-mini"> LFA </span>
-                                    <span class="sidebar-normal"> {{ __('Lista de Formulários Ativos') }} </span>
-                                </a>
-                            </li>
-                            <li class="nav-item{{ $activePage == 'lista_participantes' ? ' active' : '' }}">
-                                <a class="nav-link" href="{{route('lista.candidatos.index')}}">
-                                    <span class="sidebar-mini"> CA </span>
-                                    <span class="sidebar-normal"> {{ __('Candidatos') }} </span>
+                        </ul>
+                        <ul class="nav">
+                            <li class="nav-item{{ $activePage == 'cadastrar' ? ' active' : '' }}">
+                                <a class="nav-link" href="{{ route('novo.usuario') }}">
+                                    <i class="material-icons">person_add</i>
+                                    <p>{{ __('CADASTRA USÚARIO') }}</p>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
             @endif
-            @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Avaliador' || auth()->user()->tipo == 'Supervisor')
+            @if(auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Avaliador')
                 <li class="nav-item{{ $activePage == 'avaliacao' ? ' active' : '' }}">
-                    <a class="nav-link" href="{{ route('visualizacao.escolher.edital') }}">
+                    <a class="nav-link" href="{{ route('escolher.index') }}">
                         <i class="material-icons">library_books</i>
                         <p>{{ __('Avaliação') }}</p>
                     </a>
                 </li>
             @endif
-
-            @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Revisor' || auth()->user()->tipo == 'Supervisor')
+            @if(auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Revisor')
                 <li class="nav-item{{ $activePage == 'revisao' ? ' active' : '' }}">
-                    <a class="nav-link" href="{{ route('revisao.escolher.edital') }}">
-                        <i class="material-icons">filter_none</i>
+                    <a class="nav-link" href="{{ route('revisao.index') }}">
+                        <i class="material-icons">person_search</i>
                         <p>{{ __('Revisão') }}</p>
                     </a>
                 </li>
             @endif
-            @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Recurso' || auth()->user()->tipo == 'Supervisor')
-                <li class="nav-item{{ $activePage == 'recurso' ? ' active' : '' }}">
-                    <a class="nav-link" href="{{route('recurso.escolher.edital')}}">
-                        <i class="material-icons">folder_open</i>
-                        <p>{{ __('Recurso') }}</p>
+            @if(auth()->user()->tipo == 'Admin')
+                <li class="nav-item{{ $activePage == 'formularios-relatorios' ? ' active' : '' }}">
+                    <a class="nav-link" href="{{route('lista.index')}}">
+                        <i class="material-icons">picture_as_pdf</i>
+                        <p>{{ __('Relatórios') }}</p>
                     </a>
                 </li>
             @endif
-            @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Supervisor')
-                <li class="nav-item{{ $activePage == 'relatorio' ? ' active' : '' }}">
-                    <a class="nav-link" href="{{route('relatorio.selecionar.edital')}}">
-                        <i class="material-icons">subject</i>
-                        <p>{{ __('Relatório') }}</p>
-                    </a>
-                </li>
-                <li class="nav-item{{ $activePage == 'transparencia' ? ' active' : '' }}">
-                    <a class="nav-link" href="{{route('lista-transparencia')}}">
-                        <i class="material-icons">visibility</i>
-                        <p>{{ __('Transparência') }}</p>
-                    </a>
-                </li>
-            @endif
+            {{--            @if (auth()->user()->tipo == 'Admin' || auth()->user()->tipo == 'Avaliador' || auth()->user()->tipo == 'Supervisor')--}}
+            {{--                <li class="nav-item{{ $activePage == 'avaliacao' ? ' active' : '' }}">--}}
+            {{--                    <a class="nav-link" href="{{ route('visualizacao.escolher.edital') }}">--}}
+            {{--                        <i class="material-icons">library_books</i>--}}
+            {{--                        <p>{{ __('Avaliação') }}</p>--}}
+            {{--                    </a>--}}
+            {{--                </li>--}}
+            {{--            @endif--}}
+
         </ul>
     </div>
 </div>

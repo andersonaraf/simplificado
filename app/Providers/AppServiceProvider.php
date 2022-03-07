@@ -7,6 +7,7 @@ use App\Charts\AvaliacoesChart;
 use App\Charts\InscricoesChart;
 use App\Charts\RecursoChart;
 use App\Charts\RevisaoChart;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use ConsoleTVs\Charts\Registrar as Charts;
 
@@ -35,5 +36,7 @@ class AppServiceProvider extends ServiceProvider
             RecursoChart::class,
             AvaliacoesChart::class,
         ]);
+
+        Paginator::useBootstrap();
     }
 }

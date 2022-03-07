@@ -15,6 +15,7 @@ class Comprovante extends Model implements Auditable
     protected $fillable = [
         'id',
         'comprovante',
+        'formulario_usuario_id'
     ];
 
     public function pessoa(){

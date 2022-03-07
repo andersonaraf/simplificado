@@ -1,11 +1,5 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TelasDinamicas\TelasEditalController;
-use App\Http\Controllers\TelasDinamicas\TelaLiberarController;
-use App\Http\Controllers\TelasDinamicas\TelaCriarController;
-use App\Models\Cargo;
-use App\Models\Escolaridade;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,149 +11,96 @@ use App\Models\Escolaridade;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//FALBACK
+Route::fallback(function (){
+   dd('Sem resposta com o servidor');
+});
 //LOGIN
 Auth::routes([
     'register' => false
 ]);
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/sair', function () {
     auth()->logout();
-    return redirect()->route('inical');
+    return redirect()->route('inicio');
 })->name('sair');
 
-Route::get('/', [\App\Http\Controllers\WeelcomeController::class, 'index'])->name('inical');
+//AREA DO USUÁRIO ::INICIO::
+//Inscrição usuário
+Route::get('/', [\App\Http\Controllers\WeelcomeController::class, 'index'])->name('inicio');
+Route::get('/cadastro/simplificado', [\App\Http\Controllers\RegistroController::class, 'index'])->name('cadastro-simplificado');
+Route::post('/cadastro/simplificado/salvar', [\App\Http\Controllers\RegistroController::class, 'store'])->name('cadastro-simplificado.store');
+Route::get('usuario/formulario/{id}', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'show'])->name('usuario.formulario.show');
+Route::get('usuario/inscricao/{cargo_id}/{formulario_id}', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'create'])->name('usuario.formulario.create');
+Route::post('usuario/finalizar/inscricao', [\App\Http\Controllers\Usuario\UsuarioFormularioController::class, 'store'])->name('usuario.formulario.store');
 
-Route::get('/solicitacao/recurso', [\App\Http\Controllers\RecursoController::class, 'index'])->name('recurso');
-
-Route::post('/recurso-pedir', 'RecursoController@pedirRecurso')->name('recurso-pedir');
-
-Route::get('/registro/{id}', [\App\Http\Controllers\RegistroController::class, 'index'])->name('registro');
-Route::any('registro/parte1', [\App\Http\Controllers\RegistroController::class, 'storePart1'])->name('registro/parte1');
-Route::post('registro/parte2', 'RegistroController@storePart2')->name('registro/parte2');
-Route::get('/registro/anexos/{id}', [\App\Http\Controllers\RegistroController::class, 'buscaIndex'])->name('registro/anexos');
-
-Route::get('/comprovante/{comprovante}', 'ComprovanteController@index')->name('registro/comprovante'); //
-
-Route::get('/protocolo', 'ComprovanteController@protocolo')->name('protocolo');
-Route::post('comprovante-procurar', 'ComprovanteController@procurar')->name('comprovante-procurar');
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('table-list', function () {
-        return view('pages.table_list');
-    })->name('table');
-
-    Route::get('/visualizacao/{editalID}', 'AreaRestritaController@index')->name('/visualizacao');
-    Route::get('/avaliar/{id}', [\App\Http\Controllers\AreaRestritaController::class, 'index2'])->name('/avaliar');
-    Route::post('pontuacao', 'PontuacaoController@store')->name('pontuacao');
-
-    Route::get('/revisao/{editalID}', 'AreaRestritaController@index3')->name('revisao');
-    Route::get('/aprovar/{id}', 'AreaRestritaController@aprovar')->name('/aprovar');
-    Route::get('/aprovarpessoa/{id}', 'PontuacaoController@aceitarAvaliacao')->name('aprovarpessoa');
-
-    Route::get('/recurso/escolher/edital', [\App\Http\Controllers\RecursoAdminController::class, 'index'])->name('recurso.escolher.edital');
-    Route::get('/visualizacao-recurso/{id}', 'AreaRestritaController@index4')->name('visualizacao-recurso');
-    Route::get('/recurso-unico/{id}', [\App\Http\Controllers\AreaRestritaController::class, 'recursoUnico'])->name('recurso-unico');
+##USUÁRIO ADMIN SECTION##
+//retorna tela de admin do usuário28072000
+Route::get('/usuario', [\App\Http\Controllers\Usuario\UsuarioController::class, 'index'])->name('usuario.index');
+//lista processos participados pelo usuário
+Route::get('/usuario/lista/{id}', [\App\Http\Controllers\Usuario\UsuarioController::class, 'show'])->name('usuario.lista.processos');
+Route::get('/usuario/ver/{user_id}/{form_id}', [\App\Http\Controllers\Usuario\UsuarioController::class, 'edit'])->name('usuario.view.processos');
+Route::get('/usuario/perfil/{id}',[\App\Http\Controllers\Usuario\UsuarioController::class, 'perfil'])->name('usuario.perfil');
+Route::post('/usuario/alterar',[\App\Http\Controllers\Usuario\UsuarioController::class, 'update'])->name('usuario.perfil.update');
+//Tela Recurso
+Route::get('/usuario/recurso/{id}',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'create'])->name('usuario.recurso');
+Route::post('/usuario/recurso/salvar',[\App\Http\Controllers\Usuario\UsuarioRecursoController::class,'store'])->name('usuario.recurso.salvar');
+//listar Comprovantes
+Route::get('listar/comprovantes', [\App\Http\Controllers\ComprovanteController::class, 'listarComprovantes'])->name('comprovante.index');
+##USUÁRIO ADMIN SECTION END##
 
 
-    Route::get('/add-user', function () {
-        return view('auth.register');
-    })->name('add-user');
-    Route::post('add-create', 'AddUserController@store')->name('add-create');
-    Route::get('delete-user/{id}', [\App\Http\Controllers\UserController::class, 'delete'])->name('delete-user');
-    Route::get('edit-user/{id}', 'UserController@show')->name('edit-user');
-    Route::any('update-user/{id}', 'UserController@update')->name('update-user');
-    Route::get('/lista-transparencia', 'TransparenciaController@index')->name('lista-transparencia');
-    Route::get('/unico-transparencia/{id}', 'TransparenciaController@show')->name('unico-transparencia');
-    Route::post('/pesquisa-transparencia', 'TransparenciaController@search')->name('pesquisa-transparencia');
+//AREA DO USUÁRIO ::FIM::
 
-    Route::get('/tela-criar', [TelaCriarController::class, 'index'])->name('tela-criar');
-    Route::get('/tela-liberar', [TelaLiberarController::class, 'index'])->name('tela-liberar');
-    Route::post('tela-criar-salvar', [TelasEditalController::class, 'store'])->name('tela-criar-salvar');
-    Route::get('tela-deletar/{id}', [TelasEditalController::class, 'delete'])->name('tela-deletar');
-    Route::get('tela-unica-mostra/{id}', [TelasEditalController::class, 'show'])->name('tela-unica-mostra');
-    Route::match(['post', 'get'], 'tela-editar/{id}', [TelasEditalController::class, 'update'])->name('tela-editar');
+Route::group(['middleware' => 'acesso.restrito'] , function () {
+    Route::resource('formulario', \App\Http\Controllers\FormularioController::class);
+    Route::resource('formulario/configuracao', \App\Http\Controllers\ConfiguracaoFormularioController::class)->only(['index', 'store', 'show', 'edit', 'update']);
+    Route::resource('formulario/configuracao/escolaridade', \App\Http\Controllers\EscolaridadeController::class);
+    Route::resource('formulario/configuracao/escolaridade/cargo', \App\Http\Controllers\CargoController::class);
+    Route::resource('formulario/configuracao/campo', \App\Http\Controllers\Admin\Configuracao\Formulario\CampoController::class);
+    Route::resource('avaliar/formulario/escolher', \App\Http\Controllers\Admin\Avaliacao\FormularioController::class)->only(['index', 'show']);
+    Route::resource('avaliar/formulario/candidato', \App\Http\Controllers\Admin\Avaliacao\CandidatoController::class)->only(['store', 'show', 'edit']);
+    Route::resource('avaliar/formulario/candidato/pontuar', \App\Http\Controllers\Admin\Avaliacao\PontuacaoController::class)->only(['store', 'update']);
+    Route::resource('avaliar/formulario/candidato/reprovar', \App\Http\Controllers\Admin\Avaliacao\ReprovarController::class)->only(['store']);
+    Route::resource('relatorio/formulario/lista', \App\Http\Controllers\Admin\Relatorio\FormularioController::class)->only(['index', 'show']);
+    Route::resource('formulario/avaliar/recurso', \App\Http\Controllers\Admin\Avaliacao\RecursoController::class)->only(['show', 'store']);
 
-    Route::get('avaliacao-pne', 'PNE\AvaliacaoPNEController@index')->name('avaliacao-pne');
-    Route::get('avaliacao-pne-aceitar/{id}', 'PNE\AvaliacaoPNEController@update')->name('avaliacao-pne-aceitar');
-    Route::get('avaliacao-pne-recusar-motivo/{id}', 'PNE\AvaliacaoPNERecusarController@show')->name('avaliacao-pne-recusar-motivo');
-    Route::match(['post', 'get'], 'avaliacao-pne-recusar/{id}', 'PNE\AvaliacaoPNERecusarController@update')->name('avaliacao-pne-recusar');
-
-    Route::get('visualizacao-avaliar/{id}', 'VisualizacaoPessoas\VisualizarAvaliacaoController@show')->name('visualizacao-avaliar');
-    Route::get('busca-candidato', 'BuscaCandidatos\BuscaCandidatosController@index')->name('busca-candidatos');
-    Route::post('pesquisa-candidato', 'BuscaCandidatos\BuscaCandidatosController@show')->name('pesquisa-candidato');
-
-    Route::get('alterar-titulo-mostrar', 'TelasDinamicas\TituloController@index')->name('titulo.index');
-    Route::post('alterar-titulo/{id}', 'TelasDinamicas\TituloController@update')->name('titulo.update');
-
-    Route::get('lista-carrossel', 'TelasDinamicas\CarrosselController@index')->name('lista.carrossel.index');
-    Route::get('carrossel-edit/{id}', [\App\Http\Controllers\TelasDinamicas\CarrosselController::class, 'edit'])->name('carrossel.edit');
-    Route::post('carrossel-update/{id}', 'TelasDinamicas\CarrosselController@update')->name('carrossel.update');
-    Route::get('carrossel-delete/{id}', 'TelasDinamicas\CarrosselController@destroy')->name('carrossel.delete');
-    Route::get('carrossel-create', 'TelasDinamicas\CarrosselController@create')->name('carrossel.create');
-    Route::post('carrossel-store', [\App\Http\Controllers\TelasDinamicas\CarrosselController::class, 'store'])->name('carrossel.store');
-
-    Route::get('lista/formularios', [\App\Http\Controllers\ListaInscricoesController::class, 'index'])->name('lista.formularios');
-    Route::get('formularios/visualizar/{id}', [\App\Http\Controllers\ListaInscricoesController::class, 'show'])->name('formulario.show');
-    Route::get('remover/TipoAnexo/{id}', [\App\Http\Controllers\TipoAnexoController::class, 'destroy'])->name('tipoanexo.delete');
-    Route::post('procurar/cargo', [\App\Http\Controllers\ListaInscricoesController::class, 'search'])->name('cargo.search');
-    Route::post('salvar/tipoAnexo', [\App\Http\Controllers\TipoAnexoController::class, 'store'])->name('tipoanexo.store');
-
-    //Configurações do edital
-    Route::get('lista/escolaridade/{id}', [\App\Http\Controllers\EscolaridadeController::class, 'index'])->name('escolaridade.lista.index');
-    Route::post('/escolaridade/salvar', [\App\Http\Controllers\EscolaridadeController::class, 'store'])->name('escolaridade.store');
-    Route::get('/escolaridade/aceitar/{idEdital}/{idEscolaridade}', [\App\Http\Controllers\EscolaridadeEditalDinamicoController::class, 'aceito'])->name('escolaridade.edital.dinamico');
-    Route::get('/escolaridade/remover/{idEdital}/{idEscolaridade}', [\App\Http\Controllers\EscolaridadeEditalDinamicoController::class, 'remover'])->name('escolaridade.edital.dinamico.remover');
-
-    Route::get('/escolaridade/cargo/{idEdital}/{idEscolaridade}', [\App\Http\Controllers\EscolaridadeEditalDinamicoController::class, 'escolaridadeEditalCargo'])->name('escolaridade.edital.cargo');
-    Route::post('/cargo/salvar', [\App\Http\Controllers\CargoController::class, 'store'])->name('cargo.store');
-    Route::get('/cargo/deletar/{id}', [\App\Http\Controllers\CargoController::class, 'destroy'])->name('cargo.delete');
-    Route::get('/cargo/editar', [\App\Http\Controllers\CargoController::class, 'edit'])->name('cargo.edita');
-    Route::post('/cargo/update', [\App\Http\Controllers\CargoController::class, 'update'])->name('cargo.update');
-
-    Route::get('pontuacao/{id}', [\App\Http\Controllers\EscolaridadeController::class, 'index'])->name('escolaridade.lista.index');
-
-    Route::get('edital/formulario/anexos/{id}', [\App\Http\Controllers\EditalDinamicoTipoAnexoController::class, 'index'])->name('edital.formulario.anexo');
-    Route::post('/edital/formulario/salvar', [\App\Http\Controllers\EditalDinamicoTipoAnexoController::class, 'store'])->name('edital.formulario.store');
-    Route::get('/documento/dinamico/editar', [\App\Http\Controllers\EditalDinamicoTipoAnexoController::class, 'edit'])->name('edital.formulario.edita');
-    Route::post('/documento/dinamico/update', [\App\Http\Controllers\EditalDinamicoTipoAnexoController::class, 'update'])->name('edital.formulario.update');
-
-    Route::get('/documento/dinamico/deletar/{id}', [\App\Http\Controllers\DocumentoDinamicoController::class, 'destroy'])->name('documento.dinamico.delete');
-
-    Route::post('/avaliador/aprovar/', [\App\Http\Controllers\AvaliadorAvaliarController::class, 'aprovar'])->name('avaliador.avaliar.aprovar');
-    Route::post('/avaliador/reprovar/', [\App\Http\Controllers\AvaliadorAvaliarController::class, 'reprovar'])->name('avaliador.avaliar.reprovar');
-
-    Route::get('/revisor/index/{id}', [\App\Http\Controllers\RevisorRevisarController::class, 'index'])->name('revisor.index');
-    Route::post('/revisor/aceitar/avaliacao', [\App\Http\Controllers\RevisorRevisarController::class, 'aceitarAvaliar'])->name('revisor.aceitar.avaliacao');
-    Route::post('/revisor/reavaliar/', [\App\Http\Controllers\RevisorRevisarController::class, 'reavaliar'])->name('revisor.reavaliar');
-
-    Route::get('/escolher/edital/visualizacao', [\App\Http\Controllers\VisualizacaoTipoEdital::class, 'index'])->name('visualizacao.escolher.edital');
-    Route::get('/escolher/edital/revisao', [\App\Http\Controllers\RevisaoTipoEdital::class, 'index'])->name('revisao.escolher.edital');
-
-    Route::post('/recurso/recusar', [\App\Http\Controllers\RecursoAdminController::class, 'negar'])->name('recurso.negar');
-    Route::post('/recurso/aceitar', [\App\Http\Controllers\RecursoAdminController::class, 'aceitar'])->name('recurso.aceitar');
-
-    Route::get('/relatorio/selecionar/edital', [\App\Http\Controllers\RelatoriosController::class, 'selecionarEdital'])->name('relatorio.selecionar.edital');
-    Route::get('/relatorio/visualizar/{id}', [\App\Http\Controllers\RelatoriosController::class, 'index'])->name('relatorio.visualizar');
-    Route::post('/relatorio/gerar/', [\App\Http\Controllers\RelatoriosController::class, 'gerarRelatorio'])->name('relatorio.gerar');
-    Route::get('/relatorio/unico/{id}', [\App\Http\Controllers\RelatoriosController::class, 'visualizar'])->name('relatorio.unico');
-    Route::get('/controller/bloquear/{id}', [\App\Http\Controllers\UserController::class, 'block'])->name('user.block');
-
-    //LISTA CANDIDATOS
-    Route::get('lista/candidatos/{pessoas?}', [\App\Http\Controllers\ListaCandidatos\ListaController::class, 'index'])->name('lista.candidatos.index');
-    Route::post('lista/candidatos/filtro', [\App\Http\Controllers\ListaCandidatos\ListaController::class, 'filtro'])->name('lista.candidatos.filtro');
-    Route::get('candidato/{id}', [\App\Http\Controllers\ListaCandidatos\ListaController::class, 'devolverAvaliacao'])->name('lista.candidatos.devolverAvaliacao');
+    Route::get('relatorio/formulario/completo/{id}', [\App\Http\Controllers\Admin\Relatorio\FormularioController::class, 'relatorioCompleto'])->name('relatorio.formulario.completo');
+    Route::post('relatorio/formulario/porfiltro', [\App\Http\Controllers\Admin\Relatorio\FormularioController::class, 'relatorioPorFiltro'])->name('relatorio.formulario.por.filtro');
+    Route::get('formulario/configuracao/collapse/show/{id}', [\App\Http\Controllers\ConfigurarCargoController::class, 'show'])->name('configurar.cargo.show');
+    Route::get('formulario/configuracao/create/{id}', [\App\Http\Controllers\ConfiguracaoFormularioController::class, 'create'])->name('configuracao.create');
+    Route::post('/formulario/configurar/collapse/store', [\App\Http\Controllers\CollapseController::class, 'store'])->name('collapse.store');
+    Route::put('/formulario/configurar/collapse/update/{id}', [\App\Http\Controllers\CollapseController::class, 'update'])->name('collapse.update');
+    Route::delete('/formulario/configurar/collapse/destroy/{id}', [\App\Http\Controllers\CollapseController::class, 'destroy'])->name('collapse.destroy');
+    Route::post('cadastrar/item/select/', [\App\Http\Controllers\ConfigurarCargoController::class, 'cadastarItemSelect'])->name('cadastrar.itemSelect');
+    Route::put('editar/campo/{id}', [\App\Http\Controllers\ConfigurarCargoController::class, 'editarCampo'])->name('editar.campo');
+    Route::post('/formulario/cargo/campo/salvar', [\App\Http\Controllers\ConfiguracaoFormularioController::class,'store'])->name('formulario.cargo.campo.store');
+    Route::get('grupos', [\App\Http\Controllers\GrupoController::class, 'index'])->name('grupo.index');
+    Route::get('grupo', [\App\Http\Controllers\GrupoController::class, 'create'])->name('grupo.create');
+    Route::post('grupo', [\App\Http\Controllers\GrupoController::class, 'store'])->name('grupo.store');
+    Route::get('grupo/{id}', [\App\Http\Controllers\GrupoController::class, 'edit'])->name('grupo.edit');
+    Route::put('grupo/{id}', [\App\Http\Controllers\GrupoController::class, 'update'])->name('grupo.update');
+    Route::get('pessoas/grupo/{id}', [\App\Http\Controllers\GrupoController::class, 'people'])->name('grupo.people');
+    Route::post('pessoas', [\App\Http\Controllers\GrupoController::class, 'search'])->name('grupo.search');
+    Route::post('remove/pessoa', [\App\Http\Controllers\GrupoController::class, 'removePeople'])->name('grupo.removepeople');
+    Route::post('adicionar/pessoas', [\App\Http\Controllers\GrupoController::class, 'addpeople'])->name('grupo.adicionarpeople');
+    Route::get('definir/avaliador/{formulario_id}/{user_id}', [\App\Http\Controllers\GrupoController::class, 'definirAvaliador'])->name('definir.avaliador');
+    Route::post('definir/avaliador/',[\App\Http\Controllers\GrupoController::class, 'avaliarStore'])->name('avaliador.store');
+    Route::POST('bloquear/escolaridade',[\App\Http\Controllers\EscolaridadeController::class, 'bloquear'])->name('bloquear.escolaridade');
+    Route::POST('bloquear/cargo',[\App\Http\Controllers\CargoController::class, 'bloquear'])->name('bloquear.cargo');
+    Route::get('revisao', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'index'])->name('revisao.index');
+    Route::get('revisar/listar/pessoas/{id}', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'show'])->name('revisao.show');
+    Route::get('revisar/listar/dados/{id}', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'showDados'])->name('revisao.candidato.dados');
+    Route::post('voltar/avaliacao', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'voltarAvaliacao'])->name('voltar.avaliacao');
+    Route::post('reprovar/avaliacao', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'reprovarAvaliacao'])->name('reprovar.avaliacao');
+    Route::post('aprovar/avaliacao', [\App\Http\Controllers\Admin\Revisao\RevisaoController::class, 'aprovarAvaliacao'])->name('aprovar.avaliacao');
+    Route::get('cadastrar/usuario', [\App\Http\Controllers\UserController::class, 'create'])->name('novo.usuario');
+    Route::post('cadastrar/usuario', [\App\Http\Controllers\UserController::class, 'store'])->name('novo.usuario.salvar');
+    Route::get('listar/pessoas/{id}', [\App\Http\Controllers\VoltarUsuarioController::class, 'listarPessoas'])->name('voltar.listar.pessoas');
+    Route::post('voltar/candidato/avaliacao', [\App\Http\Controllers\VoltarUsuarioController::class, 'voltarAvaliacao'])->name('voltar.usuario.avaliacao');
+    Route::post('voltar/candidato/revisao', [\App\Http\Controllers\VoltarUsuarioController::class, 'voltarRevisao'])->name('voltar.usuario.revisao');
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('user', 'UserController', ['except' => ['show']]);
-    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-    Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+    Route::resource('user', \App\Http\Controllers\UserController::class, ['except' => ['show']]);
 });
-
-Route::get('/gerarPDF/{comprovante}', 'ComprovanteController@gerarComprovanteCpf')->name('gerarpdf-comprovante');
-Route::get('pdf', function () {
-    return view('pdf');
-})->name('pdf');
