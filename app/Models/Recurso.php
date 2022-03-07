@@ -13,6 +13,8 @@ class Recurso extends Model
         'formulario_usuario_id',
         'aprovou_recurso',
         'status',
+        'status_avaliacao',
+        'status_revisao',
         'motivo_recusar',
         'texto',
         'arquivo',
