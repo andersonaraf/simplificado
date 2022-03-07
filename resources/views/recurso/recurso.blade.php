@@ -1,13 +1,13 @@
 @extends('layouts.header-footer')
 
-@section('css')
+@push('css')
     <link rel="stylesheet" href="{{asset('css/recurso/style.css')}}">
     <style>
         #anexoRecurso {
             display: block !important;
         }
     </style>
-@endsection
+@endpush
 
 @section('content')
     <main class="container" id="ajuste">

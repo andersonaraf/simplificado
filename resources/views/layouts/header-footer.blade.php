@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('assets/DataTables/datatables.min.css')}}"
 
     @yield('css')
+    @stack('css')
 </head>
 <body>
 <!-- ======= Header ======= -->
@@ -65,6 +66,7 @@
 @yield('lista')
 @yield('recurso_user')
 @yield('view_user')
+
 <!-- ======= Footer ======= -->
 <footer id="footer">
     <div class="footer-top">

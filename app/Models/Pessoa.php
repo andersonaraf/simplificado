@@ -48,10 +48,6 @@ class Pessoa extends Model implements Auditable
         return $this->hasOne(RecursoModel::class, 'pessoa_id', 'id');
     }
 
-    public function reprovarPessoa($id){
-        return ReprovarPessoa::where('pessoa_id', $id)->get()->last();
-    }
-
     public function revisarPessoa($id){
         return RevisarPessoa::where('pessoa_id', $id)->get()->last();
     }

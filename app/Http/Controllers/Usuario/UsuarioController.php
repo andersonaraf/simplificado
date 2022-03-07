@@ -79,14 +79,10 @@ class UsuarioController extends Controller
             //campo deve ser dinamico buscando em tabela
             $recurso_hability = true;
             return view('usuario.area_user.processos_seletivos_user', compact('formularioUsuario', 'recurso_hability'));
-
         } else {
             $formularioUsuario = null;
             return view('usuario.area_user.processos_seletivos_user', compact('formularioUsuario'));
-
         }
-
-
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('layouts.header-footer')
-@section('css')
+@push('css')
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <style>
         button {
@@ -7,7 +7,7 @@
             width: 100%;
         }
     </style>
-@endsection
+@endpush
 @section('content')
     {{--    @extends('layouts.modal-cache')--}}
     <section class="container-fluid">
@@ -20,13 +20,14 @@
                 </ol>
                 @if(session('status'))
                     <span class="alert alert-success">{{session('status')}}</span>
-                {{session()->forget('status')}}
+                    {{session()->forget('status')}}
                 @endif
                 <div class="carousel-inner">
                     @foreach($carrossels as $carrossel)
                         <div class="carousel-item active">
                             <a href="{{is_null($carrossel->url_link) ? '#' : $carrossel->url_link}}" target="_blank">
-                                <img class="container" src="{{asset('storage/'.$carrossel->url_img)}}" alt="First slide" style="width: 100%;">
+                                <img class="container" src="{{asset('storage/'.$carrossel->url_img)}}" alt="First slide"
+                                     style="width: 100%;">
                             </a>
                         </div>
                     @endforeach
@@ -50,16 +51,31 @@
         <section id="featured" class="featured">
             <div class="container">
                 <div class="row justify-content-md-center">
-                    @include('usuario.formulario.box')
+                    <div class="col-lg-12">
+                        <div class="section-title text-center">
+                            <h2>Formulários Liberados</h2>
+                            @include('usuario.formulario.box')
+                        </div>
+                    </div>
                 </div>
             </div>
         </section><!-- End Featured Section -->
 
-    <!-- ======= Services Section ======= -->
-        <section id="services" class="services ">
-
-        </section><!-- End Services Section -->
-
+        <!-- ======= Services Section ======= -->
+        @if(count($recursos) > 0)
+            <section id="services" class="services ">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="section-title text-center">
+                                <h2>Recursos Liberados</h2>
+                                @include('usuario.recurso.box')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- End Services Section -->
+        @endif
     </main>
 @endsection
 
