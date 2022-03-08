@@ -118,6 +118,7 @@
                             </form>
                         </div>
                     </div>
+                    @include('pages.formulario.editais.index')
                 </div>
             </main>
         </div>
