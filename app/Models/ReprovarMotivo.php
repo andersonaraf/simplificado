@@ -5,10 +5,15 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class ReprovarMotivo extends Model
+
+class ReprovarMotivo extends Model implements Auditable
 {
     use HasFactory;
+    use AuditableTrait;
+
     protected $table = 'reprovar_motivos';
     protected $fillable = [
         'user_id',
