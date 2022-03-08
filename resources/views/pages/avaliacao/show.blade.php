@@ -59,8 +59,8 @@
                                         <tbody>
                                         @csrf
                                         @foreach(isset($avaliador[0]) ? $avaliador : $formulario->formularioUsuario as $formularioUsuario)
-                                            <tr data-cargo-id="{{$formularioUsuario->formularioUsuario->cargo_id}}"
-                                                data-tipo-avaliacao="{{is_null($formularioUsuario->formularioUsuario->recurso) ? 1 : 2}}">
+                                            <tr data-cargo-id="{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->cargo_id: $formularioUsuario->cargo_id}}"
+                                                data-tipo-avaliacao="{{isset($avaliador[0]) ? (is_null($formularioUsuario->formularioUsuario->recurso) ? 1 : 2) : (is_null($formularioUsuario->recurso) ? 1 : 2) }}">
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->name : mb_strtoupper($formularioUsuario->user->name)}}</td>
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->user->pessoa->cpf : (!is_null($formularioUsuario->user->pessoa) ? $formularioUsuario->user->pessoa->cpf : '')}}</td>
                                                 <td>{{isset($avaliador[0]) ? $formularioUsuario->formularioUsuario->cargo->cargo : (!is_null($formularioUsuario->cargo) ? $formularioUsuario->cargo->cargo : '')}}</td>
