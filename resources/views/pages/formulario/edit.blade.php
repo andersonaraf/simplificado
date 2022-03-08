@@ -55,7 +55,8 @@
                                             <label for="dataFinalizar" class="font-weight-bold">DATA PARA FINALIZAR
                                                 FORMULÁRIO: </label>
                                             <input type="datetime-local" class="form-control" name="data_fecha"
-                                                   id="dataFinalizar" value="{{date('Y-m-d\TH:i', strtotime($formulario->data_fecha))}}">
+                                                   id="dataFinalizar"
+                                                   value="{{date('Y-m-d\TH:i', strtotime($formulario->data_fecha))}}">
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +66,8 @@
                                         <div class="form-group has-info">
                                             <label for="dataInicioRecurso" class="font-weight-bold">DATA PARA LIBERAR
                                                 RECURSO: </label>
-                                            <input type="datetime-local" class="form-control" name="data_liberar_recurso"
+                                            <input type="datetime-local" class="form-control"
+                                                   name="data_liberar_recurso"
                                                    id="dataInicioRecurso"
                                                    value="{{!is_null ($formulario->data_liberar_recurso) ? date('Y-m-d\TH:i',strtotime($formulario->data_liberar_recurso)) : ''}}">
                                         </div>
@@ -73,10 +75,12 @@
 
                                     <div class="col col-12 col-md-6 col-lg-6 mt-2">
                                         <div class="form-group has-info">
-                                            <label for="dataFinalizarRecurso" class="font-weight-bold">DATA PARA FINALIZAR
+                                            <label for="dataFinalizarRecurso" class="font-weight-bold">DATA PARA
+                                                FINALIZAR
                                                 FORMULÁRIO: </label>
                                             <input type="datetime-local" class="form-control" name="data_fecha_recurso"
-                                                   id="dataFinalizarRecurso" value="{{!is_null($formulario->data_fecha_recurso) ? date('Y-m-d\TH:i', strtotime($formulario->data_fecha_recurso)) : ''}}">
+                                                   id="dataFinalizarRecurso"
+                                                   value="{{!is_null($formulario->data_fecha_recurso) ? date('Y-m-d\TH:i', strtotime($formulario->data_fecha_recurso)) : ''}}">
                                         </div>
                                     </div>
                                 </div>
@@ -97,9 +101,11 @@
 
                                     <div class="col col-12 col-md-6 col-lg-6">
                                         <div class="form-group has-info">
-                                            <label for="statusRecurso" class="font-weight-bold" style="color: #00bcd4">STATUS RECURSO</label>
+                                            <label for="statusRecurso" class="font-weight-bold" style="color: #00bcd4">STATUS
+                                                RECURSO</label>
                                             <select name="liberar_recurso" id="statusRecurso" class="form-control">
-                                                <option value="1" {{$formulario->liberar_recurso ? 'selected' : ''}}>ATIVADO
+                                                <option value="1" {{$formulario->liberar_recurso ? 'selected' : ''}}>
+                                                    ATIVADO
                                                 </option>
                                                 <option value="0" {{!$formulario->liberar_recurso ? 'selected' : ''}}>
                                                     DESATIVADO
@@ -118,12 +124,12 @@
                             </form>
                         </div>
                     </div>
+                    @include('pages.formulario.editais.index')
                 </div>
             </main>
         </div>
     </div>
 @endsection
 @push('js')
-    <script>
-    </script>
+    <script src="{{asset('js/dashboard/tabela.js')}}"></script>
 @endpush

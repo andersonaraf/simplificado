@@ -54,4 +54,8 @@ class Formulario extends Model implements Auditable
     public function buscarFormularioUsuario($userID){
         return $this->hasOne(FormularioUsuario::class, 'formulario_id', 'id')->where('user_id', $userID)->first();
     }
+
+    public function editais(){
+        return $this->hasMany(Editais::class, 'formulario_id', 'id');
+    }
 }
