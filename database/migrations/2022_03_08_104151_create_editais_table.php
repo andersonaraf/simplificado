@@ -15,7 +15,14 @@ class CreateEditaisTable extends Migration
     {
         Schema::create('editais', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('formulario_id');
+            $table->string('titulo', 200);
+            $table->string('documento')->nullable();
+            $table->string('descricao', 1000)->nullable();
+            $table->integer('hierarquia')->nullable();
             $table->timestamps();
+
+            $table->foreign('formulario_id')->references('id')->on('formularios');
         });
     }
 
